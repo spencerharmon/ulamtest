@@ -1,0 +1,43 @@
+ulam 2;
+/**
+	ReadTest.ulam to figure out how the hell read works
+	
+	\symbol Rt
+	\author Spencer Harmon
+	\licence lgpl
+ */
+element ReadTest{
+	AtomUtils au;
+	EventWindow ew;
+
+	//data members
+	Unsigned(5) testValue = 27;
+	Int(7) pad = 0;
+	Unsigned stateindex;
+	Bool canSeeVars;
+	
+	Bool look(Unsigned i){
+		Unsigned eval;
+		eval = (Unsigned(5)) au.read(ew[1],i,5);
+		if(eval == testValue){
+			return true;
+		}
+		else{
+			return false;
+		}
+	}//look() namespace
+
+	Unsigned findIndex(){
+		for(Unsigned i=0; (Int)i <= (Int)90; ++i){
+			if(look(i)){
+				return (Unsigned)i;
+			}
+		} 
+		//if look never returns true, then return something
+		return (Unsigned)0;
+	}//findIndex() namespace
+
+	Void behave(){
+		stateindex = findIndex();
+	}//behave() namespace
+}//element ReadTest namespace
