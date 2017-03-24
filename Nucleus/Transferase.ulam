@@ -1,0 +1,91 @@
+ulam 2;
+/**
+	\author Spencer Harmon;
+	\symbol Tr;
+	\color #b52
+	The point here is to check the base layer for genes and nuclei matching our ID.
+	If it matches, we'll create it in the event window, destroy ourselves, and create a new Transferase nearby.
+ */
+element Transferase{
+	AtomUtils au;
+	SiteUtils su;
+	EventWindow ew;
+	ClusterByID cl;
+	Cell c;
+	Random r;
+	DirectionUtils dir;
+
+	//typedefs
+	typedef Cell.ID ID;
+	typedef EventWindow.Symmetry Symmetry;
+	typedef EventWindow.SiteNum SiteNum;
+
+	//data members
+	ID id; //inherited from parent nucleus
+	Unsigned(10) age;
+	Bool nucleusSeen = false;
+	Unsigned(5) turnOdds = 2;
+	Symmetry symmetry;
+	
+	parameter Unsigned(3) sym = 7;
+
+	Void check(){
+		Atom base = su.getBase();
+		if(base as Gene){
+			if(base.id == id){
+				turnOdds = 2; //stay close to here
+				if(nucleusSeen == true){
+					Empty e;
+					su.setBase(e);
+					makeNew();
+					spawn(base);
+				}
+			}
+		}
+		if(base as Nucleus){
+			if(base.id == id){
+				Empty e;
+				su.setBase(e);
+				makeNew();
+				spawn(base);				
+			}
+		}
+	}
+	Void makeNew(){
+		SiteNum slot = cl.emptySlotNearMe();
+		Transferase t;
+		t.age = age;
+		ew[slot] = t;
+		nucleusSeen = true;
+	}
+	Void spawn(Atom a){
+		ew[0] = a;
+	}
+	Void search(){
+		if(turnOdds > turnOdds.maxof){
+			turnOdds = 2;
+		}
+
+		if(!r.oneIn(turnOdds)){
+			if(r.oneIn(2)){ //not quite so fast
+				++turnOdds;
+			}
+			symmetry = (Symmetry)r.create(sym);
+		}
+		ew.changeSymmetry(symmetry);
+		ew.swap(0,1);
+	}//search namespace
+	Void maybeDie(){
+		++age;
+		if(age == age.maxof){
+			Empty e;
+			ew[0] = e;
+		}
+	}//maybeDie namespace
+	Void behave(){
+		maybeDie();
+		check();
+		search();
+	}//behave namespace
+
+}//element Transferase namespace

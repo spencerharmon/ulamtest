@@ -1,0 +1,195 @@
+ulam 2;
+/**
+	\author Spencer Harmon
+	\license lgpl
+	\symbol Ge
+	\symmetries all
+	\color #7ee
+ */
+element Gene{
+	AtomUtils au;
+	EventWindow ew;
+	ClusterByID cl;
+	Cell cell;
+	DecisionTree dt;
+	SiteUtils su;
+//	BaseLayerReproduction blr;
+
+	//typedefs	
+	typedef Unsigned(6) Seqno; //similar to SiteNum, since we don't want to exceed an event window, but has no bearing on position
+
+	typedef EventWindow.SiteNum SiteNum;
+	typedef AtomUtils.Type ElementType;
+	typedef WindowScanner.Category Category;
+	typedef Cell.ID ID;
+	typedef DecisionTree.StoredValue StoredValue;
+
+	//data members
+	ID id;
+	Seqno seqno;
+	//can see at spawn
+	Bool canSeeNucleus = true;
+	Unsigned(2) operator;
+	Unsigned(2) tree0Type;
+	StoredValue eqTree0;
+	Unsigned(2) tree1Type;
+	StoredValue eqTree1;
+	StoredValue value;
+	StoredValue comIn;
+	StoredValue comOut;
+	Unsigned(3) eventsAlone;
+	Bool reproduced;
+
+	Void listen(){
+		SiteVisitorByID sv;
+                WindowScanner ws;
+
+		sv.reset();
+                ws.resetCategories();
+                Category cGene = ws.allocateCategory();
+                Gene aGene;
+                ElementType tGene = au.getValidType(aGene);
+
+                sv.setType(cGene,tGene);
+                sv.setID(cGene,id);
+		sv.neighborCell(cGene);
+                ws.scan(sv);
+
+		SiteNum slot = ws.getSiteNum(cGene);
+
+		if(slot != (SiteNum)0 && slot <= 40){
+			Atom cell = ew[slot];
+			if(cell as Gene){
+				comIn = cell.comOut;
+			}
+		}
+		else{
+			comIn = 0;
+		}		
+	}
+	Void speak(){
+                SiteVisitorByID sv;
+                WindowScanner ws;
+		
+		sv.reset();
+                ws.resetCategories();
+                Category cNucleus = ws.allocateCategory();
+                Nucleus aNucleus;
+                ElementType tNucleus = au.getValidType(aNucleus);
+		
+                sv.setType(cNucleus,tNucleus);
+                sv.setID(cNucleus,id);
+
+                ws.scan(sv);
+		
+		SiteNum slot = ws.getSiteNum(cNucleus);
+		if(slot <= 40){
+			Atom nucleus = ew[slot];
+			if(nucleus as Nucleus){
+				comOut = nucleus.comOut;
+			}
+		}
+	}
+	Void nucleusCheck(){
+//                SiteVisitorByID sv;
+//                WindowScanner ws;
+
+//                ws.resetCategories();
+//                Category cNucleus = ws.allocateCategory();
+//                Nucleus aNucleus;
+//                ElementType tNucleus = au.getValidType(aNucleus);
+
+//                sv.setType(cNucleus,tNucleus);
+//                sv.setID(cNucleus,id);
+
+//                ws.scan(sv);
+		
+//		SiteNum slot = ws.getSiteNum(cNucleus);
+//		if(slot <= 40){
+		canSeeNucleus = false;
+		for(SiteNum slot = 0; slot <=40; ++slot){
+			Atom nucleus = ew[slot];
+
+			if(nucleus as Nucleus){
+				if(nucleus.id == id){
+					//we can see the nucleus, so go ahead and let ClusterByID know.
+					canSeeNucleus = true;
+					if(nucleus.reproducing){
+						ID childID = nucleus.childID;
+						reproduced = true;
+						copy(childID);
+					}
+					else{
+						reproduced = false;
+					}
+					return;
+				}
+				else{
+					canSeeNucleus = false;
+				}
+			}
+			else canSeeNucleus = false;
+		}
+	}
+	Void copy(ID childID){
+		//get some mutations in here later
+
+		SiteNum emptySlot = cl.emptySlotNearMe();
+		Bool dontCopy = false;
+		Atom gene = self;
+		Atom base = su.getBase();
+		//set dontcopy to true if the base layer contains our nucleus
+		if(base as Nucleus){
+			if(base.id == childID){
+				dontCopy = true;
+			}
+		}
+		if(gene as Gene){
+			if(!dontCopy){
+				gene.id = childID;
+				su.setBase(gene);
+			}
+		}
+	}
+	Void killCopies(){
+		for(SiteNum slot = 1; slot <=40; ++slot){
+			Atom gene = ew[slot];
+
+			if(gene as Gene){
+				if(gene.id == id && gene.seqno == seqno){
+					Empty e;
+					ew[slot] = e;
+				}
+			}
+		}
+		
+	}
+	Void behave(){
+//		canSeeNucleus = cl.geneCanSeeNucleus(id);
+		killCopies();
+//		blr.hatchBaseLayer(id); This is probably too much..
+		nucleusCheck();
+		if(!cl.bringGenesCloser(id,self)){
+			cl.run();
+		}
+//		canSeeNucleus = cl.geneCanSeeNucleus(id);
+		//currently takes comIn on the right.
+		if(canSeeNucleus){
+			eventsAlone = 0;
+		}
+		else{
+			++eventsAlone;
+		}
+		if(eventsAlone == 7){
+			Empty e;
+			ew[0] = e;
+		}
+		//Equation tree solution step:
+		value = dt.selfEvaluate(seqno,id,comIn);
+		//look for other cells' comOut
+		listen();
+		//spread word of nucleus' comOut
+		////timer for this? variable timer?
+		speak();
+	}
+}

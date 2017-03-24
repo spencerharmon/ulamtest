@@ -1,0 +1,139 @@
+/**
+	\symmetries all
+	\author Spencer Harmon
+	\license lgpl
+	\color #b52
+	\symbol Eg
+
+	//form a protective layer over our buried genes in the base layer, then birth them into the event layer.
+ */
+element EggShell{
+	SiteUtils su;
+	EventWindow ew;
+
+	ClusterByID cl;
+
+	typedef EventWindow.SiteNum SiteNum;
+	typedef Cell.ID ID;
+
+	ID id;
+	Bool onCell;
+	Bool shellComplete;
+
+	Void onChildCell(){
+		Atom a = su.getBase();
+		if(a as Nucleus){
+			if(a.id == id){
+//				return true;
+				onCell = true;
+				createNeighbor();
+			}
+		}
+		if(a as Gene){
+			if(a.id == id){
+//				return true;
+				onCell = true;
+				createNeighbor();
+			}
+		}
+//		return true; //test; should be false
+	}
+	Void createNeighbor(){
+		SiteNum slot = cl.emptySlotNearMe();
+		EggShell eg;
+		eg.id = id;
+		if(!(slot == 0)){
+			ew[slot] = eg;
+		}
+	}
+	Bool iHaveNeighbors(){
+		SiteNum neighborSite = cl.cellSlotNearMe(self, id, 1);
+		Atom neighbor = ew[neighborSite];
+		if(neighbor as EggShell){
+			if(neighbor.id == id){
+				return true;
+			}
+		}		
+		return false;
+	}
+	Atom getNeighbor(){
+		SiteNum neighborSite = cl.cellSlotNearMe(self, id, 1);
+		Atom neighbor = ew[neighborSite];
+		if(neighbor as EggShell){
+			if(neighbor.id == id){
+				return neighbor;
+			}
+		}	
+		Empty e;			
+		return e;
+	}
+	Void guessThatImAnEdge(){
+		//so, maybe, check if my most immediate neighbor is on the child cell
+		Atom neighbor = getNeighbor();
+		if(neighbor as EggShell){
+			if(neighbor.onCell){
+			//if it is, create another neighbor
+				createNeighbor();
+			}
+			//otherwise, do nothing.
+		}
+	
+	}
+	Void checkForShellComplete(){
+		SiteNum neighborSite = 1; //testing
+//		SiteNum neighborSite = cl.cellSlotNearMe(self, id, 1);
+		if(!(neighborSite == 0)){
+			Atom neighbor = ew[neighborSite];
+			if(neighbor as EggShell){
+				if(neighbor.shellComplete){
+					if(onCell){
+						hatch();
+					}else{
+						shellComplete = true;
+					}
+				}
+			}
+		}
+	}
+	Void hatch(){
+		Atom a = su.getBase();
+		ew[0] = a;
+	}
+	Void behave(){
+//		lifetime();
+//		onChildCell();
+		//else{
+		//	if(iHaveNeighbors()){
+		//		guessThatImAnEdge();
+		//	}else{
+		///		ew.swap(0,1);
+		//	}
+		//}
+		Atom a = su.getBase();
+		if(a as Nucleus){
+			if(a.id == id){
+				onCell = true;
+				createNeighbor();
+			}
+		}
+		if(a as Gene){
+			hatch();
+			createNeighbor();
+			if(a.id == id){
+				onCell = true;
+				createNeighbor();
+			}
+		}
+		if(a as Empty){
+			ew.swap(0,1);
+		}
+
+
+
+//		if(onCell){
+//			hatch();
+//		}else{
+//			ew.swap(0,1);
+//		}
+	}
+}

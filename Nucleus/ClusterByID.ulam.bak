@@ -1,0 +1,206 @@
+ulam 2;
+use AtomUtils;
+//use SiteVisitor;
+use WindowScanner;
+use C2D;
+use OutOfBounds;
+
+/**
+	ClusterByID allows an atom to search, first for a given target atom (Nucleus), then for other atoms clustering it (Genes) by
+	identifying a 16-bit ID shared by the Nucleus and Genes.
+	
+	\symmetries all
+	\author Spencer Harmon;
+	\license lgpl;
+ */
+quark ClusterByID {
+	EventWindow ew;
+	AtomUtils au;
+
+	//inherited typdefs
+	typedef AtomUtils.Type ElementType;
+	typedef EventWindow.SiteNum SiteNum;
+	typedef WindowScanner.Radius Radius;
+	typedef C2D.Coord Coord;
+	typedef WindowScanner.Category Category;
+
+	typedef Unsigned(10) ID; //can't inherit from transient? Should be SiteVisitorByID.ID
+
+	//data members
+	Unsigned(3) eventsAlone;
+	Unsigned(3) nucleusDist;
+
+	SiteNum findMyCluster(ID id){
+		SiteVisitorByID sv;
+		WindowScanner ws;
+		
+		//initialize clusterMember to self (or none, as it were)
+		SiteNum clusterMember = 0;
+	
+		ws.resetCategories();
+		Category a = ws.allocateCategory();
+		Category b = ws.allocateCategory();
+
+		Atom me = ew[0];
+		ElementType myType = au.getValidType(me);
+
+		Nucleus nu;
+		ElementType nuType = au.getValidType(nu);
+
+		sv.setType(a,myType);
+		sv.setType(b,nuType);
+
+		sv.setID(a,id);
+		sv.setID(b,id);
+
+		ws.scan(sv,1,4); 
+
+		//if you can see the nucleus
+		if((Int)ws.getHits(b) > 0){
+
+			//return it as the target cluster member
+			clusterMember = ws.getSiteNum(b);
+			nucleusDist = distance(ws.getSiteNum(b));
+			return clusterMember;
+
+			//announce your distance to it
+		}
+		//if you can't,
+		else{
+			if((Int)ws.getHits(a) == 0){
+				//we're alone this event, better run
+				++eventsAlone;
+				//run();
+				return clusterMember;
+			}
+
+			//return a valid cluster member
+			if(ws.mSites[a] <= 40){
+				clusterMember = ws.mSites[a];
+			}
+			//and announce that your distance is 0
+			nucleusDist = (Unsigned(2))0;
+			//returns 0 if nothing is found
+			return clusterMember;
+		}
+	} //findMyCluster namespace
+
+	Unsigned(3) distance(SiteNum s){
+		C2D site = ew.getCoord(s);
+		Unsigned(3) dist;
+                if(site.x == -4 || site.x == 4){
+			dist += 4;
+		}
+                if(site.x == -3 || site.x == 3){
+			dist += 3;
+		}
+                if(site.x == -2 || site.x == 2){
+			dist += 2;
+		}
+                if(site.x == -1 || site.x == 1){
+			dist += 1;
+		}
+                if(site.y == -4 || site.y == 4){
+			dist += 4;
+		}
+                if(site.y == -3 || site.y == 3){
+			dist += 3;
+		}
+                if(site.y == -2 || site.y == 2){
+			dist += 2;
+		}
+                if(site.y == -1 || site.y == 1){
+			dist += 1;
+		}
+		return dist;
+	}
+
+	SiteNum findEmptyNear(SiteNum t){
+		return findEmptyNear(ew.getCoord(t));
+	}
+
+	SiteNum findEmptyNear(C2D t){
+		OutOfBounds ob;
+		C2D cd;
+		C2D tprime;
+
+		SiteNum target = 0;
+
+		//scan the area around t
+		for(Int x = t.x-1; x <= t.x+1; ++x){
+			for(Int y = t.y-1; y <= t.y+1; ++y){
+				tprime = cd.make((Int(16)) x,(Int(16)) y);
+				if(!ob.isOOB(tprime)){
+					if(ew.isEmpty(tprime)){
+						eventsAlone = 0;
+						target = ew.getSiteNumberRaw(tprime);
+						return target;
+					}
+				}
+			}
+		}
+		//possibly, we haven't returned anything yet, but if thats the case, target should still be 0
+		++eventsAlone;
+		return target;
+	}//findEmptynNear() namespace
+
+	Bool seppuku(){
+		if(eventsAlone >= 7){
+			Empty e;
+			ew[0] = e;
+			return true;
+		}
+		else {
+			return false;
+		}
+	}//seppuku() namespace
+
+	Bool betterLocation(Atom target){
+		Nucleus nu;
+		ElementType nuType = au.getValidType(nu);
+
+		//if you can see the nucleus, it's a better location.
+		if(au.getValidType(target) == nuType){
+			return true;
+		}
+		else{
+			return false;
+		}
+		//otherwise check gene distance
+//		else{
+//			Unsigned(3) greenerGrass;
+//	
+//			//assume target inherits from ClusterByID and has nucleusDist
+//			if(target as Self){
+//				greenerGrass = target.nucleusDist;
+//			}
+//			//a location is only better if it has a smaller nucleusDist (is closer to nucleus)
+//			if(greenerGrass < nucleusDist){
+//				return true;
+//			}
+//			else{
+//				return false;
+//			}
+//		}
+	}//betterLocation() namespace
+	
+	Void run(){
+		ew.swap(0,40);
+	}
+
+	Void cluster(ID id){
+		if(!seppuku()){
+			SiteNum clusterMember;
+			clusterMember = findMyCluster(id);
+
+			Bool better = betterLocation(ew[clusterMember]);
+
+//			if(better){
+			if(!(clusterMember == 0)){
+				SiteNum target;
+				target = findEmptyNear(clusterMember);
+				ew.swap((SiteNum) 0, (SiteNum) target);
+			}
+		}
+	}//cluster() namespace
+}//Cluster namespace

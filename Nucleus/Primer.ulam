@@ -1,0 +1,82 @@
+ulam 2;
+/**
+	Primer is intended to create the primordial population of Nuclei since I can't think of a good way to make Nucleus do it
+	without wasting bits.
+
+	\symbol Pr;
+	\symmetries all;
+	\author Spencer Harmon;
+	\license lgpl;
+
+ */
+element Primer{
+	Random r;
+	EventWindow ew;
+	Cell cell;
+	DecisionTree dt;
+	
+	typedef Cell.ID ID;
+	typedef EventWindow.SiteNum SiteNum;
+
+	Bool decide(){
+		Unsigned(1) odds;
+		
+		if(r.oneIn(odds.maxof)){
+			return true;
+		}
+		else{
+			return false;
+		}
+	}
+	Void nucleus(ID id){
+		Atom nu = cell.makeNucleus(id,0,0);
+		ew[0] = nu;
+	}
+	Void generate(){
+		ID id;
+		Gene gene1;
+		gene1.id = id;
+		gene1.seqno = 1;
+		ew[2] = gene1;
+
+		Gene gene2;
+		gene2.id = id;
+		gene2.seqno = 2;
+		ew[3] = gene2;
+
+		Gene gene3;
+		gene3.id = id;
+		gene3.seqno = 3;
+		ew[4] = gene3;
+
+		Gene gene4;
+		gene4.id = id;
+		gene4.seqno = 4;
+		ew[5] = gene4;
+
+		Gene gene5;
+		gene5.id = id;
+		gene5.seqno = 5;
+		ew[6] = gene5;
+
+		Gene gene6;
+		gene6.id = id;
+		gene6.seqno = 6;
+		ew[7] = gene6;
+
+		Gene gene7;
+		gene7.id = id;
+		gene7.seqno = 7;
+		ew[8] = gene7;
+	}
+	Void killself(){
+		Empty e;
+		ew[0] = e;
+	}
+	Void behave(){
+//		generate();
+		ID id = cell.genID();
+		dt.initVars(id);
+		nucleus(id);
+	}
+}
