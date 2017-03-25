@@ -18,122 +18,85 @@ element EggShell{
 
 	ID id;
 	Bool onCell;
-	Bool shellComplete;
+	Unsigned(3) lost;
+	Bool first;
 
-	Void onChildCell(){
-		Atom a = su.getBase();
-		if(a as Nucleus){
-			if(a.id == id){
-//				return true;
-				onCell = true;
-				createNeighbor();
-			}
-		}
-		if(a as Gene){
-			if(a.id == id){
-//				return true;
-				onCell = true;
-				createNeighbor();
-			}
-		}
-//		return true; //test; should be false
-	}
 	Void createNeighbor(){
 		SiteNum slot = cl.emptySlotNearMe();
 		EggShell eg;
 		eg.id = id;
-		if(!(slot == 0)){
+		if(slot != 0){
 			ew[slot] = eg;
 		}
 	}
-	Bool iHaveNeighbors(){
-		SiteNum neighborSite = cl.cellSlotNearMe(self, id, 1);
-		Atom neighbor = ew[neighborSite];
-		if(neighbor as EggShell){
-			if(neighbor.id == id){
-				return true;
-			}
-		}		
-		return false;
-	}
-	Atom getNeighbor(){
-		SiteNum neighborSite = cl.cellSlotNearMe(self, id, 1);
-		Atom neighbor = ew[neighborSite];
-		if(neighbor as EggShell){
-			if(neighbor.id == id){
-				return neighbor;
-			}
-		}	
-		Empty e;			
-		return e;
-	}
-	Void guessThatImAnEdge(){
-		//so, maybe, check if my most immediate neighbor is on the child cell
-		Atom neighbor = getNeighbor();
-		if(neighbor as EggShell){
-			if(neighbor.onCell){
-			//if it is, create another neighbor
-				createNeighbor();
-			}
-			//otherwise, do nothing.
-		}
-	
-	}
-	Void checkForShellComplete(){
-		SiteNum neighborSite = 1; //testing
-//		SiteNum neighborSite = cl.cellSlotNearMe(self, id, 1);
-		if(!(neighborSite == 0)){
-			Atom neighbor = ew[neighborSite];
-			if(neighbor as EggShell){
-				if(neighbor.shellComplete){
-					if(onCell){
-						hatch();
-					}else{
-						shellComplete = true;
-					}
-				}
-			}
-		}
-	}
 	Void hatch(){
+		createNeighbor();
 		Atom a = su.getBase();
-		ew[0] = a;
+		Empty e;
+		su.setBase(e);
+//		SiteNum slot = cl.emptySlotNearMe();
+//		if(slot != 0){
+			ew[0] = a;
+//		}
 	}
-	Void behave(){
-//		lifetime();
-//		onChildCell();
-		//else{
-		//	if(iHaveNeighbors()){
-		//		guessThatImAnEdge();
-		//	}else{
-		///		ew.swap(0,1);
-		//	}
-		//}
-		Atom a = su.getBase();
+	Bool onNucleus(Atom a){
 		if(a as Nucleus){
 			if(a.id == id){
-				onCell = true;
-				createNeighbor();
+				return true;
+			}else{
+				return false;
 			}
+		}else{
+			return false;
 		}
+	}
+	Bool onGene(Atom a){
 		if(a as Gene){
-			hatch();
-			createNeighbor();
 			if(a.id == id){
-				onCell = true;
-				createNeighbor();
+				return true;
+			}else{
+				return false;
 			}
+		}else{
+			return false;
 		}
-		if(a as Empty){
-			ew.swap(0,1);
+	}
+        Void clusterEgg(){
+                for(SiteNum i = 1; i <= 40;++i){
+                        Atom a = ew[i];
+                        if(a as EggShell){
+                                if(a.id == id && onCell && !a.onCell){
+                                        SiteNum e = cl.nonCellSlotNearMe(self,id);
+                                        ew.swap(i,e);
+                                }
+                        }
+                }
+        }
+	Void behave(){
+		Atom a = su.getBase();
+		Bool onN = onNucleus(a);
+		Bool onG = onGene(a);
+		if(onN){
+			onCell = true;
+			createNeighbor();
+			hatch();
 		}
-
-
-
-//		if(onCell){
-//			hatch();
-//		}else{
-//			ew.swap(0,1);
-//		}
+		if(onG){
+			onCell = true;
+			createNeighbor();
+			hatch();
+		}
+		clusterEgg();
+		if(!onN && !onG){
+			onCell = false;
+			if(first){
+				ew.swap(0,1);
+			}
+			++lost;
+		}
+		if(lost == lost.maxof){
+			Empty e;
+			ew[0] = e;
+		}
 	}
 }

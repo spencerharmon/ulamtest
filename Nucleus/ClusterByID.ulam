@@ -238,5 +238,4 @@ quark ClusterByID {
 	Void run(){
 		ew.swap(0,40);
 	}
-	
 }//Cluster namespace

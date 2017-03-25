@@ -33,26 +33,27 @@
 #include "Un_1035449217SiteVisitorByType10_Types.h"
 //Forward Defs of other classes: //gcnl:SymbolTableOfClasses.cpp:576
 namespace MFM { template <class EC> struct Uq_10106UrSelf10; }  //FORWARD
-namespace MFM { template <class EC> struct Ue_102128EggShell10; }  //FORWARD
-namespace MFM { template <class EC> struct Uq_1010919SiteUtils10; }  //FORWARD
+namespace MFM { template <class EC> struct Ue_10106Primer10; }  //FORWARD
+namespace MFM { template <class EC> struct Uq_10106Random10; }  //FORWARD
 namespace MFM { template <class EC> struct Uq_10109211EventWindow10; }  //FORWARD
-namespace MFM { template <class EC> struct Uq_10109211ClusterByID10; }  //FORWARD
 namespace MFM { template <class EC> struct Uq_10104Cell10; }  //FORWARD
-namespace MFM { template <class EC> struct Ue_102717Nucleus10; }  //FORWARD
-namespace MFM { template <class EC> struct Ue_102574Gene10; }  //FORWARD
+namespace MFM { template <class EC> struct Uq_10109212DecisionTree10; }  //FORWARD
+namespace MFM { template <class EC> struct Ue_102564Gene10; }  //FORWARD
 namespace MFM { template <class EC> struct Ue_10105Empty10; }  //FORWARD
-namespace MFM { template <class EC> struct Uq_10109210ColorUtils10; }  //FORWARD
 namespace MFM { template <class EC> struct Uq_1010919AtomUtils10; }  //FORWARD
 namespace MFM { template <class EC> struct Uq_10104Fail10; }  //FORWARD
 namespace MFM { template <class EC> struct Uq_10105MDist10; }  //FORWARD
 namespace MFM { template <class EC> struct Uq_102323C2D10; }  //FORWARD
+namespace MFM { template <class EC> struct Uq_10109210ColorUtils10; }  //FORWARD
+namespace MFM { template <class EC> struct Ue_102717Nucleus10; }  //FORWARD
 namespace MFM { template <class EC> struct Un_10412489213WindowScanner10; }  //FORWARD
-namespace MFM { template <class EC> struct Uq_10106Random10; }  //FORWARD
+namespace MFM { template <class EC> struct Uq_10109211ClusterByID10; }  //FORWARD
+namespace MFM { template <class EC> struct Uq_1010919SiteUtils10; }  //FORWARD
+namespace MFM { template <class EC> struct Un_10411209215SiteVisitorByID10; }  //FORWARD
+namespace MFM { template <class EC> struct Ue_102158EggShell10; }  //FORWARD
 namespace MFM { template <class EC> struct Uq_10109210DebugUtils10; }  //FORWARD
 namespace MFM { template <class EC> struct Uq_10109211SiteVisitor10; }  //FORWARD
 namespace MFM { template <class EC> struct Un_102329211OutOfBounds10; }  //FORWARD
-namespace MFM { template <class EC> struct Un_10411209215SiteVisitorByID10; }  //FORWARD
-namespace MFM { template <class EC> struct Uq_10109212DecisionTree10; }  //FORWARD
 
 namespace MFM{
 
@@ -91,14 +92,14 @@ namespace MFM{
 //! SiteVisitor.ulam:35:   Bool mInUse[cCATEGORY_COUNT];
     typedef UlamRefFixed<EC, 512u, 32u> Up_Um_6mInUse; //gcnl:NodeVarDeclDM.cpp:1095
 
+    void Uf_5reset(const UlamContext<EC>& uc, UlamRef<EC>& ur) const; //gcnl:SymbolFunction.cpp:463
+
+    void Uf_7setType(const UlamContext<EC>& uc, UlamRef<EC>& ur, Ui_Ut_10151u<EC>& Uv_1c, Ui_Ut_102161u<EC>& Uv_2et) const; //gcnl:SymbolFunction.cpp:463
+
     static void Uf_5visit(const UlamContext<EC>& uc, UlamRef<EC>& ur, Ui_Un_r10412489213WindowScanner10<EC>& Ur_4wsrv, Ui_Ut_r102961a<EC>& Ur_1a, Ui_Ut_10161u<EC>& Uv_2sn); //virtual //gcnl:SymbolFunction.cpp:451
 
     //and its contextual type info for virtual table entries:
     typedef void (* Uf_5visit13r10412489213WindowScanner10r102961a10161u) (const UlamContext<EC>&, UlamRef<EC>& , Ui_Un_r10412489213WindowScanner10<EC>&, Ui_Ut_r102961a<EC>&, Ui_Ut_10161u<EC>&); //gcnl:SymbolFunction.cpp:518
-    void Uf_7setType(const UlamContext<EC>& uc, UlamRef<EC>& ur, Ui_Ut_10151u<EC>& Uv_1c, Ui_Ut_102161u<EC>& Uv_2et) const; //gcnl:SymbolFunction.cpp:463
-
-    void Uf_5reset(const UlamContext<EC>& uc, UlamRef<EC>& ur) const; //gcnl:SymbolFunction.cpp:463
-
     void Uf_919unsetType(const UlamContext<EC>& uc, UlamRef<EC>& ur, Ui_Ut_10151u<EC>& Uv_1c) const; //gcnl:SymbolFunction.cpp:463
 
     //BUILT-IN FUNCTIONS:

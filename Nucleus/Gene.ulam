@@ -13,7 +13,6 @@ element Gene{
 	Cell cell;
 	DecisionTree dt;
 	SiteUtils su;
-//	BaseLayerReproduction blr;
 
 	//typedefs	
 	typedef Unsigned(6) Seqno; //similar to SiteNum, since we don't want to exceed an event window, but has no bearing on position
@@ -38,7 +37,6 @@ element Gene{
 	StoredValue comIn;
 	StoredValue comOut;
 	Unsigned(3) eventsAlone;
-	Bool reproduced;
 
 	Void listen(){
 		SiteVisitorByID sv;
@@ -106,22 +104,27 @@ element Gene{
 		
 //		SiteNum slot = ws.getSiteNum(cNucleus);
 //		if(slot <= 40){
+		
 		canSeeNucleus = false;
 		for(SiteNum slot = 0; slot <=40; ++slot){
 			Atom nucleus = ew[slot];
 
 			if(nucleus as Nucleus){
 				if(nucleus.id == id){
-					//we can see the nucleus, so go ahead and let ClusterByID know.
-					canSeeNucleus = true;
+					//check the age of the nucleus to decide if it's time to break the shell.
+				//	if(nucleus.lifespan > nucleus.lifespan.maxof){
+				//		EggShell eg;
+				//		SiteNum shellSite = cl.cellSlotNearMe(eg,id,1);
+				//		Empty e;
+				//		ew[shellSite] = e;
+				//	}
+
 					if(nucleus.reproducing){
 						ID childID = nucleus.childID;
-						reproduced = true;
 						copy(childID);
 					}
-					else{
-						reproduced = false;
-					}
+					//we can see the nucleus, so go ahead and let ClusterByID know.
+					canSeeNucleus = true;
 					return;
 				}
 				else{
@@ -164,11 +167,12 @@ element Gene{
 		}
 		
 	}
+
+
 	Void behave(){
+		nucleusCheck();
 //		canSeeNucleus = cl.geneCanSeeNucleus(id);
 		killCopies();
-//		blr.hatchBaseLayer(id); This is probably too much..
-		nucleusCheck();
 		if(!cl.bringGenesCloser(id,self)){
 			cl.run();
 		}
@@ -191,5 +195,6 @@ element Gene{
 		//spread word of nucleus' comOut
 		////timer for this? variable timer?
 		speak();
+		nucleusCheck();
 	}
 }

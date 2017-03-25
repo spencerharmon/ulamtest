@@ -33,25 +33,26 @@
 #include "Uq_10109211EventWindow10_Types.h"
 //Forward Defs of other classes: //gcnl:SymbolTableOfClasses.cpp:576
 namespace MFM { template <class EC> struct Uq_10106UrSelf10; }  //FORWARD
-namespace MFM { template <class EC> struct Ue_102128EggShell10; }  //FORWARD
-namespace MFM { template <class EC> struct Uq_1010919SiteUtils10; }  //FORWARD
-namespace MFM { template <class EC> struct Uq_10109211ClusterByID10; }  //FORWARD
+namespace MFM { template <class EC> struct Ue_10106Primer10; }  //FORWARD
+namespace MFM { template <class EC> struct Uq_10106Random10; }  //FORWARD
 namespace MFM { template <class EC> struct Uq_10104Cell10; }  //FORWARD
-namespace MFM { template <class EC> struct Ue_102717Nucleus10; }  //FORWARD
-namespace MFM { template <class EC> struct Ue_102574Gene10; }  //FORWARD
+namespace MFM { template <class EC> struct Uq_10109212DecisionTree10; }  //FORWARD
+namespace MFM { template <class EC> struct Ue_102564Gene10; }  //FORWARD
 namespace MFM { template <class EC> struct Ue_10105Empty10; }  //FORWARD
-namespace MFM { template <class EC> struct Uq_10109210ColorUtils10; }  //FORWARD
 namespace MFM { template <class EC> struct Uq_1010919AtomUtils10; }  //FORWARD
 namespace MFM { template <class EC> struct Uq_10104Fail10; }  //FORWARD
 namespace MFM { template <class EC> struct Uq_10105MDist10; }  //FORWARD
 namespace MFM { template <class EC> struct Uq_102323C2D10; }  //FORWARD
+namespace MFM { template <class EC> struct Uq_10109210ColorUtils10; }  //FORWARD
+namespace MFM { template <class EC> struct Ue_102717Nucleus10; }  //FORWARD
 namespace MFM { template <class EC> struct Un_10412489213WindowScanner10; }  //FORWARD
-namespace MFM { template <class EC> struct Uq_10106Random10; }  //FORWARD
+namespace MFM { template <class EC> struct Uq_10109211ClusterByID10; }  //FORWARD
+namespace MFM { template <class EC> struct Uq_1010919SiteUtils10; }  //FORWARD
+namespace MFM { template <class EC> struct Un_10411209215SiteVisitorByID10; }  //FORWARD
+namespace MFM { template <class EC> struct Ue_102158EggShell10; }  //FORWARD
 namespace MFM { template <class EC> struct Uq_10109210DebugUtils10; }  //FORWARD
 namespace MFM { template <class EC> struct Uq_10109211SiteVisitor10; }  //FORWARD
 namespace MFM { template <class EC> struct Un_102329211OutOfBounds10; }  //FORWARD
-namespace MFM { template <class EC> struct Un_10411209215SiteVisitorByID10; }  //FORWARD
-namespace MFM { template <class EC> struct Uq_10109212DecisionTree10; }  //FORWARD
 namespace MFM { template <class EC> struct Un_1035449217SiteVisitorByType10; }  //FORWARD
 
 namespace MFM{
@@ -124,13 +125,9 @@ namespace MFM{
 
     Ui_Ut_r102961a<EC> Uf_4aref(const UlamContext<EC>& uc, UlamRef<EC>& ur, Ui_Uq_102323C2D10<EC>& Uv_5coord) const; //gcnl:SymbolFunction.cpp:463
 
-    Ui_Ut_10111b<EC> Uf_4swap(const UlamContext<EC>& uc, UlamRef<EC>& ur, Ui_Uq_102323C2D10<EC>& Uv_6coord1, Ui_Uq_102323C2D10<EC>& Uv_6coord2) const; //gcnl:SymbolFunction.cpp:463
-
-    Ui_Ut_10111b<EC> Uf_4swap(const UlamContext<EC>& uc, UlamRef<EC>& ur, Ui_Ut_10161u<EC>& Uv_6index1, Ui_Ut_10161u<EC>& Uv_6index2) const; //native //gcnl:SymbolFunction.cpp:459
+    Ui_Ut_10111b<EC> Uf_7isEmpty(const UlamContext<EC>& uc, UlamRef<EC>& ur, Ui_Ut_10161u<EC>& Uv_5index) const; //gcnl:SymbolFunction.cpp:463
 
     Ui_Ut_10111b<EC> Uf_7isEmpty(const UlamContext<EC>& uc, UlamRef<EC>& ur, Ui_Uq_102323C2D10<EC>& Uv_5coord) const; //gcnl:SymbolFunction.cpp:463
-
-    Ui_Ut_10111b<EC> Uf_7isEmpty(const UlamContext<EC>& uc, UlamRef<EC>& ur, Ui_Ut_10161u<EC>& Uv_5index) const; //gcnl:SymbolFunction.cpp:463
 
     Ui_Ut_10161u<EC> Uf_4size(const UlamContext<EC>& uc, UlamRef<EC>& ur) const; //native //gcnl:SymbolFunction.cpp:459
 
@@ -140,17 +137,21 @@ namespace MFM{
 
     Ui_Ut_10161u<EC> Uf_9216getSiteNumberRaw(const UlamContext<EC>& uc, UlamRef<EC>& ur, Ui_Uq_102323C2D10<EC>& Uv_5coord) const; //native //gcnl:SymbolFunction.cpp:459
 
-    Ui_Ut_10111b<EC> Uf_7isLegal(const UlamContext<EC>& uc, UlamRef<EC>& ur, Ui_Uq_102323C2D10<EC>& Uv_5coord) const; //gcnl:SymbolFunction.cpp:463
-
     Ui_Ut_10111b<EC> Uf_7isLegal(const UlamContext<EC>& uc, UlamRef<EC>& ur, Ui_Ut_10161u<EC>& Uv_5index) const; //gcnl:SymbolFunction.cpp:463
 
-    Ui_Ut_10111b<EC> Uf_9212isAccessible(const UlamContext<EC>& uc, UlamRef<EC>& ur, Ui_Uq_102323C2D10<EC>& Uv_5coord) const; //gcnl:SymbolFunction.cpp:463
+    Ui_Ut_10111b<EC> Uf_7isLegal(const UlamContext<EC>& uc, UlamRef<EC>& ur, Ui_Uq_102323C2D10<EC>& Uv_5coord) const; //gcnl:SymbolFunction.cpp:463
 
     Ui_Ut_10111b<EC> Uf_9212isAccessible(const UlamContext<EC>& uc, UlamRef<EC>& ur, Ui_Ut_10161u<EC>& Uv_5index) const; //gcnl:SymbolFunction.cpp:463
 
-    Ui_Ut_10111b<EC> Uf_6isLive(const UlamContext<EC>& uc, UlamRef<EC>& ur, Ui_Uq_102323C2D10<EC>& Uv_5coord) const; //gcnl:SymbolFunction.cpp:463
+    Ui_Ut_10111b<EC> Uf_9212isAccessible(const UlamContext<EC>& uc, UlamRef<EC>& ur, Ui_Uq_102323C2D10<EC>& Uv_5coord) const; //gcnl:SymbolFunction.cpp:463
 
     Ui_Ut_10111b<EC> Uf_6isLive(const UlamContext<EC>& uc, UlamRef<EC>& ur, Ui_Ut_10161u<EC>& Uv_5index) const; //native //gcnl:SymbolFunction.cpp:459
+
+    Ui_Ut_10111b<EC> Uf_6isLive(const UlamContext<EC>& uc, UlamRef<EC>& ur, Ui_Uq_102323C2D10<EC>& Uv_5coord) const; //gcnl:SymbolFunction.cpp:463
+
+    Ui_Ut_10111b<EC> Uf_4swap(const UlamContext<EC>& uc, UlamRef<EC>& ur, Ui_Ut_10161u<EC>& Uv_6index1, Ui_Ut_10161u<EC>& Uv_6index2) const; //native //gcnl:SymbolFunction.cpp:459
+
+    Ui_Ut_10111b<EC> Uf_4swap(const UlamContext<EC>& uc, UlamRef<EC>& ur, Ui_Uq_102323C2D10<EC>& Uv_6coord1, Ui_Uq_102323C2D10<EC>& Uv_6coord2) const; //gcnl:SymbolFunction.cpp:463
 
     Ui_Ut_10161u<EC> Uf_9228getSiteNumberFromRasterIndex(const UlamContext<EC>& uc, UlamRef<EC>& ur, Ui_Ut_10161u<EC>& Uv_5index) const; //native //gcnl:SymbolFunction.cpp:459
 

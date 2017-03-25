@@ -2333,39 +2333,39 @@ namespace MFM{
 } //MFM
 #endif /*Ud_Ui_Uq_10106UrSelf10 */
 
-#ifndef Ud_Ui_Ue_r102128EggShell10
-#define Ud_Ui_Ue_r102128EggShell10
+#ifndef Ud_Ui_Ue_r10106Primer10
+#define Ud_Ui_Ue_r10106Primer10
 namespace MFM{
 
-  template<class EC> class Ue_102128EggShell10;  //forward
+  template<class EC> class Ue_10106Primer10;  //forward
  //gcnl:UlamTypeClassElement.cpp:217
   template<class EC>
-  struct Ui_Ue_r102128EggShell10 : public UlamRef<EC>
+  struct Ui_Ue_r10106Primer10 : public UlamRef<EC>
   {
     typedef typename EC::ATOM_CONFIG AC;
     typedef typename AC::ATOM_TYPE T;
     enum { BPA = AC::BITS_PER_ATOM };
 
-    typedef Ue_102128EggShell10<EC> Us; //gcnl:UlamTypeClassElement.cpp:239
+    typedef Ue_10106Primer10<EC> Us; //gcnl:UlamTypeClassElement.cpp:239
 
     const T read() { return UlamRef<EC>::ReadAtom(); /* read entire element ref */ } //gcnl:UlamTypeClassElement.cpp:314
     void write(const T& targ) { if(targ.GetType() != Us::THE_INSTANCE.GetType()) FAIL(ILLEGAL_ARGUMENT); UlamRef<EC>::WriteAtom(targ); /* write entire element */ } //gcnl:UlamTypeClassElement.cpp:358
     void write(const AtomRefBitStorage<EC>& v) { if(v.GetType() != Us::THE_INSTANCE.GetType()) FAIL(ILLEGAL_ARGUMENT); UlamRef<EC>::WriteAtom(v.ReadAtom()); /* write entire atom */ } //gcnl:UlamTypeClassElement.cpp:374
-    Ui_Ue_r102128EggShell10(BitStorage<EC>& targ, u32 idx, const UlamClass<EC>* effself, const UlamContext<EC> & uc) : UlamRef<EC>(idx, 12u, targ, effself, UlamRef<EC>::ELEMENTAL, uc) { } //gcnl:UlamTypeClassElement.cpp:259
-    Ui_Ue_r102128EggShell10(const Ui_Ue_r102128EggShell10<EC>& r) : UlamRef<EC>(r, 0, r.GetLen(), r.GetEffectiveSelf(), UlamRef<EC>::ELEMENTAL) { } //gcnl:UlamTypeClassElement.cpp:272
-    Ui_Ue_r102128EggShell10(const UlamRef<EC>& arg, s32 idx, const UlamClass<EC>* effself) : UlamRef<EC>(arg, idx, 12u, effself, UlamRef<EC>::ELEMENTAL) { } //gcnl:UlamTypeClassElement.cpp:284
+    Ui_Ue_r10106Primer10(BitStorage<EC>& targ, u32 idx, const UlamClass<EC>* effself, const UlamContext<EC> & uc) : UlamRef<EC>(idx, 0u, targ, effself, UlamRef<EC>::ELEMENTAL, uc) { } //gcnl:UlamTypeClassElement.cpp:259
+    Ui_Ue_r10106Primer10(const Ui_Ue_r10106Primer10<EC>& r) : UlamRef<EC>(r, 0, r.GetLen(), r.GetEffectiveSelf(), UlamRef<EC>::ELEMENTAL) { } //gcnl:UlamTypeClassElement.cpp:272
+    Ui_Ue_r10106Primer10(const UlamRef<EC>& arg, s32 idx, const UlamClass<EC>* effself) : UlamRef<EC>(arg, idx, 0u, effself, UlamRef<EC>::ELEMENTAL) { } //gcnl:UlamTypeClassElement.cpp:284
   };
 } //MFM
-#endif /*Ud_Ui_Ue_r102128EggShell10 */
+#endif /*Ud_Ui_Ue_r10106Primer10 */
 
-#ifndef Ud_Ui_Ue_102128EggShell10
-#define Ud_Ui_Ue_102128EggShell10
+#ifndef Ud_Ui_Ue_10106Primer10
+#define Ud_Ui_Ue_10106Primer10
 namespace MFM{
 
-  template<class EC> class Ue_102128EggShell10;  //forward //gcnl:UlamTypeClassElement.cpp:434
+  template<class EC> class Ue_10106Primer10;  //forward //gcnl:UlamTypeClassElement.cpp:434
 
   template<class EC>
-  struct Ui_Ue_102128EggShell10 : public AtomBitStorage<EC>
+  struct Ui_Ue_10106Primer10 : public AtomBitStorage<EC>
   {
     typedef typename EC::ATOM_CONFIG AC;
     typedef typename AC::ATOM_TYPE T;
@@ -2373,27 +2373,27 @@ namespace MFM{
 
     typedef AtomRefBitStorage<EC> ABS; //gcnl:UlamTypeClassElement.cpp:454
 
-    typedef Ue_102128EggShell10<EC> Us; //gcnl:UlamTypeClassElement.cpp:461
+    typedef Ue_10106Primer10<EC> Us; //gcnl:UlamTypeClassElement.cpp:461
 
     const T read() const { return ABS::ReadAtom(); } //gcnl:UlamTypeClassElement.cpp:541
     void write(const T& v) { ABS::WriteAtom(v); } //gcnl:UlamTypeClassElement.cpp:582
-    Ui_Ue_102128EggShell10() : AtomBitStorage<EC>(Us::THE_INSTANCE.GetDefaultAtom()) { } //gcnl:UlamTypeClassElement.cpp:476
-    Ui_Ue_102128EggShell10(const T& d) : AtomBitStorage<EC>(d) { if(d.GetType() != Us::THE_INSTANCE.GetType()) FAIL(ILLEGAL_ARGUMENT); } //gcnl:UlamTypeClassElement.cpp:487
-    Ui_Ue_102128EggShell10(const Ui_Ue_102128EggShell10<EC> & arg) { this->m_stg = arg.m_stg; } //gcnl:UlamTypeClassElement.cpp:495
-    Ui_Ue_102128EggShell10(const AtomRefBitStorage<EC> & arg) : AtomBitStorage<EC>(arg.ReadAtom()) { if(arg.GetType() != Us::THE_INSTANCE.GetType()) FAIL(ILLEGAL_ARGUMENT); } //gcnl:UlamTypeClassElement.cpp:504
-    Ui_Ue_102128EggShell10(const Ui_Ue_r102128EggShell10<EC>& d) : AtomBitStorage<EC>(d.read()) { } //gcnl:UlamTypeClassElement.cpp:513
+    Ui_Ue_10106Primer10() : AtomBitStorage<EC>(Us::THE_INSTANCE.GetDefaultAtom()) { } //gcnl:UlamTypeClassElement.cpp:476
+    Ui_Ue_10106Primer10(const T& d) : AtomBitStorage<EC>(d) { if(d.GetType() != Us::THE_INSTANCE.GetType()) FAIL(ILLEGAL_ARGUMENT); } //gcnl:UlamTypeClassElement.cpp:487
+    Ui_Ue_10106Primer10(const Ui_Ue_10106Primer10<EC> & arg) { this->m_stg = arg.m_stg; } //gcnl:UlamTypeClassElement.cpp:495
+    Ui_Ue_10106Primer10(const AtomRefBitStorage<EC> & arg) : AtomBitStorage<EC>(arg.ReadAtom()) { if(arg.GetType() != Us::THE_INSTANCE.GetType()) FAIL(ILLEGAL_ARGUMENT); } //gcnl:UlamTypeClassElement.cpp:504
+    Ui_Ue_10106Primer10(const Ui_Ue_r10106Primer10<EC>& d) : AtomBitStorage<EC>(d.read()) { } //gcnl:UlamTypeClassElement.cpp:513
   };
 } //MFM
-#endif /*Ud_Ui_Ue_102128EggShell10 */
+#endif /*Ud_Ui_Ue_10106Primer10 */
 
-#ifndef Ud_Ui_Uq_r1010919SiteUtils10
-#define Ud_Ui_Uq_r1010919SiteUtils10
+#ifndef Ud_Ui_Uq_r10106Random10
+#define Ud_Ui_Uq_r10106Random10
 namespace MFM{
 
-  template<class EC> class Uq_1010919SiteUtils10;  //forward //gcnl:UlamTypeClassQuark.cpp:202
+  template<class EC> class Uq_10106Random10;  //forward //gcnl:UlamTypeClassQuark.cpp:202
 
   template<class EC>
-  struct Ui_Uq_r1010919SiteUtils10 : public UlamRef<EC> //gcnl:UlamTypeClassQuark.cpp:211
+  struct Ui_Uq_r10106Random10 : public UlamRef<EC> //gcnl:UlamTypeClassQuark.cpp:211
   {
     typedef typename EC::ATOM_CONFIG AC;
     typedef typename AC::ATOM_TYPE T;
@@ -2401,27 +2401,27 @@ namespace MFM{
 
     enum { QUARK_SIZE = 0}; //gcnl:UlamTypeClassQuark.cpp:223
 
-    typedef Uq_1010919SiteUtils10<EC> Us; //gcnl:UlamTypeClassQuark.cpp:230
+    typedef Uq_10106Random10<EC> Us; //gcnl:UlamTypeClassQuark.cpp:230
     const u32 read() const { return UlamRef<EC>::Read(); /* entire quark */ } //gcnl:UlamTypeClassQuark.cpp:334
     void write(const u32& targ) { UlamRef<EC>::Write(targ); /* entire quark */ } //gcnl:UlamTypeClassQuark.cpp:370
-    Ui_Uq_r1010919SiteUtils10(BitStorage<EC>& targ, u32 idx, const UlamClass<EC>* effself, const UlamContext<EC>& uc) : UlamRef<EC>(idx, 0u, targ, effself, UlamRef<EC>::CLASSIC, uc) { } //gcnl:UlamTypeClassQuark.cpp:249
-    Ui_Uq_r1010919SiteUtils10(const UlamRef<EC>& arg, s32 idx, const UlamClass<EC>* effself) : UlamRef<EC>(arg, idx, 0u, effself, UlamRef<EC>::CLASSIC) { } //gcnl:UlamTypeClassQuark.cpp:261
-    Ui_Uq_r1010919SiteUtils10(BitStorage<EC>& targ, u32 idx, const UlamClass<EC>* effself, const typename UlamRef<EC>::UsageType usage, const UlamContext<EC>& uc) : UlamRef<EC>(idx, 0u, targ, effself, usage, uc) { } //gcnl:UlamTypeClassQuark.cpp:271
-    Ui_Uq_r1010919SiteUtils10(const UlamRef<EC>& arg, s32 idx, const UlamClass<EC>* effself, const typename UlamRef<EC>::UsageType usage) : UlamRef<EC>(arg, idx, 0u, effself, usage) { } //gcnl:UlamTypeClassQuark.cpp:280
-    Ui_Uq_r1010919SiteUtils10(const UlamRef<EC>& r) : UlamRef<EC>(r, 0u) { } //gcnl:UlamTypeClassQuark.cpp:288
-    Ui_Uq_r1010919SiteUtils10(const Ui_Uq_r1010919SiteUtils10<EC>& r) : UlamRef<EC>(r, r.GetLen()) { } //gcnl:UlamTypeClassQuark.cpp:297
+    Ui_Uq_r10106Random10(BitStorage<EC>& targ, u32 idx, const UlamClass<EC>* effself, const UlamContext<EC>& uc) : UlamRef<EC>(idx, 0u, targ, effself, UlamRef<EC>::CLASSIC, uc) { } //gcnl:UlamTypeClassQuark.cpp:249
+    Ui_Uq_r10106Random10(const UlamRef<EC>& arg, s32 idx, const UlamClass<EC>* effself) : UlamRef<EC>(arg, idx, 0u, effself, UlamRef<EC>::CLASSIC) { } //gcnl:UlamTypeClassQuark.cpp:261
+    Ui_Uq_r10106Random10(BitStorage<EC>& targ, u32 idx, const UlamClass<EC>* effself, const typename UlamRef<EC>::UsageType usage, const UlamContext<EC>& uc) : UlamRef<EC>(idx, 0u, targ, effself, usage, uc) { } //gcnl:UlamTypeClassQuark.cpp:271
+    Ui_Uq_r10106Random10(const UlamRef<EC>& arg, s32 idx, const UlamClass<EC>* effself, const typename UlamRef<EC>::UsageType usage) : UlamRef<EC>(arg, idx, 0u, effself, usage) { } //gcnl:UlamTypeClassQuark.cpp:280
+    Ui_Uq_r10106Random10(const UlamRef<EC>& r) : UlamRef<EC>(r, 0u) { } //gcnl:UlamTypeClassQuark.cpp:288
+    Ui_Uq_r10106Random10(const Ui_Uq_r10106Random10<EC>& r) : UlamRef<EC>(r, r.GetLen()) { } //gcnl:UlamTypeClassQuark.cpp:297
   };
 } //MFM
-#endif /*Ud_Ui_Uq_r1010919SiteUtils10 */
+#endif /*Ud_Ui_Uq_r10106Random10 */
 
-#ifndef Ud_Ui_Uq_1010919SiteUtils10
-#define Ud_Ui_Uq_1010919SiteUtils10
+#ifndef Ud_Ui_Uq_10106Random10
+#define Ud_Ui_Uq_10106Random10
 namespace MFM{
 
-  template<class EC> class Uq_1010919SiteUtils10; //forward //gcnl:UlamTypeClassQuark.cpp:431
+  template<class EC> class Uq_10106Random10; //forward //gcnl:UlamTypeClassQuark.cpp:431
 
   template<class EC>
-  struct Ui_Uq_1010919SiteUtils10 : public BitVectorBitStorage<EC, BitVector<0> >
+  struct Ui_Uq_10106Random10 : public BitVectorBitStorage<EC, BitVector<0> >
   {
     typedef typename EC::ATOM_CONFIG AC;
     typedef typename AC::ATOM_TYPE T;
@@ -2431,17 +2431,17 @@ namespace MFM{
     typedef BitVector<0> BV; //gcnl:UlamTypeClassQuark.cpp:464
     typedef BitVectorBitStorage<EC, BV> BVS; //gcnl:UlamTypeClassQuark.cpp:467
 
-    typedef Uq_1010919SiteUtils10<EC> Us; //gcnl:UlamTypeClassQuark.cpp:486
+    typedef Uq_10106Random10<EC> Us; //gcnl:UlamTypeClassQuark.cpp:486
 
     const u32 read() const { return BVS::Read(0u, QUARK_SIZE); } //gcnl:UlamTypeClassQuark.cpp:577
     void write(const u32 v) { BVS::Write(0u, QUARK_SIZE, v); } //gcnl:UlamTypeClassQuark.cpp:634
-    Ui_Uq_1010919SiteUtils10() { write(Us::THE_INSTANCE.getDefaultQuark()); } //gcnl:UlamTypeClassQuark.cpp:503
-    Ui_Uq_1010919SiteUtils10(const u32 d) { write(d); } //gcnl:UlamTypeClassQuark.cpp:529
-    Ui_Uq_1010919SiteUtils10(const Ui_Uq_1010919SiteUtils10<EC> & arg) { write(arg.read()); } //gcnl:UlamTypeClassQuark.cpp:538
-    Ui_Uq_1010919SiteUtils10(const Ui_Uq_r1010919SiteUtils10<EC>& d) { write(d.read()); } //gcnl:UlamTypeClassQuark.cpp:546
+    Ui_Uq_10106Random10() { write(Us::THE_INSTANCE.getDefaultQuark()); } //gcnl:UlamTypeClassQuark.cpp:503
+    Ui_Uq_10106Random10(const u32 d) { write(d); } //gcnl:UlamTypeClassQuark.cpp:529
+    Ui_Uq_10106Random10(const Ui_Uq_10106Random10<EC> & arg) { write(arg.read()); } //gcnl:UlamTypeClassQuark.cpp:538
+    Ui_Uq_10106Random10(const Ui_Uq_r10106Random10<EC>& d) { write(d.read()); } //gcnl:UlamTypeClassQuark.cpp:546
   };
 } //MFM
-#endif /*Ud_Ui_Uq_1010919SiteUtils10 */
+#endif /*Ud_Ui_Uq_10106Random10 */
 
 #ifndef Ud_Ui_Uq_r10109211EventWindow10
 #define Ud_Ui_Uq_r10109211EventWindow10
@@ -2501,63 +2501,6 @@ namespace MFM{
 } //MFM
 #endif /*Ud_Ui_Uq_10109211EventWindow10 */
 
-#ifndef Ud_Ui_Uq_r10109211ClusterByID10
-#define Ud_Ui_Uq_r10109211ClusterByID10
-namespace MFM{
-
-  template<class EC> class Uq_10109211ClusterByID10;  //forward //gcnl:UlamTypeClassQuark.cpp:202
-
-  template<class EC>
-  struct Ui_Uq_r10109211ClusterByID10 : public UlamRef<EC> //gcnl:UlamTypeClassQuark.cpp:211
-  {
-    typedef typename EC::ATOM_CONFIG AC;
-    typedef typename AC::ATOM_TYPE T;
-    enum { BPA = AC::BITS_PER_ATOM };
-
-    enum { QUARK_SIZE = 0}; //gcnl:UlamTypeClassQuark.cpp:223
-
-    typedef Uq_10109211ClusterByID10<EC> Us; //gcnl:UlamTypeClassQuark.cpp:230
-    const u32 read() const { return UlamRef<EC>::Read(); /* entire quark */ } //gcnl:UlamTypeClassQuark.cpp:334
-    void write(const u32& targ) { UlamRef<EC>::Write(targ); /* entire quark */ } //gcnl:UlamTypeClassQuark.cpp:370
-    Ui_Uq_r10109211ClusterByID10(BitStorage<EC>& targ, u32 idx, const UlamClass<EC>* effself, const UlamContext<EC>& uc) : UlamRef<EC>(idx, 0u, targ, effself, UlamRef<EC>::CLASSIC, uc) { } //gcnl:UlamTypeClassQuark.cpp:249
-    Ui_Uq_r10109211ClusterByID10(const UlamRef<EC>& arg, s32 idx, const UlamClass<EC>* effself) : UlamRef<EC>(arg, idx, 0u, effself, UlamRef<EC>::CLASSIC) { } //gcnl:UlamTypeClassQuark.cpp:261
-    Ui_Uq_r10109211ClusterByID10(BitStorage<EC>& targ, u32 idx, const UlamClass<EC>* effself, const typename UlamRef<EC>::UsageType usage, const UlamContext<EC>& uc) : UlamRef<EC>(idx, 0u, targ, effself, usage, uc) { } //gcnl:UlamTypeClassQuark.cpp:271
-    Ui_Uq_r10109211ClusterByID10(const UlamRef<EC>& arg, s32 idx, const UlamClass<EC>* effself, const typename UlamRef<EC>::UsageType usage) : UlamRef<EC>(arg, idx, 0u, effself, usage) { } //gcnl:UlamTypeClassQuark.cpp:280
-    Ui_Uq_r10109211ClusterByID10(const UlamRef<EC>& r) : UlamRef<EC>(r, 0u) { } //gcnl:UlamTypeClassQuark.cpp:288
-    Ui_Uq_r10109211ClusterByID10(const Ui_Uq_r10109211ClusterByID10<EC>& r) : UlamRef<EC>(r, r.GetLen()) { } //gcnl:UlamTypeClassQuark.cpp:297
-  };
-} //MFM
-#endif /*Ud_Ui_Uq_r10109211ClusterByID10 */
-
-#ifndef Ud_Ui_Uq_10109211ClusterByID10
-#define Ud_Ui_Uq_10109211ClusterByID10
-namespace MFM{
-
-  template<class EC> class Uq_10109211ClusterByID10; //forward //gcnl:UlamTypeClassQuark.cpp:431
-
-  template<class EC>
-  struct Ui_Uq_10109211ClusterByID10 : public BitVectorBitStorage<EC, BitVector<0> >
-  {
-    typedef typename EC::ATOM_CONFIG AC;
-    typedef typename AC::ATOM_TYPE T;
-    enum { BPA = AC::BITS_PER_ATOM };
-
-    enum { QUARK_SIZE = 0}; //gcnl:UlamTypeClassQuark.cpp:456
-    typedef BitVector<0> BV; //gcnl:UlamTypeClassQuark.cpp:464
-    typedef BitVectorBitStorage<EC, BV> BVS; //gcnl:UlamTypeClassQuark.cpp:467
-
-    typedef Uq_10109211ClusterByID10<EC> Us; //gcnl:UlamTypeClassQuark.cpp:486
-
-    const u32 read() const { return BVS::Read(0u, QUARK_SIZE); } //gcnl:UlamTypeClassQuark.cpp:577
-    void write(const u32 v) { BVS::Write(0u, QUARK_SIZE, v); } //gcnl:UlamTypeClassQuark.cpp:634
-    Ui_Uq_10109211ClusterByID10() { write(Us::THE_INSTANCE.getDefaultQuark()); } //gcnl:UlamTypeClassQuark.cpp:503
-    Ui_Uq_10109211ClusterByID10(const u32 d) { write(d); } //gcnl:UlamTypeClassQuark.cpp:529
-    Ui_Uq_10109211ClusterByID10(const Ui_Uq_10109211ClusterByID10<EC> & arg) { write(arg.read()); } //gcnl:UlamTypeClassQuark.cpp:538
-    Ui_Uq_10109211ClusterByID10(const Ui_Uq_r10109211ClusterByID10<EC>& d) { write(d.read()); } //gcnl:UlamTypeClassQuark.cpp:546
-  };
-} //MFM
-#endif /*Ud_Ui_Uq_10109211ClusterByID10 */
-
 #ifndef Ud_Ui_Uq_r10104Cell10
 #define Ud_Ui_Uq_r10104Cell10
 namespace MFM{
@@ -2615,39 +2558,96 @@ namespace MFM{
 } //MFM
 #endif /*Ud_Ui_Uq_10104Cell10 */
 
-#ifndef Ud_Ui_Ue_r102717Nucleus10
-#define Ud_Ui_Ue_r102717Nucleus10
+#ifndef Ud_Ui_Uq_r10109212DecisionTree10
+#define Ud_Ui_Uq_r10109212DecisionTree10
 namespace MFM{
 
-  template<class EC> class Ue_102717Nucleus10;  //forward
- //gcnl:UlamTypeClassElement.cpp:217
+  template<class EC> class Uq_10109212DecisionTree10;  //forward //gcnl:UlamTypeClassQuark.cpp:202
+
   template<class EC>
-  struct Ui_Ue_r102717Nucleus10 : public UlamRef<EC>
+  struct Ui_Uq_r10109212DecisionTree10 : public UlamRef<EC> //gcnl:UlamTypeClassQuark.cpp:211
   {
     typedef typename EC::ATOM_CONFIG AC;
     typedef typename AC::ATOM_TYPE T;
     enum { BPA = AC::BITS_PER_ATOM };
 
-    typedef Ue_102717Nucleus10<EC> Us; //gcnl:UlamTypeClassElement.cpp:239
+    enum { QUARK_SIZE = 0}; //gcnl:UlamTypeClassQuark.cpp:223
+
+    typedef Uq_10109212DecisionTree10<EC> Us; //gcnl:UlamTypeClassQuark.cpp:230
+    const u32 read() const { return UlamRef<EC>::Read(); /* entire quark */ } //gcnl:UlamTypeClassQuark.cpp:334
+    void write(const u32& targ) { UlamRef<EC>::Write(targ); /* entire quark */ } //gcnl:UlamTypeClassQuark.cpp:370
+    Ui_Uq_r10109212DecisionTree10(BitStorage<EC>& targ, u32 idx, const UlamClass<EC>* effself, const UlamContext<EC>& uc) : UlamRef<EC>(idx, 0u, targ, effself, UlamRef<EC>::CLASSIC, uc) { } //gcnl:UlamTypeClassQuark.cpp:249
+    Ui_Uq_r10109212DecisionTree10(const UlamRef<EC>& arg, s32 idx, const UlamClass<EC>* effself) : UlamRef<EC>(arg, idx, 0u, effself, UlamRef<EC>::CLASSIC) { } //gcnl:UlamTypeClassQuark.cpp:261
+    Ui_Uq_r10109212DecisionTree10(BitStorage<EC>& targ, u32 idx, const UlamClass<EC>* effself, const typename UlamRef<EC>::UsageType usage, const UlamContext<EC>& uc) : UlamRef<EC>(idx, 0u, targ, effself, usage, uc) { } //gcnl:UlamTypeClassQuark.cpp:271
+    Ui_Uq_r10109212DecisionTree10(const UlamRef<EC>& arg, s32 idx, const UlamClass<EC>* effself, const typename UlamRef<EC>::UsageType usage) : UlamRef<EC>(arg, idx, 0u, effself, usage) { } //gcnl:UlamTypeClassQuark.cpp:280
+    Ui_Uq_r10109212DecisionTree10(const UlamRef<EC>& r) : UlamRef<EC>(r, 0u) { } //gcnl:UlamTypeClassQuark.cpp:288
+    Ui_Uq_r10109212DecisionTree10(const Ui_Uq_r10109212DecisionTree10<EC>& r) : UlamRef<EC>(r, r.GetLen()) { } //gcnl:UlamTypeClassQuark.cpp:297
+  };
+} //MFM
+#endif /*Ud_Ui_Uq_r10109212DecisionTree10 */
+
+#ifndef Ud_Ui_Uq_10109212DecisionTree10
+#define Ud_Ui_Uq_10109212DecisionTree10
+namespace MFM{
+
+  template<class EC> class Uq_10109212DecisionTree10; //forward //gcnl:UlamTypeClassQuark.cpp:431
+
+  template<class EC>
+  struct Ui_Uq_10109212DecisionTree10 : public BitVectorBitStorage<EC, BitVector<0> >
+  {
+    typedef typename EC::ATOM_CONFIG AC;
+    typedef typename AC::ATOM_TYPE T;
+    enum { BPA = AC::BITS_PER_ATOM };
+
+    enum { QUARK_SIZE = 0}; //gcnl:UlamTypeClassQuark.cpp:456
+    typedef BitVector<0> BV; //gcnl:UlamTypeClassQuark.cpp:464
+    typedef BitVectorBitStorage<EC, BV> BVS; //gcnl:UlamTypeClassQuark.cpp:467
+
+    typedef Uq_10109212DecisionTree10<EC> Us; //gcnl:UlamTypeClassQuark.cpp:486
+
+    const u32 read() const { return BVS::Read(0u, QUARK_SIZE); } //gcnl:UlamTypeClassQuark.cpp:577
+    void write(const u32 v) { BVS::Write(0u, QUARK_SIZE, v); } //gcnl:UlamTypeClassQuark.cpp:634
+    Ui_Uq_10109212DecisionTree10() { write(Us::THE_INSTANCE.getDefaultQuark()); } //gcnl:UlamTypeClassQuark.cpp:503
+    Ui_Uq_10109212DecisionTree10(const u32 d) { write(d); } //gcnl:UlamTypeClassQuark.cpp:529
+    Ui_Uq_10109212DecisionTree10(const Ui_Uq_10109212DecisionTree10<EC> & arg) { write(arg.read()); } //gcnl:UlamTypeClassQuark.cpp:538
+    Ui_Uq_10109212DecisionTree10(const Ui_Uq_r10109212DecisionTree10<EC>& d) { write(d.read()); } //gcnl:UlamTypeClassQuark.cpp:546
+  };
+} //MFM
+#endif /*Ud_Ui_Uq_10109212DecisionTree10 */
+
+#ifndef Ud_Ui_Ue_r102564Gene10
+#define Ud_Ui_Ue_r102564Gene10
+namespace MFM{
+
+  template<class EC> class Ue_102564Gene10;  //forward
+ //gcnl:UlamTypeClassElement.cpp:217
+  template<class EC>
+  struct Ui_Ue_r102564Gene10 : public UlamRef<EC>
+  {
+    typedef typename EC::ATOM_CONFIG AC;
+    typedef typename AC::ATOM_TYPE T;
+    enum { BPA = AC::BITS_PER_ATOM };
+
+    typedef Ue_102564Gene10<EC> Us; //gcnl:UlamTypeClassElement.cpp:239
 
     const T read() { return UlamRef<EC>::ReadAtom(); /* read entire element ref */ } //gcnl:UlamTypeClassElement.cpp:314
     void write(const T& targ) { if(targ.GetType() != Us::THE_INSTANCE.GetType()) FAIL(ILLEGAL_ARGUMENT); UlamRef<EC>::WriteAtom(targ); /* write entire element */ } //gcnl:UlamTypeClassElement.cpp:358
     void write(const AtomRefBitStorage<EC>& v) { if(v.GetType() != Us::THE_INSTANCE.GetType()) FAIL(ILLEGAL_ARGUMENT); UlamRef<EC>::WriteAtom(v.ReadAtom()); /* write entire atom */ } //gcnl:UlamTypeClassElement.cpp:374
-    Ui_Ue_r102717Nucleus10(BitStorage<EC>& targ, u32 idx, const UlamClass<EC>* effself, const UlamContext<EC> & uc) : UlamRef<EC>(idx, 71u, targ, effself, UlamRef<EC>::ELEMENTAL, uc) { } //gcnl:UlamTypeClassElement.cpp:259
-    Ui_Ue_r102717Nucleus10(const Ui_Ue_r102717Nucleus10<EC>& r) : UlamRef<EC>(r, 0, r.GetLen(), r.GetEffectiveSelf(), UlamRef<EC>::ELEMENTAL) { } //gcnl:UlamTypeClassElement.cpp:272
-    Ui_Ue_r102717Nucleus10(const UlamRef<EC>& arg, s32 idx, const UlamClass<EC>* effself) : UlamRef<EC>(arg, idx, 71u, effself, UlamRef<EC>::ELEMENTAL) { } //gcnl:UlamTypeClassElement.cpp:284
+    Ui_Ue_r102564Gene10(BitStorage<EC>& targ, u32 idx, const UlamClass<EC>* effself, const UlamContext<EC> & uc) : UlamRef<EC>(idx, 56u, targ, effself, UlamRef<EC>::ELEMENTAL, uc) { } //gcnl:UlamTypeClassElement.cpp:259
+    Ui_Ue_r102564Gene10(const Ui_Ue_r102564Gene10<EC>& r) : UlamRef<EC>(r, 0, r.GetLen(), r.GetEffectiveSelf(), UlamRef<EC>::ELEMENTAL) { } //gcnl:UlamTypeClassElement.cpp:272
+    Ui_Ue_r102564Gene10(const UlamRef<EC>& arg, s32 idx, const UlamClass<EC>* effself) : UlamRef<EC>(arg, idx, 56u, effself, UlamRef<EC>::ELEMENTAL) { } //gcnl:UlamTypeClassElement.cpp:284
   };
 } //MFM
-#endif /*Ud_Ui_Ue_r102717Nucleus10 */
+#endif /*Ud_Ui_Ue_r102564Gene10 */
 
-#ifndef Ud_Ui_Ue_102717Nucleus10
-#define Ud_Ui_Ue_102717Nucleus10
+#ifndef Ud_Ui_Ue_102564Gene10
+#define Ud_Ui_Ue_102564Gene10
 namespace MFM{
 
-  template<class EC> class Ue_102717Nucleus10;  //forward //gcnl:UlamTypeClassElement.cpp:434
+  template<class EC> class Ue_102564Gene10;  //forward //gcnl:UlamTypeClassElement.cpp:434
 
   template<class EC>
-  struct Ui_Ue_102717Nucleus10 : public AtomBitStorage<EC>
+  struct Ui_Ue_102564Gene10 : public AtomBitStorage<EC>
   {
     typedef typename EC::ATOM_CONFIG AC;
     typedef typename AC::ATOM_TYPE T;
@@ -2655,71 +2655,18 @@ namespace MFM{
 
     typedef AtomRefBitStorage<EC> ABS; //gcnl:UlamTypeClassElement.cpp:454
 
-    typedef Ue_102717Nucleus10<EC> Us; //gcnl:UlamTypeClassElement.cpp:461
+    typedef Ue_102564Gene10<EC> Us; //gcnl:UlamTypeClassElement.cpp:461
 
     const T read() const { return ABS::ReadAtom(); } //gcnl:UlamTypeClassElement.cpp:541
     void write(const T& v) { ABS::WriteAtom(v); } //gcnl:UlamTypeClassElement.cpp:582
-    Ui_Ue_102717Nucleus10() : AtomBitStorage<EC>(Us::THE_INSTANCE.GetDefaultAtom()) { } //gcnl:UlamTypeClassElement.cpp:476
-    Ui_Ue_102717Nucleus10(const T& d) : AtomBitStorage<EC>(d) { if(d.GetType() != Us::THE_INSTANCE.GetType()) FAIL(ILLEGAL_ARGUMENT); } //gcnl:UlamTypeClassElement.cpp:487
-    Ui_Ue_102717Nucleus10(const Ui_Ue_102717Nucleus10<EC> & arg) { this->m_stg = arg.m_stg; } //gcnl:UlamTypeClassElement.cpp:495
-    Ui_Ue_102717Nucleus10(const AtomRefBitStorage<EC> & arg) : AtomBitStorage<EC>(arg.ReadAtom()) { if(arg.GetType() != Us::THE_INSTANCE.GetType()) FAIL(ILLEGAL_ARGUMENT); } //gcnl:UlamTypeClassElement.cpp:504
-    Ui_Ue_102717Nucleus10(const Ui_Ue_r102717Nucleus10<EC>& d) : AtomBitStorage<EC>(d.read()) { } //gcnl:UlamTypeClassElement.cpp:513
+    Ui_Ue_102564Gene10() : AtomBitStorage<EC>(Us::THE_INSTANCE.GetDefaultAtom()) { } //gcnl:UlamTypeClassElement.cpp:476
+    Ui_Ue_102564Gene10(const T& d) : AtomBitStorage<EC>(d) { if(d.GetType() != Us::THE_INSTANCE.GetType()) FAIL(ILLEGAL_ARGUMENT); } //gcnl:UlamTypeClassElement.cpp:487
+    Ui_Ue_102564Gene10(const Ui_Ue_102564Gene10<EC> & arg) { this->m_stg = arg.m_stg; } //gcnl:UlamTypeClassElement.cpp:495
+    Ui_Ue_102564Gene10(const AtomRefBitStorage<EC> & arg) : AtomBitStorage<EC>(arg.ReadAtom()) { if(arg.GetType() != Us::THE_INSTANCE.GetType()) FAIL(ILLEGAL_ARGUMENT); } //gcnl:UlamTypeClassElement.cpp:504
+    Ui_Ue_102564Gene10(const Ui_Ue_r102564Gene10<EC>& d) : AtomBitStorage<EC>(d.read()) { } //gcnl:UlamTypeClassElement.cpp:513
   };
 } //MFM
-#endif /*Ud_Ui_Ue_102717Nucleus10 */
-
-#ifndef Ud_Ui_Ue_r102574Gene10
-#define Ud_Ui_Ue_r102574Gene10
-namespace MFM{
-
-  template<class EC> class Ue_102574Gene10;  //forward
- //gcnl:UlamTypeClassElement.cpp:217
-  template<class EC>
-  struct Ui_Ue_r102574Gene10 : public UlamRef<EC>
-  {
-    typedef typename EC::ATOM_CONFIG AC;
-    typedef typename AC::ATOM_TYPE T;
-    enum { BPA = AC::BITS_PER_ATOM };
-
-    typedef Ue_102574Gene10<EC> Us; //gcnl:UlamTypeClassElement.cpp:239
-
-    const T read() { return UlamRef<EC>::ReadAtom(); /* read entire element ref */ } //gcnl:UlamTypeClassElement.cpp:314
-    void write(const T& targ) { if(targ.GetType() != Us::THE_INSTANCE.GetType()) FAIL(ILLEGAL_ARGUMENT); UlamRef<EC>::WriteAtom(targ); /* write entire element */ } //gcnl:UlamTypeClassElement.cpp:358
-    void write(const AtomRefBitStorage<EC>& v) { if(v.GetType() != Us::THE_INSTANCE.GetType()) FAIL(ILLEGAL_ARGUMENT); UlamRef<EC>::WriteAtom(v.ReadAtom()); /* write entire atom */ } //gcnl:UlamTypeClassElement.cpp:374
-    Ui_Ue_r102574Gene10(BitStorage<EC>& targ, u32 idx, const UlamClass<EC>* effself, const UlamContext<EC> & uc) : UlamRef<EC>(idx, 57u, targ, effself, UlamRef<EC>::ELEMENTAL, uc) { } //gcnl:UlamTypeClassElement.cpp:259
-    Ui_Ue_r102574Gene10(const Ui_Ue_r102574Gene10<EC>& r) : UlamRef<EC>(r, 0, r.GetLen(), r.GetEffectiveSelf(), UlamRef<EC>::ELEMENTAL) { } //gcnl:UlamTypeClassElement.cpp:272
-    Ui_Ue_r102574Gene10(const UlamRef<EC>& arg, s32 idx, const UlamClass<EC>* effself) : UlamRef<EC>(arg, idx, 57u, effself, UlamRef<EC>::ELEMENTAL) { } //gcnl:UlamTypeClassElement.cpp:284
-  };
-} //MFM
-#endif /*Ud_Ui_Ue_r102574Gene10 */
-
-#ifndef Ud_Ui_Ue_102574Gene10
-#define Ud_Ui_Ue_102574Gene10
-namespace MFM{
-
-  template<class EC> class Ue_102574Gene10;  //forward //gcnl:UlamTypeClassElement.cpp:434
-
-  template<class EC>
-  struct Ui_Ue_102574Gene10 : public AtomBitStorage<EC>
-  {
-    typedef typename EC::ATOM_CONFIG AC;
-    typedef typename AC::ATOM_TYPE T;
-    enum { BPA = AC::BITS_PER_ATOM };
-
-    typedef AtomRefBitStorage<EC> ABS; //gcnl:UlamTypeClassElement.cpp:454
-
-    typedef Ue_102574Gene10<EC> Us; //gcnl:UlamTypeClassElement.cpp:461
-
-    const T read() const { return ABS::ReadAtom(); } //gcnl:UlamTypeClassElement.cpp:541
-    void write(const T& v) { ABS::WriteAtom(v); } //gcnl:UlamTypeClassElement.cpp:582
-    Ui_Ue_102574Gene10() : AtomBitStorage<EC>(Us::THE_INSTANCE.GetDefaultAtom()) { } //gcnl:UlamTypeClassElement.cpp:476
-    Ui_Ue_102574Gene10(const T& d) : AtomBitStorage<EC>(d) { if(d.GetType() != Us::THE_INSTANCE.GetType()) FAIL(ILLEGAL_ARGUMENT); } //gcnl:UlamTypeClassElement.cpp:487
-    Ui_Ue_102574Gene10(const Ui_Ue_102574Gene10<EC> & arg) { this->m_stg = arg.m_stg; } //gcnl:UlamTypeClassElement.cpp:495
-    Ui_Ue_102574Gene10(const AtomRefBitStorage<EC> & arg) : AtomBitStorage<EC>(arg.ReadAtom()) { if(arg.GetType() != Us::THE_INSTANCE.GetType()) FAIL(ILLEGAL_ARGUMENT); } //gcnl:UlamTypeClassElement.cpp:504
-    Ui_Ue_102574Gene10(const Ui_Ue_r102574Gene10<EC>& d) : AtomBitStorage<EC>(d.read()) { } //gcnl:UlamTypeClassElement.cpp:513
-  };
-} //MFM
-#endif /*Ud_Ui_Ue_102574Gene10 */
+#endif /*Ud_Ui_Ue_102564Gene10 */
 
 #ifndef Ud_Ui_Ue_r10105Empty10
 #define Ud_Ui_Ue_r10105Empty10
@@ -2773,63 +2720,6 @@ namespace MFM{
   };
 } //MFM
 #endif /*Ud_Ui_Ue_10105Empty10 */
-
-#ifndef Ud_Ui_Uq_r10109210ColorUtils10
-#define Ud_Ui_Uq_r10109210ColorUtils10
-namespace MFM{
-
-  template<class EC> class Uq_10109210ColorUtils10;  //forward //gcnl:UlamTypeClassQuark.cpp:202
-
-  template<class EC>
-  struct Ui_Uq_r10109210ColorUtils10 : public UlamRef<EC> //gcnl:UlamTypeClassQuark.cpp:211
-  {
-    typedef typename EC::ATOM_CONFIG AC;
-    typedef typename AC::ATOM_TYPE T;
-    enum { BPA = AC::BITS_PER_ATOM };
-
-    enum { QUARK_SIZE = 0}; //gcnl:UlamTypeClassQuark.cpp:223
-
-    typedef Uq_10109210ColorUtils10<EC> Us; //gcnl:UlamTypeClassQuark.cpp:230
-    const u32 read() const { return UlamRef<EC>::Read(); /* entire quark */ } //gcnl:UlamTypeClassQuark.cpp:334
-    void write(const u32& targ) { UlamRef<EC>::Write(targ); /* entire quark */ } //gcnl:UlamTypeClassQuark.cpp:370
-    Ui_Uq_r10109210ColorUtils10(BitStorage<EC>& targ, u32 idx, const UlamClass<EC>* effself, const UlamContext<EC>& uc) : UlamRef<EC>(idx, 0u, targ, effself, UlamRef<EC>::CLASSIC, uc) { } //gcnl:UlamTypeClassQuark.cpp:249
-    Ui_Uq_r10109210ColorUtils10(const UlamRef<EC>& arg, s32 idx, const UlamClass<EC>* effself) : UlamRef<EC>(arg, idx, 0u, effself, UlamRef<EC>::CLASSIC) { } //gcnl:UlamTypeClassQuark.cpp:261
-    Ui_Uq_r10109210ColorUtils10(BitStorage<EC>& targ, u32 idx, const UlamClass<EC>* effself, const typename UlamRef<EC>::UsageType usage, const UlamContext<EC>& uc) : UlamRef<EC>(idx, 0u, targ, effself, usage, uc) { } //gcnl:UlamTypeClassQuark.cpp:271
-    Ui_Uq_r10109210ColorUtils10(const UlamRef<EC>& arg, s32 idx, const UlamClass<EC>* effself, const typename UlamRef<EC>::UsageType usage) : UlamRef<EC>(arg, idx, 0u, effself, usage) { } //gcnl:UlamTypeClassQuark.cpp:280
-    Ui_Uq_r10109210ColorUtils10(const UlamRef<EC>& r) : UlamRef<EC>(r, 0u) { } //gcnl:UlamTypeClassQuark.cpp:288
-    Ui_Uq_r10109210ColorUtils10(const Ui_Uq_r10109210ColorUtils10<EC>& r) : UlamRef<EC>(r, r.GetLen()) { } //gcnl:UlamTypeClassQuark.cpp:297
-  };
-} //MFM
-#endif /*Ud_Ui_Uq_r10109210ColorUtils10 */
-
-#ifndef Ud_Ui_Uq_10109210ColorUtils10
-#define Ud_Ui_Uq_10109210ColorUtils10
-namespace MFM{
-
-  template<class EC> class Uq_10109210ColorUtils10; //forward //gcnl:UlamTypeClassQuark.cpp:431
-
-  template<class EC>
-  struct Ui_Uq_10109210ColorUtils10 : public BitVectorBitStorage<EC, BitVector<0> >
-  {
-    typedef typename EC::ATOM_CONFIG AC;
-    typedef typename AC::ATOM_TYPE T;
-    enum { BPA = AC::BITS_PER_ATOM };
-
-    enum { QUARK_SIZE = 0}; //gcnl:UlamTypeClassQuark.cpp:456
-    typedef BitVector<0> BV; //gcnl:UlamTypeClassQuark.cpp:464
-    typedef BitVectorBitStorage<EC, BV> BVS; //gcnl:UlamTypeClassQuark.cpp:467
-
-    typedef Uq_10109210ColorUtils10<EC> Us; //gcnl:UlamTypeClassQuark.cpp:486
-
-    const u32 read() const { return BVS::Read(0u, QUARK_SIZE); } //gcnl:UlamTypeClassQuark.cpp:577
-    void write(const u32 v) { BVS::Write(0u, QUARK_SIZE, v); } //gcnl:UlamTypeClassQuark.cpp:634
-    Ui_Uq_10109210ColorUtils10() { write(Us::THE_INSTANCE.getDefaultQuark()); } //gcnl:UlamTypeClassQuark.cpp:503
-    Ui_Uq_10109210ColorUtils10(const u32 d) { write(d); } //gcnl:UlamTypeClassQuark.cpp:529
-    Ui_Uq_10109210ColorUtils10(const Ui_Uq_10109210ColorUtils10<EC> & arg) { write(arg.read()); } //gcnl:UlamTypeClassQuark.cpp:538
-    Ui_Uq_10109210ColorUtils10(const Ui_Uq_r10109210ColorUtils10<EC>& d) { write(d.read()); } //gcnl:UlamTypeClassQuark.cpp:546
-  };
-} //MFM
-#endif /*Ud_Ui_Uq_10109210ColorUtils10 */
 
 #ifndef Ud_Ui_Uq_r1010919AtomUtils10
 #define Ud_Ui_Uq_r1010919AtomUtils10
@@ -3059,6 +2949,116 @@ namespace MFM{
 } //MFM
 #endif /*Ud_Ui_Uq_102323C2D10 */
 
+#ifndef Ud_Ui_Uq_r10109210ColorUtils10
+#define Ud_Ui_Uq_r10109210ColorUtils10
+namespace MFM{
+
+  template<class EC> class Uq_10109210ColorUtils10;  //forward //gcnl:UlamTypeClassQuark.cpp:202
+
+  template<class EC>
+  struct Ui_Uq_r10109210ColorUtils10 : public UlamRef<EC> //gcnl:UlamTypeClassQuark.cpp:211
+  {
+    typedef typename EC::ATOM_CONFIG AC;
+    typedef typename AC::ATOM_TYPE T;
+    enum { BPA = AC::BITS_PER_ATOM };
+
+    enum { QUARK_SIZE = 0}; //gcnl:UlamTypeClassQuark.cpp:223
+
+    typedef Uq_10109210ColorUtils10<EC> Us; //gcnl:UlamTypeClassQuark.cpp:230
+    const u32 read() const { return UlamRef<EC>::Read(); /* entire quark */ } //gcnl:UlamTypeClassQuark.cpp:334
+    void write(const u32& targ) { UlamRef<EC>::Write(targ); /* entire quark */ } //gcnl:UlamTypeClassQuark.cpp:370
+    Ui_Uq_r10109210ColorUtils10(BitStorage<EC>& targ, u32 idx, const UlamClass<EC>* effself, const UlamContext<EC>& uc) : UlamRef<EC>(idx, 0u, targ, effself, UlamRef<EC>::CLASSIC, uc) { } //gcnl:UlamTypeClassQuark.cpp:249
+    Ui_Uq_r10109210ColorUtils10(const UlamRef<EC>& arg, s32 idx, const UlamClass<EC>* effself) : UlamRef<EC>(arg, idx, 0u, effself, UlamRef<EC>::CLASSIC) { } //gcnl:UlamTypeClassQuark.cpp:261
+    Ui_Uq_r10109210ColorUtils10(BitStorage<EC>& targ, u32 idx, const UlamClass<EC>* effself, const typename UlamRef<EC>::UsageType usage, const UlamContext<EC>& uc) : UlamRef<EC>(idx, 0u, targ, effself, usage, uc) { } //gcnl:UlamTypeClassQuark.cpp:271
+    Ui_Uq_r10109210ColorUtils10(const UlamRef<EC>& arg, s32 idx, const UlamClass<EC>* effself, const typename UlamRef<EC>::UsageType usage) : UlamRef<EC>(arg, idx, 0u, effself, usage) { } //gcnl:UlamTypeClassQuark.cpp:280
+    Ui_Uq_r10109210ColorUtils10(const UlamRef<EC>& r) : UlamRef<EC>(r, 0u) { } //gcnl:UlamTypeClassQuark.cpp:288
+    Ui_Uq_r10109210ColorUtils10(const Ui_Uq_r10109210ColorUtils10<EC>& r) : UlamRef<EC>(r, r.GetLen()) { } //gcnl:UlamTypeClassQuark.cpp:297
+  };
+} //MFM
+#endif /*Ud_Ui_Uq_r10109210ColorUtils10 */
+
+#ifndef Ud_Ui_Uq_10109210ColorUtils10
+#define Ud_Ui_Uq_10109210ColorUtils10
+namespace MFM{
+
+  template<class EC> class Uq_10109210ColorUtils10; //forward //gcnl:UlamTypeClassQuark.cpp:431
+
+  template<class EC>
+  struct Ui_Uq_10109210ColorUtils10 : public BitVectorBitStorage<EC, BitVector<0> >
+  {
+    typedef typename EC::ATOM_CONFIG AC;
+    typedef typename AC::ATOM_TYPE T;
+    enum { BPA = AC::BITS_PER_ATOM };
+
+    enum { QUARK_SIZE = 0}; //gcnl:UlamTypeClassQuark.cpp:456
+    typedef BitVector<0> BV; //gcnl:UlamTypeClassQuark.cpp:464
+    typedef BitVectorBitStorage<EC, BV> BVS; //gcnl:UlamTypeClassQuark.cpp:467
+
+    typedef Uq_10109210ColorUtils10<EC> Us; //gcnl:UlamTypeClassQuark.cpp:486
+
+    const u32 read() const { return BVS::Read(0u, QUARK_SIZE); } //gcnl:UlamTypeClassQuark.cpp:577
+    void write(const u32 v) { BVS::Write(0u, QUARK_SIZE, v); } //gcnl:UlamTypeClassQuark.cpp:634
+    Ui_Uq_10109210ColorUtils10() { write(Us::THE_INSTANCE.getDefaultQuark()); } //gcnl:UlamTypeClassQuark.cpp:503
+    Ui_Uq_10109210ColorUtils10(const u32 d) { write(d); } //gcnl:UlamTypeClassQuark.cpp:529
+    Ui_Uq_10109210ColorUtils10(const Ui_Uq_10109210ColorUtils10<EC> & arg) { write(arg.read()); } //gcnl:UlamTypeClassQuark.cpp:538
+    Ui_Uq_10109210ColorUtils10(const Ui_Uq_r10109210ColorUtils10<EC>& d) { write(d.read()); } //gcnl:UlamTypeClassQuark.cpp:546
+  };
+} //MFM
+#endif /*Ud_Ui_Uq_10109210ColorUtils10 */
+
+#ifndef Ud_Ui_Ue_r102717Nucleus10
+#define Ud_Ui_Ue_r102717Nucleus10
+namespace MFM{
+
+  template<class EC> class Ue_102717Nucleus10;  //forward
+ //gcnl:UlamTypeClassElement.cpp:217
+  template<class EC>
+  struct Ui_Ue_r102717Nucleus10 : public UlamRef<EC>
+  {
+    typedef typename EC::ATOM_CONFIG AC;
+    typedef typename AC::ATOM_TYPE T;
+    enum { BPA = AC::BITS_PER_ATOM };
+
+    typedef Ue_102717Nucleus10<EC> Us; //gcnl:UlamTypeClassElement.cpp:239
+
+    const T read() { return UlamRef<EC>::ReadAtom(); /* read entire element ref */ } //gcnl:UlamTypeClassElement.cpp:314
+    void write(const T& targ) { if(targ.GetType() != Us::THE_INSTANCE.GetType()) FAIL(ILLEGAL_ARGUMENT); UlamRef<EC>::WriteAtom(targ); /* write entire element */ } //gcnl:UlamTypeClassElement.cpp:358
+    void write(const AtomRefBitStorage<EC>& v) { if(v.GetType() != Us::THE_INSTANCE.GetType()) FAIL(ILLEGAL_ARGUMENT); UlamRef<EC>::WriteAtom(v.ReadAtom()); /* write entire atom */ } //gcnl:UlamTypeClassElement.cpp:374
+    Ui_Ue_r102717Nucleus10(BitStorage<EC>& targ, u32 idx, const UlamClass<EC>* effself, const UlamContext<EC> & uc) : UlamRef<EC>(idx, 71u, targ, effself, UlamRef<EC>::ELEMENTAL, uc) { } //gcnl:UlamTypeClassElement.cpp:259
+    Ui_Ue_r102717Nucleus10(const Ui_Ue_r102717Nucleus10<EC>& r) : UlamRef<EC>(r, 0, r.GetLen(), r.GetEffectiveSelf(), UlamRef<EC>::ELEMENTAL) { } //gcnl:UlamTypeClassElement.cpp:272
+    Ui_Ue_r102717Nucleus10(const UlamRef<EC>& arg, s32 idx, const UlamClass<EC>* effself) : UlamRef<EC>(arg, idx, 71u, effself, UlamRef<EC>::ELEMENTAL) { } //gcnl:UlamTypeClassElement.cpp:284
+  };
+} //MFM
+#endif /*Ud_Ui_Ue_r102717Nucleus10 */
+
+#ifndef Ud_Ui_Ue_102717Nucleus10
+#define Ud_Ui_Ue_102717Nucleus10
+namespace MFM{
+
+  template<class EC> class Ue_102717Nucleus10;  //forward //gcnl:UlamTypeClassElement.cpp:434
+
+  template<class EC>
+  struct Ui_Ue_102717Nucleus10 : public AtomBitStorage<EC>
+  {
+    typedef typename EC::ATOM_CONFIG AC;
+    typedef typename AC::ATOM_TYPE T;
+    enum { BPA = AC::BITS_PER_ATOM };
+
+    typedef AtomRefBitStorage<EC> ABS; //gcnl:UlamTypeClassElement.cpp:454
+
+    typedef Ue_102717Nucleus10<EC> Us; //gcnl:UlamTypeClassElement.cpp:461
+
+    const T read() const { return ABS::ReadAtom(); } //gcnl:UlamTypeClassElement.cpp:541
+    void write(const T& v) { ABS::WriteAtom(v); } //gcnl:UlamTypeClassElement.cpp:582
+    Ui_Ue_102717Nucleus10() : AtomBitStorage<EC>(Us::THE_INSTANCE.GetDefaultAtom()) { } //gcnl:UlamTypeClassElement.cpp:476
+    Ui_Ue_102717Nucleus10(const T& d) : AtomBitStorage<EC>(d) { if(d.GetType() != Us::THE_INSTANCE.GetType()) FAIL(ILLEGAL_ARGUMENT); } //gcnl:UlamTypeClassElement.cpp:487
+    Ui_Ue_102717Nucleus10(const Ui_Ue_102717Nucleus10<EC> & arg) { this->m_stg = arg.m_stg; } //gcnl:UlamTypeClassElement.cpp:495
+    Ui_Ue_102717Nucleus10(const AtomRefBitStorage<EC> & arg) : AtomBitStorage<EC>(arg.ReadAtom()) { if(arg.GetType() != Us::THE_INSTANCE.GetType()) FAIL(ILLEGAL_ARGUMENT); } //gcnl:UlamTypeClassElement.cpp:504
+    Ui_Ue_102717Nucleus10(const Ui_Ue_r102717Nucleus10<EC>& d) : AtomBitStorage<EC>(d.read()) { } //gcnl:UlamTypeClassElement.cpp:513
+  };
+} //MFM
+#endif /*Ud_Ui_Ue_102717Nucleus10 */
+
 #ifndef Ud_Ui_Un_r10412489213WindowScanner10
 #define Ud_Ui_Un_r10412489213WindowScanner10
 namespace MFM{
@@ -3110,14 +3110,14 @@ namespace MFM{
 } //MFM
 #endif /*Ud_Ui_Un_10412489213WindowScanner10 */
 
-#ifndef Ud_Ui_Uq_r10106Random10
-#define Ud_Ui_Uq_r10106Random10
+#ifndef Ud_Ui_Uq_r10109211ClusterByID10
+#define Ud_Ui_Uq_r10109211ClusterByID10
 namespace MFM{
 
-  template<class EC> class Uq_10106Random10;  //forward //gcnl:UlamTypeClassQuark.cpp:202
+  template<class EC> class Uq_10109211ClusterByID10;  //forward //gcnl:UlamTypeClassQuark.cpp:202
 
   template<class EC>
-  struct Ui_Uq_r10106Random10 : public UlamRef<EC> //gcnl:UlamTypeClassQuark.cpp:211
+  struct Ui_Uq_r10109211ClusterByID10 : public UlamRef<EC> //gcnl:UlamTypeClassQuark.cpp:211
   {
     typedef typename EC::ATOM_CONFIG AC;
     typedef typename AC::ATOM_TYPE T;
@@ -3125,27 +3125,27 @@ namespace MFM{
 
     enum { QUARK_SIZE = 0}; //gcnl:UlamTypeClassQuark.cpp:223
 
-    typedef Uq_10106Random10<EC> Us; //gcnl:UlamTypeClassQuark.cpp:230
+    typedef Uq_10109211ClusterByID10<EC> Us; //gcnl:UlamTypeClassQuark.cpp:230
     const u32 read() const { return UlamRef<EC>::Read(); /* entire quark */ } //gcnl:UlamTypeClassQuark.cpp:334
     void write(const u32& targ) { UlamRef<EC>::Write(targ); /* entire quark */ } //gcnl:UlamTypeClassQuark.cpp:370
-    Ui_Uq_r10106Random10(BitStorage<EC>& targ, u32 idx, const UlamClass<EC>* effself, const UlamContext<EC>& uc) : UlamRef<EC>(idx, 0u, targ, effself, UlamRef<EC>::CLASSIC, uc) { } //gcnl:UlamTypeClassQuark.cpp:249
-    Ui_Uq_r10106Random10(const UlamRef<EC>& arg, s32 idx, const UlamClass<EC>* effself) : UlamRef<EC>(arg, idx, 0u, effself, UlamRef<EC>::CLASSIC) { } //gcnl:UlamTypeClassQuark.cpp:261
-    Ui_Uq_r10106Random10(BitStorage<EC>& targ, u32 idx, const UlamClass<EC>* effself, const typename UlamRef<EC>::UsageType usage, const UlamContext<EC>& uc) : UlamRef<EC>(idx, 0u, targ, effself, usage, uc) { } //gcnl:UlamTypeClassQuark.cpp:271
-    Ui_Uq_r10106Random10(const UlamRef<EC>& arg, s32 idx, const UlamClass<EC>* effself, const typename UlamRef<EC>::UsageType usage) : UlamRef<EC>(arg, idx, 0u, effself, usage) { } //gcnl:UlamTypeClassQuark.cpp:280
-    Ui_Uq_r10106Random10(const UlamRef<EC>& r) : UlamRef<EC>(r, 0u) { } //gcnl:UlamTypeClassQuark.cpp:288
-    Ui_Uq_r10106Random10(const Ui_Uq_r10106Random10<EC>& r) : UlamRef<EC>(r, r.GetLen()) { } //gcnl:UlamTypeClassQuark.cpp:297
+    Ui_Uq_r10109211ClusterByID10(BitStorage<EC>& targ, u32 idx, const UlamClass<EC>* effself, const UlamContext<EC>& uc) : UlamRef<EC>(idx, 0u, targ, effself, UlamRef<EC>::CLASSIC, uc) { } //gcnl:UlamTypeClassQuark.cpp:249
+    Ui_Uq_r10109211ClusterByID10(const UlamRef<EC>& arg, s32 idx, const UlamClass<EC>* effself) : UlamRef<EC>(arg, idx, 0u, effself, UlamRef<EC>::CLASSIC) { } //gcnl:UlamTypeClassQuark.cpp:261
+    Ui_Uq_r10109211ClusterByID10(BitStorage<EC>& targ, u32 idx, const UlamClass<EC>* effself, const typename UlamRef<EC>::UsageType usage, const UlamContext<EC>& uc) : UlamRef<EC>(idx, 0u, targ, effself, usage, uc) { } //gcnl:UlamTypeClassQuark.cpp:271
+    Ui_Uq_r10109211ClusterByID10(const UlamRef<EC>& arg, s32 idx, const UlamClass<EC>* effself, const typename UlamRef<EC>::UsageType usage) : UlamRef<EC>(arg, idx, 0u, effself, usage) { } //gcnl:UlamTypeClassQuark.cpp:280
+    Ui_Uq_r10109211ClusterByID10(const UlamRef<EC>& r) : UlamRef<EC>(r, 0u) { } //gcnl:UlamTypeClassQuark.cpp:288
+    Ui_Uq_r10109211ClusterByID10(const Ui_Uq_r10109211ClusterByID10<EC>& r) : UlamRef<EC>(r, r.GetLen()) { } //gcnl:UlamTypeClassQuark.cpp:297
   };
 } //MFM
-#endif /*Ud_Ui_Uq_r10106Random10 */
+#endif /*Ud_Ui_Uq_r10109211ClusterByID10 */
 
-#ifndef Ud_Ui_Uq_10106Random10
-#define Ud_Ui_Uq_10106Random10
+#ifndef Ud_Ui_Uq_10109211ClusterByID10
+#define Ud_Ui_Uq_10109211ClusterByID10
 namespace MFM{
 
-  template<class EC> class Uq_10106Random10; //forward //gcnl:UlamTypeClassQuark.cpp:431
+  template<class EC> class Uq_10109211ClusterByID10; //forward //gcnl:UlamTypeClassQuark.cpp:431
 
   template<class EC>
-  struct Ui_Uq_10106Random10 : public BitVectorBitStorage<EC, BitVector<0> >
+  struct Ui_Uq_10109211ClusterByID10 : public BitVectorBitStorage<EC, BitVector<0> >
   {
     typedef typename EC::ATOM_CONFIG AC;
     typedef typename AC::ATOM_TYPE T;
@@ -3155,17 +3155,178 @@ namespace MFM{
     typedef BitVector<0> BV; //gcnl:UlamTypeClassQuark.cpp:464
     typedef BitVectorBitStorage<EC, BV> BVS; //gcnl:UlamTypeClassQuark.cpp:467
 
-    typedef Uq_10106Random10<EC> Us; //gcnl:UlamTypeClassQuark.cpp:486
+    typedef Uq_10109211ClusterByID10<EC> Us; //gcnl:UlamTypeClassQuark.cpp:486
 
     const u32 read() const { return BVS::Read(0u, QUARK_SIZE); } //gcnl:UlamTypeClassQuark.cpp:577
     void write(const u32 v) { BVS::Write(0u, QUARK_SIZE, v); } //gcnl:UlamTypeClassQuark.cpp:634
-    Ui_Uq_10106Random10() { write(Us::THE_INSTANCE.getDefaultQuark()); } //gcnl:UlamTypeClassQuark.cpp:503
-    Ui_Uq_10106Random10(const u32 d) { write(d); } //gcnl:UlamTypeClassQuark.cpp:529
-    Ui_Uq_10106Random10(const Ui_Uq_10106Random10<EC> & arg) { write(arg.read()); } //gcnl:UlamTypeClassQuark.cpp:538
-    Ui_Uq_10106Random10(const Ui_Uq_r10106Random10<EC>& d) { write(d.read()); } //gcnl:UlamTypeClassQuark.cpp:546
+    Ui_Uq_10109211ClusterByID10() { write(Us::THE_INSTANCE.getDefaultQuark()); } //gcnl:UlamTypeClassQuark.cpp:503
+    Ui_Uq_10109211ClusterByID10(const u32 d) { write(d); } //gcnl:UlamTypeClassQuark.cpp:529
+    Ui_Uq_10109211ClusterByID10(const Ui_Uq_10109211ClusterByID10<EC> & arg) { write(arg.read()); } //gcnl:UlamTypeClassQuark.cpp:538
+    Ui_Uq_10109211ClusterByID10(const Ui_Uq_r10109211ClusterByID10<EC>& d) { write(d.read()); } //gcnl:UlamTypeClassQuark.cpp:546
   };
 } //MFM
-#endif /*Ud_Ui_Uq_10106Random10 */
+#endif /*Ud_Ui_Uq_10109211ClusterByID10 */
+
+#ifndef Ud_Ui_Uq_r1010919SiteUtils10
+#define Ud_Ui_Uq_r1010919SiteUtils10
+namespace MFM{
+
+  template<class EC> class Uq_1010919SiteUtils10;  //forward //gcnl:UlamTypeClassQuark.cpp:202
+
+  template<class EC>
+  struct Ui_Uq_r1010919SiteUtils10 : public UlamRef<EC> //gcnl:UlamTypeClassQuark.cpp:211
+  {
+    typedef typename EC::ATOM_CONFIG AC;
+    typedef typename AC::ATOM_TYPE T;
+    enum { BPA = AC::BITS_PER_ATOM };
+
+    enum { QUARK_SIZE = 0}; //gcnl:UlamTypeClassQuark.cpp:223
+
+    typedef Uq_1010919SiteUtils10<EC> Us; //gcnl:UlamTypeClassQuark.cpp:230
+    const u32 read() const { return UlamRef<EC>::Read(); /* entire quark */ } //gcnl:UlamTypeClassQuark.cpp:334
+    void write(const u32& targ) { UlamRef<EC>::Write(targ); /* entire quark */ } //gcnl:UlamTypeClassQuark.cpp:370
+    Ui_Uq_r1010919SiteUtils10(BitStorage<EC>& targ, u32 idx, const UlamClass<EC>* effself, const UlamContext<EC>& uc) : UlamRef<EC>(idx, 0u, targ, effself, UlamRef<EC>::CLASSIC, uc) { } //gcnl:UlamTypeClassQuark.cpp:249
+    Ui_Uq_r1010919SiteUtils10(const UlamRef<EC>& arg, s32 idx, const UlamClass<EC>* effself) : UlamRef<EC>(arg, idx, 0u, effself, UlamRef<EC>::CLASSIC) { } //gcnl:UlamTypeClassQuark.cpp:261
+    Ui_Uq_r1010919SiteUtils10(BitStorage<EC>& targ, u32 idx, const UlamClass<EC>* effself, const typename UlamRef<EC>::UsageType usage, const UlamContext<EC>& uc) : UlamRef<EC>(idx, 0u, targ, effself, usage, uc) { } //gcnl:UlamTypeClassQuark.cpp:271
+    Ui_Uq_r1010919SiteUtils10(const UlamRef<EC>& arg, s32 idx, const UlamClass<EC>* effself, const typename UlamRef<EC>::UsageType usage) : UlamRef<EC>(arg, idx, 0u, effself, usage) { } //gcnl:UlamTypeClassQuark.cpp:280
+    Ui_Uq_r1010919SiteUtils10(const UlamRef<EC>& r) : UlamRef<EC>(r, 0u) { } //gcnl:UlamTypeClassQuark.cpp:288
+    Ui_Uq_r1010919SiteUtils10(const Ui_Uq_r1010919SiteUtils10<EC>& r) : UlamRef<EC>(r, r.GetLen()) { } //gcnl:UlamTypeClassQuark.cpp:297
+  };
+} //MFM
+#endif /*Ud_Ui_Uq_r1010919SiteUtils10 */
+
+#ifndef Ud_Ui_Uq_1010919SiteUtils10
+#define Ud_Ui_Uq_1010919SiteUtils10
+namespace MFM{
+
+  template<class EC> class Uq_1010919SiteUtils10; //forward //gcnl:UlamTypeClassQuark.cpp:431
+
+  template<class EC>
+  struct Ui_Uq_1010919SiteUtils10 : public BitVectorBitStorage<EC, BitVector<0> >
+  {
+    typedef typename EC::ATOM_CONFIG AC;
+    typedef typename AC::ATOM_TYPE T;
+    enum { BPA = AC::BITS_PER_ATOM };
+
+    enum { QUARK_SIZE = 0}; //gcnl:UlamTypeClassQuark.cpp:456
+    typedef BitVector<0> BV; //gcnl:UlamTypeClassQuark.cpp:464
+    typedef BitVectorBitStorage<EC, BV> BVS; //gcnl:UlamTypeClassQuark.cpp:467
+
+    typedef Uq_1010919SiteUtils10<EC> Us; //gcnl:UlamTypeClassQuark.cpp:486
+
+    const u32 read() const { return BVS::Read(0u, QUARK_SIZE); } //gcnl:UlamTypeClassQuark.cpp:577
+    void write(const u32 v) { BVS::Write(0u, QUARK_SIZE, v); } //gcnl:UlamTypeClassQuark.cpp:634
+    Ui_Uq_1010919SiteUtils10() { write(Us::THE_INSTANCE.getDefaultQuark()); } //gcnl:UlamTypeClassQuark.cpp:503
+    Ui_Uq_1010919SiteUtils10(const u32 d) { write(d); } //gcnl:UlamTypeClassQuark.cpp:529
+    Ui_Uq_1010919SiteUtils10(const Ui_Uq_1010919SiteUtils10<EC> & arg) { write(arg.read()); } //gcnl:UlamTypeClassQuark.cpp:538
+    Ui_Uq_1010919SiteUtils10(const Ui_Uq_r1010919SiteUtils10<EC>& d) { write(d.read()); } //gcnl:UlamTypeClassQuark.cpp:546
+  };
+} //MFM
+#endif /*Ud_Ui_Uq_1010919SiteUtils10 */
+
+#ifndef Ud_Ui_Un_r10411209215SiteVisitorByID10
+#define Ud_Ui_Un_r10411209215SiteVisitorByID10
+namespace MFM{
+
+  template<class EC> class Un_10411209215SiteVisitorByID10;  //forward //gcnl:UlamTypeClassTransient.cpp:218
+
+  template<class EC>
+  struct Ui_Un_r10411209215SiteVisitorByID10 : public UlamRef<EC>
+  {
+    typedef typename EC::ATOM_CONFIG AC;
+    typedef typename AC::ATOM_TYPE T;
+    enum { BPA = AC::BITS_PER_ATOM };
+
+    typedef Un_10411209215SiteVisitorByID10<EC> Us; //gcnl:UlamTypeClassTransient.cpp:240
+    typedef UlamRef<EC> Up_Us; //gcnl:UlamTypeClassTransient.cpp:244
+    const BitVector<1120> read() const { BitVector<1120> tmpbv; this->GetStorage().ReadBV(this->GetPos(), tmpbv); return tmpbv; /* entire transient */ } //gcnl:UlamTypeClassTransient.cpp:332
+    void write(const BitVector<1120>& targ) { this->GetStorage().WriteBV(this->GetPos(), targ); /* entire transient */ } //gcnl:UlamTypeClassTransient.cpp:367
+    Ui_Un_r10411209215SiteVisitorByID10(BitStorage<EC>& targ, u32 idx, const UlamClass<EC>* effself, const UlamContext<EC>& uc) : UlamRef<EC>(idx, 1120u, targ, effself, UlamRef<EC>::CLASSIC, uc) { } //gcnl:UlamTypeClassTransient.cpp:262
+    Ui_Un_r10411209215SiteVisitorByID10(const UlamRef<EC>& arg, s32 idx, const UlamClass<EC>* effself) : UlamRef<EC>(arg, idx, 1120u, effself, UlamRef<EC>::CLASSIC) { } //gcnl:UlamTypeClassTransient.cpp:274
+    Ui_Un_r10411209215SiteVisitorByID10(const UlamRef<EC>& r) : UlamRef<EC>(r, 0, r.GetLen(), r.GetEffectiveSelf(), UlamRef<EC>::CLASSIC) { } //gcnl:UlamTypeClassTransient.cpp:285
+    Ui_Un_r10411209215SiteVisitorByID10(const Ui_Un_r10411209215SiteVisitorByID10<EC>& r) : UlamRef<EC>(r, 0, r.GetLen(), r.GetEffectiveSelf(), UlamRef<EC>::CLASSIC) { } //gcnl:UlamTypeClassTransient.cpp:297
+  };
+} //MFM
+#endif /*Ud_Ui_Un_r10411209215SiteVisitorByID10 */
+
+#ifndef Ud_Ui_Un_10411209215SiteVisitorByID10
+#define Ud_Ui_Un_10411209215SiteVisitorByID10
+namespace MFM{
+
+  template<class EC>
+  struct Ui_Un_10411209215SiteVisitorByID10 : public BitVectorBitStorage<EC, BitVector<1120> >
+  {
+    typedef typename EC::ATOM_CONFIG AC;
+    typedef typename AC::ATOM_TYPE T;
+    enum { BPA = AC::BITS_PER_ATOM };
+
+    typedef BitVector<1120> BV; //gcnl:UlamTypeClassTransient.cpp:447
+    typedef BitVectorBitStorage<EC, BV> BVS; //gcnl:UlamTypeClassTransient.cpp:450
+
+    typedef Un_10411209215SiteVisitorByID10<EC> Us; //gcnl:UlamTypeClassTransient.cpp:469
+
+    const BitVector<1120> read() const { BitVector<1120> rtnunpbv; this->BVS::ReadBV(0u, rtnunpbv); return rtnunpbv; } //reads entire BV //gcnl:UlamTypeClassTransient.cpp:548
+    void  write(const BitVector<1120>& bv) { BVS::WriteBV(0u, bv); } //writes entire BV //gcnl:UlamTypeClassTransient.cpp:578
+    Ui_Un_10411209215SiteVisitorByID10() { Us::THE_INSTANCE.getDefaultTransient(0u, *this); } //gcnl:UlamTypeClassTransient.cpp:483
+    Ui_Un_10411209215SiteVisitorByID10(const BitVector<1120>& d) { write(d); } //gcnl:UlamTypeClassTransient.cpp:503
+    Ui_Un_10411209215SiteVisitorByID10(const Ui_Un_10411209215SiteVisitorByID10<EC> & arg) { write(arg.read()); } //gcnl:UlamTypeClassTransient.cpp:511
+    Ui_Un_10411209215SiteVisitorByID10(const Ui_Un_r10411209215SiteVisitorByID10<EC>& d) { write(d.read()); } //gcnl:UlamTypeClassTransient.cpp:519
+  };
+} //MFM
+#endif /*Ud_Ui_Un_10411209215SiteVisitorByID10 */
+
+#ifndef Ud_Ui_Ue_r102158EggShell10
+#define Ud_Ui_Ue_r102158EggShell10
+namespace MFM{
+
+  template<class EC> class Ue_102158EggShell10;  //forward
+ //gcnl:UlamTypeClassElement.cpp:217
+  template<class EC>
+  struct Ui_Ue_r102158EggShell10 : public UlamRef<EC>
+  {
+    typedef typename EC::ATOM_CONFIG AC;
+    typedef typename AC::ATOM_TYPE T;
+    enum { BPA = AC::BITS_PER_ATOM };
+
+    typedef Ue_102158EggShell10<EC> Us; //gcnl:UlamTypeClassElement.cpp:239
+
+    const T read() { return UlamRef<EC>::ReadAtom(); /* read entire element ref */ } //gcnl:UlamTypeClassElement.cpp:314
+    void write(const T& targ) { if(targ.GetType() != Us::THE_INSTANCE.GetType()) FAIL(ILLEGAL_ARGUMENT); UlamRef<EC>::WriteAtom(targ); /* write entire element */ } //gcnl:UlamTypeClassElement.cpp:358
+    void write(const AtomRefBitStorage<EC>& v) { if(v.GetType() != Us::THE_INSTANCE.GetType()) FAIL(ILLEGAL_ARGUMENT); UlamRef<EC>::WriteAtom(v.ReadAtom()); /* write entire atom */ } //gcnl:UlamTypeClassElement.cpp:374
+    Ui_Ue_r102158EggShell10(BitStorage<EC>& targ, u32 idx, const UlamClass<EC>* effself, const UlamContext<EC> & uc) : UlamRef<EC>(idx, 15u, targ, effself, UlamRef<EC>::ELEMENTAL, uc) { } //gcnl:UlamTypeClassElement.cpp:259
+    Ui_Ue_r102158EggShell10(const Ui_Ue_r102158EggShell10<EC>& r) : UlamRef<EC>(r, 0, r.GetLen(), r.GetEffectiveSelf(), UlamRef<EC>::ELEMENTAL) { } //gcnl:UlamTypeClassElement.cpp:272
+    Ui_Ue_r102158EggShell10(const UlamRef<EC>& arg, s32 idx, const UlamClass<EC>* effself) : UlamRef<EC>(arg, idx, 15u, effself, UlamRef<EC>::ELEMENTAL) { } //gcnl:UlamTypeClassElement.cpp:284
+  };
+} //MFM
+#endif /*Ud_Ui_Ue_r102158EggShell10 */
+
+#ifndef Ud_Ui_Ue_102158EggShell10
+#define Ud_Ui_Ue_102158EggShell10
+namespace MFM{
+
+  template<class EC> class Ue_102158EggShell10;  //forward //gcnl:UlamTypeClassElement.cpp:434
+
+  template<class EC>
+  struct Ui_Ue_102158EggShell10 : public AtomBitStorage<EC>
+  {
+    typedef typename EC::ATOM_CONFIG AC;
+    typedef typename AC::ATOM_TYPE T;
+    enum { BPA = AC::BITS_PER_ATOM };
+
+    typedef AtomRefBitStorage<EC> ABS; //gcnl:UlamTypeClassElement.cpp:454
+
+    typedef Ue_102158EggShell10<EC> Us; //gcnl:UlamTypeClassElement.cpp:461
+
+    const T read() const { return ABS::ReadAtom(); } //gcnl:UlamTypeClassElement.cpp:541
+    void write(const T& v) { ABS::WriteAtom(v); } //gcnl:UlamTypeClassElement.cpp:582
+    Ui_Ue_102158EggShell10() : AtomBitStorage<EC>(Us::THE_INSTANCE.GetDefaultAtom()) { } //gcnl:UlamTypeClassElement.cpp:476
+    Ui_Ue_102158EggShell10(const T& d) : AtomBitStorage<EC>(d) { if(d.GetType() != Us::THE_INSTANCE.GetType()) FAIL(ILLEGAL_ARGUMENT); } //gcnl:UlamTypeClassElement.cpp:487
+    Ui_Ue_102158EggShell10(const Ui_Ue_102158EggShell10<EC> & arg) { this->m_stg = arg.m_stg; } //gcnl:UlamTypeClassElement.cpp:495
+    Ui_Ue_102158EggShell10(const AtomRefBitStorage<EC> & arg) : AtomBitStorage<EC>(arg.ReadAtom()) { if(arg.GetType() != Us::THE_INSTANCE.GetType()) FAIL(ILLEGAL_ARGUMENT); } //gcnl:UlamTypeClassElement.cpp:504
+    Ui_Ue_102158EggShell10(const Ui_Ue_r102158EggShell10<EC>& d) : AtomBitStorage<EC>(d.read()) { } //gcnl:UlamTypeClassElement.cpp:513
+  };
+} //MFM
+#endif /*Ud_Ui_Ue_102158EggShell10 */
 
 #ifndef Ud_Ui_Uq_r10109210DebugUtils10
 #define Ud_Ui_Uq_r10109210DebugUtils10
@@ -3331,114 +3492,6 @@ namespace MFM{
   };
 } //MFM
 #endif /*Ud_Ui_Un_102329211OutOfBounds10 */
-
-#ifndef Ud_Ui_Un_r10411209215SiteVisitorByID10
-#define Ud_Ui_Un_r10411209215SiteVisitorByID10
-namespace MFM{
-
-  template<class EC> class Un_10411209215SiteVisitorByID10;  //forward //gcnl:UlamTypeClassTransient.cpp:218
-
-  template<class EC>
-  struct Ui_Un_r10411209215SiteVisitorByID10 : public UlamRef<EC>
-  {
-    typedef typename EC::ATOM_CONFIG AC;
-    typedef typename AC::ATOM_TYPE T;
-    enum { BPA = AC::BITS_PER_ATOM };
-
-    typedef Un_10411209215SiteVisitorByID10<EC> Us; //gcnl:UlamTypeClassTransient.cpp:240
-    typedef UlamRef<EC> Up_Us; //gcnl:UlamTypeClassTransient.cpp:244
-    const BitVector<1120> read() const { BitVector<1120> tmpbv; this->GetStorage().ReadBV(this->GetPos(), tmpbv); return tmpbv; /* entire transient */ } //gcnl:UlamTypeClassTransient.cpp:332
-    void write(const BitVector<1120>& targ) { this->GetStorage().WriteBV(this->GetPos(), targ); /* entire transient */ } //gcnl:UlamTypeClassTransient.cpp:367
-    Ui_Un_r10411209215SiteVisitorByID10(BitStorage<EC>& targ, u32 idx, const UlamClass<EC>* effself, const UlamContext<EC>& uc) : UlamRef<EC>(idx, 1120u, targ, effself, UlamRef<EC>::CLASSIC, uc) { } //gcnl:UlamTypeClassTransient.cpp:262
-    Ui_Un_r10411209215SiteVisitorByID10(const UlamRef<EC>& arg, s32 idx, const UlamClass<EC>* effself) : UlamRef<EC>(arg, idx, 1120u, effself, UlamRef<EC>::CLASSIC) { } //gcnl:UlamTypeClassTransient.cpp:274
-    Ui_Un_r10411209215SiteVisitorByID10(const UlamRef<EC>& r) : UlamRef<EC>(r, 0, r.GetLen(), r.GetEffectiveSelf(), UlamRef<EC>::CLASSIC) { } //gcnl:UlamTypeClassTransient.cpp:285
-    Ui_Un_r10411209215SiteVisitorByID10(const Ui_Un_r10411209215SiteVisitorByID10<EC>& r) : UlamRef<EC>(r, 0, r.GetLen(), r.GetEffectiveSelf(), UlamRef<EC>::CLASSIC) { } //gcnl:UlamTypeClassTransient.cpp:297
-  };
-} //MFM
-#endif /*Ud_Ui_Un_r10411209215SiteVisitorByID10 */
-
-#ifndef Ud_Ui_Un_10411209215SiteVisitorByID10
-#define Ud_Ui_Un_10411209215SiteVisitorByID10
-namespace MFM{
-
-  template<class EC>
-  struct Ui_Un_10411209215SiteVisitorByID10 : public BitVectorBitStorage<EC, BitVector<1120> >
-  {
-    typedef typename EC::ATOM_CONFIG AC;
-    typedef typename AC::ATOM_TYPE T;
-    enum { BPA = AC::BITS_PER_ATOM };
-
-    typedef BitVector<1120> BV; //gcnl:UlamTypeClassTransient.cpp:447
-    typedef BitVectorBitStorage<EC, BV> BVS; //gcnl:UlamTypeClassTransient.cpp:450
-
-    typedef Un_10411209215SiteVisitorByID10<EC> Us; //gcnl:UlamTypeClassTransient.cpp:469
-
-    const BitVector<1120> read() const { BitVector<1120> rtnunpbv; this->BVS::ReadBV(0u, rtnunpbv); return rtnunpbv; } //reads entire BV //gcnl:UlamTypeClassTransient.cpp:548
-    void  write(const BitVector<1120>& bv) { BVS::WriteBV(0u, bv); } //writes entire BV //gcnl:UlamTypeClassTransient.cpp:578
-    Ui_Un_10411209215SiteVisitorByID10() { Us::THE_INSTANCE.getDefaultTransient(0u, *this); } //gcnl:UlamTypeClassTransient.cpp:483
-    Ui_Un_10411209215SiteVisitorByID10(const BitVector<1120>& d) { write(d); } //gcnl:UlamTypeClassTransient.cpp:503
-    Ui_Un_10411209215SiteVisitorByID10(const Ui_Un_10411209215SiteVisitorByID10<EC> & arg) { write(arg.read()); } //gcnl:UlamTypeClassTransient.cpp:511
-    Ui_Un_10411209215SiteVisitorByID10(const Ui_Un_r10411209215SiteVisitorByID10<EC>& d) { write(d.read()); } //gcnl:UlamTypeClassTransient.cpp:519
-  };
-} //MFM
-#endif /*Ud_Ui_Un_10411209215SiteVisitorByID10 */
-
-#ifndef Ud_Ui_Uq_r10109212DecisionTree10
-#define Ud_Ui_Uq_r10109212DecisionTree10
-namespace MFM{
-
-  template<class EC> class Uq_10109212DecisionTree10;  //forward //gcnl:UlamTypeClassQuark.cpp:202
-
-  template<class EC>
-  struct Ui_Uq_r10109212DecisionTree10 : public UlamRef<EC> //gcnl:UlamTypeClassQuark.cpp:211
-  {
-    typedef typename EC::ATOM_CONFIG AC;
-    typedef typename AC::ATOM_TYPE T;
-    enum { BPA = AC::BITS_PER_ATOM };
-
-    enum { QUARK_SIZE = 0}; //gcnl:UlamTypeClassQuark.cpp:223
-
-    typedef Uq_10109212DecisionTree10<EC> Us; //gcnl:UlamTypeClassQuark.cpp:230
-    const u32 read() const { return UlamRef<EC>::Read(); /* entire quark */ } //gcnl:UlamTypeClassQuark.cpp:334
-    void write(const u32& targ) { UlamRef<EC>::Write(targ); /* entire quark */ } //gcnl:UlamTypeClassQuark.cpp:370
-    Ui_Uq_r10109212DecisionTree10(BitStorage<EC>& targ, u32 idx, const UlamClass<EC>* effself, const UlamContext<EC>& uc) : UlamRef<EC>(idx, 0u, targ, effself, UlamRef<EC>::CLASSIC, uc) { } //gcnl:UlamTypeClassQuark.cpp:249
-    Ui_Uq_r10109212DecisionTree10(const UlamRef<EC>& arg, s32 idx, const UlamClass<EC>* effself) : UlamRef<EC>(arg, idx, 0u, effself, UlamRef<EC>::CLASSIC) { } //gcnl:UlamTypeClassQuark.cpp:261
-    Ui_Uq_r10109212DecisionTree10(BitStorage<EC>& targ, u32 idx, const UlamClass<EC>* effself, const typename UlamRef<EC>::UsageType usage, const UlamContext<EC>& uc) : UlamRef<EC>(idx, 0u, targ, effself, usage, uc) { } //gcnl:UlamTypeClassQuark.cpp:271
-    Ui_Uq_r10109212DecisionTree10(const UlamRef<EC>& arg, s32 idx, const UlamClass<EC>* effself, const typename UlamRef<EC>::UsageType usage) : UlamRef<EC>(arg, idx, 0u, effself, usage) { } //gcnl:UlamTypeClassQuark.cpp:280
-    Ui_Uq_r10109212DecisionTree10(const UlamRef<EC>& r) : UlamRef<EC>(r, 0u) { } //gcnl:UlamTypeClassQuark.cpp:288
-    Ui_Uq_r10109212DecisionTree10(const Ui_Uq_r10109212DecisionTree10<EC>& r) : UlamRef<EC>(r, r.GetLen()) { } //gcnl:UlamTypeClassQuark.cpp:297
-  };
-} //MFM
-#endif /*Ud_Ui_Uq_r10109212DecisionTree10 */
-
-#ifndef Ud_Ui_Uq_10109212DecisionTree10
-#define Ud_Ui_Uq_10109212DecisionTree10
-namespace MFM{
-
-  template<class EC> class Uq_10109212DecisionTree10; //forward //gcnl:UlamTypeClassQuark.cpp:431
-
-  template<class EC>
-  struct Ui_Uq_10109212DecisionTree10 : public BitVectorBitStorage<EC, BitVector<0> >
-  {
-    typedef typename EC::ATOM_CONFIG AC;
-    typedef typename AC::ATOM_TYPE T;
-    enum { BPA = AC::BITS_PER_ATOM };
-
-    enum { QUARK_SIZE = 0}; //gcnl:UlamTypeClassQuark.cpp:456
-    typedef BitVector<0> BV; //gcnl:UlamTypeClassQuark.cpp:464
-    typedef BitVectorBitStorage<EC, BV> BVS; //gcnl:UlamTypeClassQuark.cpp:467
-
-    typedef Uq_10109212DecisionTree10<EC> Us; //gcnl:UlamTypeClassQuark.cpp:486
-
-    const u32 read() const { return BVS::Read(0u, QUARK_SIZE); } //gcnl:UlamTypeClassQuark.cpp:577
-    void write(const u32 v) { BVS::Write(0u, QUARK_SIZE, v); } //gcnl:UlamTypeClassQuark.cpp:634
-    Ui_Uq_10109212DecisionTree10() { write(Us::THE_INSTANCE.getDefaultQuark()); } //gcnl:UlamTypeClassQuark.cpp:503
-    Ui_Uq_10109212DecisionTree10(const u32 d) { write(d); } //gcnl:UlamTypeClassQuark.cpp:529
-    Ui_Uq_10109212DecisionTree10(const Ui_Uq_10109212DecisionTree10<EC> & arg) { write(arg.read()); } //gcnl:UlamTypeClassQuark.cpp:538
-    Ui_Uq_10109212DecisionTree10(const Ui_Uq_r10109212DecisionTree10<EC>& d) { write(d.read()); } //gcnl:UlamTypeClassQuark.cpp:546
-  };
-} //MFM
-#endif /*Ud_Ui_Uq_10109212DecisionTree10 */
 
 #ifndef Ud_Ui_Un_r1035449217SiteVisitorByType10
 #define Ud_Ui_Un_r1035449217SiteVisitorByType10

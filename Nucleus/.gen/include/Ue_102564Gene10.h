@@ -26,38 +26,39 @@
 * @license GPL-3.0+ <http://spdx.org/licenses/GPL-3.0+>
 */
 
-#ifndef UE_102574GENE10_H
-#define UE_102574GENE10_H
+#ifndef UE_102564GENE10_H
+#define UE_102564GENE10_H
 
 #include "UlamDefs.h"
-#include "Ue_102574Gene10_Types.h"
+#include "Ue_102564Gene10_Types.h"
 //Forward Defs of other classes: //gcnl:SymbolTableOfClasses.cpp:576
 namespace MFM { template <class EC> struct Uq_10106UrSelf10; }  //FORWARD
-namespace MFM { template <class EC> struct Ue_102128EggShell10; }  //FORWARD
-namespace MFM { template <class EC> struct Uq_1010919SiteUtils10; }  //FORWARD
+namespace MFM { template <class EC> struct Ue_10106Primer10; }  //FORWARD
+namespace MFM { template <class EC> struct Uq_10106Random10; }  //FORWARD
 namespace MFM { template <class EC> struct Uq_10109211EventWindow10; }  //FORWARD
-namespace MFM { template <class EC> struct Uq_10109211ClusterByID10; }  //FORWARD
 namespace MFM { template <class EC> struct Uq_10104Cell10; }  //FORWARD
-namespace MFM { template <class EC> struct Ue_102717Nucleus10; }  //FORWARD
+namespace MFM { template <class EC> struct Uq_10109212DecisionTree10; }  //FORWARD
 namespace MFM { template <class EC> struct Ue_10105Empty10; }  //FORWARD
-namespace MFM { template <class EC> struct Uq_10109210ColorUtils10; }  //FORWARD
 namespace MFM { template <class EC> struct Uq_1010919AtomUtils10; }  //FORWARD
 namespace MFM { template <class EC> struct Uq_10104Fail10; }  //FORWARD
 namespace MFM { template <class EC> struct Uq_10105MDist10; }  //FORWARD
 namespace MFM { template <class EC> struct Uq_102323C2D10; }  //FORWARD
+namespace MFM { template <class EC> struct Uq_10109210ColorUtils10; }  //FORWARD
+namespace MFM { template <class EC> struct Ue_102717Nucleus10; }  //FORWARD
 namespace MFM { template <class EC> struct Un_10412489213WindowScanner10; }  //FORWARD
-namespace MFM { template <class EC> struct Uq_10106Random10; }  //FORWARD
+namespace MFM { template <class EC> struct Uq_10109211ClusterByID10; }  //FORWARD
+namespace MFM { template <class EC> struct Uq_1010919SiteUtils10; }  //FORWARD
+namespace MFM { template <class EC> struct Un_10411209215SiteVisitorByID10; }  //FORWARD
+namespace MFM { template <class EC> struct Ue_102158EggShell10; }  //FORWARD
 namespace MFM { template <class EC> struct Uq_10109210DebugUtils10; }  //FORWARD
 namespace MFM { template <class EC> struct Uq_10109211SiteVisitor10; }  //FORWARD
 namespace MFM { template <class EC> struct Un_102329211OutOfBounds10; }  //FORWARD
-namespace MFM { template <class EC> struct Un_10411209215SiteVisitorByID10; }  //FORWARD
-namespace MFM { template <class EC> struct Uq_10109212DecisionTree10; }  //FORWARD
 namespace MFM { template <class EC> struct Un_1035449217SiteVisitorByType10; }  //FORWARD
 
 namespace MFM{
 
   template<class EC>
-  class Ue_102574Gene10 : public UlamElement<EC> /*, Uq_10106UrSelf10 */  {
+  class Ue_102564Gene10 : public UlamElement<EC> /*, Uq_10106UrSelf10 */  {
     // Extract short names for parameter types
     typedef typename EC::ATOM_CONFIG AC;
     typedef typename AC::ATOM_TYPE T;
@@ -69,10 +70,10 @@ namespace MFM{
 
   public:
 
-    Ue_102574Gene10(); //gcnl:NodeBlockClass.cpp:1441
-    ~Ue_102574Gene10(); //gcnl:NodeBlockClass.cpp:1446
+    Ue_102564Gene10(); //gcnl:NodeBlockClass.cpp:1441
+    ~Ue_102564Gene10(); //gcnl:NodeBlockClass.cpp:1446
 
-    static Ue_102574Gene10 THE_INSTANCE; //gcnl:NodeBlockClass.cpp:1452
+    static Ue_102564Gene10 THE_INSTANCE; //gcnl:NodeBlockClass.cpp:1452
 
 //! Gene.ulam:10: 	AtomUtils au;
     typedef Uq_1010919AtomUtils10<EC> Ut_Um_2au; //offset 0u //gcnl:NodeVarDeclDM.cpp:1065
@@ -92,56 +93,53 @@ namespace MFM{
 //! Gene.ulam:15: 	SiteUtils su;
     typedef Uq_1010919SiteUtils10<EC> Ut_Um_2su; //offset 0u //gcnl:NodeVarDeclDM.cpp:1065
 
-//! Gene.ulam:19: 	typedef Unsigned(6) Seqno; //similar to SiteNum, since we don't want to exceed an event window, but has no bearing on position
+//! Gene.ulam:18: 	typedef Unsigned(6) Seqno; //similar to SiteNum, since we don't want to exceed an event window, but has no bearing on position
 
-//! Gene.ulam:21: 	typedef EventWindow.SiteNum SiteNum;
+//! Gene.ulam:20: 	typedef EventWindow.SiteNum SiteNum;
 
-//! Gene.ulam:22: 	typedef AtomUtils.Type ElementType;
+//! Gene.ulam:21: 	typedef AtomUtils.Type ElementType;
 
-//! Gene.ulam:23: 	typedef WindowScanner.Category Category;
+//! Gene.ulam:22: 	typedef WindowScanner.Category Category;
 
-//! Gene.ulam:24: 	typedef Cell.ID ID;
+//! Gene.ulam:23: 	typedef Cell.ID ID;
 
-//! Gene.ulam:25: 	typedef DecisionTree.StoredValue StoredValue;
+//! Gene.ulam:24: 	typedef DecisionTree.StoredValue StoredValue;
 
-//! Gene.ulam:28: 	ID id;
+//! Gene.ulam:27: 	ID id;
     typedef UlamRefFixed<EC, 0u, 10u> Up_Um_2id; //gcnl:NodeVarDeclDM.cpp:1095
 
-//! Gene.ulam:29: 	Seqno seqno;
+//! Gene.ulam:28: 	Seqno seqno;
     typedef UlamRefFixed<EC, 10u, 6u> Up_Um_5seqno; //gcnl:NodeVarDeclDM.cpp:1095
 
-//! Gene.ulam:31: 	Bool canSeeNucleus = true;
+//! Gene.ulam:30: 	Bool canSeeNucleus = true;
     typedef UlamRefFixed<EC, 16u, 1u> Up_Um_9213canSeeNucleus; //gcnl:NodeVarDeclDM.cpp:1095
 
-//! Gene.ulam:32: 	Unsigned(2) operator;
+//! Gene.ulam:31: 	Unsigned(2) operator;
     typedef UlamRefFixed<EC, 17u, 2u> Up_Um_8operator; //gcnl:NodeVarDeclDM.cpp:1095
 
-//! Gene.ulam:33: 	Unsigned(2) tree0Type;
+//! Gene.ulam:32: 	Unsigned(2) tree0Type;
     typedef UlamRefFixed<EC, 19u, 2u> Up_Um_919tree0Type; //gcnl:NodeVarDeclDM.cpp:1095
 
-//! Gene.ulam:34: 	StoredValue eqTree0;
+//! Gene.ulam:33: 	StoredValue eqTree0;
     typedef UlamRefFixed<EC, 21u, 6u> Up_Um_7eqTree0; //gcnl:NodeVarDeclDM.cpp:1095
 
-//! Gene.ulam:35: 	Unsigned(2) tree1Type;
+//! Gene.ulam:34: 	Unsigned(2) tree1Type;
     typedef UlamRefFixed<EC, 27u, 2u> Up_Um_919tree1Type; //gcnl:NodeVarDeclDM.cpp:1095
 
-//! Gene.ulam:36: 	StoredValue eqTree1;
+//! Gene.ulam:35: 	StoredValue eqTree1;
     typedef UlamRefFixed<EC, 29u, 6u> Up_Um_7eqTree1; //gcnl:NodeVarDeclDM.cpp:1095
 
-//! Gene.ulam:37: 	StoredValue value;
+//! Gene.ulam:36: 	StoredValue value;
     typedef UlamRefFixed<EC, 35u, 6u> Up_Um_5value; //gcnl:NodeVarDeclDM.cpp:1095
 
-//! Gene.ulam:38: 	StoredValue comIn;
+//! Gene.ulam:37: 	StoredValue comIn;
     typedef UlamRefFixed<EC, 41u, 6u> Up_Um_5comIn; //gcnl:NodeVarDeclDM.cpp:1095
 
-//! Gene.ulam:39: 	StoredValue comOut;
+//! Gene.ulam:38: 	StoredValue comOut;
     typedef UlamRefFixed<EC, 47u, 6u> Up_Um_6comOut; //gcnl:NodeVarDeclDM.cpp:1095
 
-//! Gene.ulam:40: 	Unsigned(3) eventsAlone;
+//! Gene.ulam:39: 	Unsigned(3) eventsAlone;
     typedef UlamRefFixed<EC, 53u, 3u> Up_Um_9211eventsAlone; //gcnl:NodeVarDeclDM.cpp:1095
-
-//! Gene.ulam:41: 	Bool reproduced;
-    typedef UlamRefFixed<EC, 56u, 1u> Up_Um_9210reproduced; //gcnl:NodeVarDeclDM.cpp:1095
 
     static void Uf_6behave(const UlamContext<EC>& uc, UlamRef<EC>& ur); //virtual //gcnl:SymbolFunction.cpp:451
 
@@ -189,11 +187,11 @@ namespace MFM{
   };
 
   template<class EC>
-  Ue_102574Gene10<EC> Ue_102574Gene10<EC>::THE_INSTANCE;
+  Ue_102564Gene10<EC> Ue_102564Gene10<EC>::THE_INSTANCE;
 
 
 
 } //MFM
 
-#include "Ue_102574Gene10.tcc"
-#endif //UE_102574GENE10_H
+#include "Ue_102564Gene10.tcc"
+#endif //UE_102564GENE10_H

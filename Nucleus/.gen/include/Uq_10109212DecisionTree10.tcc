@@ -2,25 +2,26 @@
 
 //Include other classes: //gcnl:SymbolTableOfClasses.cpp:556
 #include "Uq_10106UrSelf10.h"
-#include "Ue_102128EggShell10.h"
-#include "Uq_1010919SiteUtils10.h"
+#include "Ue_10106Primer10.h"
+#include "Uq_10106Random10.h"
 #include "Uq_10109211EventWindow10.h"
-#include "Uq_10109211ClusterByID10.h"
 #include "Uq_10104Cell10.h"
-#include "Ue_102717Nucleus10.h"
-#include "Ue_102574Gene10.h"
+#include "Ue_102564Gene10.h"
 #include "Ue_10105Empty10.h"
-#include "Uq_10109210ColorUtils10.h"
 #include "Uq_1010919AtomUtils10.h"
 #include "Uq_10104Fail10.h"
 #include "Uq_10105MDist10.h"
 #include "Uq_102323C2D10.h"
+#include "Uq_10109210ColorUtils10.h"
+#include "Ue_102717Nucleus10.h"
 #include "Un_10412489213WindowScanner10.h"
-#include "Uq_10106Random10.h"
+#include "Uq_10109211ClusterByID10.h"
+#include "Uq_1010919SiteUtils10.h"
+#include "Un_10411209215SiteVisitorByID10.h"
+#include "Ue_102158EggShell10.h"
 #include "Uq_10109210DebugUtils10.h"
 #include "Uq_10109211SiteVisitor10.h"
 #include "Un_102329211OutOfBounds10.h"
-#include "Un_10411209215SiteVisitorByID10.h"
 #include "Un_1035449217SiteVisitorByType10.h"
 
 namespace MFM{
@@ -31,6 +32,764 @@ namespace MFM{
 
   template<class EC>
   Uq_10109212DecisionTree10<EC>::~Uq_10109212DecisionTree10(){} //gcnl:NodeBlockClass.cpp:1784
+
+
+//! DecisionTree.ulam:173: 	Void initVars(ID id){
+  template<class EC>
+  void Uq_10109212DecisionTree10<EC>::Uf_8initVars(const UlamContext<EC>& uc, UlamRef<EC>& ur, Ui_Ut_102101u<EC>& Uv_2id) const
+  {
+
+//! DecisionTree.ulam:179: 		Seqno numVars = (Seqno)(r.create(3)+(Unsigned(32))3);
+    const u32 Uh_5tlreg3578 = 3; //gcnl:NodeTerminal.cpp:721
+    const u32 Uh_5tlreg3579 = _Int32ToUnsigned32(Uh_5tlreg3578, 3, 32); //gcnl:NodeCast.cpp:723
+    UlamRef<EC> Uh_3tur3581(ur, 0u, 0u, &Uq_10106Random10<EC>::THE_INSTANCE, UlamRef<EC>::CLASSIC); //gcnl:NodeFunctionCall.cpp:923
+    const u32 Uh_5tlreg3582 = 3; //gcnl:NodeTerminal.cpp:721
+    const u32 Uh_5tlreg3583 = _Int32ToInt32(Uh_5tlreg3582, 3, 32); //gcnl:NodeCast.cpp:723
+    Ui_Ut_102321i<EC> Uh_5tlval3584(Uh_5tlreg3583); //func arg& //gcnl:Node.cpp:1128
+    const Ui_Ut_102321u<EC> Uh_5tlval3586 = Uq_10106Random10<EC>::THE_INSTANCE.Uf_6create(uc, Uh_3tur3581, Uh_5tlval3584); //gcnl:NodeFunctionCall.cpp:1006
+    const u32 Uh_5tlreg3587 = Uh_5tlval3586.read(); //gcnl:Node.cpp:1156
+    const u32 Uh_5tlreg3588 = _BinOpAddUnsigned32(Uh_5tlreg3587, Uh_5tlreg3579, 32); //gcnl:NodeBinaryOp.cpp:719
+    const u32 Uh_5tlreg3589 = _Unsigned32ToUnsigned32(Uh_5tlreg3588, 32, 6); //gcnl:NodeCast.cpp:723
+    Ui_Ut_10161u<EC> Uv_7numVars(Uh_5tlreg3589); //gcnl:NodeVarDecl.cpp:1060
+
+//! DecisionTree.ulam:180: 		Seqno seqno = (Seqno) (numVars+1);
+    const u32 Uh_5tlreg3590 = 1; //gcnl:NodeTerminal.cpp:721
+    const u32 Uh_5tlreg3591 = _Int32ToInt32(Uh_5tlreg3590, 2, 8); //gcnl:NodeCast.cpp:723
+    const u32 Uh_5tlreg3593 = Uv_7numVars.read(); //gcnl:Node.cpp:691
+    const u32 Uh_5tlreg3594 = _Unsigned32ToInt32(Uh_5tlreg3593, 6, 8); //gcnl:NodeCast.cpp:723
+    const u32 Uh_5tlreg3595 = _BinOpAddInt32(Uh_5tlreg3594, Uh_5tlreg3591, 8); //gcnl:NodeBinaryOp.cpp:719
+    const u32 Uh_5tlreg3596 = _Int32ToUnsigned32(Uh_5tlreg3595, 8, 6); //gcnl:NodeCast.cpp:723
+    Ui_Ut_10161u<EC> Uv_5seqno(Uh_5tlreg3596); //gcnl:NodeVarDecl.cpp:1060
+
+//! DecisionTree.ulam:183: 		for(Seqno i = 1; i <= numVars; ++i){
+    {
+
+//! DecisionTree.ulam:183: 		for(Seqno i = 1; i <= numVars; ++i){
+      const u32 Uh_5tlreg3597 = 1; //gcnl:NodeTerminal.cpp:721
+      const u32 Uh_5tlreg3598 = _Int32ToUnsigned32(Uh_5tlreg3597, 2, 6); //gcnl:NodeCast.cpp:723
+      Ui_Ut_10161u<EC> Uv_1i(Uh_5tlreg3598); //gcnl:NodeVarDecl.cpp:1060
+
+//! DecisionTree.ulam:183: 		for(Seqno i = 1; i <= numVars; ++i){
+      while(true)
+      {
+        const u32 Uh_5tlreg3600 = Uv_7numVars.read(); //gcnl:Node.cpp:691
+        const u32 Uh_5tlreg3602 = Uv_1i.read(); //gcnl:Node.cpp:691
+        const u32 Uh_5tlreg3603 = _BinOpCompareLessEqualUnsigned32(Uh_5tlreg3602, Uh_5tlreg3600, 6); //gcnl:NodeBinaryOpCompare.cpp:313
+
+        if(!_Bool32ToCbool(Uh_5tlreg3603, 1))
+          break; //gcnl:NodeControlWhile.cpp:135
+
+//! DecisionTree.ulam:183: 		for(Seqno i = 1; i <= numVars; ++i){
+        {
+
+//! DecisionTree.ulam:185: 			seqno = initTree(i,seqno,numVars,id);
+          const u32 Uh_5tlreg3606 = Uv_1i.read(); //gcnl:Node.cpp:691
+          Ui_Ut_10161u<EC> Uh_5tlval3607(Uh_5tlreg3606); //func arg& //gcnl:Node.cpp:1128
+          const u32 Uh_5tlreg3609 = Uv_5seqno.read(); //gcnl:Node.cpp:691
+          Ui_Ut_10161u<EC> Uh_5tlval3610(Uh_5tlreg3609); //func arg& //gcnl:Node.cpp:1128
+          const u32 Uh_5tlreg3612 = Uv_7numVars.read(); //gcnl:Node.cpp:691
+          Ui_Ut_10161u<EC> Uh_5tlval3613(Uh_5tlreg3612); //func arg& //gcnl:Node.cpp:1128
+          const u32 Uh_5tlreg3615 = Uv_2id.read(); //gcnl:Node.cpp:691
+          Ui_Ut_102101u<EC> Uh_5tlval3616(Uh_5tlreg3615); //func arg& //gcnl:Node.cpp:1128
+          const Ui_Ut_10161u<EC> Uh_5tlval3618 = THE_INSTANCE.Uf_8initTree(uc, ur, Uh_5tlval3607, Uh_5tlval3610, Uh_5tlval3613, Uh_5tlval3616); //gcnl:NodeFunctionCall.cpp:1006
+          const u32 Uh_5tlreg3619 = Uh_5tlval3618.read(); //gcnl:Node.cpp:1156
+          Uv_5seqno.write(Uh_5tlreg3619); //gcnl:Node.cpp:885
+        }
+
+//! DecisionTree.ulam:183: 		for(Seqno i = 1; i <= numVars; ++i){
+Ul_214endcontrolloop11:
+        __attribute__((__unused__)); //gcnl:NodeLabel.cpp:68
+
+//! DecisionTree.ulam:183: 		for(Seqno i = 1; i <= numVars; ++i){
+        const u32 Uh_5tlreg3621 = 1; //gcnl:NodeTerminal.cpp:721
+        const u32 Uh_5tlreg3622 = _Int32ToUnsigned32(Uh_5tlreg3621, 32, 6); //gcnl:NodeCast.cpp:723
+        const u32 Uh_5tlreg3624 = Uv_1i.read(); //gcnl:Node.cpp:691
+        const u32 Uh_5tlreg3625 = _BinOpAddUnsigned32(Uh_5tlreg3624, Uh_5tlreg3622, 6); //gcnl:NodeBinaryOpEqualArith.cpp:128
+        Uv_1i.write(Uh_5tlreg3625); //gcnl:Node.cpp:885
+      } // end while //gcnl:NodeControlWhile.cpp:145
+    }
+
+  } // Uf_8initVars
+
+
+
+//! DecisionTree.ulam:19: 	Unsigned(2) initGene(Seqno mySeqno, Seqno refSeqno, ID id, Unsigned(4) specialVars,Bool isVar){
+  template<class EC>
+  Ui_Ut_10121u<EC> Uq_10109212DecisionTree10<EC>::Uf_8initGene(const UlamContext<EC>& uc, UlamRef<EC>& ur, Ui_Ut_10161u<EC>& Uv_7mySeqno, Ui_Ut_10161u<EC>& Uv_8refSeqno, Ui_Ut_102101u<EC>& Uv_2id, Ui_Ut_10141u<EC>& Uv_9211specialVars, Ui_Ut_10111b<EC>& Uv_5isVar) const
+  {
+
+//! DecisionTree.ulam:25: 		Unsigned(2) numberOfGenesToAddToMyTree;
+    Ui_Ut_10121u<EC> Uv_9226numberOfGenesToAddToMyTree; //gcnl:NodeVarDecl.cpp:1096
+
+//! DecisionTree.ulam:27: 		Gene gene;
+    Ui_Ue_102564Gene10<EC> Uv_4gene; //gcnl:NodeVarDecl.cpp:1096
+
+//! DecisionTree.ulam:29: 		gene.seqno = mySeqno;
+    const u32 Uh_5tlreg3627 = Uv_7mySeqno.read(); //gcnl:Node.cpp:691
+    UlamRef<EC>(35u, 6u, Uv_4gene, NULL, UlamRef<EC>::PRIMITIVE, uc).Write(Uh_5tlreg3627); //gcnl:Node.cpp:885
+
+//! DecisionTree.ulam:30: 		gene.id = id;
+    const u32 Uh_5tlreg3631 = Uv_2id.read(); //gcnl:Node.cpp:691
+    UlamRef<EC>(25u, 10u, Uv_4gene, NULL, UlamRef<EC>::PRIMITIVE, uc).Write(Uh_5tlreg3631); //gcnl:Node.cpp:885
+
+//! DecisionTree.ulam:33: 		gene.operator = (Unsigned(2)) r.create(3);
+    UlamRef<EC> Uh_3tur3635(ur, 0u, 0u, &Uq_10106Random10<EC>::THE_INSTANCE, UlamRef<EC>::CLASSIC); //gcnl:NodeFunctionCall.cpp:923
+    const u32 Uh_5tlreg3636 = 3; //gcnl:NodeTerminal.cpp:721
+    const u32 Uh_5tlreg3637 = _Int32ToInt32(Uh_5tlreg3636, 3, 32); //gcnl:NodeCast.cpp:723
+    Ui_Ut_102321i<EC> Uh_5tlval3638(Uh_5tlreg3637); //func arg& //gcnl:Node.cpp:1128
+    const Ui_Ut_102321u<EC> Uh_5tlval3640 = Uq_10106Random10<EC>::THE_INSTANCE.Uf_6create(uc, Uh_3tur3635, Uh_5tlval3638); //gcnl:NodeFunctionCall.cpp:1006
+    const u32 Uh_5tlreg3641 = Uh_5tlval3640.read(); //gcnl:Node.cpp:1156
+    const u32 Uh_5tlreg3642 = _Unsigned32ToUnsigned32(Uh_5tlreg3641, 32, 2); //gcnl:NodeCast.cpp:723
+    UlamRef<EC>(42u, 2u, Uv_4gene, NULL, UlamRef<EC>::PRIMITIVE, uc).Write(Uh_5tlreg3642); //gcnl:Node.cpp:885
+
+//! DecisionTree.ulam:49: 		Unsigned valTypSwitch0;
+    Ui_Ut_102321u<EC> Uv_9213valTypSwitch0; //gcnl:NodeVarDecl.cpp:1096
+
+//! DecisionTree.ulam:50: 		Unsigned valTypSwitch1;
+    Ui_Ut_102321u<EC> Uv_9213valTypSwitch1; //gcnl:NodeVarDecl.cpp:1096
+
+//! DecisionTree.ulam:52: 		valTypSwitch0 = r.create(100);
+    UlamRef<EC> Uh_3tur3646(ur, 0u, 0u, &Uq_10106Random10<EC>::THE_INSTANCE, UlamRef<EC>::CLASSIC); //gcnl:NodeFunctionCall.cpp:923
+    const u32 Uh_5tlreg3647 = 100; //gcnl:NodeTerminal.cpp:721
+    const u32 Uh_5tlreg3648 = _Int32ToInt32(Uh_5tlreg3647, 8, 32); //gcnl:NodeCast.cpp:723
+    Ui_Ut_102321i<EC> Uh_5tlval3649(Uh_5tlreg3648); //func arg& //gcnl:Node.cpp:1128
+    const Ui_Ut_102321u<EC> Uh_5tlval3651 = Uq_10106Random10<EC>::THE_INSTANCE.Uf_6create(uc, Uh_3tur3646, Uh_5tlval3649); //gcnl:NodeFunctionCall.cpp:1006
+    const u32 Uh_5tlreg3652 = Uh_5tlval3651.read(); //gcnl:Node.cpp:1156
+    Uv_9213valTypSwitch0.write(Uh_5tlreg3652); //gcnl:Node.cpp:885
+
+//! DecisionTree.ulam:53: 		valTypSwitch1 = r.create(100);
+    UlamRef<EC> Uh_3tur3655(ur, 0u, 0u, &Uq_10106Random10<EC>::THE_INSTANCE, UlamRef<EC>::CLASSIC); //gcnl:NodeFunctionCall.cpp:923
+    const u32 Uh_5tlreg3656 = 100; //gcnl:NodeTerminal.cpp:721
+    const u32 Uh_5tlreg3657 = _Int32ToInt32(Uh_5tlreg3656, 8, 32); //gcnl:NodeCast.cpp:723
+    Ui_Ut_102321i<EC> Uh_5tlval3658(Uh_5tlreg3657); //func arg& //gcnl:Node.cpp:1128
+    const Ui_Ut_102321u<EC> Uh_5tlval3660 = Uq_10106Random10<EC>::THE_INSTANCE.Uf_6create(uc, Uh_3tur3655, Uh_5tlval3658); //gcnl:NodeFunctionCall.cpp:1006
+    const u32 Uh_5tlreg3661 = Uh_5tlval3660.read(); //gcnl:Node.cpp:1156
+    Uv_9213valTypSwitch1.write(Uh_5tlreg3661); //gcnl:Node.cpp:885
+
+//! DecisionTree.ulam:56: 		if(valTypSwitch0 >= (Unsigned)0 && valTypSwitch0 < (Unsigned)30){
+    {
+
+//! DecisionTree.ulam:56: 		if(valTypSwitch0 >= (Unsigned)0 && valTypSwitch0 < (Unsigned)30){
+      u32 Uh_5tlreg3663 = false; //gcnl:NodeBinaryOpLogicalAnd.cpp:118
+      const u32 Uh_5tlreg3664 = 0; //gcnl:NodeTerminal.cpp:721
+      const u32 Uh_5tlreg3665 = _Int32ToUnsigned32(Uh_5tlreg3664, 2, 32); //gcnl:NodeCast.cpp:723
+      const u32 Uh_5tlreg3667 = Uv_9213valTypSwitch0.read(); //gcnl:Node.cpp:691
+      const u32 Uh_5tlreg3668 = _BinOpCompareGreaterEqualUnsigned32(Uh_5tlreg3667, Uh_5tlreg3665, 32); //gcnl:NodeBinaryOpCompare.cpp:313
+      if(_Bool32ToCbool(Uh_5tlreg3668, 1)) //gcnl:NodeBinaryOpLogicalAnd.cpp:137
+      {
+        const u32 Uh_5tlreg3669 = 30; //gcnl:NodeTerminal.cpp:721
+        const u32 Uh_5tlreg3670 = _Int32ToUnsigned32(Uh_5tlreg3669, 6, 32); //gcnl:NodeCast.cpp:723
+        const u32 Uh_5tlreg3672 = Uv_9213valTypSwitch0.read(); //gcnl:Node.cpp:691
+        const u32 Uh_5tlreg3673 = _BinOpCompareLessThanUnsigned32(Uh_5tlreg3672, Uh_5tlreg3670, 32); //gcnl:NodeBinaryOpCompare.cpp:313
+        Uh_5tlreg3663 = Uh_5tlreg3673; //gcnl:NodeBinaryOpLogicalAnd.cpp:151
+      }
+      if(_Bool32ToCbool(Uh_5tlreg3663, 1)) //gcnl:NodeControl.cpp:213
+      {
+        {
+
+//! DecisionTree.ulam:58: 			gene.tree0Type = 0;
+          const u32 Uh_5tlreg3674 = 0; //gcnl:NodeTerminal.cpp:721
+          const u32 Uh_5tlreg3675 = _Int32ToUnsigned32(Uh_5tlreg3674, 2, 2); //gcnl:NodeCast.cpp:723
+          UlamRef<EC>(44u, 2u, Uv_4gene, NULL, UlamRef<EC>::PRIMITIVE, uc).Write(Uh_5tlreg3675); //gcnl:Node.cpp:885
+
+//! DecisionTree.ulam:59: 			gene.eqTree0 = (Unsigned(6)) r.create(63);
+          UlamRef<EC> Uh_3tur3679(ur, 0u, 0u, &Uq_10106Random10<EC>::THE_INSTANCE, UlamRef<EC>::CLASSIC); //gcnl:NodeFunctionCall.cpp:923
+          const u32 Uh_5tlreg3680 = 63; //gcnl:NodeTerminal.cpp:721
+          const u32 Uh_5tlreg3681 = _Int32ToInt32(Uh_5tlreg3680, 7, 32); //gcnl:NodeCast.cpp:723
+          Ui_Ut_102321i<EC> Uh_5tlval3682(Uh_5tlreg3681); //func arg& //gcnl:Node.cpp:1128
+          const Ui_Ut_102321u<EC> Uh_5tlval3684 = Uq_10106Random10<EC>::THE_INSTANCE.Uf_6create(uc, Uh_3tur3679, Uh_5tlval3682); //gcnl:NodeFunctionCall.cpp:1006
+          const u32 Uh_5tlreg3685 = Uh_5tlval3684.read(); //gcnl:Node.cpp:1156
+          const u32 Uh_5tlreg3686 = _Unsigned32ToUnsigned32(Uh_5tlreg3685, 32, 6); //gcnl:NodeCast.cpp:723
+          UlamRef<EC>(46u, 6u, Uv_4gene, NULL, UlamRef<EC>::PRIMITIVE, uc).Write(Uh_5tlreg3686); //gcnl:Node.cpp:885
+        }
+      } // end if
+    }
+
+//! DecisionTree.ulam:62: 		if(valTypSwitch0 >= (Unsigned)30 && valTypSwitch0 < (Unsigned)40){
+    {
+
+//! DecisionTree.ulam:62: 		if(valTypSwitch0 >= (Unsigned)30 && valTypSwitch0 < (Unsigned)40){
+      u32 Uh_5tlreg3689 = false; //gcnl:NodeBinaryOpLogicalAnd.cpp:118
+      const u32 Uh_5tlreg3690 = 30; //gcnl:NodeTerminal.cpp:721
+      const u32 Uh_5tlreg3691 = _Int32ToUnsigned32(Uh_5tlreg3690, 6, 32); //gcnl:NodeCast.cpp:723
+      const u32 Uh_5tlreg3693 = Uv_9213valTypSwitch0.read(); //gcnl:Node.cpp:691
+      const u32 Uh_5tlreg3694 = _BinOpCompareGreaterEqualUnsigned32(Uh_5tlreg3693, Uh_5tlreg3691, 32); //gcnl:NodeBinaryOpCompare.cpp:313
+      if(_Bool32ToCbool(Uh_5tlreg3694, 1)) //gcnl:NodeBinaryOpLogicalAnd.cpp:137
+      {
+        const u32 Uh_5tlreg3695 = 40; //gcnl:NodeTerminal.cpp:721
+        const u32 Uh_5tlreg3696 = _Int32ToUnsigned32(Uh_5tlreg3695, 7, 32); //gcnl:NodeCast.cpp:723
+        const u32 Uh_5tlreg3698 = Uv_9213valTypSwitch0.read(); //gcnl:Node.cpp:691
+        const u32 Uh_5tlreg3699 = _BinOpCompareLessThanUnsigned32(Uh_5tlreg3698, Uh_5tlreg3696, 32); //gcnl:NodeBinaryOpCompare.cpp:313
+        Uh_5tlreg3689 = Uh_5tlreg3699; //gcnl:NodeBinaryOpLogicalAnd.cpp:151
+      }
+      if(_Bool32ToCbool(Uh_5tlreg3689, 1)) //gcnl:NodeControl.cpp:213
+      {
+        {
+
+//! DecisionTree.ulam:64: 			gene.tree0Type = 0;
+          const u32 Uh_5tlreg3700 = 0; //gcnl:NodeTerminal.cpp:721
+          const u32 Uh_5tlreg3701 = _Int32ToUnsigned32(Uh_5tlreg3700, 2, 2); //gcnl:NodeCast.cpp:723
+          UlamRef<EC>(44u, 2u, Uv_4gene, NULL, UlamRef<EC>::PRIMITIVE, uc).Write(Uh_5tlreg3701); //gcnl:Node.cpp:885
+
+//! DecisionTree.ulam:65: 			gene.eqTree0 = (StoredValue) 0;
+          const u32 Uh_5tlreg3704 = 0; //gcnl:NodeTerminal.cpp:721
+          const u32 Uh_5tlreg3705 = _Int32ToUnsigned32(Uh_5tlreg3704, 2, 6); //gcnl:NodeCast.cpp:723
+          UlamRef<EC>(46u, 6u, Uv_4gene, NULL, UlamRef<EC>::PRIMITIVE, uc).Write(Uh_5tlreg3705); //gcnl:Node.cpp:885
+        }
+      } // end if
+    }
+
+//! DecisionTree.ulam:68: 		if(valTypSwitch0 >= (Unsigned)40 && valTypSwitch0 < (Unsigned)50){
+    {
+
+//! DecisionTree.ulam:68: 		if(valTypSwitch0 >= (Unsigned)40 && valTypSwitch0 < (Unsigned)50){
+      u32 Uh_5tlreg3708 = false; //gcnl:NodeBinaryOpLogicalAnd.cpp:118
+      const u32 Uh_5tlreg3709 = 40; //gcnl:NodeTerminal.cpp:721
+      const u32 Uh_5tlreg3710 = _Int32ToUnsigned32(Uh_5tlreg3709, 7, 32); //gcnl:NodeCast.cpp:723
+      const u32 Uh_5tlreg3712 = Uv_9213valTypSwitch0.read(); //gcnl:Node.cpp:691
+      const u32 Uh_5tlreg3713 = _BinOpCompareGreaterEqualUnsigned32(Uh_5tlreg3712, Uh_5tlreg3710, 32); //gcnl:NodeBinaryOpCompare.cpp:313
+      if(_Bool32ToCbool(Uh_5tlreg3713, 1)) //gcnl:NodeBinaryOpLogicalAnd.cpp:137
+      {
+        const u32 Uh_5tlreg3714 = 50; //gcnl:NodeTerminal.cpp:721
+        const u32 Uh_5tlreg3715 = _Int32ToUnsigned32(Uh_5tlreg3714, 7, 32); //gcnl:NodeCast.cpp:723
+        const u32 Uh_5tlreg3717 = Uv_9213valTypSwitch0.read(); //gcnl:Node.cpp:691
+        const u32 Uh_5tlreg3718 = _BinOpCompareLessThanUnsigned32(Uh_5tlreg3717, Uh_5tlreg3715, 32); //gcnl:NodeBinaryOpCompare.cpp:313
+        Uh_5tlreg3708 = Uh_5tlreg3718; //gcnl:NodeBinaryOpLogicalAnd.cpp:151
+      }
+      if(_Bool32ToCbool(Uh_5tlreg3708, 1)) //gcnl:NodeControl.cpp:213
+      {
+        {
+
+//! DecisionTree.ulam:74: 			gene.tree0Type = 1;
+          const u32 Uh_5tlreg3719 = 1; //gcnl:NodeTerminal.cpp:721
+          const u32 Uh_5tlreg3720 = _Int32ToUnsigned32(Uh_5tlreg3719, 2, 2); //gcnl:NodeCast.cpp:723
+          UlamRef<EC>(44u, 2u, Uv_4gene, NULL, UlamRef<EC>::PRIMITIVE, uc).Write(Uh_5tlreg3720); //gcnl:Node.cpp:885
+
+//! DecisionTree.ulam:78: 			gene.eqTree0 = (StoredValue)0;
+          const u32 Uh_5tlreg3723 = 0; //gcnl:NodeTerminal.cpp:721
+          const u32 Uh_5tlreg3724 = _Int32ToUnsigned32(Uh_5tlreg3723, 2, 6); //gcnl:NodeCast.cpp:723
+          UlamRef<EC>(46u, 6u, Uv_4gene, NULL, UlamRef<EC>::PRIMITIVE, uc).Write(Uh_5tlreg3724); //gcnl:Node.cpp:885
+        }
+      } // end if
+    }
+
+//! DecisionTree.ulam:80: 		if(valTypSwitch0 >= (Unsigned)50 && valTypSwitch0 < (Unsigned)75){
+    {
+
+//! DecisionTree.ulam:80: 		if(valTypSwitch0 >= (Unsigned)50 && valTypSwitch0 < (Unsigned)75){
+      u32 Uh_5tlreg3727 = false; //gcnl:NodeBinaryOpLogicalAnd.cpp:118
+      const u32 Uh_5tlreg3728 = 50; //gcnl:NodeTerminal.cpp:721
+      const u32 Uh_5tlreg3729 = _Int32ToUnsigned32(Uh_5tlreg3728, 7, 32); //gcnl:NodeCast.cpp:723
+      const u32 Uh_5tlreg3731 = Uv_9213valTypSwitch0.read(); //gcnl:Node.cpp:691
+      const u32 Uh_5tlreg3732 = _BinOpCompareGreaterEqualUnsigned32(Uh_5tlreg3731, Uh_5tlreg3729, 32); //gcnl:NodeBinaryOpCompare.cpp:313
+      if(_Bool32ToCbool(Uh_5tlreg3732, 1)) //gcnl:NodeBinaryOpLogicalAnd.cpp:137
+      {
+        const u32 Uh_5tlreg3733 = 75; //gcnl:NodeTerminal.cpp:721
+        const u32 Uh_5tlreg3734 = _Int32ToUnsigned32(Uh_5tlreg3733, 8, 32); //gcnl:NodeCast.cpp:723
+        const u32 Uh_5tlreg3736 = Uv_9213valTypSwitch0.read(); //gcnl:Node.cpp:691
+        const u32 Uh_5tlreg3737 = _BinOpCompareLessThanUnsigned32(Uh_5tlreg3736, Uh_5tlreg3734, 32); //gcnl:NodeBinaryOpCompare.cpp:313
+        Uh_5tlreg3727 = Uh_5tlreg3737; //gcnl:NodeBinaryOpLogicalAnd.cpp:151
+      }
+      if(_Bool32ToCbool(Uh_5tlreg3727, 1)) //gcnl:NodeControl.cpp:213
+      {
+        {
+
+//! DecisionTree.ulam:82: 			gene.tree0Type = 1;
+          const u32 Uh_5tlreg3738 = 1; //gcnl:NodeTerminal.cpp:721
+          const u32 Uh_5tlreg3739 = _Int32ToUnsigned32(Uh_5tlreg3738, 2, 2); //gcnl:NodeCast.cpp:723
+          UlamRef<EC>(44u, 2u, Uv_4gene, NULL, UlamRef<EC>::PRIMITIVE, uc).Write(Uh_5tlreg3739); //gcnl:Node.cpp:885
+
+//! DecisionTree.ulam:85: 			++numberOfGenesToAddToMyTree;
+          const u32 Uh_5tlreg3742 = 1; //gcnl:NodeTerminal.cpp:721
+          const u32 Uh_5tlreg3743 = _Int32ToUnsigned32(Uh_5tlreg3742, 32, 2); //gcnl:NodeCast.cpp:723
+          const u32 Uh_5tlreg3745 = Uv_9226numberOfGenesToAddToMyTree.read(); //gcnl:Node.cpp:691
+          const u32 Uh_5tlreg3746 = _BinOpAddUnsigned32(Uh_5tlreg3745, Uh_5tlreg3743, 2); //gcnl:NodeBinaryOpEqualArith.cpp:128
+          Uv_9226numberOfGenesToAddToMyTree.write(Uh_5tlreg3746); //gcnl:Node.cpp:885
+
+//! DecisionTree.ulam:87: 			if(isVar){
+          {
+
+//! DecisionTree.ulam:87: 			if(isVar){
+            const u32 Uh_5tlreg3748 = Uv_5isVar.read(); //gcnl:Node.cpp:691
+            if(_Bool32ToCbool(Uh_5tlreg3748, 1)) //gcnl:NodeControl.cpp:213
+            {
+              {
+
+//! DecisionTree.ulam:88: 				gene.eqTree0 = (StoredValue)(refSeqno+numberOfGenesToAddToMyTree-1);
+                const u32 Uh_5tlreg3749 = 1; //gcnl:NodeTerminal.cpp:721
+                const u32 Uh_5tlreg3750 = _Int32ToInt32(Uh_5tlreg3749, 2, 9); //gcnl:NodeCast.cpp:723
+                const u32 Uh_5tlreg3752 = Uv_9226numberOfGenesToAddToMyTree.read(); //gcnl:Node.cpp:691
+                const u32 Uh_5tlreg3753 = _Unsigned32ToUnsigned32(Uh_5tlreg3752, 2, 7); //gcnl:NodeCast.cpp:723
+                const u32 Uh_5tlreg3755 = Uv_8refSeqno.read(); //gcnl:Node.cpp:691
+                const u32 Uh_5tlreg3756 = _Unsigned32ToUnsigned32(Uh_5tlreg3755, 6, 7); //gcnl:NodeCast.cpp:723
+                const u32 Uh_5tlreg3757 = _BinOpAddUnsigned32(Uh_5tlreg3756, Uh_5tlreg3753, 7); //gcnl:NodeBinaryOp.cpp:719
+                const u32 Uh_5tlreg3758 = _Unsigned32ToInt32(Uh_5tlreg3757, 7, 9); //gcnl:NodeCast.cpp:723
+                const u32 Uh_5tlreg3759 = _BinOpSubtractInt32(Uh_5tlreg3758, Uh_5tlreg3750, 9); //gcnl:NodeBinaryOp.cpp:719
+                const u32 Uh_5tlreg3760 = _Int32ToUnsigned32(Uh_5tlreg3759, 9, 6); //gcnl:NodeCast.cpp:723
+                UlamRef<EC>(46u, 6u, Uv_4gene, NULL, UlamRef<EC>::PRIMITIVE, uc).Write(Uh_5tlreg3760); //gcnl:Node.cpp:885
+              }
+            } // end if
+            else
+            {
+              {
+
+//! DecisionTree.ulam:91: 				gene.eqTree0 = (StoredValue)(refSeqno+numberOfGenesToAddToMyTree);
+                const u32 Uh_5tlreg3764 = Uv_9226numberOfGenesToAddToMyTree.read(); //gcnl:Node.cpp:691
+                const u32 Uh_5tlreg3765 = _Unsigned32ToUnsigned32(Uh_5tlreg3764, 2, 7); //gcnl:NodeCast.cpp:723
+                const u32 Uh_5tlreg3767 = Uv_8refSeqno.read(); //gcnl:Node.cpp:691
+                const u32 Uh_5tlreg3768 = _Unsigned32ToUnsigned32(Uh_5tlreg3767, 6, 7); //gcnl:NodeCast.cpp:723
+                const u32 Uh_5tlreg3769 = _BinOpAddUnsigned32(Uh_5tlreg3768, Uh_5tlreg3765, 7); //gcnl:NodeBinaryOp.cpp:719
+                const u32 Uh_5tlreg3770 = _Unsigned32ToUnsigned32(Uh_5tlreg3769, 7, 6); //gcnl:NodeCast.cpp:723
+                UlamRef<EC>(46u, 6u, Uv_4gene, NULL, UlamRef<EC>::PRIMITIVE, uc).Write(Uh_5tlreg3770); //gcnl:Node.cpp:885
+              }
+            } //end else
+          }
+        }
+      } // end if
+    }
+
+//! DecisionTree.ulam:94: 		if(valTypSwitch0 >= (Unsigned)75 && valTypSwitch0 < (Unsigned)100){
+    {
+
+//! DecisionTree.ulam:94: 		if(valTypSwitch0 >= (Unsigned)75 && valTypSwitch0 < (Unsigned)100){
+      u32 Uh_5tlreg3773 = false; //gcnl:NodeBinaryOpLogicalAnd.cpp:118
+      const u32 Uh_5tlreg3774 = 75; //gcnl:NodeTerminal.cpp:721
+      const u32 Uh_5tlreg3775 = _Int32ToUnsigned32(Uh_5tlreg3774, 8, 32); //gcnl:NodeCast.cpp:723
+      const u32 Uh_5tlreg3777 = Uv_9213valTypSwitch0.read(); //gcnl:Node.cpp:691
+      const u32 Uh_5tlreg3778 = _BinOpCompareGreaterEqualUnsigned32(Uh_5tlreg3777, Uh_5tlreg3775, 32); //gcnl:NodeBinaryOpCompare.cpp:313
+      if(_Bool32ToCbool(Uh_5tlreg3778, 1)) //gcnl:NodeBinaryOpLogicalAnd.cpp:137
+      {
+        const u32 Uh_5tlreg3779 = 100; //gcnl:NodeTerminal.cpp:721
+        const u32 Uh_5tlreg3780 = _Int32ToUnsigned32(Uh_5tlreg3779, 8, 32); //gcnl:NodeCast.cpp:723
+        const u32 Uh_5tlreg3782 = Uv_9213valTypSwitch0.read(); //gcnl:Node.cpp:691
+        const u32 Uh_5tlreg3783 = _BinOpCompareLessThanUnsigned32(Uh_5tlreg3782, Uh_5tlreg3780, 32); //gcnl:NodeBinaryOpCompare.cpp:313
+        Uh_5tlreg3773 = Uh_5tlreg3783; //gcnl:NodeBinaryOpLogicalAnd.cpp:151
+      }
+      if(_Bool32ToCbool(Uh_5tlreg3773, 1)) //gcnl:NodeControl.cpp:213
+      {
+        {
+
+//! DecisionTree.ulam:96: 			gene.tree0Type = 1;
+          const u32 Uh_5tlreg3784 = 1; //gcnl:NodeTerminal.cpp:721
+          const u32 Uh_5tlreg3785 = _Int32ToUnsigned32(Uh_5tlreg3784, 2, 2); //gcnl:NodeCast.cpp:723
+          UlamRef<EC>(44u, 2u, Uv_4gene, NULL, UlamRef<EC>::PRIMITIVE, uc).Write(Uh_5tlreg3785); //gcnl:Node.cpp:885
+
+//! DecisionTree.ulam:100: 			gene.eqTree0 = (StoredValue)((StoredValue)r.create(specialVars)+(StoredValue)4);
+          const u32 Uh_5tlreg3788 = 4; //gcnl:NodeTerminal.cpp:721
+          const u32 Uh_5tlreg3789 = _Int32ToUnsigned32(Uh_5tlreg3788, 4, 6); //gcnl:NodeCast.cpp:723
+          const u32 Uh_5tlreg3790 = _Unsigned32ToUnsigned32(Uh_5tlreg3789, 6, 7); //gcnl:NodeCast.cpp:723
+          UlamRef<EC> Uh_3tur3792(ur, 0u, 0u, &Uq_10106Random10<EC>::THE_INSTANCE, UlamRef<EC>::CLASSIC); //gcnl:NodeFunctionCall.cpp:923
+          const u32 Uh_5tlreg3794 = Uv_9211specialVars.read(); //gcnl:Node.cpp:691
+          const u32 Uh_5tlreg3795 = _Unsigned32ToUnsigned32(Uh_5tlreg3794, 4, 32); //gcnl:NodeCast.cpp:723
+          Ui_Ut_102321u<EC> Uh_5tlval3796(Uh_5tlreg3795); //func arg& //gcnl:Node.cpp:1128
+          const Ui_Ut_102321u<EC> Uh_5tlval3798 = Uq_10106Random10<EC>::THE_INSTANCE.Uf_6create(uc, Uh_3tur3792, Uh_5tlval3796); //gcnl:NodeFunctionCall.cpp:1006
+          const u32 Uh_5tlreg3799 = Uh_5tlval3798.read(); //gcnl:Node.cpp:1156
+          const u32 Uh_5tlreg3800 = _Unsigned32ToUnsigned32(Uh_5tlreg3799, 32, 6); //gcnl:NodeCast.cpp:723
+          const u32 Uh_5tlreg3801 = _Unsigned32ToUnsigned32(Uh_5tlreg3800, 6, 7); //gcnl:NodeCast.cpp:723
+          const u32 Uh_5tlreg3802 = _BinOpAddUnsigned32(Uh_5tlreg3801, Uh_5tlreg3790, 7); //gcnl:NodeBinaryOp.cpp:719
+          const u32 Uh_5tlreg3803 = _Unsigned32ToUnsigned32(Uh_5tlreg3802, 7, 6); //gcnl:NodeCast.cpp:723
+          UlamRef<EC>(46u, 6u, Uv_4gene, NULL, UlamRef<EC>::PRIMITIVE, uc).Write(Uh_5tlreg3803); //gcnl:Node.cpp:885
+
+//! DecisionTree.ulam:103: 			if(gene.eqTree0 == gene.seqno){
+          {
+
+//! DecisionTree.ulam:103: 			if(gene.eqTree0 == gene.seqno){
+            const u32 Uh_5tlreg3808 = UlamRef<EC>(35u, 6u, Uv_4gene, NULL, UlamRef<EC>::PRIMITIVE, uc).Read(); //gcnl:Node.cpp:691
+            const u32 Uh_5tlreg3811 = UlamRef<EC>(46u, 6u, Uv_4gene, NULL, UlamRef<EC>::PRIMITIVE, uc).Read(); //gcnl:Node.cpp:691
+            const u32 Uh_5tlreg3812 = _BinOpCompareEqEqUnsigned32(Uh_5tlreg3811, Uh_5tlreg3808, 6); //gcnl:NodeBinaryOpCompare.cpp:313
+            if(_Bool32ToCbool(Uh_5tlreg3812, 1)) //gcnl:NodeControl.cpp:213
+            {
+              {
+
+//! DecisionTree.ulam:104: 				gene.tree0Type = 0;
+                const u32 Uh_5tlreg3813 = 0; //gcnl:NodeTerminal.cpp:721
+                const u32 Uh_5tlreg3814 = _Int32ToUnsigned32(Uh_5tlreg3813, 2, 2); //gcnl:NodeCast.cpp:723
+                UlamRef<EC>(44u, 2u, Uv_4gene, NULL, UlamRef<EC>::PRIMITIVE, uc).Write(Uh_5tlreg3814); //gcnl:Node.cpp:885
+              }
+            } // end if
+          }
+        }
+      } // end if
+    }
+
+//! DecisionTree.ulam:108: 		if(valTypSwitch1 >= (Unsigned)0 && valTypSwitch1 < (Unsigned)30){
+    {
+
+//! DecisionTree.ulam:108: 		if(valTypSwitch1 >= (Unsigned)0 && valTypSwitch1 < (Unsigned)30){
+      u32 Uh_5tlreg3817 = false; //gcnl:NodeBinaryOpLogicalAnd.cpp:118
+      const u32 Uh_5tlreg3818 = 0; //gcnl:NodeTerminal.cpp:721
+      const u32 Uh_5tlreg3819 = _Int32ToUnsigned32(Uh_5tlreg3818, 2, 32); //gcnl:NodeCast.cpp:723
+      const u32 Uh_5tlreg3821 = Uv_9213valTypSwitch1.read(); //gcnl:Node.cpp:691
+      const u32 Uh_5tlreg3822 = _BinOpCompareGreaterEqualUnsigned32(Uh_5tlreg3821, Uh_5tlreg3819, 32); //gcnl:NodeBinaryOpCompare.cpp:313
+      if(_Bool32ToCbool(Uh_5tlreg3822, 1)) //gcnl:NodeBinaryOpLogicalAnd.cpp:137
+      {
+        const u32 Uh_5tlreg3823 = 30; //gcnl:NodeTerminal.cpp:721
+        const u32 Uh_5tlreg3824 = _Int32ToUnsigned32(Uh_5tlreg3823, 6, 32); //gcnl:NodeCast.cpp:723
+        const u32 Uh_5tlreg3826 = Uv_9213valTypSwitch1.read(); //gcnl:Node.cpp:691
+        const u32 Uh_5tlreg3827 = _BinOpCompareLessThanUnsigned32(Uh_5tlreg3826, Uh_5tlreg3824, 32); //gcnl:NodeBinaryOpCompare.cpp:313
+        Uh_5tlreg3817 = Uh_5tlreg3827; //gcnl:NodeBinaryOpLogicalAnd.cpp:151
+      }
+      if(_Bool32ToCbool(Uh_5tlreg3817, 1)) //gcnl:NodeControl.cpp:213
+      {
+        {
+
+//! DecisionTree.ulam:110: 			gene.tree1Type = 0;
+          const u32 Uh_5tlreg3828 = 0; //gcnl:NodeTerminal.cpp:721
+          const u32 Uh_5tlreg3829 = _Int32ToUnsigned32(Uh_5tlreg3828, 2, 2); //gcnl:NodeCast.cpp:723
+          UlamRef<EC>(52u, 2u, Uv_4gene, NULL, UlamRef<EC>::PRIMITIVE, uc).Write(Uh_5tlreg3829); //gcnl:Node.cpp:885
+
+//! DecisionTree.ulam:111: 			gene.eqTree1 = (Unsigned(6)) r.create(63);
+          UlamRef<EC> Uh_3tur3833(ur, 0u, 0u, &Uq_10106Random10<EC>::THE_INSTANCE, UlamRef<EC>::CLASSIC); //gcnl:NodeFunctionCall.cpp:923
+          const u32 Uh_5tlreg3834 = 63; //gcnl:NodeTerminal.cpp:721
+          const u32 Uh_5tlreg3835 = _Int32ToInt32(Uh_5tlreg3834, 7, 32); //gcnl:NodeCast.cpp:723
+          Ui_Ut_102321i<EC> Uh_5tlval3836(Uh_5tlreg3835); //func arg& //gcnl:Node.cpp:1128
+          const Ui_Ut_102321u<EC> Uh_5tlval3838 = Uq_10106Random10<EC>::THE_INSTANCE.Uf_6create(uc, Uh_3tur3833, Uh_5tlval3836); //gcnl:NodeFunctionCall.cpp:1006
+          const u32 Uh_5tlreg3839 = Uh_5tlval3838.read(); //gcnl:Node.cpp:1156
+          const u32 Uh_5tlreg3840 = _Unsigned32ToUnsigned32(Uh_5tlreg3839, 32, 6); //gcnl:NodeCast.cpp:723
+          UlamRef<EC>(54u, 6u, Uv_4gene, NULL, UlamRef<EC>::PRIMITIVE, uc).Write(Uh_5tlreg3840); //gcnl:Node.cpp:885
+        }
+      } // end if
+    }
+
+//! DecisionTree.ulam:114: 		if(valTypSwitch1 >= (Unsigned)30 && valTypSwitch1 < (Unsigned)40){
+    {
+
+//! DecisionTree.ulam:114: 		if(valTypSwitch1 >= (Unsigned)30 && valTypSwitch1 < (Unsigned)40){
+      u32 Uh_5tlreg3843 = false; //gcnl:NodeBinaryOpLogicalAnd.cpp:118
+      const u32 Uh_5tlreg3844 = 30; //gcnl:NodeTerminal.cpp:721
+      const u32 Uh_5tlreg3845 = _Int32ToUnsigned32(Uh_5tlreg3844, 6, 32); //gcnl:NodeCast.cpp:723
+      const u32 Uh_5tlreg3847 = Uv_9213valTypSwitch1.read(); //gcnl:Node.cpp:691
+      const u32 Uh_5tlreg3848 = _BinOpCompareGreaterEqualUnsigned32(Uh_5tlreg3847, Uh_5tlreg3845, 32); //gcnl:NodeBinaryOpCompare.cpp:313
+      if(_Bool32ToCbool(Uh_5tlreg3848, 1)) //gcnl:NodeBinaryOpLogicalAnd.cpp:137
+      {
+        const u32 Uh_5tlreg3849 = 40; //gcnl:NodeTerminal.cpp:721
+        const u32 Uh_5tlreg3850 = _Int32ToUnsigned32(Uh_5tlreg3849, 7, 32); //gcnl:NodeCast.cpp:723
+        const u32 Uh_5tlreg3852 = Uv_9213valTypSwitch1.read(); //gcnl:Node.cpp:691
+        const u32 Uh_5tlreg3853 = _BinOpCompareLessThanUnsigned32(Uh_5tlreg3852, Uh_5tlreg3850, 32); //gcnl:NodeBinaryOpCompare.cpp:313
+        Uh_5tlreg3843 = Uh_5tlreg3853; //gcnl:NodeBinaryOpLogicalAnd.cpp:151
+      }
+      if(_Bool32ToCbool(Uh_5tlreg3843, 1)) //gcnl:NodeControl.cpp:213
+      {
+        {
+
+//! DecisionTree.ulam:116: 			gene.tree1Type = 0;
+          const u32 Uh_5tlreg3854 = 0; //gcnl:NodeTerminal.cpp:721
+          const u32 Uh_5tlreg3855 = _Int32ToUnsigned32(Uh_5tlreg3854, 2, 2); //gcnl:NodeCast.cpp:723
+          UlamRef<EC>(52u, 2u, Uv_4gene, NULL, UlamRef<EC>::PRIMITIVE, uc).Write(Uh_5tlreg3855); //gcnl:Node.cpp:885
+
+//! DecisionTree.ulam:117: 			gene.eqTree1 = (StoredValue) 0;
+          const u32 Uh_5tlreg3858 = 0; //gcnl:NodeTerminal.cpp:721
+          const u32 Uh_5tlreg3859 = _Int32ToUnsigned32(Uh_5tlreg3858, 2, 6); //gcnl:NodeCast.cpp:723
+          UlamRef<EC>(54u, 6u, Uv_4gene, NULL, UlamRef<EC>::PRIMITIVE, uc).Write(Uh_5tlreg3859); //gcnl:Node.cpp:885
+        }
+      } // end if
+    }
+
+//! DecisionTree.ulam:120: 		if(valTypSwitch1 >= (Unsigned)40 && valTypSwitch1 < (Unsigned)50){
+    {
+
+//! DecisionTree.ulam:120: 		if(valTypSwitch1 >= (Unsigned)40 && valTypSwitch1 < (Unsigned)50){
+      u32 Uh_5tlreg3862 = false; //gcnl:NodeBinaryOpLogicalAnd.cpp:118
+      const u32 Uh_5tlreg3863 = 40; //gcnl:NodeTerminal.cpp:721
+      const u32 Uh_5tlreg3864 = _Int32ToUnsigned32(Uh_5tlreg3863, 7, 32); //gcnl:NodeCast.cpp:723
+      const u32 Uh_5tlreg3866 = Uv_9213valTypSwitch1.read(); //gcnl:Node.cpp:691
+      const u32 Uh_5tlreg3867 = _BinOpCompareGreaterEqualUnsigned32(Uh_5tlreg3866, Uh_5tlreg3864, 32); //gcnl:NodeBinaryOpCompare.cpp:313
+      if(_Bool32ToCbool(Uh_5tlreg3867, 1)) //gcnl:NodeBinaryOpLogicalAnd.cpp:137
+      {
+        const u32 Uh_5tlreg3868 = 50; //gcnl:NodeTerminal.cpp:721
+        const u32 Uh_5tlreg3869 = _Int32ToUnsigned32(Uh_5tlreg3868, 7, 32); //gcnl:NodeCast.cpp:723
+        const u32 Uh_5tlreg3871 = Uv_9213valTypSwitch1.read(); //gcnl:Node.cpp:691
+        const u32 Uh_5tlreg3872 = _BinOpCompareLessThanUnsigned32(Uh_5tlreg3871, Uh_5tlreg3869, 32); //gcnl:NodeBinaryOpCompare.cpp:313
+        Uh_5tlreg3862 = Uh_5tlreg3872; //gcnl:NodeBinaryOpLogicalAnd.cpp:151
+      }
+      if(_Bool32ToCbool(Uh_5tlreg3862, 1)) //gcnl:NodeControl.cpp:213
+      {
+        {
+
+//! DecisionTree.ulam:126: 			gene.tree1Type = 1;
+          const u32 Uh_5tlreg3873 = 1; //gcnl:NodeTerminal.cpp:721
+          const u32 Uh_5tlreg3874 = _Int32ToUnsigned32(Uh_5tlreg3873, 2, 2); //gcnl:NodeCast.cpp:723
+          UlamRef<EC>(52u, 2u, Uv_4gene, NULL, UlamRef<EC>::PRIMITIVE, uc).Write(Uh_5tlreg3874); //gcnl:Node.cpp:885
+
+//! DecisionTree.ulam:130: 			gene.eqTree1 = (StoredValue)0;
+          const u32 Uh_5tlreg3877 = 0; //gcnl:NodeTerminal.cpp:721
+          const u32 Uh_5tlreg3878 = _Int32ToUnsigned32(Uh_5tlreg3877, 2, 6); //gcnl:NodeCast.cpp:723
+          UlamRef<EC>(54u, 6u, Uv_4gene, NULL, UlamRef<EC>::PRIMITIVE, uc).Write(Uh_5tlreg3878); //gcnl:Node.cpp:885
+        }
+      } // end if
+    }
+
+//! DecisionTree.ulam:132: 		if(valTypSwitch1 >= (Unsigned)50 && valTypSwitch1 < (Unsigned)75){
+    {
+
+//! DecisionTree.ulam:132: 		if(valTypSwitch1 >= (Unsigned)50 && valTypSwitch1 < (Unsigned)75){
+      u32 Uh_5tlreg3881 = false; //gcnl:NodeBinaryOpLogicalAnd.cpp:118
+      const u32 Uh_5tlreg3882 = 50; //gcnl:NodeTerminal.cpp:721
+      const u32 Uh_5tlreg3883 = _Int32ToUnsigned32(Uh_5tlreg3882, 7, 32); //gcnl:NodeCast.cpp:723
+      const u32 Uh_5tlreg3885 = Uv_9213valTypSwitch1.read(); //gcnl:Node.cpp:691
+      const u32 Uh_5tlreg3886 = _BinOpCompareGreaterEqualUnsigned32(Uh_5tlreg3885, Uh_5tlreg3883, 32); //gcnl:NodeBinaryOpCompare.cpp:313
+      if(_Bool32ToCbool(Uh_5tlreg3886, 1)) //gcnl:NodeBinaryOpLogicalAnd.cpp:137
+      {
+        const u32 Uh_5tlreg3887 = 75; //gcnl:NodeTerminal.cpp:721
+        const u32 Uh_5tlreg3888 = _Int32ToUnsigned32(Uh_5tlreg3887, 8, 32); //gcnl:NodeCast.cpp:723
+        const u32 Uh_5tlreg3890 = Uv_9213valTypSwitch1.read(); //gcnl:Node.cpp:691
+        const u32 Uh_5tlreg3891 = _BinOpCompareLessThanUnsigned32(Uh_5tlreg3890, Uh_5tlreg3888, 32); //gcnl:NodeBinaryOpCompare.cpp:313
+        Uh_5tlreg3881 = Uh_5tlreg3891; //gcnl:NodeBinaryOpLogicalAnd.cpp:151
+      }
+      if(_Bool32ToCbool(Uh_5tlreg3881, 1)) //gcnl:NodeControl.cpp:213
+      {
+        {
+
+//! DecisionTree.ulam:134: 			gene.tree1Type = 1;
+          const u32 Uh_5tlreg3892 = 1; //gcnl:NodeTerminal.cpp:721
+          const u32 Uh_5tlreg3893 = _Int32ToUnsigned32(Uh_5tlreg3892, 2, 2); //gcnl:NodeCast.cpp:723
+          UlamRef<EC>(52u, 2u, Uv_4gene, NULL, UlamRef<EC>::PRIMITIVE, uc).Write(Uh_5tlreg3893); //gcnl:Node.cpp:885
+
+//! DecisionTree.ulam:137: 			++numberOfGenesToAddToMyTree;
+          const u32 Uh_5tlreg3896 = 1; //gcnl:NodeTerminal.cpp:721
+          const u32 Uh_5tlreg3897 = _Int32ToUnsigned32(Uh_5tlreg3896, 32, 2); //gcnl:NodeCast.cpp:723
+          const u32 Uh_5tlreg3899 = Uv_9226numberOfGenesToAddToMyTree.read(); //gcnl:Node.cpp:691
+          const u32 Uh_5tlreg3900 = _BinOpAddUnsigned32(Uh_5tlreg3899, Uh_5tlreg3897, 2); //gcnl:NodeBinaryOpEqualArith.cpp:128
+          Uv_9226numberOfGenesToAddToMyTree.write(Uh_5tlreg3900); //gcnl:Node.cpp:885
+
+//! DecisionTree.ulam:139: 			if(isVar){
+          {
+
+//! DecisionTree.ulam:139: 			if(isVar){
+            const u32 Uh_5tlreg3902 = Uv_5isVar.read(); //gcnl:Node.cpp:691
+            if(_Bool32ToCbool(Uh_5tlreg3902, 1)) //gcnl:NodeControl.cpp:213
+            {
+              {
+
+//! DecisionTree.ulam:140: 				gene.eqTree1 = (StoredValue)(refSeqno+numberOfGenesToAddToMyTree-1);
+                const u32 Uh_5tlreg3903 = 1; //gcnl:NodeTerminal.cpp:721
+                const u32 Uh_5tlreg3904 = _Int32ToInt32(Uh_5tlreg3903, 2, 9); //gcnl:NodeCast.cpp:723
+                const u32 Uh_5tlreg3906 = Uv_9226numberOfGenesToAddToMyTree.read(); //gcnl:Node.cpp:691
+                const u32 Uh_5tlreg3907 = _Unsigned32ToUnsigned32(Uh_5tlreg3906, 2, 7); //gcnl:NodeCast.cpp:723
+                const u32 Uh_5tlreg3909 = Uv_8refSeqno.read(); //gcnl:Node.cpp:691
+                const u32 Uh_5tlreg3910 = _Unsigned32ToUnsigned32(Uh_5tlreg3909, 6, 7); //gcnl:NodeCast.cpp:723
+                const u32 Uh_5tlreg3911 = _BinOpAddUnsigned32(Uh_5tlreg3910, Uh_5tlreg3907, 7); //gcnl:NodeBinaryOp.cpp:719
+                const u32 Uh_5tlreg3912 = _Unsigned32ToInt32(Uh_5tlreg3911, 7, 9); //gcnl:NodeCast.cpp:723
+                const u32 Uh_5tlreg3913 = _BinOpSubtractInt32(Uh_5tlreg3912, Uh_5tlreg3904, 9); //gcnl:NodeBinaryOp.cpp:719
+                const u32 Uh_5tlreg3914 = _Int32ToUnsigned32(Uh_5tlreg3913, 9, 6); //gcnl:NodeCast.cpp:723
+                UlamRef<EC>(54u, 6u, Uv_4gene, NULL, UlamRef<EC>::PRIMITIVE, uc).Write(Uh_5tlreg3914); //gcnl:Node.cpp:885
+              }
+            } // end if
+            else
+            {
+              {
+
+//! DecisionTree.ulam:143: 				gene.eqTree1 = (StoredValue)(refSeqno+numberOfGenesToAddToMyTree);
+                const u32 Uh_5tlreg3918 = Uv_9226numberOfGenesToAddToMyTree.read(); //gcnl:Node.cpp:691
+                const u32 Uh_5tlreg3919 = _Unsigned32ToUnsigned32(Uh_5tlreg3918, 2, 7); //gcnl:NodeCast.cpp:723
+                const u32 Uh_5tlreg3921 = Uv_8refSeqno.read(); //gcnl:Node.cpp:691
+                const u32 Uh_5tlreg3922 = _Unsigned32ToUnsigned32(Uh_5tlreg3921, 6, 7); //gcnl:NodeCast.cpp:723
+                const u32 Uh_5tlreg3923 = _BinOpAddUnsigned32(Uh_5tlreg3922, Uh_5tlreg3919, 7); //gcnl:NodeBinaryOp.cpp:719
+                const u32 Uh_5tlreg3924 = _Unsigned32ToUnsigned32(Uh_5tlreg3923, 7, 6); //gcnl:NodeCast.cpp:723
+                UlamRef<EC>(54u, 6u, Uv_4gene, NULL, UlamRef<EC>::PRIMITIVE, uc).Write(Uh_5tlreg3924); //gcnl:Node.cpp:885
+              }
+            } //end else
+          }
+        }
+      } // end if
+    }
+
+//! DecisionTree.ulam:146: 		if(valTypSwitch1 >= (Unsigned)75 && valTypSwitch1 < (Unsigned)100){
+    {
+
+//! DecisionTree.ulam:146: 		if(valTypSwitch1 >= (Unsigned)75 && valTypSwitch1 < (Unsigned)100){
+      u32 Uh_5tlreg3927 = false; //gcnl:NodeBinaryOpLogicalAnd.cpp:118
+      const u32 Uh_5tlreg3928 = 75; //gcnl:NodeTerminal.cpp:721
+      const u32 Uh_5tlreg3929 = _Int32ToUnsigned32(Uh_5tlreg3928, 8, 32); //gcnl:NodeCast.cpp:723
+      const u32 Uh_5tlreg3931 = Uv_9213valTypSwitch1.read(); //gcnl:Node.cpp:691
+      const u32 Uh_5tlreg3932 = _BinOpCompareGreaterEqualUnsigned32(Uh_5tlreg3931, Uh_5tlreg3929, 32); //gcnl:NodeBinaryOpCompare.cpp:313
+      if(_Bool32ToCbool(Uh_5tlreg3932, 1)) //gcnl:NodeBinaryOpLogicalAnd.cpp:137
+      {
+        const u32 Uh_5tlreg3933 = 100; //gcnl:NodeTerminal.cpp:721
+        const u32 Uh_5tlreg3934 = _Int32ToUnsigned32(Uh_5tlreg3933, 8, 32); //gcnl:NodeCast.cpp:723
+        const u32 Uh_5tlreg3936 = Uv_9213valTypSwitch1.read(); //gcnl:Node.cpp:691
+        const u32 Uh_5tlreg3937 = _BinOpCompareLessThanUnsigned32(Uh_5tlreg3936, Uh_5tlreg3934, 32); //gcnl:NodeBinaryOpCompare.cpp:313
+        Uh_5tlreg3927 = Uh_5tlreg3937; //gcnl:NodeBinaryOpLogicalAnd.cpp:151
+      }
+      if(_Bool32ToCbool(Uh_5tlreg3927, 1)) //gcnl:NodeControl.cpp:213
+      {
+        {
+
+//! DecisionTree.ulam:148: 			gene.tree1Type = 1;
+          const u32 Uh_5tlreg3938 = 1; //gcnl:NodeTerminal.cpp:721
+          const u32 Uh_5tlreg3939 = _Int32ToUnsigned32(Uh_5tlreg3938, 2, 2); //gcnl:NodeCast.cpp:723
+          UlamRef<EC>(52u, 2u, Uv_4gene, NULL, UlamRef<EC>::PRIMITIVE, uc).Write(Uh_5tlreg3939); //gcnl:Node.cpp:885
+
+//! DecisionTree.ulam:152: 			gene.eqTree1 = (StoredValue)((StoredValue)r.create(specialVars)+(StoredValue)4);
+          const u32 Uh_5tlreg3942 = 4; //gcnl:NodeTerminal.cpp:721
+          const u32 Uh_5tlreg3943 = _Int32ToUnsigned32(Uh_5tlreg3942, 4, 6); //gcnl:NodeCast.cpp:723
+          const u32 Uh_5tlreg3944 = _Unsigned32ToUnsigned32(Uh_5tlreg3943, 6, 7); //gcnl:NodeCast.cpp:723
+          UlamRef<EC> Uh_3tur3946(ur, 0u, 0u, &Uq_10106Random10<EC>::THE_INSTANCE, UlamRef<EC>::CLASSIC); //gcnl:NodeFunctionCall.cpp:923
+          const u32 Uh_5tlreg3948 = Uv_9211specialVars.read(); //gcnl:Node.cpp:691
+          const u32 Uh_5tlreg3949 = _Unsigned32ToUnsigned32(Uh_5tlreg3948, 4, 32); //gcnl:NodeCast.cpp:723
+          Ui_Ut_102321u<EC> Uh_5tlval3950(Uh_5tlreg3949); //func arg& //gcnl:Node.cpp:1128
+          const Ui_Ut_102321u<EC> Uh_5tlval3952 = Uq_10106Random10<EC>::THE_INSTANCE.Uf_6create(uc, Uh_3tur3946, Uh_5tlval3950); //gcnl:NodeFunctionCall.cpp:1006
+          const u32 Uh_5tlreg3953 = Uh_5tlval3952.read(); //gcnl:Node.cpp:1156
+          const u32 Uh_5tlreg3954 = _Unsigned32ToUnsigned32(Uh_5tlreg3953, 32, 6); //gcnl:NodeCast.cpp:723
+          const u32 Uh_5tlreg3955 = _Unsigned32ToUnsigned32(Uh_5tlreg3954, 6, 7); //gcnl:NodeCast.cpp:723
+          const u32 Uh_5tlreg3956 = _BinOpAddUnsigned32(Uh_5tlreg3955, Uh_5tlreg3944, 7); //gcnl:NodeBinaryOp.cpp:719
+          const u32 Uh_5tlreg3957 = _Unsigned32ToUnsigned32(Uh_5tlreg3956, 7, 6); //gcnl:NodeCast.cpp:723
+          UlamRef<EC>(54u, 6u, Uv_4gene, NULL, UlamRef<EC>::PRIMITIVE, uc).Write(Uh_5tlreg3957); //gcnl:Node.cpp:885
+
+//! DecisionTree.ulam:155: 			if(gene.eqTree1 == gene.seqno){
+          {
+
+//! DecisionTree.ulam:155: 			if(gene.eqTree1 == gene.seqno){
+            const u32 Uh_5tlreg3962 = UlamRef<EC>(35u, 6u, Uv_4gene, NULL, UlamRef<EC>::PRIMITIVE, uc).Read(); //gcnl:Node.cpp:691
+            const u32 Uh_5tlreg3965 = UlamRef<EC>(54u, 6u, Uv_4gene, NULL, UlamRef<EC>::PRIMITIVE, uc).Read(); //gcnl:Node.cpp:691
+            const u32 Uh_5tlreg3966 = _BinOpCompareEqEqUnsigned32(Uh_5tlreg3965, Uh_5tlreg3962, 6); //gcnl:NodeBinaryOpCompare.cpp:313
+            if(_Bool32ToCbool(Uh_5tlreg3966, 1)) //gcnl:NodeControl.cpp:213
+            {
+              {
+
+//! DecisionTree.ulam:156: 				gene.tree1Type = 0;
+                const u32 Uh_5tlreg3967 = 0; //gcnl:NodeTerminal.cpp:721
+                const u32 Uh_5tlreg3968 = _Int32ToUnsigned32(Uh_5tlreg3967, 2, 2); //gcnl:NodeCast.cpp:723
+                UlamRef<EC>(52u, 2u, Uv_4gene, NULL, UlamRef<EC>::PRIMITIVE, uc).Write(Uh_5tlreg3968); //gcnl:Node.cpp:885
+              }
+            } // end if
+          }
+        }
+      } // end if
+    }
+
+//! DecisionTree.ulam:161: 		if(mySeqno <= (Seqno)40){
+    {
+
+//! DecisionTree.ulam:161: 		if(mySeqno <= (Seqno)40){
+      const u32 Uh_5tlreg3971 = 40; //gcnl:NodeTerminal.cpp:721
+      const u32 Uh_5tlreg3972 = _Int32ToUnsigned32(Uh_5tlreg3971, 7, 6); //gcnl:NodeCast.cpp:723
+      const u32 Uh_5tlreg3974 = Uv_7mySeqno.read(); //gcnl:Node.cpp:691
+      const u32 Uh_5tlreg3975 = _BinOpCompareLessEqualUnsigned32(Uh_5tlreg3974, Uh_5tlreg3972, 6); //gcnl:NodeBinaryOpCompare.cpp:313
+      if(_Bool32ToCbool(Uh_5tlreg3975, 1)) //gcnl:NodeControl.cpp:213
+      {
+        {
+
+//! DecisionTree.ulam:162: 			ew[mySeqno]=gene;
+          const T Uh_3tut3977 = Uv_4gene.read(); //gcnl:Node.cpp:691
+          UlamRef<EC> Uh_3tur3979(ur, 0u, 0u, &Uq_10109211EventWindow10<EC>::THE_INSTANCE, UlamRef<EC>::CLASSIC); //gcnl:NodeFunctionCall.cpp:923
+          const u32 Uh_5tlreg3981 = Uv_7mySeqno.read(); //gcnl:Node.cpp:691
+          Ui_Ut_10161u<EC> Uh_5tlval3982(Uh_5tlreg3981); //func arg& //gcnl:Node.cpp:1128
+          Ui_Ut_r102961a<EC> Uh_5tuval3984 = Uq_10109211EventWindow10<EC>::THE_INSTANCE.Uf_4aref(uc, Uh_3tur3979, Uh_5tlval3982); //gcnl:NodeFunctionCall.cpp:1006
+          Uh_5tuval3984.WriteAtom(Uh_3tut3977); //write into atomof ref //gcnl:Node.cpp:980
+        }
+      } // end if
+    }
+
+//! DecisionTree.ulam:164: 		return numberOfGenesToAddToMyTree;
+    const u32 Uh_5tlreg3986 = Uv_9226numberOfGenesToAddToMyTree.read(); //gcnl:Node.cpp:691
+    Ui_Ut_10121u<EC> Uh_5tlval3987(Uh_5tlreg3986); //func arg& //gcnl:Node.cpp:1128
+    return (Uh_5tlval3987); //gcnl:NodeReturnStatement.cpp:343
+
+  } // Uf_8initGene
+
+
+
+//! DecisionTree.ulam:188: 	Seqno initTree(Seqno i,Seqno seqno,Seqno numVars,ID id){
+  template<class EC>
+  Ui_Ut_10161u<EC> Uq_10109212DecisionTree10<EC>::Uf_8initTree(const UlamContext<EC>& uc, UlamRef<EC>& ur, Ui_Ut_10161u<EC>& Uv_1i, Ui_Ut_10161u<EC>& Uv_5seqno, Ui_Ut_10161u<EC>& Uv_7numVars, Ui_Ut_102101u<EC>& Uv_2id) const
+  {
+
+//! DecisionTree.ulam:189: 		Seqno genesLeftToCreate;
+    Ui_Ut_10161u<EC> Uv_9217genesLeftToCreate; //gcnl:NodeVarDecl.cpp:1096
+
+//! DecisionTree.ulam:195: 		genesLeftToCreate += initGene(i,seqno,id,(Unsigned(4))(numVars-3),true);
+    const u32 Uh_5tlreg3990 = Uv_1i.read(); //gcnl:Node.cpp:691
+    Ui_Ut_10161u<EC> Uh_5tlval3991(Uh_5tlreg3990); //func arg& //gcnl:Node.cpp:1128
+    const u32 Uh_5tlreg3993 = Uv_5seqno.read(); //gcnl:Node.cpp:691
+    Ui_Ut_10161u<EC> Uh_5tlval3994(Uh_5tlreg3993); //func arg& //gcnl:Node.cpp:1128
+    const u32 Uh_5tlreg3996 = Uv_2id.read(); //gcnl:Node.cpp:691
+    Ui_Ut_102101u<EC> Uh_5tlval3997(Uh_5tlreg3996); //func arg& //gcnl:Node.cpp:1128
+    const u32 Uh_5tlreg3998 = 3; //gcnl:NodeTerminal.cpp:721
+    const u32 Uh_5tlreg3999 = _Int32ToInt32(Uh_5tlreg3998, 3, 8); //gcnl:NodeCast.cpp:723
+    const u32 Uh_5tlreg41001 = Uv_7numVars.read(); //gcnl:Node.cpp:691
+    const u32 Uh_5tlreg41002 = _Unsigned32ToInt32(Uh_5tlreg41001, 6, 8); //gcnl:NodeCast.cpp:723
+    const u32 Uh_5tlreg41003 = _BinOpSubtractInt32(Uh_5tlreg41002, Uh_5tlreg3999, 8); //gcnl:NodeBinaryOp.cpp:719
+    const u32 Uh_5tlreg41004 = _Int32ToUnsigned32(Uh_5tlreg41003, 8, 4); //gcnl:NodeCast.cpp:723
+    Ui_Ut_10141u<EC> Uh_5tlval41005(Uh_5tlreg41004); //func arg& //gcnl:Node.cpp:1128
+    const u32 Uh_5tlreg41006 = 1u; //gcnl:NodeTerminal.cpp:721
+    Ui_Ut_10111b<EC> Uh_5tlval41007(Uh_5tlreg41006); //func arg& //gcnl:Node.cpp:1128
+    const Ui_Ut_10121u<EC> Uh_5tlval41009 = THE_INSTANCE.Uf_8initGene(uc, ur, Uh_5tlval3991, Uh_5tlval3994, Uh_5tlval3997, Uh_5tlval41005, Uh_5tlval41007); //gcnl:NodeFunctionCall.cpp:1006
+    const u32 Uh_5tlreg41010 = Uh_5tlval41009.read(); //gcnl:Node.cpp:1156
+    const u32 Uh_5tlreg41011 = _Unsigned32ToUnsigned32(Uh_5tlreg41010, 2, 6); //gcnl:NodeCast.cpp:723
+    const u32 Uh_5tlreg41013 = Uv_9217genesLeftToCreate.read(); //gcnl:Node.cpp:691
+    const u32 Uh_5tlreg41014 = _BinOpAddUnsigned32(Uh_5tlreg41013, Uh_5tlreg41011, 6); //gcnl:NodeBinaryOpEqualArith.cpp:128
+    Uv_9217genesLeftToCreate.write(Uh_5tlreg41014); //gcnl:Node.cpp:885
+
+//! DecisionTree.ulam:197: 		while(genesLeftToCreate > 0){
+    {
+
+//! DecisionTree.ulam:197: 		while(genesLeftToCreate > 0){
+      while(true)
+      {
+        const u32 Uh_5tlreg41015 = 0; //gcnl:NodeTerminal.cpp:721
+        const u32 Uh_5tlreg41016 = _Int32ToInt32(Uh_5tlreg41015, 2, 7); //gcnl:NodeCast.cpp:723
+        const u32 Uh_5tlreg41018 = Uv_9217genesLeftToCreate.read(); //gcnl:Node.cpp:691
+        const u32 Uh_5tlreg41019 = _Unsigned32ToInt32(Uh_5tlreg41018, 6, 7); //gcnl:NodeCast.cpp:723
+        const u32 Uh_5tlreg41020 = _BinOpCompareGreaterThanInt32(Uh_5tlreg41019, Uh_5tlreg41016, 7); //gcnl:NodeBinaryOpCompare.cpp:313
+
+        if(!_Bool32ToCbool(Uh_5tlreg41020, 1))
+          break; //gcnl:NodeControlWhile.cpp:135
+
+//! DecisionTree.ulam:197: 		while(genesLeftToCreate > 0){
+        {
+
+//! DecisionTree.ulam:198: 			genesLeftToCreate += initGene(seqno,seqno,id,(Unsigned(4))(numVars-3),false);
+          const u32 Uh_5tlreg41023 = Uv_5seqno.read(); //gcnl:Node.cpp:691
+          Ui_Ut_10161u<EC> Uh_5tlval41024(Uh_5tlreg41023); //func arg& //gcnl:Node.cpp:1128
+          const u32 Uh_5tlreg41026 = Uv_5seqno.read(); //gcnl:Node.cpp:691
+          Ui_Ut_10161u<EC> Uh_5tlval41027(Uh_5tlreg41026); //func arg& //gcnl:Node.cpp:1128
+          const u32 Uh_5tlreg41029 = Uv_2id.read(); //gcnl:Node.cpp:691
+          Ui_Ut_102101u<EC> Uh_5tlval41030(Uh_5tlreg41029); //func arg& //gcnl:Node.cpp:1128
+          const u32 Uh_5tlreg41031 = 3; //gcnl:NodeTerminal.cpp:721
+          const u32 Uh_5tlreg41032 = _Int32ToInt32(Uh_5tlreg41031, 3, 8); //gcnl:NodeCast.cpp:723
+          const u32 Uh_5tlreg41034 = Uv_7numVars.read(); //gcnl:Node.cpp:691
+          const u32 Uh_5tlreg41035 = _Unsigned32ToInt32(Uh_5tlreg41034, 6, 8); //gcnl:NodeCast.cpp:723
+          const u32 Uh_5tlreg41036 = _BinOpSubtractInt32(Uh_5tlreg41035, Uh_5tlreg41032, 8); //gcnl:NodeBinaryOp.cpp:719
+          const u32 Uh_5tlreg41037 = _Int32ToUnsigned32(Uh_5tlreg41036, 8, 4); //gcnl:NodeCast.cpp:723
+          Ui_Ut_10141u<EC> Uh_5tlval41038(Uh_5tlreg41037); //func arg& //gcnl:Node.cpp:1128
+          const u32 Uh_5tlreg41039 = 0u; //gcnl:NodeTerminal.cpp:721
+          Ui_Ut_10111b<EC> Uh_5tlval41040(Uh_5tlreg41039); //func arg& //gcnl:Node.cpp:1128
+          const Ui_Ut_10121u<EC> Uh_5tlval41042 = THE_INSTANCE.Uf_8initGene(uc, ur, Uh_5tlval41024, Uh_5tlval41027, Uh_5tlval41030, Uh_5tlval41038, Uh_5tlval41040); //gcnl:NodeFunctionCall.cpp:1006
+          const u32 Uh_5tlreg41043 = Uh_5tlval41042.read(); //gcnl:Node.cpp:1156
+          const u32 Uh_5tlreg41044 = _Unsigned32ToUnsigned32(Uh_5tlreg41043, 2, 6); //gcnl:NodeCast.cpp:723
+          const u32 Uh_5tlreg41046 = Uv_9217genesLeftToCreate.read(); //gcnl:Node.cpp:691
+          const u32 Uh_5tlreg41047 = _BinOpAddUnsigned32(Uh_5tlreg41046, Uh_5tlreg41044, 6); //gcnl:NodeBinaryOpEqualArith.cpp:128
+          Uv_9217genesLeftToCreate.write(Uh_5tlreg41047); //gcnl:Node.cpp:885
+
+//! DecisionTree.ulam:199: 			--genesLeftToCreate;
+          const u32 Uh_5tlreg41048 = 1; //gcnl:NodeTerminal.cpp:721
+          const u32 Uh_5tlreg41049 = _Int32ToUnsigned32(Uh_5tlreg41048, 32, 6); //gcnl:NodeCast.cpp:723
+          const u32 Uh_5tlreg41051 = Uv_9217genesLeftToCreate.read(); //gcnl:Node.cpp:691
+          const u32 Uh_5tlreg41052 = _BinOpSubtractUnsigned32(Uh_5tlreg41051, Uh_5tlreg41049, 6); //gcnl:NodeBinaryOpEqualArith.cpp:128
+          Uv_9217genesLeftToCreate.write(Uh_5tlreg41052); //gcnl:Node.cpp:885
+
+//! DecisionTree.ulam:200: 			++seqno;
+          const u32 Uh_5tlreg41053 = 1; //gcnl:NodeTerminal.cpp:721
+          const u32 Uh_5tlreg41054 = _Int32ToUnsigned32(Uh_5tlreg41053, 32, 6); //gcnl:NodeCast.cpp:723
+          const u32 Uh_5tlreg41056 = Uv_5seqno.read(); //gcnl:Node.cpp:691
+          const u32 Uh_5tlreg41057 = _BinOpAddUnsigned32(Uh_5tlreg41056, Uh_5tlreg41054, 6); //gcnl:NodeBinaryOpEqualArith.cpp:128
+          Uv_5seqno.write(Uh_5tlreg41057); //gcnl:Node.cpp:885
+        }
+
+//! DecisionTree.ulam:197: 		while(genesLeftToCreate > 0){
+Ul_214endcontrolloop12:
+        __attribute__((__unused__)); //gcnl:NodeLabel.cpp:68
+      } // end while //gcnl:NodeControlWhile.cpp:145
+    }
+
+//! DecisionTree.ulam:202: 		return seqno;
+    const u32 Uh_5tlreg41059 = Uv_5seqno.read(); //gcnl:Node.cpp:691
+    Ui_Ut_10161u<EC> Uh_5tlval41060(Uh_5tlreg41059); //func arg& //gcnl:Node.cpp:1128
+    return (Uh_5tlval41060); //gcnl:NodeReturnStatement.cpp:343
+
+  } // Uf_8initTree
+
 
 
 //! DecisionTree.ulam:204: 	Atom findSeqno(Seqno seqno, ID id){
@@ -45,68 +804,68 @@ namespace MFM{
     {
 
 //! DecisionTree.ulam:207: 		for(Seqno i = 0; i <=40; ++i){
-      const u32 Uh_5tlreg43883 = 0; //gcnl:NodeTerminal.cpp:721
-      const u32 Uh_5tlreg43884 = _Int32ToUnsigned32(Uh_5tlreg43883, 2, 6); //gcnl:NodeCast.cpp:723
-      Ui_Ut_10161u<EC> Uv_1i(Uh_5tlreg43884); //gcnl:NodeVarDecl.cpp:1060
+      const u32 Uh_5tlreg41061 = 0; //gcnl:NodeTerminal.cpp:721
+      const u32 Uh_5tlreg41062 = _Int32ToUnsigned32(Uh_5tlreg41061, 2, 6); //gcnl:NodeCast.cpp:723
+      Ui_Ut_10161u<EC> Uv_1i(Uh_5tlreg41062); //gcnl:NodeVarDecl.cpp:1060
 
 //! DecisionTree.ulam:207: 		for(Seqno i = 0; i <=40; ++i){
       while(true)
       {
-        const u32 Uh_5tlreg43885 = 40; //gcnl:NodeTerminal.cpp:721
-        const u32 Uh_5tlreg43887 = Uv_1i.read(); //gcnl:Node.cpp:691
-        const u32 Uh_5tlreg43888 = _Unsigned32ToInt32(Uh_5tlreg43887, 6, 7); //gcnl:NodeCast.cpp:723
-        const u32 Uh_5tlreg43889 = _BinOpCompareLessEqualInt32(Uh_5tlreg43888, Uh_5tlreg43885, 7); //gcnl:NodeBinaryOpCompare.cpp:313
+        const u32 Uh_5tlreg41063 = 40; //gcnl:NodeTerminal.cpp:721
+        const u32 Uh_5tlreg41065 = Uv_1i.read(); //gcnl:Node.cpp:691
+        const u32 Uh_5tlreg41066 = _Unsigned32ToInt32(Uh_5tlreg41065, 6, 7); //gcnl:NodeCast.cpp:723
+        const u32 Uh_5tlreg41067 = _BinOpCompareLessEqualInt32(Uh_5tlreg41066, Uh_5tlreg41063, 7); //gcnl:NodeBinaryOpCompare.cpp:313
 
-        if(!_Bool32ToCbool(Uh_5tlreg43889, 1))
+        if(!_Bool32ToCbool(Uh_5tlreg41067, 1))
           break; //gcnl:NodeControlWhile.cpp:135
 
 //! DecisionTree.ulam:207: 		for(Seqno i = 0; i <=40; ++i){
         {
 
 //! DecisionTree.ulam:208: 			Atom gene = ew[i];
-          UlamRef<EC> Uh_3tur43891(ur, 0u, 0u, &Uq_10109211EventWindow10<EC>::THE_INSTANCE, UlamRef<EC>::CLASSIC); //gcnl:NodeFunctionCall.cpp:923
-          const u32 Uh_5tlreg43893 = Uv_1i.read(); //gcnl:Node.cpp:691
-          Ui_Ut_10161u<EC> Uh_5tlval43894(Uh_5tlreg43893); //func arg& //gcnl:Node.cpp:1128
-          Ui_Ut_r102961a<EC> Uh_5tuval43896 = Uq_10109211EventWindow10<EC>::THE_INSTANCE.Uf_4aref(uc, Uh_3tur43891, Uh_5tlval43894); //gcnl:NodeFunctionCall.cpp:1006
-          Ui_Ut_102961a<EC> Uv_4gene(Uh_5tuval43896.read()); //gcnl:NodeVarDecl.cpp:1060
+          UlamRef<EC> Uh_3tur41069(ur, 0u, 0u, &Uq_10109211EventWindow10<EC>::THE_INSTANCE, UlamRef<EC>::CLASSIC); //gcnl:NodeFunctionCall.cpp:923
+          const u32 Uh_5tlreg41071 = Uv_1i.read(); //gcnl:Node.cpp:691
+          Ui_Ut_10161u<EC> Uh_5tlval41072(Uh_5tlreg41071); //func arg& //gcnl:Node.cpp:1128
+          Ui_Ut_r102961a<EC> Uh_5tuval41074 = Uq_10109211EventWindow10<EC>::THE_INSTANCE.Uf_4aref(uc, Uh_3tur41069, Uh_5tlval41072); //gcnl:NodeFunctionCall.cpp:1006
+          Ui_Ut_102961a<EC> Uv_4gene(Uh_5tuval41074.read()); //gcnl:NodeVarDecl.cpp:1060
 
 //! DecisionTree.ulam:209: 			if(gene as Gene){
           {
 
 //! DecisionTree.ulam:209: 			if(gene as Gene){
-            const T Uh_3tut43898 = Uv_4gene.read(); //gcnl:Node.cpp:691
-            const u32 Uh_5tlreg43899 = Ue_102574Gene10<EC>::THE_INSTANCE.internalCMethodImplementingIs(Uh_3tut43898); //gcnl:NodeConditionalAs.cpp:444
-            if(_Bool32ToCbool(Uh_5tlreg43899, 1)) //gcnl:NodeControl.cpp:213
+            const T Uh_3tut41076 = Uv_4gene.read(); //gcnl:Node.cpp:691
+            const u32 Uh_5tlreg41077 = Ue_102564Gene10<EC>::THE_INSTANCE.internalCMethodImplementingIs(Uh_3tut41076); //gcnl:NodeConditionalAs.cpp:444
+            if(_Bool32ToCbool(Uh_5tlreg41077, 1)) //gcnl:NodeControl.cpp:213
             {
               {
 
 //! DecisionTree.ulam:209: 			if(gene as Gene){
-                Ui_Ut_102961a<EC> & Uh_5tuval43900 = Uv_4gene; //c++ reference to immediate //gcnl:NodeVarRefAs.cpp:161
-                Ui_Ue_r102574Gene10<EC> Uv_4gene(Uh_5tuval43900, 0u + T::ATOM_FIRST_STATE_BIT, uc.LookupUlamElementTypeFromContext(Uh_5tuval43900.GetType()), uc); //shadows lhs of 'as' //gcnl:NodeVarRefAs.cpp:246
+                Ui_Ut_102961a<EC> & Uh_5tuval41078 = Uv_4gene; //c++ reference to immediate //gcnl:NodeVarRefAs.cpp:161
+                Ui_Ue_r102564Gene10<EC> Uv_4gene(Uh_5tuval41078, 0u + T::ATOM_FIRST_STATE_BIT, uc.LookupUlamElementTypeFromContext(Uh_5tuval41078.GetType()), uc); //shadows lhs of 'as' //gcnl:NodeVarRefAs.cpp:246
 
 //! DecisionTree.ulam:210: 				if(gene.id == id && gene.seqno == seqno){
                 {
 
 //! DecisionTree.ulam:210: 				if(gene.id == id && gene.seqno == seqno){
-                  u32 Uh_5tlreg43901 = false; //gcnl:NodeBinaryOpLogicalAnd.cpp:118
-                  const u32 Uh_5tlreg43903 = Uv_2id.read(); //gcnl:Node.cpp:691
-                  const u32 Uh_5tlreg43906 = UlamRef<EC>(Uv_4gene, 0u, 10u, NULL, UlamRef<EC>::PRIMITIVE).Read(); //gcnl:Node.cpp:691
-                  const u32 Uh_5tlreg43907 = _BinOpCompareEqEqUnsigned32(Uh_5tlreg43906, Uh_5tlreg43903, 10); //gcnl:NodeBinaryOpCompare.cpp:313
-                  if(_Bool32ToCbool(Uh_5tlreg43907, 1)) //gcnl:NodeBinaryOpLogicalAnd.cpp:137
+                  u32 Uh_5tlreg41079 = false; //gcnl:NodeBinaryOpLogicalAnd.cpp:118
+                  const u32 Uh_5tlreg41081 = Uv_2id.read(); //gcnl:Node.cpp:691
+                  const u32 Uh_5tlreg41084 = UlamRef<EC>(Uv_4gene, 0u, 10u, NULL, UlamRef<EC>::PRIMITIVE).Read(); //gcnl:Node.cpp:691
+                  const u32 Uh_5tlreg41085 = _BinOpCompareEqEqUnsigned32(Uh_5tlreg41084, Uh_5tlreg41081, 10); //gcnl:NodeBinaryOpCompare.cpp:313
+                  if(_Bool32ToCbool(Uh_5tlreg41085, 1)) //gcnl:NodeBinaryOpLogicalAnd.cpp:137
                   {
-                    const u32 Uh_5tlreg43909 = Uv_5seqno.read(); //gcnl:Node.cpp:691
-                    const u32 Uh_5tlreg43912 = UlamRef<EC>(Uv_4gene, 10u, 6u, NULL, UlamRef<EC>::PRIMITIVE).Read(); //gcnl:Node.cpp:691
-                    const u32 Uh_5tlreg43913 = _BinOpCompareEqEqUnsigned32(Uh_5tlreg43912, Uh_5tlreg43909, 6); //gcnl:NodeBinaryOpCompare.cpp:313
-                    Uh_5tlreg43901 = Uh_5tlreg43913; //gcnl:NodeBinaryOpLogicalAnd.cpp:151
+                    const u32 Uh_5tlreg41087 = Uv_5seqno.read(); //gcnl:Node.cpp:691
+                    const u32 Uh_5tlreg41090 = UlamRef<EC>(Uv_4gene, 10u, 6u, NULL, UlamRef<EC>::PRIMITIVE).Read(); //gcnl:Node.cpp:691
+                    const u32 Uh_5tlreg41091 = _BinOpCompareEqEqUnsigned32(Uh_5tlreg41090, Uh_5tlreg41087, 6); //gcnl:NodeBinaryOpCompare.cpp:313
+                    Uh_5tlreg41079 = Uh_5tlreg41091; //gcnl:NodeBinaryOpLogicalAnd.cpp:151
                   }
-                  if(_Bool32ToCbool(Uh_5tlreg43901, 1)) //gcnl:NodeControl.cpp:213
+                  if(_Bool32ToCbool(Uh_5tlreg41079, 1)) //gcnl:NodeControl.cpp:213
                   {
                     {
 
 //! DecisionTree.ulam:211: 					return gene;
-                      const T Uh_3tut43915 = Uv_4gene.read(); //gcnl:Node.cpp:691
-                      Ui_Ut_102961a<EC> Uh_5tuval43916(Uh_3tut43915); //func arg& //gcnl:Node.cpp:1128
-                      return (Uh_5tuval43916); //gcnl:NodeReturnStatement.cpp:343
+                      const T Uh_3tut41093 = Uv_4gene.read(); //gcnl:Node.cpp:691
+                      Ui_Ut_102961a<EC> Uh_5tuval41094(Uh_3tut41093); //func arg& //gcnl:Node.cpp:1128
+                      return (Uh_5tuval41094); //gcnl:NodeReturnStatement.cpp:343
                     }
                   } // end if
                 }
@@ -116,1044 +875,24 @@ namespace MFM{
         }
 
 //! DecisionTree.ulam:207: 		for(Seqno i = 0; i <=40; ++i){
-Ul_214endcontrolloop219:
+Ul_214endcontrolloop13:
         __attribute__((__unused__)); //gcnl:NodeLabel.cpp:68
 
 //! DecisionTree.ulam:207: 		for(Seqno i = 0; i <=40; ++i){
-        const u32 Uh_5tlreg43917 = 1; //gcnl:NodeTerminal.cpp:721
-        const u32 Uh_5tlreg43918 = _Int32ToUnsigned32(Uh_5tlreg43917, 32, 6); //gcnl:NodeCast.cpp:723
-        const u32 Uh_5tlreg43920 = Uv_1i.read(); //gcnl:Node.cpp:691
-        const u32 Uh_5tlreg43921 = _BinOpAddUnsigned32(Uh_5tlreg43920, Uh_5tlreg43918, 6); //gcnl:NodeBinaryOpEqualArith.cpp:128
-        Uv_1i.write(Uh_5tlreg43921); //gcnl:Node.cpp:885
+        const u32 Uh_5tlreg41095 = 1; //gcnl:NodeTerminal.cpp:721
+        const u32 Uh_5tlreg41096 = _Int32ToUnsigned32(Uh_5tlreg41095, 32, 6); //gcnl:NodeCast.cpp:723
+        const u32 Uh_5tlreg41098 = Uv_1i.read(); //gcnl:Node.cpp:691
+        const u32 Uh_5tlreg41099 = _BinOpAddUnsigned32(Uh_5tlreg41098, Uh_5tlreg41096, 6); //gcnl:NodeBinaryOpEqualArith.cpp:128
+        Uv_1i.write(Uh_5tlreg41099); //gcnl:Node.cpp:885
       } // end while //gcnl:NodeControlWhile.cpp:145
     }
 
 //! DecisionTree.ulam:215: 		return e;		
-    const T Uh_3tut43923 = Uv_1e.read(); //gcnl:Node.cpp:691
-    Ui_Ut_102961a<EC> Uh_5tuval43924(Uh_3tut43923); //func arg& //gcnl:Node.cpp:1128
-    return (Uh_5tuval43924); //gcnl:NodeReturnStatement.cpp:343
+    const T Uh_3tut41101 = Uv_1e.read(); //gcnl:Node.cpp:691
+    Ui_Ut_102961a<EC> Uh_5tuval41102(Uh_3tut41101); //func arg& //gcnl:Node.cpp:1128
+    return (Uh_5tuval41102); //gcnl:NodeReturnStatement.cpp:343
 
   } // Uf_919findSeqno
-
-
-
-//! DecisionTree.ulam:322: 	StoredValue selfEvaluate(Seqno var, ID id, StoredValue comIn){
-  template<class EC>
-  Ui_Ut_10161u<EC> Uq_10109212DecisionTree10<EC>::Uf_9212selfEvaluate(const UlamContext<EC>& uc, UlamRef<EC>& ur, Ui_Ut_10161u<EC>& Uv_3var, Ui_Ut_102101u<EC>& Uv_2id, Ui_Ut_10161u<EC>& Uv_5comIn) const
-  {
-
-//! DecisionTree.ulam:323: 		StoredValue val0;
-    Ui_Ut_10161u<EC> Uv_4val0; //gcnl:NodeVarDecl.cpp:1096
-
-//! DecisionTree.ulam:324: 		StoredValue val1;
-    Ui_Ut_10161u<EC> Uv_4val1; //gcnl:NodeVarDecl.cpp:1096
-
-//! DecisionTree.ulam:325: 		StoredValue value;
-    Ui_Ut_10161u<EC> Uv_5value; //gcnl:NodeVarDecl.cpp:1096
-
-//! DecisionTree.ulam:326: 		Atom gene;
-    Ui_Ut_102961a<EC> Uv_4gene; //gcnl:NodeVarDecl.cpp:1096
-
-//! DecisionTree.ulam:327: 		Atom my = ew[0];
-    UlamRef<EC> Uh_3tur43926(ur, 0u, 0u, &Uq_10109211EventWindow10<EC>::THE_INSTANCE, UlamRef<EC>::CLASSIC); //gcnl:NodeFunctionCall.cpp:923
-    const u32 Uh_5tlreg43927 = 0; //gcnl:NodeTerminal.cpp:721
-    const u32 Uh_5tlreg43928 = _Int32ToUnsigned32(Uh_5tlreg43927, 2, 6); //gcnl:NodeCast.cpp:723
-    Ui_Ut_10161u<EC> Uh_5tlval43929(Uh_5tlreg43928); //func arg& //gcnl:Node.cpp:1128
-    Ui_Ut_r102961a<EC> Uh_5tuval43931 = Uq_10109211EventWindow10<EC>::THE_INSTANCE.Uf_4aref(uc, Uh_3tur43926, Uh_5tlval43929); //gcnl:NodeFunctionCall.cpp:1006
-    Ui_Ut_102961a<EC> Uv_2my(Uh_5tuval43931.read()); //gcnl:NodeVarDecl.cpp:1060
-
-//! DecisionTree.ulam:328: 		if(my as Gene){
-    {
-
-//! DecisionTree.ulam:328: 		if(my as Gene){
-      const T Uh_3tut43933 = Uv_2my.read(); //gcnl:Node.cpp:691
-      const u32 Uh_5tlreg43934 = Ue_102574Gene10<EC>::THE_INSTANCE.internalCMethodImplementingIs(Uh_3tut43933); //gcnl:NodeConditionalAs.cpp:444
-      if(_Bool32ToCbool(Uh_5tlreg43934, 1)) //gcnl:NodeControl.cpp:213
-      {
-        {
-
-//! DecisionTree.ulam:328: 		if(my as Gene){
-          Ui_Ut_102961a<EC> & Uh_5tuval43935 = Uv_2my; //c++ reference to immediate //gcnl:NodeVarRefAs.cpp:161
-          Ui_Ue_r102574Gene10<EC> Uv_2my(Uh_5tuval43935, 0u + T::ATOM_FIRST_STATE_BIT, uc.LookupUlamElementTypeFromContext(Uh_5tuval43935.GetType()), uc); //shadows lhs of 'as' //gcnl:NodeVarRefAs.cpp:246
-
-//! DecisionTree.ulam:329: 			if(my.tree0Type == 1 && my.eqTree0 == 0){
-          {
-
-//! DecisionTree.ulam:329: 			if(my.tree0Type == 1 && my.eqTree0 == 0){
-            u32 Uh_5tlreg43936 = false; //gcnl:NodeBinaryOpLogicalAnd.cpp:118
-            const u32 Uh_5tlreg43937 = 1; //gcnl:NodeTerminal.cpp:721
-            const u32 Uh_5tlreg43938 = _Int32ToInt32(Uh_5tlreg43937, 2, 3); //gcnl:NodeCast.cpp:723
-            const u32 Uh_5tlreg43941 = UlamRef<EC>(Uv_2my, 19u, 2u, NULL, UlamRef<EC>::PRIMITIVE).Read(); //gcnl:Node.cpp:691
-            const u32 Uh_5tlreg43942 = _Unsigned32ToInt32(Uh_5tlreg43941, 2, 3); //gcnl:NodeCast.cpp:723
-            const u32 Uh_5tlreg43943 = _BinOpCompareEqEqInt32(Uh_5tlreg43942, Uh_5tlreg43938, 3); //gcnl:NodeBinaryOpCompare.cpp:313
-            if(_Bool32ToCbool(Uh_5tlreg43943, 1)) //gcnl:NodeBinaryOpLogicalAnd.cpp:137
-            {
-              const u32 Uh_5tlreg43944 = 0; //gcnl:NodeTerminal.cpp:721
-              const u32 Uh_5tlreg43945 = _Int32ToInt32(Uh_5tlreg43944, 2, 7); //gcnl:NodeCast.cpp:723
-              const u32 Uh_5tlreg43948 = UlamRef<EC>(Uv_2my, 21u, 6u, NULL, UlamRef<EC>::PRIMITIVE).Read(); //gcnl:Node.cpp:691
-              const u32 Uh_5tlreg43949 = _Unsigned32ToInt32(Uh_5tlreg43948, 6, 7); //gcnl:NodeCast.cpp:723
-              const u32 Uh_5tlreg43950 = _BinOpCompareEqEqInt32(Uh_5tlreg43949, Uh_5tlreg43945, 7); //gcnl:NodeBinaryOpCompare.cpp:313
-              Uh_5tlreg43936 = Uh_5tlreg43950; //gcnl:NodeBinaryOpLogicalAnd.cpp:151
-            }
-            if(_Bool32ToCbool(Uh_5tlreg43936, 1)) //gcnl:NodeControl.cpp:213
-            {
-              {
-
-//! DecisionTree.ulam:330: 				my.tree0Type = 0;
-                const u32 Uh_5tlreg43951 = 0; //gcnl:NodeTerminal.cpp:721
-                const u32 Uh_5tlreg43952 = _Int32ToUnsigned32(Uh_5tlreg43951, 2, 2); //gcnl:NodeCast.cpp:723
-                UlamRef<EC>(Uv_2my, 19u, 2u, NULL, UlamRef<EC>::PRIMITIVE).Write(Uh_5tlreg43952); //gcnl:Node.cpp:885
-
-//! DecisionTree.ulam:331: 				val0 = comIn;
-                const u32 Uh_5tlreg43956 = Uv_5comIn.read(); //gcnl:Node.cpp:691
-                Uv_4val0.write(Uh_5tlreg43956); //gcnl:Node.cpp:885
-              }
-            } // end if
-          }
-
-//! DecisionTree.ulam:333: 			if(my.tree1Type == 1 && my.eqTree1 == 0){
-          {
-
-//! DecisionTree.ulam:333: 			if(my.tree1Type == 1 && my.eqTree1 == 0){
-            u32 Uh_5tlreg43958 = false; //gcnl:NodeBinaryOpLogicalAnd.cpp:118
-            const u32 Uh_5tlreg43959 = 1; //gcnl:NodeTerminal.cpp:721
-            const u32 Uh_5tlreg43960 = _Int32ToInt32(Uh_5tlreg43959, 2, 3); //gcnl:NodeCast.cpp:723
-            const u32 Uh_5tlreg43963 = UlamRef<EC>(Uv_2my, 27u, 2u, NULL, UlamRef<EC>::PRIMITIVE).Read(); //gcnl:Node.cpp:691
-            const u32 Uh_5tlreg43964 = _Unsigned32ToInt32(Uh_5tlreg43963, 2, 3); //gcnl:NodeCast.cpp:723
-            const u32 Uh_5tlreg43965 = _BinOpCompareEqEqInt32(Uh_5tlreg43964, Uh_5tlreg43960, 3); //gcnl:NodeBinaryOpCompare.cpp:313
-            if(_Bool32ToCbool(Uh_5tlreg43965, 1)) //gcnl:NodeBinaryOpLogicalAnd.cpp:137
-            {
-              const u32 Uh_5tlreg43966 = 0; //gcnl:NodeTerminal.cpp:721
-              const u32 Uh_5tlreg43967 = _Int32ToInt32(Uh_5tlreg43966, 2, 7); //gcnl:NodeCast.cpp:723
-              const u32 Uh_5tlreg43970 = UlamRef<EC>(Uv_2my, 29u, 6u, NULL, UlamRef<EC>::PRIMITIVE).Read(); //gcnl:Node.cpp:691
-              const u32 Uh_5tlreg43971 = _Unsigned32ToInt32(Uh_5tlreg43970, 6, 7); //gcnl:NodeCast.cpp:723
-              const u32 Uh_5tlreg43972 = _BinOpCompareEqEqInt32(Uh_5tlreg43971, Uh_5tlreg43967, 7); //gcnl:NodeBinaryOpCompare.cpp:313
-              Uh_5tlreg43958 = Uh_5tlreg43972; //gcnl:NodeBinaryOpLogicalAnd.cpp:151
-            }
-            if(_Bool32ToCbool(Uh_5tlreg43958, 1)) //gcnl:NodeControl.cpp:213
-            {
-              {
-
-//! DecisionTree.ulam:334: 				my.tree0Type = 0;
-                const u32 Uh_5tlreg43973 = 0; //gcnl:NodeTerminal.cpp:721
-                const u32 Uh_5tlreg43974 = _Int32ToUnsigned32(Uh_5tlreg43973, 2, 2); //gcnl:NodeCast.cpp:723
-                UlamRef<EC>(Uv_2my, 19u, 2u, NULL, UlamRef<EC>::PRIMITIVE).Write(Uh_5tlreg43974); //gcnl:Node.cpp:885
-
-//! DecisionTree.ulam:335: 				val1 = comIn;
-                const u32 Uh_5tlreg43978 = Uv_5comIn.read(); //gcnl:Node.cpp:691
-                Uv_4val1.write(Uh_5tlreg43978); //gcnl:Node.cpp:885
-              }
-            } // end if
-          }
-
-//! DecisionTree.ulam:338: 			if(my.tree0Type == 1){
-          {
-
-//! DecisionTree.ulam:338: 			if(my.tree0Type == 1){
-            const u32 Uh_5tlreg43980 = 1; //gcnl:NodeTerminal.cpp:721
-            const u32 Uh_5tlreg43981 = _Int32ToInt32(Uh_5tlreg43980, 2, 3); //gcnl:NodeCast.cpp:723
-            const u32 Uh_5tlreg43984 = UlamRef<EC>(Uv_2my, 19u, 2u, NULL, UlamRef<EC>::PRIMITIVE).Read(); //gcnl:Node.cpp:691
-            const u32 Uh_5tlreg43985 = _Unsigned32ToInt32(Uh_5tlreg43984, 2, 3); //gcnl:NodeCast.cpp:723
-            const u32 Uh_5tlreg43986 = _BinOpCompareEqEqInt32(Uh_5tlreg43985, Uh_5tlreg43981, 3); //gcnl:NodeBinaryOpCompare.cpp:313
-            if(_Bool32ToCbool(Uh_5tlreg43986, 1)) //gcnl:NodeControl.cpp:213
-            {
-              {
-
-//! DecisionTree.ulam:339: 				gene = findSeqno((Seqno)my.eqTree0, id);
-                const u32 Uh_5tlreg43990 = UlamRef<EC>(Uv_2my, 21u, 6u, NULL, UlamRef<EC>::PRIMITIVE).Read(); //gcnl:Node.cpp:691
-                Ui_Ut_10161u<EC> Uh_5tlval43991(Uh_5tlreg43990); //func arg& //gcnl:Node.cpp:1128
-                const u32 Uh_5tlreg43993 = Uv_2id.read(); //gcnl:Node.cpp:691
-                Ui_Ut_102101u<EC> Uh_5tlval43994(Uh_5tlreg43993); //func arg& //gcnl:Node.cpp:1128
-                const Ui_Ut_102961a<EC> Uh_5tuval43996 = THE_INSTANCE.Uf_919findSeqno(uc, ur, Uh_5tlval43991, Uh_5tlval43994); //gcnl:NodeFunctionCall.cpp:1006
-                Uv_4gene.write(Uh_5tuval43996.read()); //gcnl:Node.cpp:885
-
-//! DecisionTree.ulam:340: 				if(gene as Gene){
-                {
-
-//! DecisionTree.ulam:340: 				if(gene as Gene){
-                  const T Uh_3tut43999 = Uv_4gene.read(); //gcnl:Node.cpp:691
-                  const u32 Uh_5tlreg44000 = Ue_102574Gene10<EC>::THE_INSTANCE.internalCMethodImplementingIs(Uh_3tut43999); //gcnl:NodeConditionalAs.cpp:444
-                  if(_Bool32ToCbool(Uh_5tlreg44000, 1)) //gcnl:NodeControl.cpp:213
-                  {
-                    {
-
-//! DecisionTree.ulam:340: 				if(gene as Gene){
-                      Ui_Ut_102961a<EC> & Uh_5tuval44001 = Uv_4gene; //c++ reference to immediate //gcnl:NodeVarRefAs.cpp:161
-                      Ui_Ue_r102574Gene10<EC> Uv_4gene(Uh_5tuval44001, 0u + T::ATOM_FIRST_STATE_BIT, uc.LookupUlamElementTypeFromContext(Uh_5tuval44001.GetType()), uc); //shadows lhs of 'as' //gcnl:NodeVarRefAs.cpp:246
-
-//! DecisionTree.ulam:341: 					val0 = gene.value;
-                      const u32 Uh_5tlreg44004 = UlamRef<EC>(Uv_4gene, 35u, 6u, NULL, UlamRef<EC>::PRIMITIVE).Read(); //gcnl:Node.cpp:691
-                      Uv_4val0.write(Uh_5tlreg44004); //gcnl:Node.cpp:885
-                    }
-                  } // end if
-                }
-              }
-            } // end if
-          }
-
-//! DecisionTree.ulam:344: 			if(my.tree0Type == 0){
-          {
-
-//! DecisionTree.ulam:344: 			if(my.tree0Type == 0){
-            const u32 Uh_5tlreg44006 = 0; //gcnl:NodeTerminal.cpp:721
-            const u32 Uh_5tlreg44007 = _Int32ToInt32(Uh_5tlreg44006, 2, 3); //gcnl:NodeCast.cpp:723
-            const u32 Uh_5tlreg44010 = UlamRef<EC>(Uv_2my, 19u, 2u, NULL, UlamRef<EC>::PRIMITIVE).Read(); //gcnl:Node.cpp:691
-            const u32 Uh_5tlreg44011 = _Unsigned32ToInt32(Uh_5tlreg44010, 2, 3); //gcnl:NodeCast.cpp:723
-            const u32 Uh_5tlreg44012 = _BinOpCompareEqEqInt32(Uh_5tlreg44011, Uh_5tlreg44007, 3); //gcnl:NodeBinaryOpCompare.cpp:313
-            if(_Bool32ToCbool(Uh_5tlreg44012, 1)) //gcnl:NodeControl.cpp:213
-            {
-              {
-
-//! DecisionTree.ulam:345: 				val0 = my.eqTree0;
-                const u32 Uh_5tlreg44015 = UlamRef<EC>(Uv_2my, 21u, 6u, NULL, UlamRef<EC>::PRIMITIVE).Read(); //gcnl:Node.cpp:691
-                Uv_4val0.write(Uh_5tlreg44015); //gcnl:Node.cpp:885
-              }
-            } // end if
-          }
-
-//! DecisionTree.ulam:347: 			if(my.tree1Type == 1){
-          {
-
-//! DecisionTree.ulam:347: 			if(my.tree1Type == 1){
-            const u32 Uh_5tlreg44017 = 1; //gcnl:NodeTerminal.cpp:721
-            const u32 Uh_5tlreg44018 = _Int32ToInt32(Uh_5tlreg44017, 2, 3); //gcnl:NodeCast.cpp:723
-            const u32 Uh_5tlreg44021 = UlamRef<EC>(Uv_2my, 27u, 2u, NULL, UlamRef<EC>::PRIMITIVE).Read(); //gcnl:Node.cpp:691
-            const u32 Uh_5tlreg44022 = _Unsigned32ToInt32(Uh_5tlreg44021, 2, 3); //gcnl:NodeCast.cpp:723
-            const u32 Uh_5tlreg44023 = _BinOpCompareEqEqInt32(Uh_5tlreg44022, Uh_5tlreg44018, 3); //gcnl:NodeBinaryOpCompare.cpp:313
-            if(_Bool32ToCbool(Uh_5tlreg44023, 1)) //gcnl:NodeControl.cpp:213
-            {
-              {
-
-//! DecisionTree.ulam:348: 				gene = findSeqno((Seqno)my.eqTree1, id);
-                const u32 Uh_5tlreg44027 = UlamRef<EC>(Uv_2my, 29u, 6u, NULL, UlamRef<EC>::PRIMITIVE).Read(); //gcnl:Node.cpp:691
-                Ui_Ut_10161u<EC> Uh_5tlval44028(Uh_5tlreg44027); //func arg& //gcnl:Node.cpp:1128
-                const u32 Uh_5tlreg44030 = Uv_2id.read(); //gcnl:Node.cpp:691
-                Ui_Ut_102101u<EC> Uh_5tlval44031(Uh_5tlreg44030); //func arg& //gcnl:Node.cpp:1128
-                const Ui_Ut_102961a<EC> Uh_5tuval44033 = THE_INSTANCE.Uf_919findSeqno(uc, ur, Uh_5tlval44028, Uh_5tlval44031); //gcnl:NodeFunctionCall.cpp:1006
-                Uv_4gene.write(Uh_5tuval44033.read()); //gcnl:Node.cpp:885
-
-//! DecisionTree.ulam:349: 				if(gene as Gene){
-                {
-
-//! DecisionTree.ulam:349: 				if(gene as Gene){
-                  const T Uh_3tut44036 = Uv_4gene.read(); //gcnl:Node.cpp:691
-                  const u32 Uh_5tlreg44037 = Ue_102574Gene10<EC>::THE_INSTANCE.internalCMethodImplementingIs(Uh_3tut44036); //gcnl:NodeConditionalAs.cpp:444
-                  if(_Bool32ToCbool(Uh_5tlreg44037, 1)) //gcnl:NodeControl.cpp:213
-                  {
-                    {
-
-//! DecisionTree.ulam:349: 				if(gene as Gene){
-                      Ui_Ut_102961a<EC> & Uh_5tuval44038 = Uv_4gene; //c++ reference to immediate //gcnl:NodeVarRefAs.cpp:161
-                      Ui_Ue_r102574Gene10<EC> Uv_4gene(Uh_5tuval44038, 0u + T::ATOM_FIRST_STATE_BIT, uc.LookupUlamElementTypeFromContext(Uh_5tuval44038.GetType()), uc); //shadows lhs of 'as' //gcnl:NodeVarRefAs.cpp:246
-
-//! DecisionTree.ulam:350: 					val1 = gene.value;
-                      const u32 Uh_5tlreg44041 = UlamRef<EC>(Uv_4gene, 35u, 6u, NULL, UlamRef<EC>::PRIMITIVE).Read(); //gcnl:Node.cpp:691
-                      Uv_4val1.write(Uh_5tlreg44041); //gcnl:Node.cpp:885
-                    }
-                  } // end if
-                }
-              }
-            } // end if
-          }
-
-//! DecisionTree.ulam:353: 			if(my.tree1Type == 0){
-          {
-
-//! DecisionTree.ulam:353: 			if(my.tree1Type == 0){
-            const u32 Uh_5tlreg44043 = 0; //gcnl:NodeTerminal.cpp:721
-            const u32 Uh_5tlreg44044 = _Int32ToInt32(Uh_5tlreg44043, 2, 3); //gcnl:NodeCast.cpp:723
-            const u32 Uh_5tlreg44047 = UlamRef<EC>(Uv_2my, 27u, 2u, NULL, UlamRef<EC>::PRIMITIVE).Read(); //gcnl:Node.cpp:691
-            const u32 Uh_5tlreg44048 = _Unsigned32ToInt32(Uh_5tlreg44047, 2, 3); //gcnl:NodeCast.cpp:723
-            const u32 Uh_5tlreg44049 = _BinOpCompareEqEqInt32(Uh_5tlreg44048, Uh_5tlreg44044, 3); //gcnl:NodeBinaryOpCompare.cpp:313
-            if(_Bool32ToCbool(Uh_5tlreg44049, 1)) //gcnl:NodeControl.cpp:213
-            {
-              {
-
-//! DecisionTree.ulam:354: 				val1 = my.eqTree1;
-                const u32 Uh_5tlreg44052 = UlamRef<EC>(Uv_2my, 29u, 6u, NULL, UlamRef<EC>::PRIMITIVE).Read(); //gcnl:Node.cpp:691
-                Uv_4val1.write(Uh_5tlreg44052); //gcnl:Node.cpp:885
-              }
-            } // end if
-          }
-
-//! DecisionTree.ulam:356: 			value = operate(val0, my.operator, val1);
-          const u32 Uh_5tlreg44056 = Uv_4val0.read(); //gcnl:Node.cpp:691
-          Ui_Ut_10161u<EC> Uh_5tlval44057(Uh_5tlreg44056); //func arg& //gcnl:Node.cpp:1128
-          const u32 Uh_5tlreg44060 = UlamRef<EC>(Uv_2my, 17u, 2u, NULL, UlamRef<EC>::PRIMITIVE).Read(); //gcnl:Node.cpp:691
-          Ui_Ut_10121u<EC> Uh_5tlval44061(Uh_5tlreg44060); //func arg& //gcnl:Node.cpp:1128
-          const u32 Uh_5tlreg44063 = Uv_4val1.read(); //gcnl:Node.cpp:691
-          Ui_Ut_10161u<EC> Uh_5tlval44064(Uh_5tlreg44063); //func arg& //gcnl:Node.cpp:1128
-          const Ui_Ut_10161u<EC> Uh_5tlval44066 = THE_INSTANCE.Uf_7operate(uc, ur, Uh_5tlval44057, Uh_5tlval44061, Uh_5tlval44064); //gcnl:NodeFunctionCall.cpp:1006
-          const u32 Uh_5tlreg44067 = Uh_5tlval44066.read(); //gcnl:Node.cpp:1156
-          Uv_5value.write(Uh_5tlreg44067); //gcnl:Node.cpp:885
-        }
-      } // end if
-    }
-
-//! DecisionTree.ulam:358: 		return value;
-    const u32 Uh_5tlreg44070 = Uv_5value.read(); //gcnl:Node.cpp:691
-    Ui_Ut_10161u<EC> Uh_5tlval44071(Uh_5tlreg44070); //func arg& //gcnl:Node.cpp:1128
-    return (Uh_5tlval44071); //gcnl:NodeReturnStatement.cpp:343
-
-  } // Uf_9212selfEvaluate
-
-
-
-//! DecisionTree.ulam:19: 	Unsigned(2) initGene(Seqno mySeqno, Seqno refSeqno, ID id, Unsigned(4) specialVars,Bool isVar){
-  template<class EC>
-  Ui_Ut_10121u<EC> Uq_10109212DecisionTree10<EC>::Uf_8initGene(const UlamContext<EC>& uc, UlamRef<EC>& ur, Ui_Ut_10161u<EC>& Uv_7mySeqno, Ui_Ut_10161u<EC>& Uv_8refSeqno, Ui_Ut_102101u<EC>& Uv_2id, Ui_Ut_10141u<EC>& Uv_9211specialVars, Ui_Ut_10111b<EC>& Uv_5isVar) const
-  {
-
-//! DecisionTree.ulam:25: 		Unsigned(2) numberOfGenesToAddToMyTree;
-    Ui_Ut_10121u<EC> Uv_9226numberOfGenesToAddToMyTree; //gcnl:NodeVarDecl.cpp:1096
-
-//! DecisionTree.ulam:27: 		Gene gene;
-    Ui_Ue_102574Gene10<EC> Uv_4gene; //gcnl:NodeVarDecl.cpp:1096
-
-//! DecisionTree.ulam:29: 		gene.seqno = mySeqno;
-    const u32 Uh_5tlreg44073 = Uv_7mySeqno.read(); //gcnl:Node.cpp:691
-    UlamRef<EC>(35u, 6u, Uv_4gene, NULL, UlamRef<EC>::PRIMITIVE, uc).Write(Uh_5tlreg44073); //gcnl:Node.cpp:885
-
-//! DecisionTree.ulam:30: 		gene.id = id;
-    const u32 Uh_5tlreg44077 = Uv_2id.read(); //gcnl:Node.cpp:691
-    UlamRef<EC>(25u, 10u, Uv_4gene, NULL, UlamRef<EC>::PRIMITIVE, uc).Write(Uh_5tlreg44077); //gcnl:Node.cpp:885
-
-//! DecisionTree.ulam:33: 		gene.operator = (Unsigned(2)) r.create(3);
-    UlamRef<EC> Uh_3tur44081(ur, 0u, 0u, &Uq_10106Random10<EC>::THE_INSTANCE, UlamRef<EC>::CLASSIC); //gcnl:NodeFunctionCall.cpp:923
-    const u32 Uh_5tlreg44082 = 3; //gcnl:NodeTerminal.cpp:721
-    const u32 Uh_5tlreg44083 = _Int32ToInt32(Uh_5tlreg44082, 3, 32); //gcnl:NodeCast.cpp:723
-    Ui_Ut_102321i<EC> Uh_5tlval44084(Uh_5tlreg44083); //func arg& //gcnl:Node.cpp:1128
-    const Ui_Ut_102321u<EC> Uh_5tlval44086 = Uq_10106Random10<EC>::THE_INSTANCE.Uf_6create(uc, Uh_3tur44081, Uh_5tlval44084); //gcnl:NodeFunctionCall.cpp:1006
-    const u32 Uh_5tlreg44087 = Uh_5tlval44086.read(); //gcnl:Node.cpp:1156
-    const u32 Uh_5tlreg44088 = _Unsigned32ToUnsigned32(Uh_5tlreg44087, 32, 2); //gcnl:NodeCast.cpp:723
-    UlamRef<EC>(42u, 2u, Uv_4gene, NULL, UlamRef<EC>::PRIMITIVE, uc).Write(Uh_5tlreg44088); //gcnl:Node.cpp:885
-
-//! DecisionTree.ulam:49: 		Unsigned valTypSwitch0;
-    Ui_Ut_102321u<EC> Uv_9213valTypSwitch0; //gcnl:NodeVarDecl.cpp:1096
-
-//! DecisionTree.ulam:50: 		Unsigned valTypSwitch1;
-    Ui_Ut_102321u<EC> Uv_9213valTypSwitch1; //gcnl:NodeVarDecl.cpp:1096
-
-//! DecisionTree.ulam:52: 		valTypSwitch0 = r.create(100);
-    UlamRef<EC> Uh_3tur44092(ur, 0u, 0u, &Uq_10106Random10<EC>::THE_INSTANCE, UlamRef<EC>::CLASSIC); //gcnl:NodeFunctionCall.cpp:923
-    const u32 Uh_5tlreg44093 = 100; //gcnl:NodeTerminal.cpp:721
-    const u32 Uh_5tlreg44094 = _Int32ToInt32(Uh_5tlreg44093, 8, 32); //gcnl:NodeCast.cpp:723
-    Ui_Ut_102321i<EC> Uh_5tlval44095(Uh_5tlreg44094); //func arg& //gcnl:Node.cpp:1128
-    const Ui_Ut_102321u<EC> Uh_5tlval44097 = Uq_10106Random10<EC>::THE_INSTANCE.Uf_6create(uc, Uh_3tur44092, Uh_5tlval44095); //gcnl:NodeFunctionCall.cpp:1006
-    const u32 Uh_5tlreg44098 = Uh_5tlval44097.read(); //gcnl:Node.cpp:1156
-    Uv_9213valTypSwitch0.write(Uh_5tlreg44098); //gcnl:Node.cpp:885
-
-//! DecisionTree.ulam:53: 		valTypSwitch1 = r.create(100);
-    UlamRef<EC> Uh_3tur44101(ur, 0u, 0u, &Uq_10106Random10<EC>::THE_INSTANCE, UlamRef<EC>::CLASSIC); //gcnl:NodeFunctionCall.cpp:923
-    const u32 Uh_5tlreg44102 = 100; //gcnl:NodeTerminal.cpp:721
-    const u32 Uh_5tlreg44103 = _Int32ToInt32(Uh_5tlreg44102, 8, 32); //gcnl:NodeCast.cpp:723
-    Ui_Ut_102321i<EC> Uh_5tlval44104(Uh_5tlreg44103); //func arg& //gcnl:Node.cpp:1128
-    const Ui_Ut_102321u<EC> Uh_5tlval44106 = Uq_10106Random10<EC>::THE_INSTANCE.Uf_6create(uc, Uh_3tur44101, Uh_5tlval44104); //gcnl:NodeFunctionCall.cpp:1006
-    const u32 Uh_5tlreg44107 = Uh_5tlval44106.read(); //gcnl:Node.cpp:1156
-    Uv_9213valTypSwitch1.write(Uh_5tlreg44107); //gcnl:Node.cpp:885
-
-//! DecisionTree.ulam:56: 		if(valTypSwitch0 >= (Unsigned)0 && valTypSwitch0 < (Unsigned)30){
-    {
-
-//! DecisionTree.ulam:56: 		if(valTypSwitch0 >= (Unsigned)0 && valTypSwitch0 < (Unsigned)30){
-      u32 Uh_5tlreg44109 = false; //gcnl:NodeBinaryOpLogicalAnd.cpp:118
-      const u32 Uh_5tlreg44110 = 0; //gcnl:NodeTerminal.cpp:721
-      const u32 Uh_5tlreg44111 = _Int32ToUnsigned32(Uh_5tlreg44110, 2, 32); //gcnl:NodeCast.cpp:723
-      const u32 Uh_5tlreg44113 = Uv_9213valTypSwitch0.read(); //gcnl:Node.cpp:691
-      const u32 Uh_5tlreg44114 = _BinOpCompareGreaterEqualUnsigned32(Uh_5tlreg44113, Uh_5tlreg44111, 32); //gcnl:NodeBinaryOpCompare.cpp:313
-      if(_Bool32ToCbool(Uh_5tlreg44114, 1)) //gcnl:NodeBinaryOpLogicalAnd.cpp:137
-      {
-        const u32 Uh_5tlreg44115 = 30; //gcnl:NodeTerminal.cpp:721
-        const u32 Uh_5tlreg44116 = _Int32ToUnsigned32(Uh_5tlreg44115, 6, 32); //gcnl:NodeCast.cpp:723
-        const u32 Uh_5tlreg44118 = Uv_9213valTypSwitch0.read(); //gcnl:Node.cpp:691
-        const u32 Uh_5tlreg44119 = _BinOpCompareLessThanUnsigned32(Uh_5tlreg44118, Uh_5tlreg44116, 32); //gcnl:NodeBinaryOpCompare.cpp:313
-        Uh_5tlreg44109 = Uh_5tlreg44119; //gcnl:NodeBinaryOpLogicalAnd.cpp:151
-      }
-      if(_Bool32ToCbool(Uh_5tlreg44109, 1)) //gcnl:NodeControl.cpp:213
-      {
-        {
-
-//! DecisionTree.ulam:58: 			gene.tree0Type = 0;
-          const u32 Uh_5tlreg44120 = 0; //gcnl:NodeTerminal.cpp:721
-          const u32 Uh_5tlreg44121 = _Int32ToUnsigned32(Uh_5tlreg44120, 2, 2); //gcnl:NodeCast.cpp:723
-          UlamRef<EC>(44u, 2u, Uv_4gene, NULL, UlamRef<EC>::PRIMITIVE, uc).Write(Uh_5tlreg44121); //gcnl:Node.cpp:885
-
-//! DecisionTree.ulam:59: 			gene.eqTree0 = (Unsigned(6)) r.create(63);
-          UlamRef<EC> Uh_3tur44125(ur, 0u, 0u, &Uq_10106Random10<EC>::THE_INSTANCE, UlamRef<EC>::CLASSIC); //gcnl:NodeFunctionCall.cpp:923
-          const u32 Uh_5tlreg44126 = 63; //gcnl:NodeTerminal.cpp:721
-          const u32 Uh_5tlreg44127 = _Int32ToInt32(Uh_5tlreg44126, 7, 32); //gcnl:NodeCast.cpp:723
-          Ui_Ut_102321i<EC> Uh_5tlval44128(Uh_5tlreg44127); //func arg& //gcnl:Node.cpp:1128
-          const Ui_Ut_102321u<EC> Uh_5tlval44130 = Uq_10106Random10<EC>::THE_INSTANCE.Uf_6create(uc, Uh_3tur44125, Uh_5tlval44128); //gcnl:NodeFunctionCall.cpp:1006
-          const u32 Uh_5tlreg44131 = Uh_5tlval44130.read(); //gcnl:Node.cpp:1156
-          const u32 Uh_5tlreg44132 = _Unsigned32ToUnsigned32(Uh_5tlreg44131, 32, 6); //gcnl:NodeCast.cpp:723
-          UlamRef<EC>(46u, 6u, Uv_4gene, NULL, UlamRef<EC>::PRIMITIVE, uc).Write(Uh_5tlreg44132); //gcnl:Node.cpp:885
-        }
-      } // end if
-    }
-
-//! DecisionTree.ulam:62: 		if(valTypSwitch0 >= (Unsigned)30 && valTypSwitch0 < (Unsigned)40){
-    {
-
-//! DecisionTree.ulam:62: 		if(valTypSwitch0 >= (Unsigned)30 && valTypSwitch0 < (Unsigned)40){
-      u32 Uh_5tlreg44135 = false; //gcnl:NodeBinaryOpLogicalAnd.cpp:118
-      const u32 Uh_5tlreg44136 = 30; //gcnl:NodeTerminal.cpp:721
-      const u32 Uh_5tlreg44137 = _Int32ToUnsigned32(Uh_5tlreg44136, 6, 32); //gcnl:NodeCast.cpp:723
-      const u32 Uh_5tlreg44139 = Uv_9213valTypSwitch0.read(); //gcnl:Node.cpp:691
-      const u32 Uh_5tlreg44140 = _BinOpCompareGreaterEqualUnsigned32(Uh_5tlreg44139, Uh_5tlreg44137, 32); //gcnl:NodeBinaryOpCompare.cpp:313
-      if(_Bool32ToCbool(Uh_5tlreg44140, 1)) //gcnl:NodeBinaryOpLogicalAnd.cpp:137
-      {
-        const u32 Uh_5tlreg44141 = 40; //gcnl:NodeTerminal.cpp:721
-        const u32 Uh_5tlreg44142 = _Int32ToUnsigned32(Uh_5tlreg44141, 7, 32); //gcnl:NodeCast.cpp:723
-        const u32 Uh_5tlreg44144 = Uv_9213valTypSwitch0.read(); //gcnl:Node.cpp:691
-        const u32 Uh_5tlreg44145 = _BinOpCompareLessThanUnsigned32(Uh_5tlreg44144, Uh_5tlreg44142, 32); //gcnl:NodeBinaryOpCompare.cpp:313
-        Uh_5tlreg44135 = Uh_5tlreg44145; //gcnl:NodeBinaryOpLogicalAnd.cpp:151
-      }
-      if(_Bool32ToCbool(Uh_5tlreg44135, 1)) //gcnl:NodeControl.cpp:213
-      {
-        {
-
-//! DecisionTree.ulam:64: 			gene.tree0Type = 0;
-          const u32 Uh_5tlreg44146 = 0; //gcnl:NodeTerminal.cpp:721
-          const u32 Uh_5tlreg44147 = _Int32ToUnsigned32(Uh_5tlreg44146, 2, 2); //gcnl:NodeCast.cpp:723
-          UlamRef<EC>(44u, 2u, Uv_4gene, NULL, UlamRef<EC>::PRIMITIVE, uc).Write(Uh_5tlreg44147); //gcnl:Node.cpp:885
-
-//! DecisionTree.ulam:65: 			gene.eqTree0 = (StoredValue) 0;
-          const u32 Uh_5tlreg44150 = 0; //gcnl:NodeTerminal.cpp:721
-          const u32 Uh_5tlreg44151 = _Int32ToUnsigned32(Uh_5tlreg44150, 2, 6); //gcnl:NodeCast.cpp:723
-          UlamRef<EC>(46u, 6u, Uv_4gene, NULL, UlamRef<EC>::PRIMITIVE, uc).Write(Uh_5tlreg44151); //gcnl:Node.cpp:885
-        }
-      } // end if
-    }
-
-//! DecisionTree.ulam:68: 		if(valTypSwitch0 >= (Unsigned)40 && valTypSwitch0 < (Unsigned)50){
-    {
-
-//! DecisionTree.ulam:68: 		if(valTypSwitch0 >= (Unsigned)40 && valTypSwitch0 < (Unsigned)50){
-      u32 Uh_5tlreg44154 = false; //gcnl:NodeBinaryOpLogicalAnd.cpp:118
-      const u32 Uh_5tlreg44155 = 40; //gcnl:NodeTerminal.cpp:721
-      const u32 Uh_5tlreg44156 = _Int32ToUnsigned32(Uh_5tlreg44155, 7, 32); //gcnl:NodeCast.cpp:723
-      const u32 Uh_5tlreg44158 = Uv_9213valTypSwitch0.read(); //gcnl:Node.cpp:691
-      const u32 Uh_5tlreg44159 = _BinOpCompareGreaterEqualUnsigned32(Uh_5tlreg44158, Uh_5tlreg44156, 32); //gcnl:NodeBinaryOpCompare.cpp:313
-      if(_Bool32ToCbool(Uh_5tlreg44159, 1)) //gcnl:NodeBinaryOpLogicalAnd.cpp:137
-      {
-        const u32 Uh_5tlreg44160 = 50; //gcnl:NodeTerminal.cpp:721
-        const u32 Uh_5tlreg44161 = _Int32ToUnsigned32(Uh_5tlreg44160, 7, 32); //gcnl:NodeCast.cpp:723
-        const u32 Uh_5tlreg44163 = Uv_9213valTypSwitch0.read(); //gcnl:Node.cpp:691
-        const u32 Uh_5tlreg44164 = _BinOpCompareLessThanUnsigned32(Uh_5tlreg44163, Uh_5tlreg44161, 32); //gcnl:NodeBinaryOpCompare.cpp:313
-        Uh_5tlreg44154 = Uh_5tlreg44164; //gcnl:NodeBinaryOpLogicalAnd.cpp:151
-      }
-      if(_Bool32ToCbool(Uh_5tlreg44154, 1)) //gcnl:NodeControl.cpp:213
-      {
-        {
-
-//! DecisionTree.ulam:74: 			gene.tree0Type = 1;
-          const u32 Uh_5tlreg44165 = 1; //gcnl:NodeTerminal.cpp:721
-          const u32 Uh_5tlreg44166 = _Int32ToUnsigned32(Uh_5tlreg44165, 2, 2); //gcnl:NodeCast.cpp:723
-          UlamRef<EC>(44u, 2u, Uv_4gene, NULL, UlamRef<EC>::PRIMITIVE, uc).Write(Uh_5tlreg44166); //gcnl:Node.cpp:885
-
-//! DecisionTree.ulam:78: 			gene.eqTree0 = (StoredValue)0;
-          const u32 Uh_5tlreg44169 = 0; //gcnl:NodeTerminal.cpp:721
-          const u32 Uh_5tlreg44170 = _Int32ToUnsigned32(Uh_5tlreg44169, 2, 6); //gcnl:NodeCast.cpp:723
-          UlamRef<EC>(46u, 6u, Uv_4gene, NULL, UlamRef<EC>::PRIMITIVE, uc).Write(Uh_5tlreg44170); //gcnl:Node.cpp:885
-        }
-      } // end if
-    }
-
-//! DecisionTree.ulam:80: 		if(valTypSwitch0 >= (Unsigned)50 && valTypSwitch0 < (Unsigned)75){
-    {
-
-//! DecisionTree.ulam:80: 		if(valTypSwitch0 >= (Unsigned)50 && valTypSwitch0 < (Unsigned)75){
-      u32 Uh_5tlreg44173 = false; //gcnl:NodeBinaryOpLogicalAnd.cpp:118
-      const u32 Uh_5tlreg44174 = 50; //gcnl:NodeTerminal.cpp:721
-      const u32 Uh_5tlreg44175 = _Int32ToUnsigned32(Uh_5tlreg44174, 7, 32); //gcnl:NodeCast.cpp:723
-      const u32 Uh_5tlreg44177 = Uv_9213valTypSwitch0.read(); //gcnl:Node.cpp:691
-      const u32 Uh_5tlreg44178 = _BinOpCompareGreaterEqualUnsigned32(Uh_5tlreg44177, Uh_5tlreg44175, 32); //gcnl:NodeBinaryOpCompare.cpp:313
-      if(_Bool32ToCbool(Uh_5tlreg44178, 1)) //gcnl:NodeBinaryOpLogicalAnd.cpp:137
-      {
-        const u32 Uh_5tlreg44179 = 75; //gcnl:NodeTerminal.cpp:721
-        const u32 Uh_5tlreg44180 = _Int32ToUnsigned32(Uh_5tlreg44179, 8, 32); //gcnl:NodeCast.cpp:723
-        const u32 Uh_5tlreg44182 = Uv_9213valTypSwitch0.read(); //gcnl:Node.cpp:691
-        const u32 Uh_5tlreg44183 = _BinOpCompareLessThanUnsigned32(Uh_5tlreg44182, Uh_5tlreg44180, 32); //gcnl:NodeBinaryOpCompare.cpp:313
-        Uh_5tlreg44173 = Uh_5tlreg44183; //gcnl:NodeBinaryOpLogicalAnd.cpp:151
-      }
-      if(_Bool32ToCbool(Uh_5tlreg44173, 1)) //gcnl:NodeControl.cpp:213
-      {
-        {
-
-//! DecisionTree.ulam:82: 			gene.tree0Type = 1;
-          const u32 Uh_5tlreg44184 = 1; //gcnl:NodeTerminal.cpp:721
-          const u32 Uh_5tlreg44185 = _Int32ToUnsigned32(Uh_5tlreg44184, 2, 2); //gcnl:NodeCast.cpp:723
-          UlamRef<EC>(44u, 2u, Uv_4gene, NULL, UlamRef<EC>::PRIMITIVE, uc).Write(Uh_5tlreg44185); //gcnl:Node.cpp:885
-
-//! DecisionTree.ulam:85: 			++numberOfGenesToAddToMyTree;
-          const u32 Uh_5tlreg44188 = 1; //gcnl:NodeTerminal.cpp:721
-          const u32 Uh_5tlreg44189 = _Int32ToUnsigned32(Uh_5tlreg44188, 32, 2); //gcnl:NodeCast.cpp:723
-          const u32 Uh_5tlreg44191 = Uv_9226numberOfGenesToAddToMyTree.read(); //gcnl:Node.cpp:691
-          const u32 Uh_5tlreg44192 = _BinOpAddUnsigned32(Uh_5tlreg44191, Uh_5tlreg44189, 2); //gcnl:NodeBinaryOpEqualArith.cpp:128
-          Uv_9226numberOfGenesToAddToMyTree.write(Uh_5tlreg44192); //gcnl:Node.cpp:885
-
-//! DecisionTree.ulam:87: 			if(isVar){
-          {
-
-//! DecisionTree.ulam:87: 			if(isVar){
-            const u32 Uh_5tlreg44194 = Uv_5isVar.read(); //gcnl:Node.cpp:691
-            if(_Bool32ToCbool(Uh_5tlreg44194, 1)) //gcnl:NodeControl.cpp:213
-            {
-              {
-
-//! DecisionTree.ulam:88: 				gene.eqTree0 = (StoredValue)(refSeqno+numberOfGenesToAddToMyTree-1);
-                const u32 Uh_5tlreg44195 = 1; //gcnl:NodeTerminal.cpp:721
-                const u32 Uh_5tlreg44196 = _Int32ToInt32(Uh_5tlreg44195, 2, 9); //gcnl:NodeCast.cpp:723
-                const u32 Uh_5tlreg44198 = Uv_9226numberOfGenesToAddToMyTree.read(); //gcnl:Node.cpp:691
-                const u32 Uh_5tlreg44199 = _Unsigned32ToUnsigned32(Uh_5tlreg44198, 2, 7); //gcnl:NodeCast.cpp:723
-                const u32 Uh_5tlreg44201 = Uv_8refSeqno.read(); //gcnl:Node.cpp:691
-                const u32 Uh_5tlreg44202 = _Unsigned32ToUnsigned32(Uh_5tlreg44201, 6, 7); //gcnl:NodeCast.cpp:723
-                const u32 Uh_5tlreg44203 = _BinOpAddUnsigned32(Uh_5tlreg44202, Uh_5tlreg44199, 7); //gcnl:NodeBinaryOp.cpp:719
-                const u32 Uh_5tlreg44204 = _Unsigned32ToInt32(Uh_5tlreg44203, 7, 9); //gcnl:NodeCast.cpp:723
-                const u32 Uh_5tlreg44205 = _BinOpSubtractInt32(Uh_5tlreg44204, Uh_5tlreg44196, 9); //gcnl:NodeBinaryOp.cpp:719
-                const u32 Uh_5tlreg44206 = _Int32ToUnsigned32(Uh_5tlreg44205, 9, 6); //gcnl:NodeCast.cpp:723
-                UlamRef<EC>(46u, 6u, Uv_4gene, NULL, UlamRef<EC>::PRIMITIVE, uc).Write(Uh_5tlreg44206); //gcnl:Node.cpp:885
-              }
-            } // end if
-            else
-            {
-              {
-
-//! DecisionTree.ulam:91: 				gene.eqTree0 = (StoredValue)(refSeqno+numberOfGenesToAddToMyTree);
-                const u32 Uh_5tlreg44210 = Uv_9226numberOfGenesToAddToMyTree.read(); //gcnl:Node.cpp:691
-                const u32 Uh_5tlreg44211 = _Unsigned32ToUnsigned32(Uh_5tlreg44210, 2, 7); //gcnl:NodeCast.cpp:723
-                const u32 Uh_5tlreg44213 = Uv_8refSeqno.read(); //gcnl:Node.cpp:691
-                const u32 Uh_5tlreg44214 = _Unsigned32ToUnsigned32(Uh_5tlreg44213, 6, 7); //gcnl:NodeCast.cpp:723
-                const u32 Uh_5tlreg44215 = _BinOpAddUnsigned32(Uh_5tlreg44214, Uh_5tlreg44211, 7); //gcnl:NodeBinaryOp.cpp:719
-                const u32 Uh_5tlreg44216 = _Unsigned32ToUnsigned32(Uh_5tlreg44215, 7, 6); //gcnl:NodeCast.cpp:723
-                UlamRef<EC>(46u, 6u, Uv_4gene, NULL, UlamRef<EC>::PRIMITIVE, uc).Write(Uh_5tlreg44216); //gcnl:Node.cpp:885
-              }
-            } //end else
-          }
-        }
-      } // end if
-    }
-
-//! DecisionTree.ulam:94: 		if(valTypSwitch0 >= (Unsigned)75 && valTypSwitch0 < (Unsigned)100){
-    {
-
-//! DecisionTree.ulam:94: 		if(valTypSwitch0 >= (Unsigned)75 && valTypSwitch0 < (Unsigned)100){
-      u32 Uh_5tlreg44219 = false; //gcnl:NodeBinaryOpLogicalAnd.cpp:118
-      const u32 Uh_5tlreg44220 = 75; //gcnl:NodeTerminal.cpp:721
-      const u32 Uh_5tlreg44221 = _Int32ToUnsigned32(Uh_5tlreg44220, 8, 32); //gcnl:NodeCast.cpp:723
-      const u32 Uh_5tlreg44223 = Uv_9213valTypSwitch0.read(); //gcnl:Node.cpp:691
-      const u32 Uh_5tlreg44224 = _BinOpCompareGreaterEqualUnsigned32(Uh_5tlreg44223, Uh_5tlreg44221, 32); //gcnl:NodeBinaryOpCompare.cpp:313
-      if(_Bool32ToCbool(Uh_5tlreg44224, 1)) //gcnl:NodeBinaryOpLogicalAnd.cpp:137
-      {
-        const u32 Uh_5tlreg44225 = 100; //gcnl:NodeTerminal.cpp:721
-        const u32 Uh_5tlreg44226 = _Int32ToUnsigned32(Uh_5tlreg44225, 8, 32); //gcnl:NodeCast.cpp:723
-        const u32 Uh_5tlreg44228 = Uv_9213valTypSwitch0.read(); //gcnl:Node.cpp:691
-        const u32 Uh_5tlreg44229 = _BinOpCompareLessThanUnsigned32(Uh_5tlreg44228, Uh_5tlreg44226, 32); //gcnl:NodeBinaryOpCompare.cpp:313
-        Uh_5tlreg44219 = Uh_5tlreg44229; //gcnl:NodeBinaryOpLogicalAnd.cpp:151
-      }
-      if(_Bool32ToCbool(Uh_5tlreg44219, 1)) //gcnl:NodeControl.cpp:213
-      {
-        {
-
-//! DecisionTree.ulam:96: 			gene.tree0Type = 1;
-          const u32 Uh_5tlreg44230 = 1; //gcnl:NodeTerminal.cpp:721
-          const u32 Uh_5tlreg44231 = _Int32ToUnsigned32(Uh_5tlreg44230, 2, 2); //gcnl:NodeCast.cpp:723
-          UlamRef<EC>(44u, 2u, Uv_4gene, NULL, UlamRef<EC>::PRIMITIVE, uc).Write(Uh_5tlreg44231); //gcnl:Node.cpp:885
-
-//! DecisionTree.ulam:100: 			gene.eqTree0 = (StoredValue)((StoredValue)r.create(specialVars)+(StoredValue)4);
-          const u32 Uh_5tlreg44234 = 4; //gcnl:NodeTerminal.cpp:721
-          const u32 Uh_5tlreg44235 = _Int32ToUnsigned32(Uh_5tlreg44234, 4, 6); //gcnl:NodeCast.cpp:723
-          const u32 Uh_5tlreg44236 = _Unsigned32ToUnsigned32(Uh_5tlreg44235, 6, 7); //gcnl:NodeCast.cpp:723
-          UlamRef<EC> Uh_3tur44238(ur, 0u, 0u, &Uq_10106Random10<EC>::THE_INSTANCE, UlamRef<EC>::CLASSIC); //gcnl:NodeFunctionCall.cpp:923
-          const u32 Uh_5tlreg44240 = Uv_9211specialVars.read(); //gcnl:Node.cpp:691
-          const u32 Uh_5tlreg44241 = _Unsigned32ToUnsigned32(Uh_5tlreg44240, 4, 32); //gcnl:NodeCast.cpp:723
-          Ui_Ut_102321u<EC> Uh_5tlval44242(Uh_5tlreg44241); //func arg& //gcnl:Node.cpp:1128
-          const Ui_Ut_102321u<EC> Uh_5tlval44244 = Uq_10106Random10<EC>::THE_INSTANCE.Uf_6create(uc, Uh_3tur44238, Uh_5tlval44242); //gcnl:NodeFunctionCall.cpp:1006
-          const u32 Uh_5tlreg44245 = Uh_5tlval44244.read(); //gcnl:Node.cpp:1156
-          const u32 Uh_5tlreg44246 = _Unsigned32ToUnsigned32(Uh_5tlreg44245, 32, 6); //gcnl:NodeCast.cpp:723
-          const u32 Uh_5tlreg44247 = _Unsigned32ToUnsigned32(Uh_5tlreg44246, 6, 7); //gcnl:NodeCast.cpp:723
-          const u32 Uh_5tlreg44248 = _BinOpAddUnsigned32(Uh_5tlreg44247, Uh_5tlreg44236, 7); //gcnl:NodeBinaryOp.cpp:719
-          const u32 Uh_5tlreg44249 = _Unsigned32ToUnsigned32(Uh_5tlreg44248, 7, 6); //gcnl:NodeCast.cpp:723
-          UlamRef<EC>(46u, 6u, Uv_4gene, NULL, UlamRef<EC>::PRIMITIVE, uc).Write(Uh_5tlreg44249); //gcnl:Node.cpp:885
-
-//! DecisionTree.ulam:103: 			if(gene.eqTree0 == gene.seqno){
-          {
-
-//! DecisionTree.ulam:103: 			if(gene.eqTree0 == gene.seqno){
-            const u32 Uh_5tlreg44254 = UlamRef<EC>(35u, 6u, Uv_4gene, NULL, UlamRef<EC>::PRIMITIVE, uc).Read(); //gcnl:Node.cpp:691
-            const u32 Uh_5tlreg44257 = UlamRef<EC>(46u, 6u, Uv_4gene, NULL, UlamRef<EC>::PRIMITIVE, uc).Read(); //gcnl:Node.cpp:691
-            const u32 Uh_5tlreg44258 = _BinOpCompareEqEqUnsigned32(Uh_5tlreg44257, Uh_5tlreg44254, 6); //gcnl:NodeBinaryOpCompare.cpp:313
-            if(_Bool32ToCbool(Uh_5tlreg44258, 1)) //gcnl:NodeControl.cpp:213
-            {
-              {
-
-//! DecisionTree.ulam:104: 				gene.tree0Type = 0;
-                const u32 Uh_5tlreg44259 = 0; //gcnl:NodeTerminal.cpp:721
-                const u32 Uh_5tlreg44260 = _Int32ToUnsigned32(Uh_5tlreg44259, 2, 2); //gcnl:NodeCast.cpp:723
-                UlamRef<EC>(44u, 2u, Uv_4gene, NULL, UlamRef<EC>::PRIMITIVE, uc).Write(Uh_5tlreg44260); //gcnl:Node.cpp:885
-              }
-            } // end if
-          }
-        }
-      } // end if
-    }
-
-//! DecisionTree.ulam:108: 		if(valTypSwitch1 >= (Unsigned)0 && valTypSwitch1 < (Unsigned)30){
-    {
-
-//! DecisionTree.ulam:108: 		if(valTypSwitch1 >= (Unsigned)0 && valTypSwitch1 < (Unsigned)30){
-      u32 Uh_5tlreg44263 = false; //gcnl:NodeBinaryOpLogicalAnd.cpp:118
-      const u32 Uh_5tlreg44264 = 0; //gcnl:NodeTerminal.cpp:721
-      const u32 Uh_5tlreg44265 = _Int32ToUnsigned32(Uh_5tlreg44264, 2, 32); //gcnl:NodeCast.cpp:723
-      const u32 Uh_5tlreg44267 = Uv_9213valTypSwitch1.read(); //gcnl:Node.cpp:691
-      const u32 Uh_5tlreg44268 = _BinOpCompareGreaterEqualUnsigned32(Uh_5tlreg44267, Uh_5tlreg44265, 32); //gcnl:NodeBinaryOpCompare.cpp:313
-      if(_Bool32ToCbool(Uh_5tlreg44268, 1)) //gcnl:NodeBinaryOpLogicalAnd.cpp:137
-      {
-        const u32 Uh_5tlreg44269 = 30; //gcnl:NodeTerminal.cpp:721
-        const u32 Uh_5tlreg44270 = _Int32ToUnsigned32(Uh_5tlreg44269, 6, 32); //gcnl:NodeCast.cpp:723
-        const u32 Uh_5tlreg44272 = Uv_9213valTypSwitch1.read(); //gcnl:Node.cpp:691
-        const u32 Uh_5tlreg44273 = _BinOpCompareLessThanUnsigned32(Uh_5tlreg44272, Uh_5tlreg44270, 32); //gcnl:NodeBinaryOpCompare.cpp:313
-        Uh_5tlreg44263 = Uh_5tlreg44273; //gcnl:NodeBinaryOpLogicalAnd.cpp:151
-      }
-      if(_Bool32ToCbool(Uh_5tlreg44263, 1)) //gcnl:NodeControl.cpp:213
-      {
-        {
-
-//! DecisionTree.ulam:110: 			gene.tree1Type = 0;
-          const u32 Uh_5tlreg44274 = 0; //gcnl:NodeTerminal.cpp:721
-          const u32 Uh_5tlreg44275 = _Int32ToUnsigned32(Uh_5tlreg44274, 2, 2); //gcnl:NodeCast.cpp:723
-          UlamRef<EC>(52u, 2u, Uv_4gene, NULL, UlamRef<EC>::PRIMITIVE, uc).Write(Uh_5tlreg44275); //gcnl:Node.cpp:885
-
-//! DecisionTree.ulam:111: 			gene.eqTree1 = (Unsigned(6)) r.create(63);
-          UlamRef<EC> Uh_3tur44279(ur, 0u, 0u, &Uq_10106Random10<EC>::THE_INSTANCE, UlamRef<EC>::CLASSIC); //gcnl:NodeFunctionCall.cpp:923
-          const u32 Uh_5tlreg44280 = 63; //gcnl:NodeTerminal.cpp:721
-          const u32 Uh_5tlreg44281 = _Int32ToInt32(Uh_5tlreg44280, 7, 32); //gcnl:NodeCast.cpp:723
-          Ui_Ut_102321i<EC> Uh_5tlval44282(Uh_5tlreg44281); //func arg& //gcnl:Node.cpp:1128
-          const Ui_Ut_102321u<EC> Uh_5tlval44284 = Uq_10106Random10<EC>::THE_INSTANCE.Uf_6create(uc, Uh_3tur44279, Uh_5tlval44282); //gcnl:NodeFunctionCall.cpp:1006
-          const u32 Uh_5tlreg44285 = Uh_5tlval44284.read(); //gcnl:Node.cpp:1156
-          const u32 Uh_5tlreg44286 = _Unsigned32ToUnsigned32(Uh_5tlreg44285, 32, 6); //gcnl:NodeCast.cpp:723
-          UlamRef<EC>(54u, 6u, Uv_4gene, NULL, UlamRef<EC>::PRIMITIVE, uc).Write(Uh_5tlreg44286); //gcnl:Node.cpp:885
-        }
-      } // end if
-    }
-
-//! DecisionTree.ulam:114: 		if(valTypSwitch1 >= (Unsigned)30 && valTypSwitch1 < (Unsigned)40){
-    {
-
-//! DecisionTree.ulam:114: 		if(valTypSwitch1 >= (Unsigned)30 && valTypSwitch1 < (Unsigned)40){
-      u32 Uh_5tlreg44289 = false; //gcnl:NodeBinaryOpLogicalAnd.cpp:118
-      const u32 Uh_5tlreg44290 = 30; //gcnl:NodeTerminal.cpp:721
-      const u32 Uh_5tlreg44291 = _Int32ToUnsigned32(Uh_5tlreg44290, 6, 32); //gcnl:NodeCast.cpp:723
-      const u32 Uh_5tlreg44293 = Uv_9213valTypSwitch1.read(); //gcnl:Node.cpp:691
-      const u32 Uh_5tlreg44294 = _BinOpCompareGreaterEqualUnsigned32(Uh_5tlreg44293, Uh_5tlreg44291, 32); //gcnl:NodeBinaryOpCompare.cpp:313
-      if(_Bool32ToCbool(Uh_5tlreg44294, 1)) //gcnl:NodeBinaryOpLogicalAnd.cpp:137
-      {
-        const u32 Uh_5tlreg44295 = 40; //gcnl:NodeTerminal.cpp:721
-        const u32 Uh_5tlreg44296 = _Int32ToUnsigned32(Uh_5tlreg44295, 7, 32); //gcnl:NodeCast.cpp:723
-        const u32 Uh_5tlreg44298 = Uv_9213valTypSwitch1.read(); //gcnl:Node.cpp:691
-        const u32 Uh_5tlreg44299 = _BinOpCompareLessThanUnsigned32(Uh_5tlreg44298, Uh_5tlreg44296, 32); //gcnl:NodeBinaryOpCompare.cpp:313
-        Uh_5tlreg44289 = Uh_5tlreg44299; //gcnl:NodeBinaryOpLogicalAnd.cpp:151
-      }
-      if(_Bool32ToCbool(Uh_5tlreg44289, 1)) //gcnl:NodeControl.cpp:213
-      {
-        {
-
-//! DecisionTree.ulam:116: 			gene.tree1Type = 0;
-          const u32 Uh_5tlreg44300 = 0; //gcnl:NodeTerminal.cpp:721
-          const u32 Uh_5tlreg44301 = _Int32ToUnsigned32(Uh_5tlreg44300, 2, 2); //gcnl:NodeCast.cpp:723
-          UlamRef<EC>(52u, 2u, Uv_4gene, NULL, UlamRef<EC>::PRIMITIVE, uc).Write(Uh_5tlreg44301); //gcnl:Node.cpp:885
-
-//! DecisionTree.ulam:117: 			gene.eqTree1 = (StoredValue) 0;
-          const u32 Uh_5tlreg44304 = 0; //gcnl:NodeTerminal.cpp:721
-          const u32 Uh_5tlreg44305 = _Int32ToUnsigned32(Uh_5tlreg44304, 2, 6); //gcnl:NodeCast.cpp:723
-          UlamRef<EC>(54u, 6u, Uv_4gene, NULL, UlamRef<EC>::PRIMITIVE, uc).Write(Uh_5tlreg44305); //gcnl:Node.cpp:885
-        }
-      } // end if
-    }
-
-//! DecisionTree.ulam:120: 		if(valTypSwitch1 >= (Unsigned)40 && valTypSwitch1 < (Unsigned)50){
-    {
-
-//! DecisionTree.ulam:120: 		if(valTypSwitch1 >= (Unsigned)40 && valTypSwitch1 < (Unsigned)50){
-      u32 Uh_5tlreg44308 = false; //gcnl:NodeBinaryOpLogicalAnd.cpp:118
-      const u32 Uh_5tlreg44309 = 40; //gcnl:NodeTerminal.cpp:721
-      const u32 Uh_5tlreg44310 = _Int32ToUnsigned32(Uh_5tlreg44309, 7, 32); //gcnl:NodeCast.cpp:723
-      const u32 Uh_5tlreg44312 = Uv_9213valTypSwitch1.read(); //gcnl:Node.cpp:691
-      const u32 Uh_5tlreg44313 = _BinOpCompareGreaterEqualUnsigned32(Uh_5tlreg44312, Uh_5tlreg44310, 32); //gcnl:NodeBinaryOpCompare.cpp:313
-      if(_Bool32ToCbool(Uh_5tlreg44313, 1)) //gcnl:NodeBinaryOpLogicalAnd.cpp:137
-      {
-        const u32 Uh_5tlreg44314 = 50; //gcnl:NodeTerminal.cpp:721
-        const u32 Uh_5tlreg44315 = _Int32ToUnsigned32(Uh_5tlreg44314, 7, 32); //gcnl:NodeCast.cpp:723
-        const u32 Uh_5tlreg44317 = Uv_9213valTypSwitch1.read(); //gcnl:Node.cpp:691
-        const u32 Uh_5tlreg44318 = _BinOpCompareLessThanUnsigned32(Uh_5tlreg44317, Uh_5tlreg44315, 32); //gcnl:NodeBinaryOpCompare.cpp:313
-        Uh_5tlreg44308 = Uh_5tlreg44318; //gcnl:NodeBinaryOpLogicalAnd.cpp:151
-      }
-      if(_Bool32ToCbool(Uh_5tlreg44308, 1)) //gcnl:NodeControl.cpp:213
-      {
-        {
-
-//! DecisionTree.ulam:126: 			gene.tree1Type = 1;
-          const u32 Uh_5tlreg44319 = 1; //gcnl:NodeTerminal.cpp:721
-          const u32 Uh_5tlreg44320 = _Int32ToUnsigned32(Uh_5tlreg44319, 2, 2); //gcnl:NodeCast.cpp:723
-          UlamRef<EC>(52u, 2u, Uv_4gene, NULL, UlamRef<EC>::PRIMITIVE, uc).Write(Uh_5tlreg44320); //gcnl:Node.cpp:885
-
-//! DecisionTree.ulam:130: 			gene.eqTree1 = (StoredValue)0;
-          const u32 Uh_5tlreg44323 = 0; //gcnl:NodeTerminal.cpp:721
-          const u32 Uh_5tlreg44324 = _Int32ToUnsigned32(Uh_5tlreg44323, 2, 6); //gcnl:NodeCast.cpp:723
-          UlamRef<EC>(54u, 6u, Uv_4gene, NULL, UlamRef<EC>::PRIMITIVE, uc).Write(Uh_5tlreg44324); //gcnl:Node.cpp:885
-        }
-      } // end if
-    }
-
-//! DecisionTree.ulam:132: 		if(valTypSwitch1 >= (Unsigned)50 && valTypSwitch1 < (Unsigned)75){
-    {
-
-//! DecisionTree.ulam:132: 		if(valTypSwitch1 >= (Unsigned)50 && valTypSwitch1 < (Unsigned)75){
-      u32 Uh_5tlreg44327 = false; //gcnl:NodeBinaryOpLogicalAnd.cpp:118
-      const u32 Uh_5tlreg44328 = 50; //gcnl:NodeTerminal.cpp:721
-      const u32 Uh_5tlreg44329 = _Int32ToUnsigned32(Uh_5tlreg44328, 7, 32); //gcnl:NodeCast.cpp:723
-      const u32 Uh_5tlreg44331 = Uv_9213valTypSwitch1.read(); //gcnl:Node.cpp:691
-      const u32 Uh_5tlreg44332 = _BinOpCompareGreaterEqualUnsigned32(Uh_5tlreg44331, Uh_5tlreg44329, 32); //gcnl:NodeBinaryOpCompare.cpp:313
-      if(_Bool32ToCbool(Uh_5tlreg44332, 1)) //gcnl:NodeBinaryOpLogicalAnd.cpp:137
-      {
-        const u32 Uh_5tlreg44333 = 75; //gcnl:NodeTerminal.cpp:721
-        const u32 Uh_5tlreg44334 = _Int32ToUnsigned32(Uh_5tlreg44333, 8, 32); //gcnl:NodeCast.cpp:723
-        const u32 Uh_5tlreg44336 = Uv_9213valTypSwitch1.read(); //gcnl:Node.cpp:691
-        const u32 Uh_5tlreg44337 = _BinOpCompareLessThanUnsigned32(Uh_5tlreg44336, Uh_5tlreg44334, 32); //gcnl:NodeBinaryOpCompare.cpp:313
-        Uh_5tlreg44327 = Uh_5tlreg44337; //gcnl:NodeBinaryOpLogicalAnd.cpp:151
-      }
-      if(_Bool32ToCbool(Uh_5tlreg44327, 1)) //gcnl:NodeControl.cpp:213
-      {
-        {
-
-//! DecisionTree.ulam:134: 			gene.tree1Type = 1;
-          const u32 Uh_5tlreg44338 = 1; //gcnl:NodeTerminal.cpp:721
-          const u32 Uh_5tlreg44339 = _Int32ToUnsigned32(Uh_5tlreg44338, 2, 2); //gcnl:NodeCast.cpp:723
-          UlamRef<EC>(52u, 2u, Uv_4gene, NULL, UlamRef<EC>::PRIMITIVE, uc).Write(Uh_5tlreg44339); //gcnl:Node.cpp:885
-
-//! DecisionTree.ulam:137: 			++numberOfGenesToAddToMyTree;
-          const u32 Uh_5tlreg44342 = 1; //gcnl:NodeTerminal.cpp:721
-          const u32 Uh_5tlreg44343 = _Int32ToUnsigned32(Uh_5tlreg44342, 32, 2); //gcnl:NodeCast.cpp:723
-          const u32 Uh_5tlreg44345 = Uv_9226numberOfGenesToAddToMyTree.read(); //gcnl:Node.cpp:691
-          const u32 Uh_5tlreg44346 = _BinOpAddUnsigned32(Uh_5tlreg44345, Uh_5tlreg44343, 2); //gcnl:NodeBinaryOpEqualArith.cpp:128
-          Uv_9226numberOfGenesToAddToMyTree.write(Uh_5tlreg44346); //gcnl:Node.cpp:885
-
-//! DecisionTree.ulam:139: 			if(isVar){
-          {
-
-//! DecisionTree.ulam:139: 			if(isVar){
-            const u32 Uh_5tlreg44348 = Uv_5isVar.read(); //gcnl:Node.cpp:691
-            if(_Bool32ToCbool(Uh_5tlreg44348, 1)) //gcnl:NodeControl.cpp:213
-            {
-              {
-
-//! DecisionTree.ulam:140: 				gene.eqTree1 = (StoredValue)(refSeqno+numberOfGenesToAddToMyTree-1);
-                const u32 Uh_5tlreg44349 = 1; //gcnl:NodeTerminal.cpp:721
-                const u32 Uh_5tlreg44350 = _Int32ToInt32(Uh_5tlreg44349, 2, 9); //gcnl:NodeCast.cpp:723
-                const u32 Uh_5tlreg44352 = Uv_9226numberOfGenesToAddToMyTree.read(); //gcnl:Node.cpp:691
-                const u32 Uh_5tlreg44353 = _Unsigned32ToUnsigned32(Uh_5tlreg44352, 2, 7); //gcnl:NodeCast.cpp:723
-                const u32 Uh_5tlreg44355 = Uv_8refSeqno.read(); //gcnl:Node.cpp:691
-                const u32 Uh_5tlreg44356 = _Unsigned32ToUnsigned32(Uh_5tlreg44355, 6, 7); //gcnl:NodeCast.cpp:723
-                const u32 Uh_5tlreg44357 = _BinOpAddUnsigned32(Uh_5tlreg44356, Uh_5tlreg44353, 7); //gcnl:NodeBinaryOp.cpp:719
-                const u32 Uh_5tlreg44358 = _Unsigned32ToInt32(Uh_5tlreg44357, 7, 9); //gcnl:NodeCast.cpp:723
-                const u32 Uh_5tlreg44359 = _BinOpSubtractInt32(Uh_5tlreg44358, Uh_5tlreg44350, 9); //gcnl:NodeBinaryOp.cpp:719
-                const u32 Uh_5tlreg44360 = _Int32ToUnsigned32(Uh_5tlreg44359, 9, 6); //gcnl:NodeCast.cpp:723
-                UlamRef<EC>(54u, 6u, Uv_4gene, NULL, UlamRef<EC>::PRIMITIVE, uc).Write(Uh_5tlreg44360); //gcnl:Node.cpp:885
-              }
-            } // end if
-            else
-            {
-              {
-
-//! DecisionTree.ulam:143: 				gene.eqTree1 = (StoredValue)(refSeqno+numberOfGenesToAddToMyTree);
-                const u32 Uh_5tlreg44364 = Uv_9226numberOfGenesToAddToMyTree.read(); //gcnl:Node.cpp:691
-                const u32 Uh_5tlreg44365 = _Unsigned32ToUnsigned32(Uh_5tlreg44364, 2, 7); //gcnl:NodeCast.cpp:723
-                const u32 Uh_5tlreg44367 = Uv_8refSeqno.read(); //gcnl:Node.cpp:691
-                const u32 Uh_5tlreg44368 = _Unsigned32ToUnsigned32(Uh_5tlreg44367, 6, 7); //gcnl:NodeCast.cpp:723
-                const u32 Uh_5tlreg44369 = _BinOpAddUnsigned32(Uh_5tlreg44368, Uh_5tlreg44365, 7); //gcnl:NodeBinaryOp.cpp:719
-                const u32 Uh_5tlreg44370 = _Unsigned32ToUnsigned32(Uh_5tlreg44369, 7, 6); //gcnl:NodeCast.cpp:723
-                UlamRef<EC>(54u, 6u, Uv_4gene, NULL, UlamRef<EC>::PRIMITIVE, uc).Write(Uh_5tlreg44370); //gcnl:Node.cpp:885
-              }
-            } //end else
-          }
-        }
-      } // end if
-    }
-
-//! DecisionTree.ulam:146: 		if(valTypSwitch1 >= (Unsigned)75 && valTypSwitch1 < (Unsigned)100){
-    {
-
-//! DecisionTree.ulam:146: 		if(valTypSwitch1 >= (Unsigned)75 && valTypSwitch1 < (Unsigned)100){
-      u32 Uh_5tlreg44373 = false; //gcnl:NodeBinaryOpLogicalAnd.cpp:118
-      const u32 Uh_5tlreg44374 = 75; //gcnl:NodeTerminal.cpp:721
-      const u32 Uh_5tlreg44375 = _Int32ToUnsigned32(Uh_5tlreg44374, 8, 32); //gcnl:NodeCast.cpp:723
-      const u32 Uh_5tlreg44377 = Uv_9213valTypSwitch1.read(); //gcnl:Node.cpp:691
-      const u32 Uh_5tlreg44378 = _BinOpCompareGreaterEqualUnsigned32(Uh_5tlreg44377, Uh_5tlreg44375, 32); //gcnl:NodeBinaryOpCompare.cpp:313
-      if(_Bool32ToCbool(Uh_5tlreg44378, 1)) //gcnl:NodeBinaryOpLogicalAnd.cpp:137
-      {
-        const u32 Uh_5tlreg44379 = 100; //gcnl:NodeTerminal.cpp:721
-        const u32 Uh_5tlreg44380 = _Int32ToUnsigned32(Uh_5tlreg44379, 8, 32); //gcnl:NodeCast.cpp:723
-        const u32 Uh_5tlreg44382 = Uv_9213valTypSwitch1.read(); //gcnl:Node.cpp:691
-        const u32 Uh_5tlreg44383 = _BinOpCompareLessThanUnsigned32(Uh_5tlreg44382, Uh_5tlreg44380, 32); //gcnl:NodeBinaryOpCompare.cpp:313
-        Uh_5tlreg44373 = Uh_5tlreg44383; //gcnl:NodeBinaryOpLogicalAnd.cpp:151
-      }
-      if(_Bool32ToCbool(Uh_5tlreg44373, 1)) //gcnl:NodeControl.cpp:213
-      {
-        {
-
-//! DecisionTree.ulam:148: 			gene.tree1Type = 1;
-          const u32 Uh_5tlreg44384 = 1; //gcnl:NodeTerminal.cpp:721
-          const u32 Uh_5tlreg44385 = _Int32ToUnsigned32(Uh_5tlreg44384, 2, 2); //gcnl:NodeCast.cpp:723
-          UlamRef<EC>(52u, 2u, Uv_4gene, NULL, UlamRef<EC>::PRIMITIVE, uc).Write(Uh_5tlreg44385); //gcnl:Node.cpp:885
-
-//! DecisionTree.ulam:152: 			gene.eqTree1 = (StoredValue)((StoredValue)r.create(specialVars)+(StoredValue)4);
-          const u32 Uh_5tlreg44388 = 4; //gcnl:NodeTerminal.cpp:721
-          const u32 Uh_5tlreg44389 = _Int32ToUnsigned32(Uh_5tlreg44388, 4, 6); //gcnl:NodeCast.cpp:723
-          const u32 Uh_5tlreg44390 = _Unsigned32ToUnsigned32(Uh_5tlreg44389, 6, 7); //gcnl:NodeCast.cpp:723
-          UlamRef<EC> Uh_3tur44392(ur, 0u, 0u, &Uq_10106Random10<EC>::THE_INSTANCE, UlamRef<EC>::CLASSIC); //gcnl:NodeFunctionCall.cpp:923
-          const u32 Uh_5tlreg44394 = Uv_9211specialVars.read(); //gcnl:Node.cpp:691
-          const u32 Uh_5tlreg44395 = _Unsigned32ToUnsigned32(Uh_5tlreg44394, 4, 32); //gcnl:NodeCast.cpp:723
-          Ui_Ut_102321u<EC> Uh_5tlval44396(Uh_5tlreg44395); //func arg& //gcnl:Node.cpp:1128
-          const Ui_Ut_102321u<EC> Uh_5tlval44398 = Uq_10106Random10<EC>::THE_INSTANCE.Uf_6create(uc, Uh_3tur44392, Uh_5tlval44396); //gcnl:NodeFunctionCall.cpp:1006
-          const u32 Uh_5tlreg44399 = Uh_5tlval44398.read(); //gcnl:Node.cpp:1156
-          const u32 Uh_5tlreg44400 = _Unsigned32ToUnsigned32(Uh_5tlreg44399, 32, 6); //gcnl:NodeCast.cpp:723
-          const u32 Uh_5tlreg44401 = _Unsigned32ToUnsigned32(Uh_5tlreg44400, 6, 7); //gcnl:NodeCast.cpp:723
-          const u32 Uh_5tlreg44402 = _BinOpAddUnsigned32(Uh_5tlreg44401, Uh_5tlreg44390, 7); //gcnl:NodeBinaryOp.cpp:719
-          const u32 Uh_5tlreg44403 = _Unsigned32ToUnsigned32(Uh_5tlreg44402, 7, 6); //gcnl:NodeCast.cpp:723
-          UlamRef<EC>(54u, 6u, Uv_4gene, NULL, UlamRef<EC>::PRIMITIVE, uc).Write(Uh_5tlreg44403); //gcnl:Node.cpp:885
-
-//! DecisionTree.ulam:155: 			if(gene.eqTree1 == gene.seqno){
-          {
-
-//! DecisionTree.ulam:155: 			if(gene.eqTree1 == gene.seqno){
-            const u32 Uh_5tlreg44408 = UlamRef<EC>(35u, 6u, Uv_4gene, NULL, UlamRef<EC>::PRIMITIVE, uc).Read(); //gcnl:Node.cpp:691
-            const u32 Uh_5tlreg44411 = UlamRef<EC>(54u, 6u, Uv_4gene, NULL, UlamRef<EC>::PRIMITIVE, uc).Read(); //gcnl:Node.cpp:691
-            const u32 Uh_5tlreg44412 = _BinOpCompareEqEqUnsigned32(Uh_5tlreg44411, Uh_5tlreg44408, 6); //gcnl:NodeBinaryOpCompare.cpp:313
-            if(_Bool32ToCbool(Uh_5tlreg44412, 1)) //gcnl:NodeControl.cpp:213
-            {
-              {
-
-//! DecisionTree.ulam:156: 				gene.tree1Type = 0;
-                const u32 Uh_5tlreg44413 = 0; //gcnl:NodeTerminal.cpp:721
-                const u32 Uh_5tlreg44414 = _Int32ToUnsigned32(Uh_5tlreg44413, 2, 2); //gcnl:NodeCast.cpp:723
-                UlamRef<EC>(52u, 2u, Uv_4gene, NULL, UlamRef<EC>::PRIMITIVE, uc).Write(Uh_5tlreg44414); //gcnl:Node.cpp:885
-              }
-            } // end if
-          }
-        }
-      } // end if
-    }
-
-//! DecisionTree.ulam:161: 		if(mySeqno <= (Seqno)40){
-    {
-
-//! DecisionTree.ulam:161: 		if(mySeqno <= (Seqno)40){
-      const u32 Uh_5tlreg44417 = 40; //gcnl:NodeTerminal.cpp:721
-      const u32 Uh_5tlreg44418 = _Int32ToUnsigned32(Uh_5tlreg44417, 7, 6); //gcnl:NodeCast.cpp:723
-      const u32 Uh_5tlreg44420 = Uv_7mySeqno.read(); //gcnl:Node.cpp:691
-      const u32 Uh_5tlreg44421 = _BinOpCompareLessEqualUnsigned32(Uh_5tlreg44420, Uh_5tlreg44418, 6); //gcnl:NodeBinaryOpCompare.cpp:313
-      if(_Bool32ToCbool(Uh_5tlreg44421, 1)) //gcnl:NodeControl.cpp:213
-      {
-        {
-
-//! DecisionTree.ulam:162: 			ew[mySeqno]=gene;
-          const T Uh_3tut44423 = Uv_4gene.read(); //gcnl:Node.cpp:691
-          UlamRef<EC> Uh_3tur44425(ur, 0u, 0u, &Uq_10109211EventWindow10<EC>::THE_INSTANCE, UlamRef<EC>::CLASSIC); //gcnl:NodeFunctionCall.cpp:923
-          const u32 Uh_5tlreg44427 = Uv_7mySeqno.read(); //gcnl:Node.cpp:691
-          Ui_Ut_10161u<EC> Uh_5tlval44428(Uh_5tlreg44427); //func arg& //gcnl:Node.cpp:1128
-          Ui_Ut_r102961a<EC> Uh_5tuval44430 = Uq_10109211EventWindow10<EC>::THE_INSTANCE.Uf_4aref(uc, Uh_3tur44425, Uh_5tlval44428); //gcnl:NodeFunctionCall.cpp:1006
-          Uh_5tuval44430.WriteAtom(Uh_3tut44423); //write into atomof ref //gcnl:Node.cpp:980
-        }
-      } // end if
-    }
-
-//! DecisionTree.ulam:164: 		return numberOfGenesToAddToMyTree;
-    const u32 Uh_5tlreg44432 = Uv_9226numberOfGenesToAddToMyTree.read(); //gcnl:Node.cpp:691
-    Ui_Ut_10121u<EC> Uh_5tlval44433(Uh_5tlreg44432); //func arg& //gcnl:Node.cpp:1128
-    return (Uh_5tlval44433); //gcnl:NodeReturnStatement.cpp:343
-
-  } // Uf_8initGene
-
-
-
-//! DecisionTree.ulam:173: 	Void initVars(ID id){
-  template<class EC>
-  void Uq_10109212DecisionTree10<EC>::Uf_8initVars(const UlamContext<EC>& uc, UlamRef<EC>& ur, Ui_Ut_102101u<EC>& Uv_2id) const
-  {
-
-//! DecisionTree.ulam:179: 		Seqno numVars = (Seqno)(r.create(3)+(Unsigned(32))3);
-    const u32 Uh_5tlreg44434 = 3; //gcnl:NodeTerminal.cpp:721
-    const u32 Uh_5tlreg44435 = _Int32ToUnsigned32(Uh_5tlreg44434, 3, 32); //gcnl:NodeCast.cpp:723
-    UlamRef<EC> Uh_3tur44437(ur, 0u, 0u, &Uq_10106Random10<EC>::THE_INSTANCE, UlamRef<EC>::CLASSIC); //gcnl:NodeFunctionCall.cpp:923
-    const u32 Uh_5tlreg44438 = 3; //gcnl:NodeTerminal.cpp:721
-    const u32 Uh_5tlreg44439 = _Int32ToInt32(Uh_5tlreg44438, 3, 32); //gcnl:NodeCast.cpp:723
-    Ui_Ut_102321i<EC> Uh_5tlval44440(Uh_5tlreg44439); //func arg& //gcnl:Node.cpp:1128
-    const Ui_Ut_102321u<EC> Uh_5tlval44442 = Uq_10106Random10<EC>::THE_INSTANCE.Uf_6create(uc, Uh_3tur44437, Uh_5tlval44440); //gcnl:NodeFunctionCall.cpp:1006
-    const u32 Uh_5tlreg44443 = Uh_5tlval44442.read(); //gcnl:Node.cpp:1156
-    const u32 Uh_5tlreg44444 = _BinOpAddUnsigned32(Uh_5tlreg44443, Uh_5tlreg44435, 32); //gcnl:NodeBinaryOp.cpp:719
-    const u32 Uh_5tlreg44445 = _Unsigned32ToUnsigned32(Uh_5tlreg44444, 32, 6); //gcnl:NodeCast.cpp:723
-    Ui_Ut_10161u<EC> Uv_7numVars(Uh_5tlreg44445); //gcnl:NodeVarDecl.cpp:1060
-
-//! DecisionTree.ulam:180: 		Seqno seqno = (Seqno) (numVars+1);
-    const u32 Uh_5tlreg44446 = 1; //gcnl:NodeTerminal.cpp:721
-    const u32 Uh_5tlreg44447 = _Int32ToInt32(Uh_5tlreg44446, 2, 8); //gcnl:NodeCast.cpp:723
-    const u32 Uh_5tlreg44449 = Uv_7numVars.read(); //gcnl:Node.cpp:691
-    const u32 Uh_5tlreg44450 = _Unsigned32ToInt32(Uh_5tlreg44449, 6, 8); //gcnl:NodeCast.cpp:723
-    const u32 Uh_5tlreg44451 = _BinOpAddInt32(Uh_5tlreg44450, Uh_5tlreg44447, 8); //gcnl:NodeBinaryOp.cpp:719
-    const u32 Uh_5tlreg44452 = _Int32ToUnsigned32(Uh_5tlreg44451, 8, 6); //gcnl:NodeCast.cpp:723
-    Ui_Ut_10161u<EC> Uv_5seqno(Uh_5tlreg44452); //gcnl:NodeVarDecl.cpp:1060
-
-//! DecisionTree.ulam:183: 		for(Seqno i = 1; i <= numVars; ++i){
-    {
-
-//! DecisionTree.ulam:183: 		for(Seqno i = 1; i <= numVars; ++i){
-      const u32 Uh_5tlreg44453 = 1; //gcnl:NodeTerminal.cpp:721
-      const u32 Uh_5tlreg44454 = _Int32ToUnsigned32(Uh_5tlreg44453, 2, 6); //gcnl:NodeCast.cpp:723
-      Ui_Ut_10161u<EC> Uv_1i(Uh_5tlreg44454); //gcnl:NodeVarDecl.cpp:1060
-
-//! DecisionTree.ulam:183: 		for(Seqno i = 1; i <= numVars; ++i){
-      while(true)
-      {
-        const u32 Uh_5tlreg44456 = Uv_7numVars.read(); //gcnl:Node.cpp:691
-        const u32 Uh_5tlreg44458 = Uv_1i.read(); //gcnl:Node.cpp:691
-        const u32 Uh_5tlreg44459 = _BinOpCompareLessEqualUnsigned32(Uh_5tlreg44458, Uh_5tlreg44456, 6); //gcnl:NodeBinaryOpCompare.cpp:313
-
-        if(!_Bool32ToCbool(Uh_5tlreg44459, 1))
-          break; //gcnl:NodeControlWhile.cpp:135
-
-//! DecisionTree.ulam:183: 		for(Seqno i = 1; i <= numVars; ++i){
-        {
-
-//! DecisionTree.ulam:185: 			seqno = initTree(i,seqno,numVars,id);
-          const u32 Uh_5tlreg44462 = Uv_1i.read(); //gcnl:Node.cpp:691
-          Ui_Ut_10161u<EC> Uh_5tlval44463(Uh_5tlreg44462); //func arg& //gcnl:Node.cpp:1128
-          const u32 Uh_5tlreg44465 = Uv_5seqno.read(); //gcnl:Node.cpp:691
-          Ui_Ut_10161u<EC> Uh_5tlval44466(Uh_5tlreg44465); //func arg& //gcnl:Node.cpp:1128
-          const u32 Uh_5tlreg44468 = Uv_7numVars.read(); //gcnl:Node.cpp:691
-          Ui_Ut_10161u<EC> Uh_5tlval44469(Uh_5tlreg44468); //func arg& //gcnl:Node.cpp:1128
-          const u32 Uh_5tlreg44471 = Uv_2id.read(); //gcnl:Node.cpp:691
-          Ui_Ut_102101u<EC> Uh_5tlval44472(Uh_5tlreg44471); //func arg& //gcnl:Node.cpp:1128
-          const Ui_Ut_10161u<EC> Uh_5tlval44474 = THE_INSTANCE.Uf_8initTree(uc, ur, Uh_5tlval44463, Uh_5tlval44466, Uh_5tlval44469, Uh_5tlval44472); //gcnl:NodeFunctionCall.cpp:1006
-          const u32 Uh_5tlreg44475 = Uh_5tlval44474.read(); //gcnl:Node.cpp:1156
-          Uv_5seqno.write(Uh_5tlreg44475); //gcnl:Node.cpp:885
-        }
-
-//! DecisionTree.ulam:183: 		for(Seqno i = 1; i <= numVars; ++i){
-Ul_214endcontrolloop217:
-        __attribute__((__unused__)); //gcnl:NodeLabel.cpp:68
-
-//! DecisionTree.ulam:183: 		for(Seqno i = 1; i <= numVars; ++i){
-        const u32 Uh_5tlreg44477 = 1; //gcnl:NodeTerminal.cpp:721
-        const u32 Uh_5tlreg44478 = _Int32ToUnsigned32(Uh_5tlreg44477, 32, 6); //gcnl:NodeCast.cpp:723
-        const u32 Uh_5tlreg44480 = Uv_1i.read(); //gcnl:Node.cpp:691
-        const u32 Uh_5tlreg44481 = _BinOpAddUnsigned32(Uh_5tlreg44480, Uh_5tlreg44478, 6); //gcnl:NodeBinaryOpEqualArith.cpp:128
-        Uv_1i.write(Uh_5tlreg44481); //gcnl:Node.cpp:885
-      } // end while //gcnl:NodeControlWhile.cpp:145
-    }
-
-  } // Uf_8initVars
-
-
-
-//! DecisionTree.ulam:188: 	Seqno initTree(Seqno i,Seqno seqno,Seqno numVars,ID id){
-  template<class EC>
-  Ui_Ut_10161u<EC> Uq_10109212DecisionTree10<EC>::Uf_8initTree(const UlamContext<EC>& uc, UlamRef<EC>& ur, Ui_Ut_10161u<EC>& Uv_1i, Ui_Ut_10161u<EC>& Uv_5seqno, Ui_Ut_10161u<EC>& Uv_7numVars, Ui_Ut_102101u<EC>& Uv_2id) const
-  {
-
-//! DecisionTree.ulam:189: 		Seqno genesLeftToCreate;
-    Ui_Ut_10161u<EC> Uv_9217genesLeftToCreate; //gcnl:NodeVarDecl.cpp:1096
-
-//! DecisionTree.ulam:195: 		genesLeftToCreate += initGene(i,seqno,id,(Unsigned(4))(numVars-3),true);
-    const u32 Uh_5tlreg44484 = Uv_1i.read(); //gcnl:Node.cpp:691
-    Ui_Ut_10161u<EC> Uh_5tlval44485(Uh_5tlreg44484); //func arg& //gcnl:Node.cpp:1128
-    const u32 Uh_5tlreg44487 = Uv_5seqno.read(); //gcnl:Node.cpp:691
-    Ui_Ut_10161u<EC> Uh_5tlval44488(Uh_5tlreg44487); //func arg& //gcnl:Node.cpp:1128
-    const u32 Uh_5tlreg44490 = Uv_2id.read(); //gcnl:Node.cpp:691
-    Ui_Ut_102101u<EC> Uh_5tlval44491(Uh_5tlreg44490); //func arg& //gcnl:Node.cpp:1128
-    const u32 Uh_5tlreg44492 = 3; //gcnl:NodeTerminal.cpp:721
-    const u32 Uh_5tlreg44493 = _Int32ToInt32(Uh_5tlreg44492, 3, 8); //gcnl:NodeCast.cpp:723
-    const u32 Uh_5tlreg44495 = Uv_7numVars.read(); //gcnl:Node.cpp:691
-    const u32 Uh_5tlreg44496 = _Unsigned32ToInt32(Uh_5tlreg44495, 6, 8); //gcnl:NodeCast.cpp:723
-    const u32 Uh_5tlreg44497 = _BinOpSubtractInt32(Uh_5tlreg44496, Uh_5tlreg44493, 8); //gcnl:NodeBinaryOp.cpp:719
-    const u32 Uh_5tlreg44498 = _Int32ToUnsigned32(Uh_5tlreg44497, 8, 4); //gcnl:NodeCast.cpp:723
-    Ui_Ut_10141u<EC> Uh_5tlval44499(Uh_5tlreg44498); //func arg& //gcnl:Node.cpp:1128
-    const u32 Uh_5tlreg44500 = 1u; //gcnl:NodeTerminal.cpp:721
-    Ui_Ut_10111b<EC> Uh_5tlval44501(Uh_5tlreg44500); //func arg& //gcnl:Node.cpp:1128
-    const Ui_Ut_10121u<EC> Uh_5tlval44503 = THE_INSTANCE.Uf_8initGene(uc, ur, Uh_5tlval44485, Uh_5tlval44488, Uh_5tlval44491, Uh_5tlval44499, Uh_5tlval44501); //gcnl:NodeFunctionCall.cpp:1006
-    const u32 Uh_5tlreg44504 = Uh_5tlval44503.read(); //gcnl:Node.cpp:1156
-    const u32 Uh_5tlreg44505 = _Unsigned32ToUnsigned32(Uh_5tlreg44504, 2, 6); //gcnl:NodeCast.cpp:723
-    const u32 Uh_5tlreg44507 = Uv_9217genesLeftToCreate.read(); //gcnl:Node.cpp:691
-    const u32 Uh_5tlreg44508 = _BinOpAddUnsigned32(Uh_5tlreg44507, Uh_5tlreg44505, 6); //gcnl:NodeBinaryOpEqualArith.cpp:128
-    Uv_9217genesLeftToCreate.write(Uh_5tlreg44508); //gcnl:Node.cpp:885
-
-//! DecisionTree.ulam:197: 		while(genesLeftToCreate > 0){
-    {
-
-//! DecisionTree.ulam:197: 		while(genesLeftToCreate > 0){
-      while(true)
-      {
-        const u32 Uh_5tlreg44509 = 0; //gcnl:NodeTerminal.cpp:721
-        const u32 Uh_5tlreg44510 = _Int32ToInt32(Uh_5tlreg44509, 2, 7); //gcnl:NodeCast.cpp:723
-        const u32 Uh_5tlreg44512 = Uv_9217genesLeftToCreate.read(); //gcnl:Node.cpp:691
-        const u32 Uh_5tlreg44513 = _Unsigned32ToInt32(Uh_5tlreg44512, 6, 7); //gcnl:NodeCast.cpp:723
-        const u32 Uh_5tlreg44514 = _BinOpCompareGreaterThanInt32(Uh_5tlreg44513, Uh_5tlreg44510, 7); //gcnl:NodeBinaryOpCompare.cpp:313
-
-        if(!_Bool32ToCbool(Uh_5tlreg44514, 1))
-          break; //gcnl:NodeControlWhile.cpp:135
-
-//! DecisionTree.ulam:197: 		while(genesLeftToCreate > 0){
-        {
-
-//! DecisionTree.ulam:198: 			genesLeftToCreate += initGene(seqno,seqno,id,(Unsigned(4))(numVars-3),false);
-          const u32 Uh_5tlreg44517 = Uv_5seqno.read(); //gcnl:Node.cpp:691
-          Ui_Ut_10161u<EC> Uh_5tlval44518(Uh_5tlreg44517); //func arg& //gcnl:Node.cpp:1128
-          const u32 Uh_5tlreg44520 = Uv_5seqno.read(); //gcnl:Node.cpp:691
-          Ui_Ut_10161u<EC> Uh_5tlval44521(Uh_5tlreg44520); //func arg& //gcnl:Node.cpp:1128
-          const u32 Uh_5tlreg44523 = Uv_2id.read(); //gcnl:Node.cpp:691
-          Ui_Ut_102101u<EC> Uh_5tlval44524(Uh_5tlreg44523); //func arg& //gcnl:Node.cpp:1128
-          const u32 Uh_5tlreg44525 = 3; //gcnl:NodeTerminal.cpp:721
-          const u32 Uh_5tlreg44526 = _Int32ToInt32(Uh_5tlreg44525, 3, 8); //gcnl:NodeCast.cpp:723
-          const u32 Uh_5tlreg44528 = Uv_7numVars.read(); //gcnl:Node.cpp:691
-          const u32 Uh_5tlreg44529 = _Unsigned32ToInt32(Uh_5tlreg44528, 6, 8); //gcnl:NodeCast.cpp:723
-          const u32 Uh_5tlreg44530 = _BinOpSubtractInt32(Uh_5tlreg44529, Uh_5tlreg44526, 8); //gcnl:NodeBinaryOp.cpp:719
-          const u32 Uh_5tlreg44531 = _Int32ToUnsigned32(Uh_5tlreg44530, 8, 4); //gcnl:NodeCast.cpp:723
-          Ui_Ut_10141u<EC> Uh_5tlval44532(Uh_5tlreg44531); //func arg& //gcnl:Node.cpp:1128
-          const u32 Uh_5tlreg44533 = 0u; //gcnl:NodeTerminal.cpp:721
-          Ui_Ut_10111b<EC> Uh_5tlval44534(Uh_5tlreg44533); //func arg& //gcnl:Node.cpp:1128
-          const Ui_Ut_10121u<EC> Uh_5tlval44536 = THE_INSTANCE.Uf_8initGene(uc, ur, Uh_5tlval44518, Uh_5tlval44521, Uh_5tlval44524, Uh_5tlval44532, Uh_5tlval44534); //gcnl:NodeFunctionCall.cpp:1006
-          const u32 Uh_5tlreg44537 = Uh_5tlval44536.read(); //gcnl:Node.cpp:1156
-          const u32 Uh_5tlreg44538 = _Unsigned32ToUnsigned32(Uh_5tlreg44537, 2, 6); //gcnl:NodeCast.cpp:723
-          const u32 Uh_5tlreg44540 = Uv_9217genesLeftToCreate.read(); //gcnl:Node.cpp:691
-          const u32 Uh_5tlreg44541 = _BinOpAddUnsigned32(Uh_5tlreg44540, Uh_5tlreg44538, 6); //gcnl:NodeBinaryOpEqualArith.cpp:128
-          Uv_9217genesLeftToCreate.write(Uh_5tlreg44541); //gcnl:Node.cpp:885
-
-//! DecisionTree.ulam:199: 			--genesLeftToCreate;
-          const u32 Uh_5tlreg44542 = 1; //gcnl:NodeTerminal.cpp:721
-          const u32 Uh_5tlreg44543 = _Int32ToUnsigned32(Uh_5tlreg44542, 32, 6); //gcnl:NodeCast.cpp:723
-          const u32 Uh_5tlreg44545 = Uv_9217genesLeftToCreate.read(); //gcnl:Node.cpp:691
-          const u32 Uh_5tlreg44546 = _BinOpSubtractUnsigned32(Uh_5tlreg44545, Uh_5tlreg44543, 6); //gcnl:NodeBinaryOpEqualArith.cpp:128
-          Uv_9217genesLeftToCreate.write(Uh_5tlreg44546); //gcnl:Node.cpp:885
-
-//! DecisionTree.ulam:200: 			++seqno;
-          const u32 Uh_5tlreg44547 = 1; //gcnl:NodeTerminal.cpp:721
-          const u32 Uh_5tlreg44548 = _Int32ToUnsigned32(Uh_5tlreg44547, 32, 6); //gcnl:NodeCast.cpp:723
-          const u32 Uh_5tlreg44550 = Uv_5seqno.read(); //gcnl:Node.cpp:691
-          const u32 Uh_5tlreg44551 = _BinOpAddUnsigned32(Uh_5tlreg44550, Uh_5tlreg44548, 6); //gcnl:NodeBinaryOpEqualArith.cpp:128
-          Uv_5seqno.write(Uh_5tlreg44551); //gcnl:Node.cpp:885
-        }
-
-//! DecisionTree.ulam:197: 		while(genesLeftToCreate > 0){
-Ul_214endcontrolloop218:
-        __attribute__((__unused__)); //gcnl:NodeLabel.cpp:68
-      } // end while //gcnl:NodeControlWhile.cpp:145
-    }
-
-//! DecisionTree.ulam:202: 		return seqno;
-    const u32 Uh_5tlreg44553 = Uv_5seqno.read(); //gcnl:Node.cpp:691
-    Ui_Ut_10161u<EC> Uh_5tlval44554(Uh_5tlreg44553); //func arg& //gcnl:Node.cpp:1128
-    return (Uh_5tlval44554); //gcnl:NodeReturnStatement.cpp:343
-
-  } // Uf_8initTree
 
 
 
@@ -1190,12 +929,12 @@ Ul_214endcontrolloop218:
     Ui_Ut_240161u<EC> Uv_7eqTree1; //gcnl:NodeVarDecl.cpp:1096
 
 //! DecisionTree.ulam:232: 		Bool keepRecursing = true;
-    const u32 Uh_5tlreg44555 = 1u; //gcnl:NodeTerminal.cpp:721
-    Ui_Ut_10111b<EC> Uv_9213keepRecursing(Uh_5tlreg44555); //gcnl:NodeVarDecl.cpp:1060
+    const u32 Uh_5tlreg41103 = 1u; //gcnl:NodeTerminal.cpp:721
+    Ui_Ut_10111b<EC> Uv_9213keepRecursing(Uh_5tlreg41103); //gcnl:NodeVarDecl.cpp:1060
 
 //! DecisionTree.ulam:233: 		Seqno seqno = var;
-    const u32 Uh_5tlreg44557 = Uv_3var.read(); //gcnl:Node.cpp:691
-    Ui_Ut_10161u<EC> Uv_5seqno(Uh_5tlreg44557); //gcnl:NodeVarDecl.cpp:1060
+    const u32 Uh_5tlreg41105 = Uv_3var.read(); //gcnl:Node.cpp:691
+    Ui_Ut_10161u<EC> Uv_5seqno(Uh_5tlreg41105); //gcnl:NodeVarDecl.cpp:1060
 
 //! DecisionTree.ulam:235: 		Unsigned(2) dejavu;
     Ui_Ut_10121u<EC> Uv_6dejavu; //gcnl:NodeVarDecl.cpp:1096
@@ -1206,9 +945,9 @@ Ul_214endcontrolloop218:
 //! DecisionTree.ulam:236: 		while(keepRecursing){
       while(true)
       {
-        const u32 Uh_5tlreg44559 = Uv_9213keepRecursing.read(); //gcnl:Node.cpp:691
+        const u32 Uh_5tlreg41107 = Uv_9213keepRecursing.read(); //gcnl:Node.cpp:691
 
-        if(!_Bool32ToCbool(Uh_5tlreg44559, 1))
+        if(!_Bool32ToCbool(Uh_5tlreg41107, 1))
           break; //gcnl:NodeControlWhile.cpp:135
 
 //! DecisionTree.ulam:236: 		while(keepRecursing){
@@ -1218,23 +957,23 @@ Ul_214endcontrolloop218:
           {
 
 //! DecisionTree.ulam:237: 			if(evaluated[var]){
-            const u32 Uh_5tlreg44561 = Uv_3var.read(); //gcnl:Node.cpp:691
-            if(Uh_5tlreg44561 >= 40) //gcnl:NodeSquareBracket.cpp:794
+            const u32 Uh_5tlreg41109 = Uv_3var.read(); //gcnl:Node.cpp:691
+            if(Uh_5tlreg41109 >= 40) //gcnl:NodeSquareBracket.cpp:794
               FAIL(ARRAY_INDEX_OUT_OF_BOUNDS); //gcnl:NodeSquareBracket.cpp:798
-            Ui_Ut_r10111b<EC> Uh_6tlref44563(Uv_919evaluated, Uh_5tlreg44561 * 1u + 0u, uc); //gcnl:Node.cpp:1303
-            const u32 Uh_5tlreg44564 = Uh_6tlref44563.read(); //gcnl:Node.cpp:691
-            if(_Bool32ToCbool(Uh_5tlreg44564, 1)) //gcnl:NodeControl.cpp:213
+            Ui_Ut_r10111b<EC> Uh_6tlref41111(Uv_919evaluated, Uh_5tlreg41109 * 1u + 0u, uc); //gcnl:Node.cpp:1303
+            const u32 Uh_5tlreg41112 = Uh_6tlref41111.read(); //gcnl:Node.cpp:691
+            if(_Bool32ToCbool(Uh_5tlreg41112, 1)) //gcnl:NodeControl.cpp:213
             {
               {
 
 //! DecisionTree.ulam:238: 				return value[var];
-                const u32 Uh_5tlreg44566 = Uv_3var.read(); //gcnl:Node.cpp:691
-                if(Uh_5tlreg44566 >= 40) //gcnl:NodeSquareBracket.cpp:794
+                const u32 Uh_5tlreg41114 = Uv_3var.read(); //gcnl:Node.cpp:691
+                if(Uh_5tlreg41114 >= 40) //gcnl:NodeSquareBracket.cpp:794
                   FAIL(ARRAY_INDEX_OUT_OF_BOUNDS); //gcnl:NodeSquareBracket.cpp:798
-                Ui_Ut_r10161u<EC> Uh_6tlref44568(Uv_5value, Uh_5tlreg44566 * 6u + 0u, uc); //gcnl:Node.cpp:1303
-                const u32 Uh_5tlreg44569 = Uh_6tlref44568.read(); //gcnl:Node.cpp:691
-                Ui_Ut_10161u<EC> Uh_5tlval44570(Uh_5tlreg44569); //func arg& //gcnl:Node.cpp:1128
-                return (Uh_5tlval44570); //gcnl:NodeReturnStatement.cpp:343
+                Ui_Ut_r10161u<EC> Uh_6tlref41116(Uv_5value, Uh_5tlreg41114 * 6u + 0u, uc); //gcnl:Node.cpp:1303
+                const u32 Uh_5tlreg41117 = Uh_6tlref41116.read(); //gcnl:Node.cpp:691
+                Ui_Ut_10161u<EC> Uh_5tlval41118(Uh_5tlreg41117); //func arg& //gcnl:Node.cpp:1128
+                return (Uh_5tlval41118); //gcnl:NodeReturnStatement.cpp:343
               }
             } // end if
           }
@@ -1243,60 +982,60 @@ Ul_214endcontrolloop218:
           {
 
 //! DecisionTree.ulam:240: 			if(!evaluated[seqno] && !checked[seqno]){
-            u32 Uh_5tlreg44571 = false; //gcnl:NodeBinaryOpLogicalAnd.cpp:118
-            const u32 Uh_5tlreg44573 = Uv_5seqno.read(); //gcnl:Node.cpp:691
-            if(Uh_5tlreg44573 >= 40) //gcnl:NodeSquareBracket.cpp:794
+            u32 Uh_5tlreg41119 = false; //gcnl:NodeBinaryOpLogicalAnd.cpp:118
+            const u32 Uh_5tlreg41121 = Uv_5seqno.read(); //gcnl:Node.cpp:691
+            if(Uh_5tlreg41121 >= 40) //gcnl:NodeSquareBracket.cpp:794
               FAIL(ARRAY_INDEX_OUT_OF_BOUNDS); //gcnl:NodeSquareBracket.cpp:798
-            Ui_Ut_r10111b<EC> Uh_6tlref44575(Uv_919evaluated, Uh_5tlreg44573 * 1u + 0u, uc); //gcnl:Node.cpp:1303
-            const u32 Uh_5tlreg44576 = Uh_6tlref44575.read(); //gcnl:Node.cpp:691
-            const u32 Uh_5tlreg44577 = _LogicalBangBool32(Uh_5tlreg44576, 1); //gcnl:NodeUnaryOp.cpp:449
-            if(_Bool32ToCbool(Uh_5tlreg44577, 1)) //gcnl:NodeBinaryOpLogicalAnd.cpp:137
+            Ui_Ut_r10111b<EC> Uh_6tlref41123(Uv_919evaluated, Uh_5tlreg41121 * 1u + 0u, uc); //gcnl:Node.cpp:1303
+            const u32 Uh_5tlreg41124 = Uh_6tlref41123.read(); //gcnl:Node.cpp:691
+            const u32 Uh_5tlreg41125 = _LogicalBangBool32(Uh_5tlreg41124, 1); //gcnl:NodeUnaryOp.cpp:449
+            if(_Bool32ToCbool(Uh_5tlreg41125, 1)) //gcnl:NodeBinaryOpLogicalAnd.cpp:137
             {
-              const u32 Uh_5tlreg44579 = Uv_5seqno.read(); //gcnl:Node.cpp:691
-              if(Uh_5tlreg44579 >= 40) //gcnl:NodeSquareBracket.cpp:794
+              const u32 Uh_5tlreg41127 = Uv_5seqno.read(); //gcnl:Node.cpp:691
+              if(Uh_5tlreg41127 >= 40) //gcnl:NodeSquareBracket.cpp:794
                 FAIL(ARRAY_INDEX_OUT_OF_BOUNDS); //gcnl:NodeSquareBracket.cpp:798
-              Ui_Ut_r10111b<EC> Uh_6tlref44581(Uv_7checked, Uh_5tlreg44579 * 1u + 0u, uc); //gcnl:Node.cpp:1303
-              const u32 Uh_5tlreg44582 = Uh_6tlref44581.read(); //gcnl:Node.cpp:691
-              const u32 Uh_5tlreg44583 = _LogicalBangBool32(Uh_5tlreg44582, 1); //gcnl:NodeUnaryOp.cpp:449
-              Uh_5tlreg44571 = Uh_5tlreg44583; //gcnl:NodeBinaryOpLogicalAnd.cpp:151
+              Ui_Ut_r10111b<EC> Uh_6tlref41129(Uv_7checked, Uh_5tlreg41127 * 1u + 0u, uc); //gcnl:Node.cpp:1303
+              const u32 Uh_5tlreg41130 = Uh_6tlref41129.read(); //gcnl:Node.cpp:691
+              const u32 Uh_5tlreg41131 = _LogicalBangBool32(Uh_5tlreg41130, 1); //gcnl:NodeUnaryOp.cpp:449
+              Uh_5tlreg41119 = Uh_5tlreg41131; //gcnl:NodeBinaryOpLogicalAnd.cpp:151
             }
-            if(_Bool32ToCbool(Uh_5tlreg44571, 1)) //gcnl:NodeControl.cpp:213
+            if(_Bool32ToCbool(Uh_5tlreg41119, 1)) //gcnl:NodeControl.cpp:213
             {
               {
 
 //! DecisionTree.ulam:244: 				Atom gene = findSeqno(seqno, id);
-                const u32 Uh_5tlreg44586 = Uv_5seqno.read(); //gcnl:Node.cpp:691
-                Ui_Ut_10161u<EC> Uh_5tlval44587(Uh_5tlreg44586); //func arg& //gcnl:Node.cpp:1128
-                const u32 Uh_5tlreg44589 = Uv_2id.read(); //gcnl:Node.cpp:691
-                Ui_Ut_102101u<EC> Uh_5tlval44590(Uh_5tlreg44589); //func arg& //gcnl:Node.cpp:1128
-                const Ui_Ut_102961a<EC> Uh_5tuval44592 = THE_INSTANCE.Uf_919findSeqno(uc, ur, Uh_5tlval44587, Uh_5tlval44590); //gcnl:NodeFunctionCall.cpp:1006
-                Ui_Ut_102961a<EC> Uv_4gene(Uh_5tuval44592.read()); //gcnl:NodeVarDecl.cpp:1060
+                const u32 Uh_5tlreg41134 = Uv_5seqno.read(); //gcnl:Node.cpp:691
+                Ui_Ut_10161u<EC> Uh_5tlval41135(Uh_5tlreg41134); //func arg& //gcnl:Node.cpp:1128
+                const u32 Uh_5tlreg41137 = Uv_2id.read(); //gcnl:Node.cpp:691
+                Ui_Ut_102101u<EC> Uh_5tlval41138(Uh_5tlreg41137); //func arg& //gcnl:Node.cpp:1128
+                const Ui_Ut_102961a<EC> Uh_5tuval41140 = THE_INSTANCE.Uf_919findSeqno(uc, ur, Uh_5tlval41135, Uh_5tlval41138); //gcnl:NodeFunctionCall.cpp:1006
+                Ui_Ut_102961a<EC> Uv_4gene(Uh_5tuval41140.read()); //gcnl:NodeVarDecl.cpp:1060
 
 //! DecisionTree.ulam:249: 				++dejavu;
-                const u32 Uh_5tlreg44593 = 1; //gcnl:NodeTerminal.cpp:721
-                const u32 Uh_5tlreg44594 = _Int32ToUnsigned32(Uh_5tlreg44593, 32, 2); //gcnl:NodeCast.cpp:723
-                const u32 Uh_5tlreg44596 = Uv_6dejavu.read(); //gcnl:Node.cpp:691
-                const u32 Uh_5tlreg44597 = _BinOpAddUnsigned32(Uh_5tlreg44596, Uh_5tlreg44594, 2); //gcnl:NodeBinaryOpEqualArith.cpp:128
-                Uv_6dejavu.write(Uh_5tlreg44597); //gcnl:Node.cpp:885
+                const u32 Uh_5tlreg41141 = 1; //gcnl:NodeTerminal.cpp:721
+                const u32 Uh_5tlreg41142 = _Int32ToUnsigned32(Uh_5tlreg41141, 32, 2); //gcnl:NodeCast.cpp:723
+                const u32 Uh_5tlreg41144 = Uv_6dejavu.read(); //gcnl:Node.cpp:691
+                const u32 Uh_5tlreg41145 = _BinOpAddUnsigned32(Uh_5tlreg41144, Uh_5tlreg41142, 2); //gcnl:NodeBinaryOpEqualArith.cpp:128
+                Uv_6dejavu.write(Uh_5tlreg41145); //gcnl:Node.cpp:885
 
 //! DecisionTree.ulam:250: 				if(dejavu > 1){
                 {
 
 //! DecisionTree.ulam:250: 				if(dejavu > 1){
-                  const u32 Uh_5tlreg44598 = 1; //gcnl:NodeTerminal.cpp:721
-                  const u32 Uh_5tlreg44599 = _Int32ToInt32(Uh_5tlreg44598, 2, 3); //gcnl:NodeCast.cpp:723
-                  const u32 Uh_5tlreg44601 = Uv_6dejavu.read(); //gcnl:Node.cpp:691
-                  const u32 Uh_5tlreg44602 = _Unsigned32ToInt32(Uh_5tlreg44601, 2, 3); //gcnl:NodeCast.cpp:723
-                  const u32 Uh_5tlreg44603 = _BinOpCompareGreaterThanInt32(Uh_5tlreg44602, Uh_5tlreg44599, 3); //gcnl:NodeBinaryOpCompare.cpp:313
-                  if(_Bool32ToCbool(Uh_5tlreg44603, 1)) //gcnl:NodeControl.cpp:213
+                  const u32 Uh_5tlreg41146 = 1; //gcnl:NodeTerminal.cpp:721
+                  const u32 Uh_5tlreg41147 = _Int32ToInt32(Uh_5tlreg41146, 2, 3); //gcnl:NodeCast.cpp:723
+                  const u32 Uh_5tlreg41149 = Uv_6dejavu.read(); //gcnl:Node.cpp:691
+                  const u32 Uh_5tlreg41150 = _Unsigned32ToInt32(Uh_5tlreg41149, 2, 3); //gcnl:NodeCast.cpp:723
+                  const u32 Uh_5tlreg41151 = _BinOpCompareGreaterThanInt32(Uh_5tlreg41150, Uh_5tlreg41147, 3); //gcnl:NodeBinaryOpCompare.cpp:313
+                  if(_Bool32ToCbool(Uh_5tlreg41151, 1)) //gcnl:NodeControl.cpp:213
                   {
                     {
 
 //! DecisionTree.ulam:251: 					return (StoredValue) 0;
-                      const u32 Uh_5tlreg44604 = 0; //gcnl:NodeTerminal.cpp:721
-                      const u32 Uh_5tlreg44605 = _Int32ToUnsigned32(Uh_5tlreg44604, 2, 6); //gcnl:NodeCast.cpp:723
-                      Ui_Ut_10161u<EC> Uh_5tlval44606(Uh_5tlreg44605); //func arg& //gcnl:Node.cpp:1128
-                      return (Uh_5tlval44606); //gcnl:NodeReturnStatement.cpp:343
+                      const u32 Uh_5tlreg41152 = 0; //gcnl:NodeTerminal.cpp:721
+                      const u32 Uh_5tlreg41153 = _Int32ToUnsigned32(Uh_5tlreg41152, 2, 6); //gcnl:NodeCast.cpp:723
+                      Ui_Ut_10161u<EC> Uh_5tlval41154(Uh_5tlreg41153); //func arg& //gcnl:Node.cpp:1128
+                      return (Uh_5tlval41154); //gcnl:NodeReturnStatement.cpp:343
                     }
                   } // end if
                 }
@@ -1305,65 +1044,65 @@ Ul_214endcontrolloop218:
                 {
 
 //! DecisionTree.ulam:253: 				if(gene as Gene){
-                  const T Uh_3tut44608 = Uv_4gene.read(); //gcnl:Node.cpp:691
-                  const u32 Uh_5tlreg44609 = Ue_102574Gene10<EC>::THE_INSTANCE.internalCMethodImplementingIs(Uh_3tut44608); //gcnl:NodeConditionalAs.cpp:444
-                  if(_Bool32ToCbool(Uh_5tlreg44609, 1)) //gcnl:NodeControl.cpp:213
+                  const T Uh_3tut41156 = Uv_4gene.read(); //gcnl:Node.cpp:691
+                  const u32 Uh_5tlreg41157 = Ue_102564Gene10<EC>::THE_INSTANCE.internalCMethodImplementingIs(Uh_3tut41156); //gcnl:NodeConditionalAs.cpp:444
+                  if(_Bool32ToCbool(Uh_5tlreg41157, 1)) //gcnl:NodeControl.cpp:213
                   {
                     {
 
 //! DecisionTree.ulam:253: 				if(gene as Gene){
-                      Ui_Ut_102961a<EC> & Uh_5tuval44610 = Uv_4gene; //c++ reference to immediate //gcnl:NodeVarRefAs.cpp:161
-                      Ui_Ue_r102574Gene10<EC> Uv_4gene(Uh_5tuval44610, 0u + T::ATOM_FIRST_STATE_BIT, uc.LookupUlamElementTypeFromContext(Uh_5tuval44610.GetType()), uc); //shadows lhs of 'as' //gcnl:NodeVarRefAs.cpp:246
+                      Ui_Ut_102961a<EC> & Uh_5tuval41158 = Uv_4gene; //c++ reference to immediate //gcnl:NodeVarRefAs.cpp:161
+                      Ui_Ue_r102564Gene10<EC> Uv_4gene(Uh_5tuval41158, 0u + T::ATOM_FIRST_STATE_BIT, uc.LookupUlamElementTypeFromContext(Uh_5tuval41158.GetType()), uc); //shadows lhs of 'as' //gcnl:NodeVarRefAs.cpp:246
 
 //! DecisionTree.ulam:254: 					checked[seqno] = true;
-                      const u32 Uh_5tlreg44611 = 1u; //gcnl:NodeTerminal.cpp:721
-                      const u32 Uh_5tlreg44613 = Uv_5seqno.read(); //gcnl:Node.cpp:691
-                      if(Uh_5tlreg44613 >= 40) //gcnl:NodeSquareBracket.cpp:794
+                      const u32 Uh_5tlreg41159 = 1u; //gcnl:NodeTerminal.cpp:721
+                      const u32 Uh_5tlreg41161 = Uv_5seqno.read(); //gcnl:Node.cpp:691
+                      if(Uh_5tlreg41161 >= 40) //gcnl:NodeSquareBracket.cpp:794
                         FAIL(ARRAY_INDEX_OUT_OF_BOUNDS); //gcnl:NodeSquareBracket.cpp:798
-                      Ui_Ut_r10111b<EC> Uh_6tlref44615(Uv_7checked, Uh_5tlreg44613 * 1u + 0u, uc); //gcnl:Node.cpp:1303
-                      Uh_6tlref44615.write(Uh_5tlreg44611);
+                      Ui_Ut_r10111b<EC> Uh_6tlref41163(Uv_7checked, Uh_5tlreg41161 * 1u + 0u, uc); //gcnl:Node.cpp:1303
+                      Uh_6tlref41163.write(Uh_5tlreg41159);
 
 //! DecisionTree.ulam:256: 					operator[seqno] = gene.operator;
-                      const u32 Uh_5tlreg44618 = UlamRef<EC>(Uv_4gene, 17u, 2u, NULL, UlamRef<EC>::PRIMITIVE).Read(); //gcnl:Node.cpp:691
-                      const u32 Uh_5tlreg44620 = Uv_5seqno.read(); //gcnl:Node.cpp:691
-                      if(Uh_5tlreg44620 >= 40) //gcnl:NodeSquareBracket.cpp:794
+                      const u32 Uh_5tlreg41166 = UlamRef<EC>(Uv_4gene, 17u, 2u, NULL, UlamRef<EC>::PRIMITIVE).Read(); //gcnl:Node.cpp:691
+                      const u32 Uh_5tlreg41168 = Uv_5seqno.read(); //gcnl:Node.cpp:691
+                      if(Uh_5tlreg41168 >= 40) //gcnl:NodeSquareBracket.cpp:794
                         FAIL(ARRAY_INDEX_OUT_OF_BOUNDS); //gcnl:NodeSquareBracket.cpp:798
-                      Ui_Ut_r10121u<EC> Uh_6tlref44622(Uv_8operator, Uh_5tlreg44620 * 2u + 0u, uc); //gcnl:Node.cpp:1303
-                      Uh_6tlref44622.write(Uh_5tlreg44618);
+                      Ui_Ut_r10121u<EC> Uh_6tlref41170(Uv_8operator, Uh_5tlreg41168 * 2u + 0u, uc); //gcnl:Node.cpp:1303
+                      Uh_6tlref41170.write(Uh_5tlreg41166);
 
 //! DecisionTree.ulam:258: 					tree0Type[seqno] = gene.tree0Type;
-                      const u32 Uh_5tlreg44625 = UlamRef<EC>(Uv_4gene, 19u, 2u, NULL, UlamRef<EC>::PRIMITIVE).Read(); //gcnl:Node.cpp:691
-                      const u32 Uh_5tlreg44626 = _Unsigned32ToBits32(Uh_5tlreg44625, 2, 2); //gcnl:NodeCast.cpp:723
-                      const u32 Uh_5tlreg44628 = Uv_5seqno.read(); //gcnl:Node.cpp:691
-                      if(Uh_5tlreg44628 >= 40) //gcnl:NodeSquareBracket.cpp:794
+                      const u32 Uh_5tlreg41173 = UlamRef<EC>(Uv_4gene, 19u, 2u, NULL, UlamRef<EC>::PRIMITIVE).Read(); //gcnl:Node.cpp:691
+                      const u32 Uh_5tlreg41174 = _Unsigned32ToBits32(Uh_5tlreg41173, 2, 2); //gcnl:NodeCast.cpp:723
+                      const u32 Uh_5tlreg41176 = Uv_5seqno.read(); //gcnl:Node.cpp:691
+                      if(Uh_5tlreg41176 >= 40) //gcnl:NodeSquareBracket.cpp:794
                         FAIL(ARRAY_INDEX_OUT_OF_BOUNDS); //gcnl:NodeSquareBracket.cpp:798
-                      Ui_Ut_r10121t<EC> Uh_6tlref44630(Uv_919tree0Type, Uh_5tlreg44628 * 2u + 0u, uc); //gcnl:Node.cpp:1303
-                      Uh_6tlref44630.write(Uh_5tlreg44626);
+                      Ui_Ut_r10121t<EC> Uh_6tlref41178(Uv_919tree0Type, Uh_5tlreg41176 * 2u + 0u, uc); //gcnl:Node.cpp:1303
+                      Uh_6tlref41178.write(Uh_5tlreg41174);
 
 //! DecisionTree.ulam:259: 					eqTree0[seqno] = gene.eqTree0;
-                      const u32 Uh_5tlreg44633 = UlamRef<EC>(Uv_4gene, 21u, 6u, NULL, UlamRef<EC>::PRIMITIVE).Read(); //gcnl:Node.cpp:691
-                      const u32 Uh_5tlreg44635 = Uv_5seqno.read(); //gcnl:Node.cpp:691
-                      if(Uh_5tlreg44635 >= 40) //gcnl:NodeSquareBracket.cpp:794
+                      const u32 Uh_5tlreg41181 = UlamRef<EC>(Uv_4gene, 21u, 6u, NULL, UlamRef<EC>::PRIMITIVE).Read(); //gcnl:Node.cpp:691
+                      const u32 Uh_5tlreg41183 = Uv_5seqno.read(); //gcnl:Node.cpp:691
+                      if(Uh_5tlreg41183 >= 40) //gcnl:NodeSquareBracket.cpp:794
                         FAIL(ARRAY_INDEX_OUT_OF_BOUNDS); //gcnl:NodeSquareBracket.cpp:798
-                      Ui_Ut_r10161u<EC> Uh_6tlref44637(Uv_7eqTree0, Uh_5tlreg44635 * 6u + 0u, uc); //gcnl:Node.cpp:1303
-                      Uh_6tlref44637.write(Uh_5tlreg44633);
+                      Ui_Ut_r10161u<EC> Uh_6tlref41185(Uv_7eqTree0, Uh_5tlreg41183 * 6u + 0u, uc); //gcnl:Node.cpp:1303
+                      Uh_6tlref41185.write(Uh_5tlreg41181);
 
 //! DecisionTree.ulam:261: 					tree1Type[seqno] = gene.tree1Type;
-                      const u32 Uh_5tlreg44640 = UlamRef<EC>(Uv_4gene, 27u, 2u, NULL, UlamRef<EC>::PRIMITIVE).Read(); //gcnl:Node.cpp:691
-                      const u32 Uh_5tlreg44641 = _Unsigned32ToBits32(Uh_5tlreg44640, 2, 2); //gcnl:NodeCast.cpp:723
-                      const u32 Uh_5tlreg44643 = Uv_5seqno.read(); //gcnl:Node.cpp:691
-                      if(Uh_5tlreg44643 >= 40) //gcnl:NodeSquareBracket.cpp:794
+                      const u32 Uh_5tlreg41188 = UlamRef<EC>(Uv_4gene, 27u, 2u, NULL, UlamRef<EC>::PRIMITIVE).Read(); //gcnl:Node.cpp:691
+                      const u32 Uh_5tlreg41189 = _Unsigned32ToBits32(Uh_5tlreg41188, 2, 2); //gcnl:NodeCast.cpp:723
+                      const u32 Uh_5tlreg41191 = Uv_5seqno.read(); //gcnl:Node.cpp:691
+                      if(Uh_5tlreg41191 >= 40) //gcnl:NodeSquareBracket.cpp:794
                         FAIL(ARRAY_INDEX_OUT_OF_BOUNDS); //gcnl:NodeSquareBracket.cpp:798
-                      Ui_Ut_r10121t<EC> Uh_6tlref44645(Uv_919tree1Type, Uh_5tlreg44643 * 2u + 0u, uc); //gcnl:Node.cpp:1303
-                      Uh_6tlref44645.write(Uh_5tlreg44641);
+                      Ui_Ut_r10121t<EC> Uh_6tlref41193(Uv_919tree1Type, Uh_5tlreg41191 * 2u + 0u, uc); //gcnl:Node.cpp:1303
+                      Uh_6tlref41193.write(Uh_5tlreg41189);
 
 //! DecisionTree.ulam:262: 					eqTree1[seqno] = gene.eqTree1;
-                      const u32 Uh_5tlreg44648 = UlamRef<EC>(Uv_4gene, 29u, 6u, NULL, UlamRef<EC>::PRIMITIVE).Read(); //gcnl:Node.cpp:691
-                      const u32 Uh_5tlreg44650 = Uv_5seqno.read(); //gcnl:Node.cpp:691
-                      if(Uh_5tlreg44650 >= 40) //gcnl:NodeSquareBracket.cpp:794
+                      const u32 Uh_5tlreg41196 = UlamRef<EC>(Uv_4gene, 29u, 6u, NULL, UlamRef<EC>::PRIMITIVE).Read(); //gcnl:Node.cpp:691
+                      const u32 Uh_5tlreg41198 = Uv_5seqno.read(); //gcnl:Node.cpp:691
+                      if(Uh_5tlreg41198 >= 40) //gcnl:NodeSquareBracket.cpp:794
                         FAIL(ARRAY_INDEX_OUT_OF_BOUNDS); //gcnl:NodeSquareBracket.cpp:798
-                      Ui_Ut_r10161u<EC> Uh_6tlref44652(Uv_7eqTree1, Uh_5tlreg44650 * 6u + 0u, uc); //gcnl:Node.cpp:1303
-                      Uh_6tlref44652.write(Uh_5tlreg44648);
+                      Ui_Ut_r10161u<EC> Uh_6tlref41200(Uv_7eqTree1, Uh_5tlreg41198 * 6u + 0u, uc); //gcnl:Node.cpp:1303
+                      Uh_6tlref41200.write(Uh_5tlreg41196);
                     }
                   } // end if
                 }
@@ -1375,48 +1114,48 @@ Ul_214endcontrolloop218:
           {
 
 //! DecisionTree.ulam:268: 			if(tree0Type[seqno] == 1 && eqTree0[seqno] == 0){
-            u32 Uh_5tlreg44653 = false; //gcnl:NodeBinaryOpLogicalAnd.cpp:118
-            const u32 Uh_5tlreg44654 = 1; //gcnl:NodeTerminal.cpp:721
-            const u32 Uh_5tlreg44655 = _Int32ToBits32(Uh_5tlreg44654, 2, 2); //gcnl:NodeCast.cpp:723
-            const u32 Uh_5tlreg44657 = Uv_5seqno.read(); //gcnl:Node.cpp:691
-            if(Uh_5tlreg44657 >= 40) //gcnl:NodeSquareBracket.cpp:794
+            u32 Uh_5tlreg41201 = false; //gcnl:NodeBinaryOpLogicalAnd.cpp:118
+            const u32 Uh_5tlreg41202 = 1; //gcnl:NodeTerminal.cpp:721
+            const u32 Uh_5tlreg41203 = _Int32ToBits32(Uh_5tlreg41202, 2, 2); //gcnl:NodeCast.cpp:723
+            const u32 Uh_5tlreg41205 = Uv_5seqno.read(); //gcnl:Node.cpp:691
+            if(Uh_5tlreg41205 >= 40) //gcnl:NodeSquareBracket.cpp:794
               FAIL(ARRAY_INDEX_OUT_OF_BOUNDS); //gcnl:NodeSquareBracket.cpp:798
-            Ui_Ut_r10121t<EC> Uh_6tlref44659(Uv_919tree0Type, Uh_5tlreg44657 * 2u + 0u, uc); //gcnl:Node.cpp:1303
-            const u32 Uh_5tlreg44660 = Uh_6tlref44659.read(); //gcnl:Node.cpp:691
-            const u32 Uh_5tlreg44661 = _BinOpCompareEqEqBits32(Uh_5tlreg44660, Uh_5tlreg44655, 2); //gcnl:NodeBinaryOpCompare.cpp:313
-            if(_Bool32ToCbool(Uh_5tlreg44661, 1)) //gcnl:NodeBinaryOpLogicalAnd.cpp:137
+            Ui_Ut_r10121t<EC> Uh_6tlref41207(Uv_919tree0Type, Uh_5tlreg41205 * 2u + 0u, uc); //gcnl:Node.cpp:1303
+            const u32 Uh_5tlreg41208 = Uh_6tlref41207.read(); //gcnl:Node.cpp:691
+            const u32 Uh_5tlreg41209 = _BinOpCompareEqEqBits32(Uh_5tlreg41208, Uh_5tlreg41203, 2); //gcnl:NodeBinaryOpCompare.cpp:313
+            if(_Bool32ToCbool(Uh_5tlreg41209, 1)) //gcnl:NodeBinaryOpLogicalAnd.cpp:137
             {
-              const u32 Uh_5tlreg44662 = 0; //gcnl:NodeTerminal.cpp:721
-              const u32 Uh_5tlreg44663 = _Int32ToInt32(Uh_5tlreg44662, 2, 7); //gcnl:NodeCast.cpp:723
-              const u32 Uh_5tlreg44665 = Uv_5seqno.read(); //gcnl:Node.cpp:691
-              if(Uh_5tlreg44665 >= 40) //gcnl:NodeSquareBracket.cpp:794
+              const u32 Uh_5tlreg41210 = 0; //gcnl:NodeTerminal.cpp:721
+              const u32 Uh_5tlreg41211 = _Int32ToInt32(Uh_5tlreg41210, 2, 7); //gcnl:NodeCast.cpp:723
+              const u32 Uh_5tlreg41213 = Uv_5seqno.read(); //gcnl:Node.cpp:691
+              if(Uh_5tlreg41213 >= 40) //gcnl:NodeSquareBracket.cpp:794
                 FAIL(ARRAY_INDEX_OUT_OF_BOUNDS); //gcnl:NodeSquareBracket.cpp:798
-              Ui_Ut_r10161u<EC> Uh_6tlref44667(Uv_7eqTree0, Uh_5tlreg44665 * 6u + 0u, uc); //gcnl:Node.cpp:1303
-              const u32 Uh_5tlreg44668 = Uh_6tlref44667.read(); //gcnl:Node.cpp:691
-              const u32 Uh_5tlreg44669 = _Unsigned32ToInt32(Uh_5tlreg44668, 6, 7); //gcnl:NodeCast.cpp:723
-              const u32 Uh_5tlreg44670 = _BinOpCompareEqEqInt32(Uh_5tlreg44669, Uh_5tlreg44663, 7); //gcnl:NodeBinaryOpCompare.cpp:313
-              Uh_5tlreg44653 = Uh_5tlreg44670; //gcnl:NodeBinaryOpLogicalAnd.cpp:151
+              Ui_Ut_r10161u<EC> Uh_6tlref41215(Uv_7eqTree0, Uh_5tlreg41213 * 6u + 0u, uc); //gcnl:Node.cpp:1303
+              const u32 Uh_5tlreg41216 = Uh_6tlref41215.read(); //gcnl:Node.cpp:691
+              const u32 Uh_5tlreg41217 = _Unsigned32ToInt32(Uh_5tlreg41216, 6, 7); //gcnl:NodeCast.cpp:723
+              const u32 Uh_5tlreg41218 = _BinOpCompareEqEqInt32(Uh_5tlreg41217, Uh_5tlreg41211, 7); //gcnl:NodeBinaryOpCompare.cpp:313
+              Uh_5tlreg41201 = Uh_5tlreg41218; //gcnl:NodeBinaryOpLogicalAnd.cpp:151
             }
-            if(_Bool32ToCbool(Uh_5tlreg44653, 1)) //gcnl:NodeControl.cpp:213
+            if(_Bool32ToCbool(Uh_5tlreg41201, 1)) //gcnl:NodeControl.cpp:213
             {
               {
 
 //! DecisionTree.ulam:269: 				tree0Type[seqno] = 0;
-                const u32 Uh_5tlreg44671 = 0; //gcnl:NodeTerminal.cpp:721
-                const u32 Uh_5tlreg44672 = _Int32ToBits32(Uh_5tlreg44671, 2, 2); //gcnl:NodeCast.cpp:723
-                const u32 Uh_5tlreg44674 = Uv_5seqno.read(); //gcnl:Node.cpp:691
-                if(Uh_5tlreg44674 >= 40) //gcnl:NodeSquareBracket.cpp:794
+                const u32 Uh_5tlreg41219 = 0; //gcnl:NodeTerminal.cpp:721
+                const u32 Uh_5tlreg41220 = _Int32ToBits32(Uh_5tlreg41219, 2, 2); //gcnl:NodeCast.cpp:723
+                const u32 Uh_5tlreg41222 = Uv_5seqno.read(); //gcnl:Node.cpp:691
+                if(Uh_5tlreg41222 >= 40) //gcnl:NodeSquareBracket.cpp:794
                   FAIL(ARRAY_INDEX_OUT_OF_BOUNDS); //gcnl:NodeSquareBracket.cpp:798
-                Ui_Ut_r10121t<EC> Uh_6tlref44676(Uv_919tree0Type, Uh_5tlreg44674 * 2u + 0u, uc); //gcnl:Node.cpp:1303
-                Uh_6tlref44676.write(Uh_5tlreg44672);
+                Ui_Ut_r10121t<EC> Uh_6tlref41224(Uv_919tree0Type, Uh_5tlreg41222 * 2u + 0u, uc); //gcnl:Node.cpp:1303
+                Uh_6tlref41224.write(Uh_5tlreg41220);
 
 //! DecisionTree.ulam:270: 				eqTree0[seqno] = comIn;
-                const u32 Uh_5tlreg44678 = Uv_5comIn.read(); //gcnl:Node.cpp:691
-                const u32 Uh_5tlreg44680 = Uv_5seqno.read(); //gcnl:Node.cpp:691
-                if(Uh_5tlreg44680 >= 40) //gcnl:NodeSquareBracket.cpp:794
+                const u32 Uh_5tlreg41226 = Uv_5comIn.read(); //gcnl:Node.cpp:691
+                const u32 Uh_5tlreg41228 = Uv_5seqno.read(); //gcnl:Node.cpp:691
+                if(Uh_5tlreg41228 >= 40) //gcnl:NodeSquareBracket.cpp:794
                   FAIL(ARRAY_INDEX_OUT_OF_BOUNDS); //gcnl:NodeSquareBracket.cpp:798
-                Ui_Ut_r10161u<EC> Uh_6tlref44682(Uv_7eqTree0, Uh_5tlreg44680 * 6u + 0u, uc); //gcnl:Node.cpp:1303
-                Uh_6tlref44682.write(Uh_5tlreg44678);
+                Ui_Ut_r10161u<EC> Uh_6tlref41230(Uv_7eqTree0, Uh_5tlreg41228 * 6u + 0u, uc); //gcnl:Node.cpp:1303
+                Uh_6tlref41230.write(Uh_5tlreg41226);
               }
             } // end if
           }
@@ -1425,48 +1164,48 @@ Ul_214endcontrolloop218:
           {
 
 //! DecisionTree.ulam:272: 			if(tree1Type[seqno] == 1 && eqTree1[seqno] == 0){
-            u32 Uh_5tlreg44683 = false; //gcnl:NodeBinaryOpLogicalAnd.cpp:118
-            const u32 Uh_5tlreg44684 = 1; //gcnl:NodeTerminal.cpp:721
-            const u32 Uh_5tlreg44685 = _Int32ToBits32(Uh_5tlreg44684, 2, 2); //gcnl:NodeCast.cpp:723
-            const u32 Uh_5tlreg44687 = Uv_5seqno.read(); //gcnl:Node.cpp:691
-            if(Uh_5tlreg44687 >= 40) //gcnl:NodeSquareBracket.cpp:794
+            u32 Uh_5tlreg41231 = false; //gcnl:NodeBinaryOpLogicalAnd.cpp:118
+            const u32 Uh_5tlreg41232 = 1; //gcnl:NodeTerminal.cpp:721
+            const u32 Uh_5tlreg41233 = _Int32ToBits32(Uh_5tlreg41232, 2, 2); //gcnl:NodeCast.cpp:723
+            const u32 Uh_5tlreg41235 = Uv_5seqno.read(); //gcnl:Node.cpp:691
+            if(Uh_5tlreg41235 >= 40) //gcnl:NodeSquareBracket.cpp:794
               FAIL(ARRAY_INDEX_OUT_OF_BOUNDS); //gcnl:NodeSquareBracket.cpp:798
-            Ui_Ut_r10121t<EC> Uh_6tlref44689(Uv_919tree1Type, Uh_5tlreg44687 * 2u + 0u, uc); //gcnl:Node.cpp:1303
-            const u32 Uh_5tlreg44690 = Uh_6tlref44689.read(); //gcnl:Node.cpp:691
-            const u32 Uh_5tlreg44691 = _BinOpCompareEqEqBits32(Uh_5tlreg44690, Uh_5tlreg44685, 2); //gcnl:NodeBinaryOpCompare.cpp:313
-            if(_Bool32ToCbool(Uh_5tlreg44691, 1)) //gcnl:NodeBinaryOpLogicalAnd.cpp:137
+            Ui_Ut_r10121t<EC> Uh_6tlref41237(Uv_919tree1Type, Uh_5tlreg41235 * 2u + 0u, uc); //gcnl:Node.cpp:1303
+            const u32 Uh_5tlreg41238 = Uh_6tlref41237.read(); //gcnl:Node.cpp:691
+            const u32 Uh_5tlreg41239 = _BinOpCompareEqEqBits32(Uh_5tlreg41238, Uh_5tlreg41233, 2); //gcnl:NodeBinaryOpCompare.cpp:313
+            if(_Bool32ToCbool(Uh_5tlreg41239, 1)) //gcnl:NodeBinaryOpLogicalAnd.cpp:137
             {
-              const u32 Uh_5tlreg44692 = 0; //gcnl:NodeTerminal.cpp:721
-              const u32 Uh_5tlreg44693 = _Int32ToInt32(Uh_5tlreg44692, 2, 7); //gcnl:NodeCast.cpp:723
-              const u32 Uh_5tlreg44695 = Uv_5seqno.read(); //gcnl:Node.cpp:691
-              if(Uh_5tlreg44695 >= 40) //gcnl:NodeSquareBracket.cpp:794
+              const u32 Uh_5tlreg41240 = 0; //gcnl:NodeTerminal.cpp:721
+              const u32 Uh_5tlreg41241 = _Int32ToInt32(Uh_5tlreg41240, 2, 7); //gcnl:NodeCast.cpp:723
+              const u32 Uh_5tlreg41243 = Uv_5seqno.read(); //gcnl:Node.cpp:691
+              if(Uh_5tlreg41243 >= 40) //gcnl:NodeSquareBracket.cpp:794
                 FAIL(ARRAY_INDEX_OUT_OF_BOUNDS); //gcnl:NodeSquareBracket.cpp:798
-              Ui_Ut_r10161u<EC> Uh_6tlref44697(Uv_7eqTree1, Uh_5tlreg44695 * 6u + 0u, uc); //gcnl:Node.cpp:1303
-              const u32 Uh_5tlreg44698 = Uh_6tlref44697.read(); //gcnl:Node.cpp:691
-              const u32 Uh_5tlreg44699 = _Unsigned32ToInt32(Uh_5tlreg44698, 6, 7); //gcnl:NodeCast.cpp:723
-              const u32 Uh_5tlreg44700 = _BinOpCompareEqEqInt32(Uh_5tlreg44699, Uh_5tlreg44693, 7); //gcnl:NodeBinaryOpCompare.cpp:313
-              Uh_5tlreg44683 = Uh_5tlreg44700; //gcnl:NodeBinaryOpLogicalAnd.cpp:151
+              Ui_Ut_r10161u<EC> Uh_6tlref41245(Uv_7eqTree1, Uh_5tlreg41243 * 6u + 0u, uc); //gcnl:Node.cpp:1303
+              const u32 Uh_5tlreg41246 = Uh_6tlref41245.read(); //gcnl:Node.cpp:691
+              const u32 Uh_5tlreg41247 = _Unsigned32ToInt32(Uh_5tlreg41246, 6, 7); //gcnl:NodeCast.cpp:723
+              const u32 Uh_5tlreg41248 = _BinOpCompareEqEqInt32(Uh_5tlreg41247, Uh_5tlreg41241, 7); //gcnl:NodeBinaryOpCompare.cpp:313
+              Uh_5tlreg41231 = Uh_5tlreg41248; //gcnl:NodeBinaryOpLogicalAnd.cpp:151
             }
-            if(_Bool32ToCbool(Uh_5tlreg44683, 1)) //gcnl:NodeControl.cpp:213
+            if(_Bool32ToCbool(Uh_5tlreg41231, 1)) //gcnl:NodeControl.cpp:213
             {
               {
 
 //! DecisionTree.ulam:273: 				tree0Type[seqno] = 0;
-                const u32 Uh_5tlreg44701 = 0; //gcnl:NodeTerminal.cpp:721
-                const u32 Uh_5tlreg44702 = _Int32ToBits32(Uh_5tlreg44701, 2, 2); //gcnl:NodeCast.cpp:723
-                const u32 Uh_5tlreg44704 = Uv_5seqno.read(); //gcnl:Node.cpp:691
-                if(Uh_5tlreg44704 >= 40) //gcnl:NodeSquareBracket.cpp:794
+                const u32 Uh_5tlreg41249 = 0; //gcnl:NodeTerminal.cpp:721
+                const u32 Uh_5tlreg41250 = _Int32ToBits32(Uh_5tlreg41249, 2, 2); //gcnl:NodeCast.cpp:723
+                const u32 Uh_5tlreg41252 = Uv_5seqno.read(); //gcnl:Node.cpp:691
+                if(Uh_5tlreg41252 >= 40) //gcnl:NodeSquareBracket.cpp:794
                   FAIL(ARRAY_INDEX_OUT_OF_BOUNDS); //gcnl:NodeSquareBracket.cpp:798
-                Ui_Ut_r10121t<EC> Uh_6tlref44706(Uv_919tree0Type, Uh_5tlreg44704 * 2u + 0u, uc); //gcnl:Node.cpp:1303
-                Uh_6tlref44706.write(Uh_5tlreg44702);
+                Ui_Ut_r10121t<EC> Uh_6tlref41254(Uv_919tree0Type, Uh_5tlreg41252 * 2u + 0u, uc); //gcnl:Node.cpp:1303
+                Uh_6tlref41254.write(Uh_5tlreg41250);
 
 //! DecisionTree.ulam:274: 				eqTree0[seqno] = comIn;
-                const u32 Uh_5tlreg44708 = Uv_5comIn.read(); //gcnl:Node.cpp:691
-                const u32 Uh_5tlreg44710 = Uv_5seqno.read(); //gcnl:Node.cpp:691
-                if(Uh_5tlreg44710 >= 40) //gcnl:NodeSquareBracket.cpp:794
+                const u32 Uh_5tlreg41256 = Uv_5comIn.read(); //gcnl:Node.cpp:691
+                const u32 Uh_5tlreg41258 = Uv_5seqno.read(); //gcnl:Node.cpp:691
+                if(Uh_5tlreg41258 >= 40) //gcnl:NodeSquareBracket.cpp:794
                   FAIL(ARRAY_INDEX_OUT_OF_BOUNDS); //gcnl:NodeSquareBracket.cpp:798
-                Ui_Ut_r10161u<EC> Uh_6tlref44712(Uv_7eqTree0, Uh_5tlreg44710 * 6u + 0u, uc); //gcnl:Node.cpp:1303
-                Uh_6tlref44712.write(Uh_5tlreg44708);
+                Ui_Ut_r10161u<EC> Uh_6tlref41260(Uv_7eqTree0, Uh_5tlreg41258 * 6u + 0u, uc); //gcnl:Node.cpp:1303
+                Uh_6tlref41260.write(Uh_5tlreg41256);
               }
             } // end if
           }
@@ -1475,77 +1214,77 @@ Ul_214endcontrolloop218:
           {
 
 //! DecisionTree.ulam:280: 			if(tree0Type[seqno] == 0 && tree1Type[seqno] == 0){
-            u32 Uh_5tlreg44713 = false; //gcnl:NodeBinaryOpLogicalAnd.cpp:118
-            const u32 Uh_5tlreg44714 = 0; //gcnl:NodeTerminal.cpp:721
-            const u32 Uh_5tlreg44715 = _Int32ToBits32(Uh_5tlreg44714, 2, 2); //gcnl:NodeCast.cpp:723
-            const u32 Uh_5tlreg44717 = Uv_5seqno.read(); //gcnl:Node.cpp:691
-            if(Uh_5tlreg44717 >= 40) //gcnl:NodeSquareBracket.cpp:794
+            u32 Uh_5tlreg41261 = false; //gcnl:NodeBinaryOpLogicalAnd.cpp:118
+            const u32 Uh_5tlreg41262 = 0; //gcnl:NodeTerminal.cpp:721
+            const u32 Uh_5tlreg41263 = _Int32ToBits32(Uh_5tlreg41262, 2, 2); //gcnl:NodeCast.cpp:723
+            const u32 Uh_5tlreg41265 = Uv_5seqno.read(); //gcnl:Node.cpp:691
+            if(Uh_5tlreg41265 >= 40) //gcnl:NodeSquareBracket.cpp:794
               FAIL(ARRAY_INDEX_OUT_OF_BOUNDS); //gcnl:NodeSquareBracket.cpp:798
-            Ui_Ut_r10121t<EC> Uh_6tlref44719(Uv_919tree0Type, Uh_5tlreg44717 * 2u + 0u, uc); //gcnl:Node.cpp:1303
-            const u32 Uh_5tlreg44720 = Uh_6tlref44719.read(); //gcnl:Node.cpp:691
-            const u32 Uh_5tlreg44721 = _BinOpCompareEqEqBits32(Uh_5tlreg44720, Uh_5tlreg44715, 2); //gcnl:NodeBinaryOpCompare.cpp:313
-            if(_Bool32ToCbool(Uh_5tlreg44721, 1)) //gcnl:NodeBinaryOpLogicalAnd.cpp:137
+            Ui_Ut_r10121t<EC> Uh_6tlref41267(Uv_919tree0Type, Uh_5tlreg41265 * 2u + 0u, uc); //gcnl:Node.cpp:1303
+            const u32 Uh_5tlreg41268 = Uh_6tlref41267.read(); //gcnl:Node.cpp:691
+            const u32 Uh_5tlreg41269 = _BinOpCompareEqEqBits32(Uh_5tlreg41268, Uh_5tlreg41263, 2); //gcnl:NodeBinaryOpCompare.cpp:313
+            if(_Bool32ToCbool(Uh_5tlreg41269, 1)) //gcnl:NodeBinaryOpLogicalAnd.cpp:137
             {
-              const u32 Uh_5tlreg44722 = 0; //gcnl:NodeTerminal.cpp:721
-              const u32 Uh_5tlreg44723 = _Int32ToBits32(Uh_5tlreg44722, 2, 2); //gcnl:NodeCast.cpp:723
-              const u32 Uh_5tlreg44725 = Uv_5seqno.read(); //gcnl:Node.cpp:691
-              if(Uh_5tlreg44725 >= 40) //gcnl:NodeSquareBracket.cpp:794
+              const u32 Uh_5tlreg41270 = 0; //gcnl:NodeTerminal.cpp:721
+              const u32 Uh_5tlreg41271 = _Int32ToBits32(Uh_5tlreg41270, 2, 2); //gcnl:NodeCast.cpp:723
+              const u32 Uh_5tlreg41273 = Uv_5seqno.read(); //gcnl:Node.cpp:691
+              if(Uh_5tlreg41273 >= 40) //gcnl:NodeSquareBracket.cpp:794
                 FAIL(ARRAY_INDEX_OUT_OF_BOUNDS); //gcnl:NodeSquareBracket.cpp:798
-              Ui_Ut_r10121t<EC> Uh_6tlref44727(Uv_919tree1Type, Uh_5tlreg44725 * 2u + 0u, uc); //gcnl:Node.cpp:1303
-              const u32 Uh_5tlreg44728 = Uh_6tlref44727.read(); //gcnl:Node.cpp:691
-              const u32 Uh_5tlreg44729 = _BinOpCompareEqEqBits32(Uh_5tlreg44728, Uh_5tlreg44723, 2); //gcnl:NodeBinaryOpCompare.cpp:313
-              Uh_5tlreg44713 = Uh_5tlreg44729; //gcnl:NodeBinaryOpLogicalAnd.cpp:151
+              Ui_Ut_r10121t<EC> Uh_6tlref41275(Uv_919tree1Type, Uh_5tlreg41273 * 2u + 0u, uc); //gcnl:Node.cpp:1303
+              const u32 Uh_5tlreg41276 = Uh_6tlref41275.read(); //gcnl:Node.cpp:691
+              const u32 Uh_5tlreg41277 = _BinOpCompareEqEqBits32(Uh_5tlreg41276, Uh_5tlreg41271, 2); //gcnl:NodeBinaryOpCompare.cpp:313
+              Uh_5tlreg41261 = Uh_5tlreg41277; //gcnl:NodeBinaryOpLogicalAnd.cpp:151
             }
-            if(_Bool32ToCbool(Uh_5tlreg44713, 1)) //gcnl:NodeControl.cpp:213
+            if(_Bool32ToCbool(Uh_5tlreg41261, 1)) //gcnl:NodeControl.cpp:213
             {
               {
 
 //! DecisionTree.ulam:281: 				value[seqno] = operate(eqTree0[seqno], operator[seqno], eqTree1[seqno]);
-                const u32 Uh_5tlreg44732 = Uv_5seqno.read(); //gcnl:Node.cpp:691
-                if(Uh_5tlreg44732 >= 40) //gcnl:NodeSquareBracket.cpp:794
+                const u32 Uh_5tlreg41280 = Uv_5seqno.read(); //gcnl:Node.cpp:691
+                if(Uh_5tlreg41280 >= 40) //gcnl:NodeSquareBracket.cpp:794
                   FAIL(ARRAY_INDEX_OUT_OF_BOUNDS); //gcnl:NodeSquareBracket.cpp:798
-                Ui_Ut_r10161u<EC> Uh_6tlref44734(Uv_7eqTree0, Uh_5tlreg44732 * 6u + 0u, uc); //gcnl:Node.cpp:1303
-                const u32 Uh_5tlreg44735 = Uh_6tlref44734.read(); //gcnl:Node.cpp:691
-                Ui_Ut_10161u<EC> Uh_5tlval44736(Uh_5tlreg44735); //func arg& //gcnl:Node.cpp:1128
-                const u32 Uh_5tlreg44738 = Uv_5seqno.read(); //gcnl:Node.cpp:691
-                if(Uh_5tlreg44738 >= 40) //gcnl:NodeSquareBracket.cpp:794
+                Ui_Ut_r10161u<EC> Uh_6tlref41282(Uv_7eqTree0, Uh_5tlreg41280 * 6u + 0u, uc); //gcnl:Node.cpp:1303
+                const u32 Uh_5tlreg41283 = Uh_6tlref41282.read(); //gcnl:Node.cpp:691
+                Ui_Ut_10161u<EC> Uh_5tlval41284(Uh_5tlreg41283); //func arg& //gcnl:Node.cpp:1128
+                const u32 Uh_5tlreg41286 = Uv_5seqno.read(); //gcnl:Node.cpp:691
+                if(Uh_5tlreg41286 >= 40) //gcnl:NodeSquareBracket.cpp:794
                   FAIL(ARRAY_INDEX_OUT_OF_BOUNDS); //gcnl:NodeSquareBracket.cpp:798
-                Ui_Ut_r10121u<EC> Uh_6tlref44740(Uv_8operator, Uh_5tlreg44738 * 2u + 0u, uc); //gcnl:Node.cpp:1303
-                const u32 Uh_5tlreg44741 = Uh_6tlref44740.read(); //gcnl:Node.cpp:691
-                Ui_Ut_10121u<EC> Uh_5tlval44742(Uh_5tlreg44741); //func arg& //gcnl:Node.cpp:1128
-                const u32 Uh_5tlreg44744 = Uv_5seqno.read(); //gcnl:Node.cpp:691
-                if(Uh_5tlreg44744 >= 40) //gcnl:NodeSquareBracket.cpp:794
+                Ui_Ut_r10121u<EC> Uh_6tlref41288(Uv_8operator, Uh_5tlreg41286 * 2u + 0u, uc); //gcnl:Node.cpp:1303
+                const u32 Uh_5tlreg41289 = Uh_6tlref41288.read(); //gcnl:Node.cpp:691
+                Ui_Ut_10121u<EC> Uh_5tlval41290(Uh_5tlreg41289); //func arg& //gcnl:Node.cpp:1128
+                const u32 Uh_5tlreg41292 = Uv_5seqno.read(); //gcnl:Node.cpp:691
+                if(Uh_5tlreg41292 >= 40) //gcnl:NodeSquareBracket.cpp:794
                   FAIL(ARRAY_INDEX_OUT_OF_BOUNDS); //gcnl:NodeSquareBracket.cpp:798
-                Ui_Ut_r10161u<EC> Uh_6tlref44746(Uv_7eqTree1, Uh_5tlreg44744 * 6u + 0u, uc); //gcnl:Node.cpp:1303
-                const u32 Uh_5tlreg44747 = Uh_6tlref44746.read(); //gcnl:Node.cpp:691
-                Ui_Ut_10161u<EC> Uh_5tlval44748(Uh_5tlreg44747); //func arg& //gcnl:Node.cpp:1128
-                const Ui_Ut_10161u<EC> Uh_5tlval44750 = THE_INSTANCE.Uf_7operate(uc, ur, Uh_5tlval44736, Uh_5tlval44742, Uh_5tlval44748); //gcnl:NodeFunctionCall.cpp:1006
-                const u32 Uh_5tlreg44751 = Uh_5tlval44750.read(); //gcnl:Node.cpp:1156
-                const u32 Uh_5tlreg44753 = Uv_5seqno.read(); //gcnl:Node.cpp:691
-                if(Uh_5tlreg44753 >= 40) //gcnl:NodeSquareBracket.cpp:794
+                Ui_Ut_r10161u<EC> Uh_6tlref41294(Uv_7eqTree1, Uh_5tlreg41292 * 6u + 0u, uc); //gcnl:Node.cpp:1303
+                const u32 Uh_5tlreg41295 = Uh_6tlref41294.read(); //gcnl:Node.cpp:691
+                Ui_Ut_10161u<EC> Uh_5tlval41296(Uh_5tlreg41295); //func arg& //gcnl:Node.cpp:1128
+                const Ui_Ut_10161u<EC> Uh_5tlval41298 = THE_INSTANCE.Uf_7operate(uc, ur, Uh_5tlval41284, Uh_5tlval41290, Uh_5tlval41296); //gcnl:NodeFunctionCall.cpp:1006
+                const u32 Uh_5tlreg41299 = Uh_5tlval41298.read(); //gcnl:Node.cpp:1156
+                const u32 Uh_5tlreg41301 = Uv_5seqno.read(); //gcnl:Node.cpp:691
+                if(Uh_5tlreg41301 >= 40) //gcnl:NodeSquareBracket.cpp:794
                   FAIL(ARRAY_INDEX_OUT_OF_BOUNDS); //gcnl:NodeSquareBracket.cpp:798
-                Ui_Ut_r10161u<EC> Uh_6tlref44755(Uv_5value, Uh_5tlreg44753 * 6u + 0u, uc); //gcnl:Node.cpp:1303
-                Uh_6tlref44755.write(Uh_5tlreg44751);
+                Ui_Ut_r10161u<EC> Uh_6tlref41303(Uv_5value, Uh_5tlreg41301 * 6u + 0u, uc); //gcnl:Node.cpp:1303
+                Uh_6tlref41303.write(Uh_5tlreg41299);
 
 //! DecisionTree.ulam:282: 				evaluated[seqno] = true;
-                const u32 Uh_5tlreg44756 = 1u; //gcnl:NodeTerminal.cpp:721
-                const u32 Uh_5tlreg44758 = Uv_5seqno.read(); //gcnl:Node.cpp:691
-                if(Uh_5tlreg44758 >= 40) //gcnl:NodeSquareBracket.cpp:794
+                const u32 Uh_5tlreg41304 = 1u; //gcnl:NodeTerminal.cpp:721
+                const u32 Uh_5tlreg41306 = Uv_5seqno.read(); //gcnl:Node.cpp:691
+                if(Uh_5tlreg41306 >= 40) //gcnl:NodeSquareBracket.cpp:794
                   FAIL(ARRAY_INDEX_OUT_OF_BOUNDS); //gcnl:NodeSquareBracket.cpp:798
-                Ui_Ut_r10111b<EC> Uh_6tlref44760(Uv_919evaluated, Uh_5tlreg44758 * 1u + 0u, uc); //gcnl:Node.cpp:1303
-                Uh_6tlref44760.write(Uh_5tlreg44756);
+                Ui_Ut_r10111b<EC> Uh_6tlref41308(Uv_919evaluated, Uh_5tlreg41306 * 1u + 0u, uc); //gcnl:Node.cpp:1303
+                Uh_6tlref41308.write(Uh_5tlreg41304);
 
 //! DecisionTree.ulam:283: 				keepRecursing = true;
-                const u32 Uh_5tlreg44761 = 1u; //gcnl:NodeTerminal.cpp:721
-                Uv_9213keepRecursing.write(Uh_5tlreg44761); //gcnl:Node.cpp:885
+                const u32 Uh_5tlreg41309 = 1u; //gcnl:NodeTerminal.cpp:721
+                Uv_9213keepRecursing.write(Uh_5tlreg41309); //gcnl:Node.cpp:885
 
 //! DecisionTree.ulam:284: 				seqno = parent[seqno];
-                const u32 Uh_5tlreg44764 = Uv_5seqno.read(); //gcnl:Node.cpp:691
-                if(Uh_5tlreg44764 >= 40) //gcnl:NodeSquareBracket.cpp:794
+                const u32 Uh_5tlreg41312 = Uv_5seqno.read(); //gcnl:Node.cpp:691
+                if(Uh_5tlreg41312 >= 40) //gcnl:NodeSquareBracket.cpp:794
                   FAIL(ARRAY_INDEX_OUT_OF_BOUNDS); //gcnl:NodeSquareBracket.cpp:798
-                Ui_Ut_r10161u<EC> Uh_6tlref44766(Uv_6parent, Uh_5tlreg44764 * 6u + 0u, uc); //gcnl:Node.cpp:1303
-                const u32 Uh_5tlreg44767 = Uh_6tlref44766.read(); //gcnl:Node.cpp:691
-                Uv_5seqno.write(Uh_5tlreg44767); //gcnl:Node.cpp:885
+                Ui_Ut_r10161u<EC> Uh_6tlref41314(Uv_6parent, Uh_5tlreg41312 * 6u + 0u, uc); //gcnl:Node.cpp:1303
+                const u32 Uh_5tlreg41315 = Uh_6tlref41314.read(); //gcnl:Node.cpp:691
+                Uv_5seqno.write(Uh_5tlreg41315); //gcnl:Node.cpp:885
               }
             } // end if
           }
@@ -1554,55 +1293,55 @@ Ul_214endcontrolloop218:
           {
 
 //! DecisionTree.ulam:289: 			if(tree0Type[seqno] == 1){
-            const u32 Uh_5tlreg44769 = 1; //gcnl:NodeTerminal.cpp:721
-            const u32 Uh_5tlreg44770 = _Int32ToBits32(Uh_5tlreg44769, 2, 2); //gcnl:NodeCast.cpp:723
-            const u32 Uh_5tlreg44772 = Uv_5seqno.read(); //gcnl:Node.cpp:691
-            if(Uh_5tlreg44772 >= 40) //gcnl:NodeSquareBracket.cpp:794
+            const u32 Uh_5tlreg41317 = 1; //gcnl:NodeTerminal.cpp:721
+            const u32 Uh_5tlreg41318 = _Int32ToBits32(Uh_5tlreg41317, 2, 2); //gcnl:NodeCast.cpp:723
+            const u32 Uh_5tlreg41320 = Uv_5seqno.read(); //gcnl:Node.cpp:691
+            if(Uh_5tlreg41320 >= 40) //gcnl:NodeSquareBracket.cpp:794
               FAIL(ARRAY_INDEX_OUT_OF_BOUNDS); //gcnl:NodeSquareBracket.cpp:798
-            Ui_Ut_r10121t<EC> Uh_6tlref44774(Uv_919tree0Type, Uh_5tlreg44772 * 2u + 0u, uc); //gcnl:Node.cpp:1303
-            const u32 Uh_5tlreg44775 = Uh_6tlref44774.read(); //gcnl:Node.cpp:691
-            const u32 Uh_5tlreg44776 = _BinOpCompareEqEqBits32(Uh_5tlreg44775, Uh_5tlreg44770, 2); //gcnl:NodeBinaryOpCompare.cpp:313
-            if(_Bool32ToCbool(Uh_5tlreg44776, 1)) //gcnl:NodeControl.cpp:213
+            Ui_Ut_r10121t<EC> Uh_6tlref41322(Uv_919tree0Type, Uh_5tlreg41320 * 2u + 0u, uc); //gcnl:Node.cpp:1303
+            const u32 Uh_5tlreg41323 = Uh_6tlref41322.read(); //gcnl:Node.cpp:691
+            const u32 Uh_5tlreg41324 = _BinOpCompareEqEqBits32(Uh_5tlreg41323, Uh_5tlreg41318, 2); //gcnl:NodeBinaryOpCompare.cpp:313
+            if(_Bool32ToCbool(Uh_5tlreg41324, 1)) //gcnl:NodeControl.cpp:213
             {
               {
 
 //! DecisionTree.ulam:290: 				Seqno childseqno = (Seqno)eqTree0[seqno];
-                const u32 Uh_5tlreg44778 = Uv_5seqno.read(); //gcnl:Node.cpp:691
-                if(Uh_5tlreg44778 >= 40) //gcnl:NodeSquareBracket.cpp:794
+                const u32 Uh_5tlreg41326 = Uv_5seqno.read(); //gcnl:Node.cpp:691
+                if(Uh_5tlreg41326 >= 40) //gcnl:NodeSquareBracket.cpp:794
                   FAIL(ARRAY_INDEX_OUT_OF_BOUNDS); //gcnl:NodeSquareBracket.cpp:798
-                Ui_Ut_r10161u<EC> Uh_6tlref44780(Uv_7eqTree0, Uh_5tlreg44778 * 6u + 0u, uc); //gcnl:Node.cpp:1303
-                const u32 Uh_5tlreg44781 = Uh_6tlref44780.read(); //gcnl:Node.cpp:691
-                Ui_Ut_10161u<EC> Uv_9210childseqno(Uh_5tlreg44781); //gcnl:NodeVarDecl.cpp:1060
+                Ui_Ut_r10161u<EC> Uh_6tlref41328(Uv_7eqTree0, Uh_5tlreg41326 * 6u + 0u, uc); //gcnl:Node.cpp:1303
+                const u32 Uh_5tlreg41329 = Uh_6tlref41328.read(); //gcnl:Node.cpp:691
+                Ui_Ut_10161u<EC> Uv_9210childseqno(Uh_5tlreg41329); //gcnl:NodeVarDecl.cpp:1060
 
 //! DecisionTree.ulam:291: 				if(!evaluated[childseqno]){
                 {
 
 //! DecisionTree.ulam:291: 				if(!evaluated[childseqno]){
-                  const u32 Uh_5tlreg44783 = Uv_9210childseqno.read(); //gcnl:Node.cpp:691
-                  if(Uh_5tlreg44783 >= 40) //gcnl:NodeSquareBracket.cpp:794
+                  const u32 Uh_5tlreg41331 = Uv_9210childseqno.read(); //gcnl:Node.cpp:691
+                  if(Uh_5tlreg41331 >= 40) //gcnl:NodeSquareBracket.cpp:794
                     FAIL(ARRAY_INDEX_OUT_OF_BOUNDS); //gcnl:NodeSquareBracket.cpp:798
-                  Ui_Ut_r10111b<EC> Uh_6tlref44785(Uv_919evaluated, Uh_5tlreg44783 * 1u + 0u, uc); //gcnl:Node.cpp:1303
-                  const u32 Uh_5tlreg44786 = Uh_6tlref44785.read(); //gcnl:Node.cpp:691
-                  const u32 Uh_5tlreg44787 = _LogicalBangBool32(Uh_5tlreg44786, 1); //gcnl:NodeUnaryOp.cpp:449
-                  if(_Bool32ToCbool(Uh_5tlreg44787, 1)) //gcnl:NodeControl.cpp:213
+                  Ui_Ut_r10111b<EC> Uh_6tlref41333(Uv_919evaluated, Uh_5tlreg41331 * 1u + 0u, uc); //gcnl:Node.cpp:1303
+                  const u32 Uh_5tlreg41334 = Uh_6tlref41333.read(); //gcnl:Node.cpp:691
+                  const u32 Uh_5tlreg41335 = _LogicalBangBool32(Uh_5tlreg41334, 1); //gcnl:NodeUnaryOp.cpp:449
+                  if(_Bool32ToCbool(Uh_5tlreg41335, 1)) //gcnl:NodeControl.cpp:213
                   {
                     {
 
 //! DecisionTree.ulam:292: 					parent[childseqno] = seqno;
-                      const u32 Uh_5tlreg44789 = Uv_5seqno.read(); //gcnl:Node.cpp:691
-                      const u32 Uh_5tlreg44791 = Uv_9210childseqno.read(); //gcnl:Node.cpp:691
-                      if(Uh_5tlreg44791 >= 40) //gcnl:NodeSquareBracket.cpp:794
+                      const u32 Uh_5tlreg41337 = Uv_5seqno.read(); //gcnl:Node.cpp:691
+                      const u32 Uh_5tlreg41339 = Uv_9210childseqno.read(); //gcnl:Node.cpp:691
+                      if(Uh_5tlreg41339 >= 40) //gcnl:NodeSquareBracket.cpp:794
                         FAIL(ARRAY_INDEX_OUT_OF_BOUNDS); //gcnl:NodeSquareBracket.cpp:798
-                      Ui_Ut_r10161u<EC> Uh_6tlref44793(Uv_6parent, Uh_5tlreg44791 * 6u + 0u, uc); //gcnl:Node.cpp:1303
-                      Uh_6tlref44793.write(Uh_5tlreg44789);
+                      Ui_Ut_r10161u<EC> Uh_6tlref41341(Uv_6parent, Uh_5tlreg41339 * 6u + 0u, uc); //gcnl:Node.cpp:1303
+                      Uh_6tlref41341.write(Uh_5tlreg41337);
 
 //! DecisionTree.ulam:293: 					seqno = childseqno;
-                      const u32 Uh_5tlreg44795 = Uv_9210childseqno.read(); //gcnl:Node.cpp:691
-                      Uv_5seqno.write(Uh_5tlreg44795); //gcnl:Node.cpp:885
+                      const u32 Uh_5tlreg41343 = Uv_9210childseqno.read(); //gcnl:Node.cpp:691
+                      Uv_5seqno.write(Uh_5tlreg41343); //gcnl:Node.cpp:885
 
 //! DecisionTree.ulam:294: 					keepRecursing = true;
-                      const u32 Uh_5tlreg44797 = 1u; //gcnl:NodeTerminal.cpp:721
-                      Uv_9213keepRecursing.write(Uh_5tlreg44797); //gcnl:Node.cpp:885
+                      const u32 Uh_5tlreg41345 = 1u; //gcnl:NodeTerminal.cpp:721
+                      Uv_9213keepRecursing.write(Uh_5tlreg41345); //gcnl:Node.cpp:885
                     }
                   } // end if
                   else
@@ -1610,29 +1349,29 @@ Ul_214endcontrolloop218:
                     {
 
 //! DecisionTree.ulam:297: 					tree0Type[seqno] = 0;
-                      const u32 Uh_5tlreg44799 = 0; //gcnl:NodeTerminal.cpp:721
-                      const u32 Uh_5tlreg44800 = _Int32ToBits32(Uh_5tlreg44799, 2, 2); //gcnl:NodeCast.cpp:723
-                      const u32 Uh_5tlreg44802 = Uv_5seqno.read(); //gcnl:Node.cpp:691
-                      if(Uh_5tlreg44802 >= 40) //gcnl:NodeSquareBracket.cpp:794
+                      const u32 Uh_5tlreg41347 = 0; //gcnl:NodeTerminal.cpp:721
+                      const u32 Uh_5tlreg41348 = _Int32ToBits32(Uh_5tlreg41347, 2, 2); //gcnl:NodeCast.cpp:723
+                      const u32 Uh_5tlreg41350 = Uv_5seqno.read(); //gcnl:Node.cpp:691
+                      if(Uh_5tlreg41350 >= 40) //gcnl:NodeSquareBracket.cpp:794
                         FAIL(ARRAY_INDEX_OUT_OF_BOUNDS); //gcnl:NodeSquareBracket.cpp:798
-                      Ui_Ut_r10121t<EC> Uh_6tlref44804(Uv_919tree0Type, Uh_5tlreg44802 * 2u + 0u, uc); //gcnl:Node.cpp:1303
-                      Uh_6tlref44804.write(Uh_5tlreg44800);
+                      Ui_Ut_r10121t<EC> Uh_6tlref41352(Uv_919tree0Type, Uh_5tlreg41350 * 2u + 0u, uc); //gcnl:Node.cpp:1303
+                      Uh_6tlref41352.write(Uh_5tlreg41348);
 
 //! DecisionTree.ulam:298: 					eqTree0[seqno] = value[childseqno];
-                      const u32 Uh_5tlreg44806 = Uv_9210childseqno.read(); //gcnl:Node.cpp:691
-                      if(Uh_5tlreg44806 >= 40) //gcnl:NodeSquareBracket.cpp:794
+                      const u32 Uh_5tlreg41354 = Uv_9210childseqno.read(); //gcnl:Node.cpp:691
+                      if(Uh_5tlreg41354 >= 40) //gcnl:NodeSquareBracket.cpp:794
                         FAIL(ARRAY_INDEX_OUT_OF_BOUNDS); //gcnl:NodeSquareBracket.cpp:798
-                      Ui_Ut_r10161u<EC> Uh_6tlref44808(Uv_5value, Uh_5tlreg44806 * 6u + 0u, uc); //gcnl:Node.cpp:1303
-                      const u32 Uh_5tlreg44809 = Uh_6tlref44808.read(); //gcnl:Node.cpp:691
-                      const u32 Uh_5tlreg44811 = Uv_5seqno.read(); //gcnl:Node.cpp:691
-                      if(Uh_5tlreg44811 >= 40) //gcnl:NodeSquareBracket.cpp:794
+                      Ui_Ut_r10161u<EC> Uh_6tlref41356(Uv_5value, Uh_5tlreg41354 * 6u + 0u, uc); //gcnl:Node.cpp:1303
+                      const u32 Uh_5tlreg41357 = Uh_6tlref41356.read(); //gcnl:Node.cpp:691
+                      const u32 Uh_5tlreg41359 = Uv_5seqno.read(); //gcnl:Node.cpp:691
+                      if(Uh_5tlreg41359 >= 40) //gcnl:NodeSquareBracket.cpp:794
                         FAIL(ARRAY_INDEX_OUT_OF_BOUNDS); //gcnl:NodeSquareBracket.cpp:798
-                      Ui_Ut_r10161u<EC> Uh_6tlref44813(Uv_7eqTree0, Uh_5tlreg44811 * 6u + 0u, uc); //gcnl:Node.cpp:1303
-                      Uh_6tlref44813.write(Uh_5tlreg44809);
+                      Ui_Ut_r10161u<EC> Uh_6tlref41361(Uv_7eqTree0, Uh_5tlreg41359 * 6u + 0u, uc); //gcnl:Node.cpp:1303
+                      Uh_6tlref41361.write(Uh_5tlreg41357);
 
 //! DecisionTree.ulam:299: 					keepRecursing = true;
-                      const u32 Uh_5tlreg44814 = 1u; //gcnl:NodeTerminal.cpp:721
-                      Uv_9213keepRecursing.write(Uh_5tlreg44814); //gcnl:Node.cpp:885
+                      const u32 Uh_5tlreg41362 = 1u; //gcnl:NodeTerminal.cpp:721
+                      Uv_9213keepRecursing.write(Uh_5tlreg41362); //gcnl:Node.cpp:885
                     }
                   } //end else
                 }
@@ -1646,55 +1385,55 @@ Ul_214endcontrolloop218:
                 {
 
 //! DecisionTree.ulam:303: 				if(tree1Type[seqno] == 1){
-                  const u32 Uh_5tlreg44816 = 1; //gcnl:NodeTerminal.cpp:721
-                  const u32 Uh_5tlreg44817 = _Int32ToBits32(Uh_5tlreg44816, 2, 2); //gcnl:NodeCast.cpp:723
-                  const u32 Uh_5tlreg44819 = Uv_5seqno.read(); //gcnl:Node.cpp:691
-                  if(Uh_5tlreg44819 >= 40) //gcnl:NodeSquareBracket.cpp:794
+                  const u32 Uh_5tlreg41364 = 1; //gcnl:NodeTerminal.cpp:721
+                  const u32 Uh_5tlreg41365 = _Int32ToBits32(Uh_5tlreg41364, 2, 2); //gcnl:NodeCast.cpp:723
+                  const u32 Uh_5tlreg41367 = Uv_5seqno.read(); //gcnl:Node.cpp:691
+                  if(Uh_5tlreg41367 >= 40) //gcnl:NodeSquareBracket.cpp:794
                     FAIL(ARRAY_INDEX_OUT_OF_BOUNDS); //gcnl:NodeSquareBracket.cpp:798
-                  Ui_Ut_r10121t<EC> Uh_6tlref44821(Uv_919tree1Type, Uh_5tlreg44819 * 2u + 0u, uc); //gcnl:Node.cpp:1303
-                  const u32 Uh_5tlreg44822 = Uh_6tlref44821.read(); //gcnl:Node.cpp:691
-                  const u32 Uh_5tlreg44823 = _BinOpCompareEqEqBits32(Uh_5tlreg44822, Uh_5tlreg44817, 2); //gcnl:NodeBinaryOpCompare.cpp:313
-                  if(_Bool32ToCbool(Uh_5tlreg44823, 1)) //gcnl:NodeControl.cpp:213
+                  Ui_Ut_r10121t<EC> Uh_6tlref41369(Uv_919tree1Type, Uh_5tlreg41367 * 2u + 0u, uc); //gcnl:Node.cpp:1303
+                  const u32 Uh_5tlreg41370 = Uh_6tlref41369.read(); //gcnl:Node.cpp:691
+                  const u32 Uh_5tlreg41371 = _BinOpCompareEqEqBits32(Uh_5tlreg41370, Uh_5tlreg41365, 2); //gcnl:NodeBinaryOpCompare.cpp:313
+                  if(_Bool32ToCbool(Uh_5tlreg41371, 1)) //gcnl:NodeControl.cpp:213
                   {
                     {
 
 //! DecisionTree.ulam:304: 					Seqno childseqno = (Seqno)eqTree1[seqno];
-                      const u32 Uh_5tlreg44825 = Uv_5seqno.read(); //gcnl:Node.cpp:691
-                      if(Uh_5tlreg44825 >= 40) //gcnl:NodeSquareBracket.cpp:794
+                      const u32 Uh_5tlreg41373 = Uv_5seqno.read(); //gcnl:Node.cpp:691
+                      if(Uh_5tlreg41373 >= 40) //gcnl:NodeSquareBracket.cpp:794
                         FAIL(ARRAY_INDEX_OUT_OF_BOUNDS); //gcnl:NodeSquareBracket.cpp:798
-                      Ui_Ut_r10161u<EC> Uh_6tlref44827(Uv_7eqTree1, Uh_5tlreg44825 * 6u + 0u, uc); //gcnl:Node.cpp:1303
-                      const u32 Uh_5tlreg44828 = Uh_6tlref44827.read(); //gcnl:Node.cpp:691
-                      Ui_Ut_10161u<EC> Uv_9210childseqno(Uh_5tlreg44828); //gcnl:NodeVarDecl.cpp:1060
+                      Ui_Ut_r10161u<EC> Uh_6tlref41375(Uv_7eqTree1, Uh_5tlreg41373 * 6u + 0u, uc); //gcnl:Node.cpp:1303
+                      const u32 Uh_5tlreg41376 = Uh_6tlref41375.read(); //gcnl:Node.cpp:691
+                      Ui_Ut_10161u<EC> Uv_9210childseqno(Uh_5tlreg41376); //gcnl:NodeVarDecl.cpp:1060
 
 //! DecisionTree.ulam:305: 					if(!evaluated[childseqno]){
                       {
 
 //! DecisionTree.ulam:305: 					if(!evaluated[childseqno]){
-                        const u32 Uh_5tlreg44830 = Uv_9210childseqno.read(); //gcnl:Node.cpp:691
-                        if(Uh_5tlreg44830 >= 40) //gcnl:NodeSquareBracket.cpp:794
+                        const u32 Uh_5tlreg41378 = Uv_9210childseqno.read(); //gcnl:Node.cpp:691
+                        if(Uh_5tlreg41378 >= 40) //gcnl:NodeSquareBracket.cpp:794
                           FAIL(ARRAY_INDEX_OUT_OF_BOUNDS); //gcnl:NodeSquareBracket.cpp:798
-                        Ui_Ut_r10111b<EC> Uh_6tlref44832(Uv_919evaluated, Uh_5tlreg44830 * 1u + 0u, uc); //gcnl:Node.cpp:1303
-                        const u32 Uh_5tlreg44833 = Uh_6tlref44832.read(); //gcnl:Node.cpp:691
-                        const u32 Uh_5tlreg44834 = _LogicalBangBool32(Uh_5tlreg44833, 1); //gcnl:NodeUnaryOp.cpp:449
-                        if(_Bool32ToCbool(Uh_5tlreg44834, 1)) //gcnl:NodeControl.cpp:213
+                        Ui_Ut_r10111b<EC> Uh_6tlref41380(Uv_919evaluated, Uh_5tlreg41378 * 1u + 0u, uc); //gcnl:Node.cpp:1303
+                        const u32 Uh_5tlreg41381 = Uh_6tlref41380.read(); //gcnl:Node.cpp:691
+                        const u32 Uh_5tlreg41382 = _LogicalBangBool32(Uh_5tlreg41381, 1); //gcnl:NodeUnaryOp.cpp:449
+                        if(_Bool32ToCbool(Uh_5tlreg41382, 1)) //gcnl:NodeControl.cpp:213
                         {
                           {
 
 //! DecisionTree.ulam:306: 						parent[childseqno] = seqno;
-                            const u32 Uh_5tlreg44836 = Uv_5seqno.read(); //gcnl:Node.cpp:691
-                            const u32 Uh_5tlreg44838 = Uv_9210childseqno.read(); //gcnl:Node.cpp:691
-                            if(Uh_5tlreg44838 >= 40) //gcnl:NodeSquareBracket.cpp:794
+                            const u32 Uh_5tlreg41384 = Uv_5seqno.read(); //gcnl:Node.cpp:691
+                            const u32 Uh_5tlreg41386 = Uv_9210childseqno.read(); //gcnl:Node.cpp:691
+                            if(Uh_5tlreg41386 >= 40) //gcnl:NodeSquareBracket.cpp:794
                               FAIL(ARRAY_INDEX_OUT_OF_BOUNDS); //gcnl:NodeSquareBracket.cpp:798
-                            Ui_Ut_r10161u<EC> Uh_6tlref44840(Uv_6parent, Uh_5tlreg44838 * 6u + 0u, uc); //gcnl:Node.cpp:1303
-                            Uh_6tlref44840.write(Uh_5tlreg44836);
+                            Ui_Ut_r10161u<EC> Uh_6tlref41388(Uv_6parent, Uh_5tlreg41386 * 6u + 0u, uc); //gcnl:Node.cpp:1303
+                            Uh_6tlref41388.write(Uh_5tlreg41384);
 
 //! DecisionTree.ulam:307: 						seqno = childseqno;
-                            const u32 Uh_5tlreg44842 = Uv_9210childseqno.read(); //gcnl:Node.cpp:691
-                            Uv_5seqno.write(Uh_5tlreg44842); //gcnl:Node.cpp:885
+                            const u32 Uh_5tlreg41390 = Uv_9210childseqno.read(); //gcnl:Node.cpp:691
+                            Uv_5seqno.write(Uh_5tlreg41390); //gcnl:Node.cpp:885
 
 //! DecisionTree.ulam:308: 						keepRecursing = true;
-                            const u32 Uh_5tlreg44844 = 1u; //gcnl:NodeTerminal.cpp:721
-                            Uv_9213keepRecursing.write(Uh_5tlreg44844); //gcnl:Node.cpp:885
+                            const u32 Uh_5tlreg41392 = 1u; //gcnl:NodeTerminal.cpp:721
+                            Uv_9213keepRecursing.write(Uh_5tlreg41392); //gcnl:Node.cpp:885
                           }
                         } // end if
                         else
@@ -1702,29 +1441,29 @@ Ul_214endcontrolloop218:
                           {
 
 //! DecisionTree.ulam:311: 						tree1Type[seqno] = 0;
-                            const u32 Uh_5tlreg44846 = 0; //gcnl:NodeTerminal.cpp:721
-                            const u32 Uh_5tlreg44847 = _Int32ToBits32(Uh_5tlreg44846, 2, 2); //gcnl:NodeCast.cpp:723
-                            const u32 Uh_5tlreg44849 = Uv_5seqno.read(); //gcnl:Node.cpp:691
-                            if(Uh_5tlreg44849 >= 40) //gcnl:NodeSquareBracket.cpp:794
+                            const u32 Uh_5tlreg41394 = 0; //gcnl:NodeTerminal.cpp:721
+                            const u32 Uh_5tlreg41395 = _Int32ToBits32(Uh_5tlreg41394, 2, 2); //gcnl:NodeCast.cpp:723
+                            const u32 Uh_5tlreg41397 = Uv_5seqno.read(); //gcnl:Node.cpp:691
+                            if(Uh_5tlreg41397 >= 40) //gcnl:NodeSquareBracket.cpp:794
                               FAIL(ARRAY_INDEX_OUT_OF_BOUNDS); //gcnl:NodeSquareBracket.cpp:798
-                            Ui_Ut_r10121t<EC> Uh_6tlref44851(Uv_919tree1Type, Uh_5tlreg44849 * 2u + 0u, uc); //gcnl:Node.cpp:1303
-                            Uh_6tlref44851.write(Uh_5tlreg44847);
+                            Ui_Ut_r10121t<EC> Uh_6tlref41399(Uv_919tree1Type, Uh_5tlreg41397 * 2u + 0u, uc); //gcnl:Node.cpp:1303
+                            Uh_6tlref41399.write(Uh_5tlreg41395);
 
 //! DecisionTree.ulam:312: 						eqTree1[seqno] = value[childseqno];
-                            const u32 Uh_5tlreg44853 = Uv_9210childseqno.read(); //gcnl:Node.cpp:691
-                            if(Uh_5tlreg44853 >= 40) //gcnl:NodeSquareBracket.cpp:794
+                            const u32 Uh_5tlreg41401 = Uv_9210childseqno.read(); //gcnl:Node.cpp:691
+                            if(Uh_5tlreg41401 >= 40) //gcnl:NodeSquareBracket.cpp:794
                               FAIL(ARRAY_INDEX_OUT_OF_BOUNDS); //gcnl:NodeSquareBracket.cpp:798
-                            Ui_Ut_r10161u<EC> Uh_6tlref44855(Uv_5value, Uh_5tlreg44853 * 6u + 0u, uc); //gcnl:Node.cpp:1303
-                            const u32 Uh_5tlreg44856 = Uh_6tlref44855.read(); //gcnl:Node.cpp:691
-                            const u32 Uh_5tlreg44858 = Uv_5seqno.read(); //gcnl:Node.cpp:691
-                            if(Uh_5tlreg44858 >= 40) //gcnl:NodeSquareBracket.cpp:794
+                            Ui_Ut_r10161u<EC> Uh_6tlref41403(Uv_5value, Uh_5tlreg41401 * 6u + 0u, uc); //gcnl:Node.cpp:1303
+                            const u32 Uh_5tlreg41404 = Uh_6tlref41403.read(); //gcnl:Node.cpp:691
+                            const u32 Uh_5tlreg41406 = Uv_5seqno.read(); //gcnl:Node.cpp:691
+                            if(Uh_5tlreg41406 >= 40) //gcnl:NodeSquareBracket.cpp:794
                               FAIL(ARRAY_INDEX_OUT_OF_BOUNDS); //gcnl:NodeSquareBracket.cpp:798
-                            Ui_Ut_r10161u<EC> Uh_6tlref44860(Uv_7eqTree1, Uh_5tlreg44858 * 6u + 0u, uc); //gcnl:Node.cpp:1303
-                            Uh_6tlref44860.write(Uh_5tlreg44856);
+                            Ui_Ut_r10161u<EC> Uh_6tlref41408(Uv_7eqTree1, Uh_5tlreg41406 * 6u + 0u, uc); //gcnl:Node.cpp:1303
+                            Uh_6tlref41408.write(Uh_5tlreg41404);
 
 //! DecisionTree.ulam:313: 						keepRecursing = true;
-                            const u32 Uh_5tlreg44861 = 1u; //gcnl:NodeTerminal.cpp:721
-                            Uv_9213keepRecursing.write(Uh_5tlreg44861); //gcnl:Node.cpp:885
+                            const u32 Uh_5tlreg41409 = 1u; //gcnl:NodeTerminal.cpp:721
+                            Uv_9213keepRecursing.write(Uh_5tlreg41409); //gcnl:Node.cpp:885
                           }
                         } //end else
                       }
@@ -1737,19 +1476,19 @@ Ul_214endcontrolloop218:
         }
 
 //! DecisionTree.ulam:236: 		while(keepRecursing){
-Ul_214endcontrolloop220:
+Ul_214endcontrolloop14:
         __attribute__((__unused__)); //gcnl:NodeLabel.cpp:68
       } // end while //gcnl:NodeControlWhile.cpp:145
     }
 
 //! DecisionTree.ulam:320: 		return value[var];
-    const u32 Uh_5tlreg44864 = Uv_3var.read(); //gcnl:Node.cpp:691
-    if(Uh_5tlreg44864 >= 40) //gcnl:NodeSquareBracket.cpp:794
+    const u32 Uh_5tlreg41412 = Uv_3var.read(); //gcnl:Node.cpp:691
+    if(Uh_5tlreg41412 >= 40) //gcnl:NodeSquareBracket.cpp:794
       FAIL(ARRAY_INDEX_OUT_OF_BOUNDS); //gcnl:NodeSquareBracket.cpp:798
-    Ui_Ut_r10161u<EC> Uh_6tlref44866(Uv_5value, Uh_5tlreg44864 * 6u + 0u, uc); //gcnl:Node.cpp:1303
-    const u32 Uh_5tlreg44867 = Uh_6tlref44866.read(); //gcnl:Node.cpp:691
-    Ui_Ut_10161u<EC> Uh_5tlval44868(Uh_5tlreg44867); //func arg& //gcnl:Node.cpp:1128
-    return (Uh_5tlval44868); //gcnl:NodeReturnStatement.cpp:343
+    Ui_Ut_r10161u<EC> Uh_6tlref41414(Uv_5value, Uh_5tlreg41412 * 6u + 0u, uc); //gcnl:Node.cpp:1303
+    const u32 Uh_5tlreg41415 = Uh_6tlref41414.read(); //gcnl:Node.cpp:691
+    Ui_Ut_10161u<EC> Uh_5tlval41416(Uh_5tlreg41415); //func arg& //gcnl:Node.cpp:1128
+    return (Uh_5tlval41416); //gcnl:NodeReturnStatement.cpp:343
 
   } // Uf_8evaluate
 
@@ -1767,23 +1506,23 @@ Ul_214endcontrolloop220:
     {
 
 //! DecisionTree.ulam:362: 		if(operator == 0){
-      const u32 Uh_5tlreg44869 = 0; //gcnl:NodeTerminal.cpp:721
-      const u32 Uh_5tlreg44870 = _Int32ToInt32(Uh_5tlreg44869, 2, 3); //gcnl:NodeCast.cpp:723
-      const u32 Uh_5tlreg44872 = Uv_8operator.read(); //gcnl:Node.cpp:691
-      const u32 Uh_5tlreg44873 = _Unsigned32ToInt32(Uh_5tlreg44872, 2, 3); //gcnl:NodeCast.cpp:723
-      const u32 Uh_5tlreg44874 = _BinOpCompareEqEqInt32(Uh_5tlreg44873, Uh_5tlreg44870, 3); //gcnl:NodeBinaryOpCompare.cpp:313
-      if(_Bool32ToCbool(Uh_5tlreg44874, 1)) //gcnl:NodeControl.cpp:213
+      const u32 Uh_5tlreg41417 = 0; //gcnl:NodeTerminal.cpp:721
+      const u32 Uh_5tlreg41418 = _Int32ToInt32(Uh_5tlreg41417, 2, 3); //gcnl:NodeCast.cpp:723
+      const u32 Uh_5tlreg41420 = Uv_8operator.read(); //gcnl:Node.cpp:691
+      const u32 Uh_5tlreg41421 = _Unsigned32ToInt32(Uh_5tlreg41420, 2, 3); //gcnl:NodeCast.cpp:723
+      const u32 Uh_5tlreg41422 = _BinOpCompareEqEqInt32(Uh_5tlreg41421, Uh_5tlreg41418, 3); //gcnl:NodeBinaryOpCompare.cpp:313
+      if(_Bool32ToCbool(Uh_5tlreg41422, 1)) //gcnl:NodeControl.cpp:213
       {
         {
 
 //! DecisionTree.ulam:363: 			value = (StoredValue)(val1 + val2);
-          const u32 Uh_5tlreg44876 = Uv_4val2.read(); //gcnl:Node.cpp:691
-          const u32 Uh_5tlreg44877 = _Unsigned32ToUnsigned32(Uh_5tlreg44876, 6, 7); //gcnl:NodeCast.cpp:723
-          const u32 Uh_5tlreg44879 = Uv_4val1.read(); //gcnl:Node.cpp:691
-          const u32 Uh_5tlreg44880 = _Unsigned32ToUnsigned32(Uh_5tlreg44879, 6, 7); //gcnl:NodeCast.cpp:723
-          const u32 Uh_5tlreg44881 = _BinOpAddUnsigned32(Uh_5tlreg44880, Uh_5tlreg44877, 7); //gcnl:NodeBinaryOp.cpp:719
-          const u32 Uh_5tlreg44882 = _Unsigned32ToUnsigned32(Uh_5tlreg44881, 7, 6); //gcnl:NodeCast.cpp:723
-          Uv_5value.write(Uh_5tlreg44882); //gcnl:Node.cpp:885
+          const u32 Uh_5tlreg41424 = Uv_4val2.read(); //gcnl:Node.cpp:691
+          const u32 Uh_5tlreg41425 = _Unsigned32ToUnsigned32(Uh_5tlreg41424, 6, 7); //gcnl:NodeCast.cpp:723
+          const u32 Uh_5tlreg41427 = Uv_4val1.read(); //gcnl:Node.cpp:691
+          const u32 Uh_5tlreg41428 = _Unsigned32ToUnsigned32(Uh_5tlreg41427, 6, 7); //gcnl:NodeCast.cpp:723
+          const u32 Uh_5tlreg41429 = _BinOpAddUnsigned32(Uh_5tlreg41428, Uh_5tlreg41425, 7); //gcnl:NodeBinaryOp.cpp:719
+          const u32 Uh_5tlreg41430 = _Unsigned32ToUnsigned32(Uh_5tlreg41429, 7, 6); //gcnl:NodeCast.cpp:723
+          Uv_5value.write(Uh_5tlreg41430); //gcnl:Node.cpp:885
         }
       } // end if
     }
@@ -1792,23 +1531,23 @@ Ul_214endcontrolloop220:
     {
 
 //! DecisionTree.ulam:365: 		if(operator == 1){
-      const u32 Uh_5tlreg44884 = 1; //gcnl:NodeTerminal.cpp:721
-      const u32 Uh_5tlreg44885 = _Int32ToInt32(Uh_5tlreg44884, 2, 3); //gcnl:NodeCast.cpp:723
-      const u32 Uh_5tlreg44887 = Uv_8operator.read(); //gcnl:Node.cpp:691
-      const u32 Uh_5tlreg44888 = _Unsigned32ToInt32(Uh_5tlreg44887, 2, 3); //gcnl:NodeCast.cpp:723
-      const u32 Uh_5tlreg44889 = _BinOpCompareEqEqInt32(Uh_5tlreg44888, Uh_5tlreg44885, 3); //gcnl:NodeBinaryOpCompare.cpp:313
-      if(_Bool32ToCbool(Uh_5tlreg44889, 1)) //gcnl:NodeControl.cpp:213
+      const u32 Uh_5tlreg41432 = 1; //gcnl:NodeTerminal.cpp:721
+      const u32 Uh_5tlreg41433 = _Int32ToInt32(Uh_5tlreg41432, 2, 3); //gcnl:NodeCast.cpp:723
+      const u32 Uh_5tlreg41435 = Uv_8operator.read(); //gcnl:Node.cpp:691
+      const u32 Uh_5tlreg41436 = _Unsigned32ToInt32(Uh_5tlreg41435, 2, 3); //gcnl:NodeCast.cpp:723
+      const u32 Uh_5tlreg41437 = _BinOpCompareEqEqInt32(Uh_5tlreg41436, Uh_5tlreg41433, 3); //gcnl:NodeBinaryOpCompare.cpp:313
+      if(_Bool32ToCbool(Uh_5tlreg41437, 1)) //gcnl:NodeControl.cpp:213
       {
         {
 
 //! DecisionTree.ulam:366: 			value = (StoredValue)(val1 - val2);
-          const u32 Uh_5tlreg44891 = Uv_4val2.read(); //gcnl:Node.cpp:691
-          const u32 Uh_5tlreg44892 = _Unsigned32ToUnsigned32(Uh_5tlreg44891, 6, 7); //gcnl:NodeCast.cpp:723
-          const u32 Uh_5tlreg44894 = Uv_4val1.read(); //gcnl:Node.cpp:691
-          const u32 Uh_5tlreg44895 = _Unsigned32ToUnsigned32(Uh_5tlreg44894, 6, 7); //gcnl:NodeCast.cpp:723
-          const u32 Uh_5tlreg44896 = _BinOpSubtractUnsigned32(Uh_5tlreg44895, Uh_5tlreg44892, 7); //gcnl:NodeBinaryOp.cpp:719
-          const u32 Uh_5tlreg44897 = _Unsigned32ToUnsigned32(Uh_5tlreg44896, 7, 6); //gcnl:NodeCast.cpp:723
-          Uv_5value.write(Uh_5tlreg44897); //gcnl:Node.cpp:885
+          const u32 Uh_5tlreg41439 = Uv_4val2.read(); //gcnl:Node.cpp:691
+          const u32 Uh_5tlreg41440 = _Unsigned32ToUnsigned32(Uh_5tlreg41439, 6, 7); //gcnl:NodeCast.cpp:723
+          const u32 Uh_5tlreg41442 = Uv_4val1.read(); //gcnl:Node.cpp:691
+          const u32 Uh_5tlreg41443 = _Unsigned32ToUnsigned32(Uh_5tlreg41442, 6, 7); //gcnl:NodeCast.cpp:723
+          const u32 Uh_5tlreg41444 = _BinOpSubtractUnsigned32(Uh_5tlreg41443, Uh_5tlreg41440, 7); //gcnl:NodeBinaryOp.cpp:719
+          const u32 Uh_5tlreg41445 = _Unsigned32ToUnsigned32(Uh_5tlreg41444, 7, 6); //gcnl:NodeCast.cpp:723
+          Uv_5value.write(Uh_5tlreg41445); //gcnl:Node.cpp:885
         }
       } // end if
     }
@@ -1817,22 +1556,22 @@ Ul_214endcontrolloop220:
     {
 
 //! DecisionTree.ulam:368: 		if(operator == 2){
-      const u32 Uh_5tlreg44899 = 2; //gcnl:NodeTerminal.cpp:721
-      const u32 Uh_5tlreg44901 = Uv_8operator.read(); //gcnl:Node.cpp:691
-      const u32 Uh_5tlreg44902 = _Unsigned32ToInt32(Uh_5tlreg44901, 2, 3); //gcnl:NodeCast.cpp:723
-      const u32 Uh_5tlreg44903 = _BinOpCompareEqEqInt32(Uh_5tlreg44902, Uh_5tlreg44899, 3); //gcnl:NodeBinaryOpCompare.cpp:313
-      if(_Bool32ToCbool(Uh_5tlreg44903, 1)) //gcnl:NodeControl.cpp:213
+      const u32 Uh_5tlreg41447 = 2; //gcnl:NodeTerminal.cpp:721
+      const u32 Uh_5tlreg41449 = Uv_8operator.read(); //gcnl:Node.cpp:691
+      const u32 Uh_5tlreg41450 = _Unsigned32ToInt32(Uh_5tlreg41449, 2, 3); //gcnl:NodeCast.cpp:723
+      const u32 Uh_5tlreg41451 = _BinOpCompareEqEqInt32(Uh_5tlreg41450, Uh_5tlreg41447, 3); //gcnl:NodeBinaryOpCompare.cpp:313
+      if(_Bool32ToCbool(Uh_5tlreg41451, 1)) //gcnl:NodeControl.cpp:213
       {
         {
 
 //! DecisionTree.ulam:369: 			value = (StoredValue)(val1 * val2);
-          const u32 Uh_5tlreg44905 = Uv_4val2.read(); //gcnl:Node.cpp:691
-          const u32 Uh_5tlreg44906 = _Unsigned32ToUnsigned32(Uh_5tlreg44905, 6, 12); //gcnl:NodeCast.cpp:723
-          const u32 Uh_5tlreg44908 = Uv_4val1.read(); //gcnl:Node.cpp:691
-          const u32 Uh_5tlreg44909 = _Unsigned32ToUnsigned32(Uh_5tlreg44908, 6, 12); //gcnl:NodeCast.cpp:723
-          const u32 Uh_5tlreg44910 = _BinOpMultiplyUnsigned32(Uh_5tlreg44909, Uh_5tlreg44906, 12); //gcnl:NodeBinaryOp.cpp:719
-          const u32 Uh_5tlreg44911 = _Unsigned32ToUnsigned32(Uh_5tlreg44910, 12, 6); //gcnl:NodeCast.cpp:723
-          Uv_5value.write(Uh_5tlreg44911); //gcnl:Node.cpp:885
+          const u32 Uh_5tlreg41453 = Uv_4val2.read(); //gcnl:Node.cpp:691
+          const u32 Uh_5tlreg41454 = _Unsigned32ToUnsigned32(Uh_5tlreg41453, 6, 12); //gcnl:NodeCast.cpp:723
+          const u32 Uh_5tlreg41456 = Uv_4val1.read(); //gcnl:Node.cpp:691
+          const u32 Uh_5tlreg41457 = _Unsigned32ToUnsigned32(Uh_5tlreg41456, 6, 12); //gcnl:NodeCast.cpp:723
+          const u32 Uh_5tlreg41458 = _BinOpMultiplyUnsigned32(Uh_5tlreg41457, Uh_5tlreg41454, 12); //gcnl:NodeBinaryOp.cpp:719
+          const u32 Uh_5tlreg41459 = _Unsigned32ToUnsigned32(Uh_5tlreg41458, 12, 6); //gcnl:NodeCast.cpp:723
+          Uv_5value.write(Uh_5tlreg41459); //gcnl:Node.cpp:885
         }
       } // end if
     }
@@ -1841,29 +1580,291 @@ Ul_214endcontrolloop220:
     {
 
 //! DecisionTree.ulam:371: 		if(operator == 3){
-      const u32 Uh_5tlreg44913 = 3; //gcnl:NodeTerminal.cpp:721
-      const u32 Uh_5tlreg44915 = Uv_8operator.read(); //gcnl:Node.cpp:691
-      const u32 Uh_5tlreg44916 = _Unsigned32ToInt32(Uh_5tlreg44915, 2, 3); //gcnl:NodeCast.cpp:723
-      const u32 Uh_5tlreg44917 = _BinOpCompareEqEqInt32(Uh_5tlreg44916, Uh_5tlreg44913, 3); //gcnl:NodeBinaryOpCompare.cpp:313
-      if(_Bool32ToCbool(Uh_5tlreg44917, 1)) //gcnl:NodeControl.cpp:213
+      const u32 Uh_5tlreg41461 = 3; //gcnl:NodeTerminal.cpp:721
+      const u32 Uh_5tlreg41463 = Uv_8operator.read(); //gcnl:Node.cpp:691
+      const u32 Uh_5tlreg41464 = _Unsigned32ToInt32(Uh_5tlreg41463, 2, 3); //gcnl:NodeCast.cpp:723
+      const u32 Uh_5tlreg41465 = _BinOpCompareEqEqInt32(Uh_5tlreg41464, Uh_5tlreg41461, 3); //gcnl:NodeBinaryOpCompare.cpp:313
+      if(_Bool32ToCbool(Uh_5tlreg41465, 1)) //gcnl:NodeControl.cpp:213
       {
         {
 
 //! DecisionTree.ulam:372: 			value = (StoredValue)(val1 / val2);
-          const u32 Uh_5tlreg44919 = Uv_4val2.read(); //gcnl:Node.cpp:691
-          const u32 Uh_5tlreg44921 = Uv_4val1.read(); //gcnl:Node.cpp:691
-          const u32 Uh_5tlreg44922 = _BinOpDivideUnsigned32(Uh_5tlreg44921, Uh_5tlreg44919, 6); //gcnl:NodeBinaryOp.cpp:719
-          Uv_5value.write(Uh_5tlreg44922); //gcnl:Node.cpp:885
+          const u32 Uh_5tlreg41467 = Uv_4val2.read(); //gcnl:Node.cpp:691
+          const u32 Uh_5tlreg41469 = Uv_4val1.read(); //gcnl:Node.cpp:691
+          const u32 Uh_5tlreg41470 = _BinOpDivideUnsigned32(Uh_5tlreg41469, Uh_5tlreg41467, 6); //gcnl:NodeBinaryOp.cpp:719
+          Uv_5value.write(Uh_5tlreg41470); //gcnl:Node.cpp:885
         }
       } // end if
     }
 
 //! DecisionTree.ulam:374: 		return value;
-    const u32 Uh_5tlreg44925 = Uv_5value.read(); //gcnl:Node.cpp:691
-    Ui_Ut_10161u<EC> Uh_5tlval44926(Uh_5tlreg44925); //func arg& //gcnl:Node.cpp:1128
-    return (Uh_5tlval44926); //gcnl:NodeReturnStatement.cpp:343
+    const u32 Uh_5tlreg41473 = Uv_5value.read(); //gcnl:Node.cpp:691
+    Ui_Ut_10161u<EC> Uh_5tlval41474(Uh_5tlreg41473); //func arg& //gcnl:Node.cpp:1128
+    return (Uh_5tlval41474); //gcnl:NodeReturnStatement.cpp:343
 
   } // Uf_7operate
+
+
+
+//! DecisionTree.ulam:322: 	StoredValue selfEvaluate(Seqno var, ID id, StoredValue comIn){
+  template<class EC>
+  Ui_Ut_10161u<EC> Uq_10109212DecisionTree10<EC>::Uf_9212selfEvaluate(const UlamContext<EC>& uc, UlamRef<EC>& ur, Ui_Ut_10161u<EC>& Uv_3var, Ui_Ut_102101u<EC>& Uv_2id, Ui_Ut_10161u<EC>& Uv_5comIn) const
+  {
+
+//! DecisionTree.ulam:323: 		StoredValue val0;
+    Ui_Ut_10161u<EC> Uv_4val0; //gcnl:NodeVarDecl.cpp:1096
+
+//! DecisionTree.ulam:324: 		StoredValue val1;
+    Ui_Ut_10161u<EC> Uv_4val1; //gcnl:NodeVarDecl.cpp:1096
+
+//! DecisionTree.ulam:325: 		StoredValue value;
+    Ui_Ut_10161u<EC> Uv_5value; //gcnl:NodeVarDecl.cpp:1096
+
+//! DecisionTree.ulam:326: 		Atom gene;
+    Ui_Ut_102961a<EC> Uv_4gene; //gcnl:NodeVarDecl.cpp:1096
+
+//! DecisionTree.ulam:327: 		Atom my = ew[0];
+    UlamRef<EC> Uh_3tur41476(ur, 0u, 0u, &Uq_10109211EventWindow10<EC>::THE_INSTANCE, UlamRef<EC>::CLASSIC); //gcnl:NodeFunctionCall.cpp:923
+    const u32 Uh_5tlreg41477 = 0; //gcnl:NodeTerminal.cpp:721
+    const u32 Uh_5tlreg41478 = _Int32ToUnsigned32(Uh_5tlreg41477, 2, 6); //gcnl:NodeCast.cpp:723
+    Ui_Ut_10161u<EC> Uh_5tlval41479(Uh_5tlreg41478); //func arg& //gcnl:Node.cpp:1128
+    Ui_Ut_r102961a<EC> Uh_5tuval41481 = Uq_10109211EventWindow10<EC>::THE_INSTANCE.Uf_4aref(uc, Uh_3tur41476, Uh_5tlval41479); //gcnl:NodeFunctionCall.cpp:1006
+    Ui_Ut_102961a<EC> Uv_2my(Uh_5tuval41481.read()); //gcnl:NodeVarDecl.cpp:1060
+
+//! DecisionTree.ulam:328: 		if(my as Gene){
+    {
+
+//! DecisionTree.ulam:328: 		if(my as Gene){
+      const T Uh_3tut41483 = Uv_2my.read(); //gcnl:Node.cpp:691
+      const u32 Uh_5tlreg41484 = Ue_102564Gene10<EC>::THE_INSTANCE.internalCMethodImplementingIs(Uh_3tut41483); //gcnl:NodeConditionalAs.cpp:444
+      if(_Bool32ToCbool(Uh_5tlreg41484, 1)) //gcnl:NodeControl.cpp:213
+      {
+        {
+
+//! DecisionTree.ulam:328: 		if(my as Gene){
+          Ui_Ut_102961a<EC> & Uh_5tuval41485 = Uv_2my; //c++ reference to immediate //gcnl:NodeVarRefAs.cpp:161
+          Ui_Ue_r102564Gene10<EC> Uv_2my(Uh_5tuval41485, 0u + T::ATOM_FIRST_STATE_BIT, uc.LookupUlamElementTypeFromContext(Uh_5tuval41485.GetType()), uc); //shadows lhs of 'as' //gcnl:NodeVarRefAs.cpp:246
+
+//! DecisionTree.ulam:329: 			if(my.tree0Type == 1 && my.eqTree0 == 0){
+          {
+
+//! DecisionTree.ulam:329: 			if(my.tree0Type == 1 && my.eqTree0 == 0){
+            u32 Uh_5tlreg41486 = false; //gcnl:NodeBinaryOpLogicalAnd.cpp:118
+            const u32 Uh_5tlreg41487 = 1; //gcnl:NodeTerminal.cpp:721
+            const u32 Uh_5tlreg41488 = _Int32ToInt32(Uh_5tlreg41487, 2, 3); //gcnl:NodeCast.cpp:723
+            const u32 Uh_5tlreg41491 = UlamRef<EC>(Uv_2my, 19u, 2u, NULL, UlamRef<EC>::PRIMITIVE).Read(); //gcnl:Node.cpp:691
+            const u32 Uh_5tlreg41492 = _Unsigned32ToInt32(Uh_5tlreg41491, 2, 3); //gcnl:NodeCast.cpp:723
+            const u32 Uh_5tlreg41493 = _BinOpCompareEqEqInt32(Uh_5tlreg41492, Uh_5tlreg41488, 3); //gcnl:NodeBinaryOpCompare.cpp:313
+            if(_Bool32ToCbool(Uh_5tlreg41493, 1)) //gcnl:NodeBinaryOpLogicalAnd.cpp:137
+            {
+              const u32 Uh_5tlreg41494 = 0; //gcnl:NodeTerminal.cpp:721
+              const u32 Uh_5tlreg41495 = _Int32ToInt32(Uh_5tlreg41494, 2, 7); //gcnl:NodeCast.cpp:723
+              const u32 Uh_5tlreg41498 = UlamRef<EC>(Uv_2my, 21u, 6u, NULL, UlamRef<EC>::PRIMITIVE).Read(); //gcnl:Node.cpp:691
+              const u32 Uh_5tlreg41499 = _Unsigned32ToInt32(Uh_5tlreg41498, 6, 7); //gcnl:NodeCast.cpp:723
+              const u32 Uh_5tlreg41500 = _BinOpCompareEqEqInt32(Uh_5tlreg41499, Uh_5tlreg41495, 7); //gcnl:NodeBinaryOpCompare.cpp:313
+              Uh_5tlreg41486 = Uh_5tlreg41500; //gcnl:NodeBinaryOpLogicalAnd.cpp:151
+            }
+            if(_Bool32ToCbool(Uh_5tlreg41486, 1)) //gcnl:NodeControl.cpp:213
+            {
+              {
+
+//! DecisionTree.ulam:330: 				my.tree0Type = 0;
+                const u32 Uh_5tlreg41501 = 0; //gcnl:NodeTerminal.cpp:721
+                const u32 Uh_5tlreg41502 = _Int32ToUnsigned32(Uh_5tlreg41501, 2, 2); //gcnl:NodeCast.cpp:723
+                UlamRef<EC>(Uv_2my, 19u, 2u, NULL, UlamRef<EC>::PRIMITIVE).Write(Uh_5tlreg41502); //gcnl:Node.cpp:885
+
+//! DecisionTree.ulam:331: 				val0 = comIn;
+                const u32 Uh_5tlreg41506 = Uv_5comIn.read(); //gcnl:Node.cpp:691
+                Uv_4val0.write(Uh_5tlreg41506); //gcnl:Node.cpp:885
+              }
+            } // end if
+          }
+
+//! DecisionTree.ulam:333: 			if(my.tree1Type == 1 && my.eqTree1 == 0){
+          {
+
+//! DecisionTree.ulam:333: 			if(my.tree1Type == 1 && my.eqTree1 == 0){
+            u32 Uh_5tlreg41508 = false; //gcnl:NodeBinaryOpLogicalAnd.cpp:118
+            const u32 Uh_5tlreg41509 = 1; //gcnl:NodeTerminal.cpp:721
+            const u32 Uh_5tlreg41510 = _Int32ToInt32(Uh_5tlreg41509, 2, 3); //gcnl:NodeCast.cpp:723
+            const u32 Uh_5tlreg41513 = UlamRef<EC>(Uv_2my, 27u, 2u, NULL, UlamRef<EC>::PRIMITIVE).Read(); //gcnl:Node.cpp:691
+            const u32 Uh_5tlreg41514 = _Unsigned32ToInt32(Uh_5tlreg41513, 2, 3); //gcnl:NodeCast.cpp:723
+            const u32 Uh_5tlreg41515 = _BinOpCompareEqEqInt32(Uh_5tlreg41514, Uh_5tlreg41510, 3); //gcnl:NodeBinaryOpCompare.cpp:313
+            if(_Bool32ToCbool(Uh_5tlreg41515, 1)) //gcnl:NodeBinaryOpLogicalAnd.cpp:137
+            {
+              const u32 Uh_5tlreg41516 = 0; //gcnl:NodeTerminal.cpp:721
+              const u32 Uh_5tlreg41517 = _Int32ToInt32(Uh_5tlreg41516, 2, 7); //gcnl:NodeCast.cpp:723
+              const u32 Uh_5tlreg41520 = UlamRef<EC>(Uv_2my, 29u, 6u, NULL, UlamRef<EC>::PRIMITIVE).Read(); //gcnl:Node.cpp:691
+              const u32 Uh_5tlreg41521 = _Unsigned32ToInt32(Uh_5tlreg41520, 6, 7); //gcnl:NodeCast.cpp:723
+              const u32 Uh_5tlreg41522 = _BinOpCompareEqEqInt32(Uh_5tlreg41521, Uh_5tlreg41517, 7); //gcnl:NodeBinaryOpCompare.cpp:313
+              Uh_5tlreg41508 = Uh_5tlreg41522; //gcnl:NodeBinaryOpLogicalAnd.cpp:151
+            }
+            if(_Bool32ToCbool(Uh_5tlreg41508, 1)) //gcnl:NodeControl.cpp:213
+            {
+              {
+
+//! DecisionTree.ulam:334: 				my.tree0Type = 0;
+                const u32 Uh_5tlreg41523 = 0; //gcnl:NodeTerminal.cpp:721
+                const u32 Uh_5tlreg41524 = _Int32ToUnsigned32(Uh_5tlreg41523, 2, 2); //gcnl:NodeCast.cpp:723
+                UlamRef<EC>(Uv_2my, 19u, 2u, NULL, UlamRef<EC>::PRIMITIVE).Write(Uh_5tlreg41524); //gcnl:Node.cpp:885
+
+//! DecisionTree.ulam:335: 				val1 = comIn;
+                const u32 Uh_5tlreg41528 = Uv_5comIn.read(); //gcnl:Node.cpp:691
+                Uv_4val1.write(Uh_5tlreg41528); //gcnl:Node.cpp:885
+              }
+            } // end if
+          }
+
+//! DecisionTree.ulam:338: 			if(my.tree0Type == 1){
+          {
+
+//! DecisionTree.ulam:338: 			if(my.tree0Type == 1){
+            const u32 Uh_5tlreg41530 = 1; //gcnl:NodeTerminal.cpp:721
+            const u32 Uh_5tlreg41531 = _Int32ToInt32(Uh_5tlreg41530, 2, 3); //gcnl:NodeCast.cpp:723
+            const u32 Uh_5tlreg41534 = UlamRef<EC>(Uv_2my, 19u, 2u, NULL, UlamRef<EC>::PRIMITIVE).Read(); //gcnl:Node.cpp:691
+            const u32 Uh_5tlreg41535 = _Unsigned32ToInt32(Uh_5tlreg41534, 2, 3); //gcnl:NodeCast.cpp:723
+            const u32 Uh_5tlreg41536 = _BinOpCompareEqEqInt32(Uh_5tlreg41535, Uh_5tlreg41531, 3); //gcnl:NodeBinaryOpCompare.cpp:313
+            if(_Bool32ToCbool(Uh_5tlreg41536, 1)) //gcnl:NodeControl.cpp:213
+            {
+              {
+
+//! DecisionTree.ulam:339: 				gene = findSeqno((Seqno)my.eqTree0, id);
+                const u32 Uh_5tlreg41540 = UlamRef<EC>(Uv_2my, 21u, 6u, NULL, UlamRef<EC>::PRIMITIVE).Read(); //gcnl:Node.cpp:691
+                Ui_Ut_10161u<EC> Uh_5tlval41541(Uh_5tlreg41540); //func arg& //gcnl:Node.cpp:1128
+                const u32 Uh_5tlreg41543 = Uv_2id.read(); //gcnl:Node.cpp:691
+                Ui_Ut_102101u<EC> Uh_5tlval41544(Uh_5tlreg41543); //func arg& //gcnl:Node.cpp:1128
+                const Ui_Ut_102961a<EC> Uh_5tuval41546 = THE_INSTANCE.Uf_919findSeqno(uc, ur, Uh_5tlval41541, Uh_5tlval41544); //gcnl:NodeFunctionCall.cpp:1006
+                Uv_4gene.write(Uh_5tuval41546.read()); //gcnl:Node.cpp:885
+
+//! DecisionTree.ulam:340: 				if(gene as Gene){
+                {
+
+//! DecisionTree.ulam:340: 				if(gene as Gene){
+                  const T Uh_3tut41549 = Uv_4gene.read(); //gcnl:Node.cpp:691
+                  const u32 Uh_5tlreg41550 = Ue_102564Gene10<EC>::THE_INSTANCE.internalCMethodImplementingIs(Uh_3tut41549); //gcnl:NodeConditionalAs.cpp:444
+                  if(_Bool32ToCbool(Uh_5tlreg41550, 1)) //gcnl:NodeControl.cpp:213
+                  {
+                    {
+
+//! DecisionTree.ulam:340: 				if(gene as Gene){
+                      Ui_Ut_102961a<EC> & Uh_5tuval41551 = Uv_4gene; //c++ reference to immediate //gcnl:NodeVarRefAs.cpp:161
+                      Ui_Ue_r102564Gene10<EC> Uv_4gene(Uh_5tuval41551, 0u + T::ATOM_FIRST_STATE_BIT, uc.LookupUlamElementTypeFromContext(Uh_5tuval41551.GetType()), uc); //shadows lhs of 'as' //gcnl:NodeVarRefAs.cpp:246
+
+//! DecisionTree.ulam:341: 					val0 = gene.value;
+                      const u32 Uh_5tlreg41554 = UlamRef<EC>(Uv_4gene, 35u, 6u, NULL, UlamRef<EC>::PRIMITIVE).Read(); //gcnl:Node.cpp:691
+                      Uv_4val0.write(Uh_5tlreg41554); //gcnl:Node.cpp:885
+                    }
+                  } // end if
+                }
+              }
+            } // end if
+          }
+
+//! DecisionTree.ulam:344: 			if(my.tree0Type == 0){
+          {
+
+//! DecisionTree.ulam:344: 			if(my.tree0Type == 0){
+            const u32 Uh_5tlreg41556 = 0; //gcnl:NodeTerminal.cpp:721
+            const u32 Uh_5tlreg41557 = _Int32ToInt32(Uh_5tlreg41556, 2, 3); //gcnl:NodeCast.cpp:723
+            const u32 Uh_5tlreg41560 = UlamRef<EC>(Uv_2my, 19u, 2u, NULL, UlamRef<EC>::PRIMITIVE).Read(); //gcnl:Node.cpp:691
+            const u32 Uh_5tlreg41561 = _Unsigned32ToInt32(Uh_5tlreg41560, 2, 3); //gcnl:NodeCast.cpp:723
+            const u32 Uh_5tlreg41562 = _BinOpCompareEqEqInt32(Uh_5tlreg41561, Uh_5tlreg41557, 3); //gcnl:NodeBinaryOpCompare.cpp:313
+            if(_Bool32ToCbool(Uh_5tlreg41562, 1)) //gcnl:NodeControl.cpp:213
+            {
+              {
+
+//! DecisionTree.ulam:345: 				val0 = my.eqTree0;
+                const u32 Uh_5tlreg41565 = UlamRef<EC>(Uv_2my, 21u, 6u, NULL, UlamRef<EC>::PRIMITIVE).Read(); //gcnl:Node.cpp:691
+                Uv_4val0.write(Uh_5tlreg41565); //gcnl:Node.cpp:885
+              }
+            } // end if
+          }
+
+//! DecisionTree.ulam:347: 			if(my.tree1Type == 1){
+          {
+
+//! DecisionTree.ulam:347: 			if(my.tree1Type == 1){
+            const u32 Uh_5tlreg41567 = 1; //gcnl:NodeTerminal.cpp:721
+            const u32 Uh_5tlreg41568 = _Int32ToInt32(Uh_5tlreg41567, 2, 3); //gcnl:NodeCast.cpp:723
+            const u32 Uh_5tlreg41571 = UlamRef<EC>(Uv_2my, 27u, 2u, NULL, UlamRef<EC>::PRIMITIVE).Read(); //gcnl:Node.cpp:691
+            const u32 Uh_5tlreg41572 = _Unsigned32ToInt32(Uh_5tlreg41571, 2, 3); //gcnl:NodeCast.cpp:723
+            const u32 Uh_5tlreg41573 = _BinOpCompareEqEqInt32(Uh_5tlreg41572, Uh_5tlreg41568, 3); //gcnl:NodeBinaryOpCompare.cpp:313
+            if(_Bool32ToCbool(Uh_5tlreg41573, 1)) //gcnl:NodeControl.cpp:213
+            {
+              {
+
+//! DecisionTree.ulam:348: 				gene = findSeqno((Seqno)my.eqTree1, id);
+                const u32 Uh_5tlreg41577 = UlamRef<EC>(Uv_2my, 29u, 6u, NULL, UlamRef<EC>::PRIMITIVE).Read(); //gcnl:Node.cpp:691
+                Ui_Ut_10161u<EC> Uh_5tlval41578(Uh_5tlreg41577); //func arg& //gcnl:Node.cpp:1128
+                const u32 Uh_5tlreg41580 = Uv_2id.read(); //gcnl:Node.cpp:691
+                Ui_Ut_102101u<EC> Uh_5tlval41581(Uh_5tlreg41580); //func arg& //gcnl:Node.cpp:1128
+                const Ui_Ut_102961a<EC> Uh_5tuval41583 = THE_INSTANCE.Uf_919findSeqno(uc, ur, Uh_5tlval41578, Uh_5tlval41581); //gcnl:NodeFunctionCall.cpp:1006
+                Uv_4gene.write(Uh_5tuval41583.read()); //gcnl:Node.cpp:885
+
+//! DecisionTree.ulam:349: 				if(gene as Gene){
+                {
+
+//! DecisionTree.ulam:349: 				if(gene as Gene){
+                  const T Uh_3tut41586 = Uv_4gene.read(); //gcnl:Node.cpp:691
+                  const u32 Uh_5tlreg41587 = Ue_102564Gene10<EC>::THE_INSTANCE.internalCMethodImplementingIs(Uh_3tut41586); //gcnl:NodeConditionalAs.cpp:444
+                  if(_Bool32ToCbool(Uh_5tlreg41587, 1)) //gcnl:NodeControl.cpp:213
+                  {
+                    {
+
+//! DecisionTree.ulam:349: 				if(gene as Gene){
+                      Ui_Ut_102961a<EC> & Uh_5tuval41588 = Uv_4gene; //c++ reference to immediate //gcnl:NodeVarRefAs.cpp:161
+                      Ui_Ue_r102564Gene10<EC> Uv_4gene(Uh_5tuval41588, 0u + T::ATOM_FIRST_STATE_BIT, uc.LookupUlamElementTypeFromContext(Uh_5tuval41588.GetType()), uc); //shadows lhs of 'as' //gcnl:NodeVarRefAs.cpp:246
+
+//! DecisionTree.ulam:350: 					val1 = gene.value;
+                      const u32 Uh_5tlreg41591 = UlamRef<EC>(Uv_4gene, 35u, 6u, NULL, UlamRef<EC>::PRIMITIVE).Read(); //gcnl:Node.cpp:691
+                      Uv_4val1.write(Uh_5tlreg41591); //gcnl:Node.cpp:885
+                    }
+                  } // end if
+                }
+              }
+            } // end if
+          }
+
+//! DecisionTree.ulam:353: 			if(my.tree1Type == 0){
+          {
+
+//! DecisionTree.ulam:353: 			if(my.tree1Type == 0){
+            const u32 Uh_5tlreg41593 = 0; //gcnl:NodeTerminal.cpp:721
+            const u32 Uh_5tlreg41594 = _Int32ToInt32(Uh_5tlreg41593, 2, 3); //gcnl:NodeCast.cpp:723
+            const u32 Uh_5tlreg41597 = UlamRef<EC>(Uv_2my, 27u, 2u, NULL, UlamRef<EC>::PRIMITIVE).Read(); //gcnl:Node.cpp:691
+            const u32 Uh_5tlreg41598 = _Unsigned32ToInt32(Uh_5tlreg41597, 2, 3); //gcnl:NodeCast.cpp:723
+            const u32 Uh_5tlreg41599 = _BinOpCompareEqEqInt32(Uh_5tlreg41598, Uh_5tlreg41594, 3); //gcnl:NodeBinaryOpCompare.cpp:313
+            if(_Bool32ToCbool(Uh_5tlreg41599, 1)) //gcnl:NodeControl.cpp:213
+            {
+              {
+
+//! DecisionTree.ulam:354: 				val1 = my.eqTree1;
+                const u32 Uh_5tlreg41602 = UlamRef<EC>(Uv_2my, 29u, 6u, NULL, UlamRef<EC>::PRIMITIVE).Read(); //gcnl:Node.cpp:691
+                Uv_4val1.write(Uh_5tlreg41602); //gcnl:Node.cpp:885
+              }
+            } // end if
+          }
+
+//! DecisionTree.ulam:356: 			value = operate(val0, my.operator, val1);
+          const u32 Uh_5tlreg41606 = Uv_4val0.read(); //gcnl:Node.cpp:691
+          Ui_Ut_10161u<EC> Uh_5tlval41607(Uh_5tlreg41606); //func arg& //gcnl:Node.cpp:1128
+          const u32 Uh_5tlreg41610 = UlamRef<EC>(Uv_2my, 17u, 2u, NULL, UlamRef<EC>::PRIMITIVE).Read(); //gcnl:Node.cpp:691
+          Ui_Ut_10121u<EC> Uh_5tlval41611(Uh_5tlreg41610); //func arg& //gcnl:Node.cpp:1128
+          const u32 Uh_5tlreg41613 = Uv_4val1.read(); //gcnl:Node.cpp:691
+          Ui_Ut_10161u<EC> Uh_5tlval41614(Uh_5tlreg41613); //func arg& //gcnl:Node.cpp:1128
+          const Ui_Ut_10161u<EC> Uh_5tlval41616 = THE_INSTANCE.Uf_7operate(uc, ur, Uh_5tlval41607, Uh_5tlval41611, Uh_5tlval41614); //gcnl:NodeFunctionCall.cpp:1006
+          const u32 Uh_5tlreg41617 = Uh_5tlval41616.read(); //gcnl:Node.cpp:1156
+          Uv_5value.write(Uh_5tlreg41617); //gcnl:Node.cpp:885
+        }
+      } // end if
+    }
+
+//! DecisionTree.ulam:358: 		return value;
+    const u32 Uh_5tlreg41620 = Uv_5value.read(); //gcnl:Node.cpp:691
+    Ui_Ut_10161u<EC> Uh_5tlval41621(Uh_5tlreg41620); //func arg& //gcnl:Node.cpp:1128
+    return (Uh_5tlval41621); //gcnl:NodeReturnStatement.cpp:343
+
+  } // Uf_9212selfEvaluate
 
 
   //BUILT-IN FUNCTIONS:

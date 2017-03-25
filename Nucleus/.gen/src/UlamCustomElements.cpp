@@ -13,26 +13,32 @@ extern "C" {
       MFM::Ue_10105Empty10<MFM::StdEventConfig>::THE_INSTANCE,
       &_ueinfo10);
 
-  static MFM::UlamElementInfoForUe_102128EggShell10<MFM::StdEventConfig> _ueinfo11(MFM::Ue_102128EggShell10<MFM::StdEventConfig>::THE_INSTANCE);
+  static MFM::UlamElementInfoForUe_10106Primer10<MFM::StdEventConfig> _ueinfo11(MFM::Ue_10106Primer10<MFM::StdEventConfig>::THE_INSTANCE);
   static MFM::UlamElementLibraryStub<MFM::StdEventConfig> _uelstub11 (
-      MFM::Ue_102128EggShell10<MFM::StdEventConfig>::THE_INSTANCE,
+      MFM::Ue_10106Primer10<MFM::StdEventConfig>::THE_INSTANCE,
       &_ueinfo11);
 
-  static MFM::UlamElementInfoForUe_102574Gene10<MFM::StdEventConfig> _ueinfo12(MFM::Ue_102574Gene10<MFM::StdEventConfig>::THE_INSTANCE);
+  static MFM::UlamElementInfoForUe_102158EggShell10<MFM::StdEventConfig> _ueinfo12(MFM::Ue_102158EggShell10<MFM::StdEventConfig>::THE_INSTANCE);
   static MFM::UlamElementLibraryStub<MFM::StdEventConfig> _uelstub12 (
-      MFM::Ue_102574Gene10<MFM::StdEventConfig>::THE_INSTANCE,
+      MFM::Ue_102158EggShell10<MFM::StdEventConfig>::THE_INSTANCE,
       &_ueinfo12);
 
-  static MFM::UlamElementInfoForUe_102717Nucleus10<MFM::StdEventConfig> _ueinfo13(MFM::Ue_102717Nucleus10<MFM::StdEventConfig>::THE_INSTANCE);
+  static MFM::UlamElementInfoForUe_102564Gene10<MFM::StdEventConfig> _ueinfo13(MFM::Ue_102564Gene10<MFM::StdEventConfig>::THE_INSTANCE);
   static MFM::UlamElementLibraryStub<MFM::StdEventConfig> _uelstub13 (
-      MFM::Ue_102717Nucleus10<MFM::StdEventConfig>::THE_INSTANCE,
+      MFM::Ue_102564Gene10<MFM::StdEventConfig>::THE_INSTANCE,
       &_ueinfo13);
+
+  static MFM::UlamElementInfoForUe_102717Nucleus10<MFM::StdEventConfig> _ueinfo14(MFM::Ue_102717Nucleus10<MFM::StdEventConfig>::THE_INSTANCE);
+  static MFM::UlamElementLibraryStub<MFM::StdEventConfig> _uelstub14 (
+      MFM::Ue_102717Nucleus10<MFM::StdEventConfig>::THE_INSTANCE,
+      &_ueinfo14);
 
   static MFM::ElementLibraryStub<MFM::StdEventConfig> * (_elementStubPtrArray_[]) = {
     &_uelstub10,
     &_uelstub11,
     &_uelstub12,
-    &_uelstub13
+    &_uelstub13,
+    &_uelstub14
   };
 
   static MFM::UlamClass<MFM::StdEventConfig> * (_otherUlamClassPtrArray_[]) = {
@@ -62,7 +68,7 @@ extern "C" {
     0,
     MFM_BUILD_DATE,
     MFM_BUILD_TIME,
-    4,
+    5,
     _elementStubPtrArray_,
     18,
     _otherUlamClassPtrArray_

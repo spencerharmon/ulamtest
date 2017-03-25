@@ -18,7 +18,6 @@ element Nucleus{
 	SiteUtils su;
 	ClusterByID cl;
 	DecisionTree dt;
-//	BaseLayerReproduction blr;
 	
 	//typedefs
 	typedef ColorUtils.ARGB ARGB;
@@ -87,6 +86,7 @@ element Nucleus{
 		}
 		EggShell eg;
 		eg.id = childID;
+		eg.first = true;
 		SiteNum emptySlot = cl.emptySlotNearMe();
 		
 		if(emptySlot != 0){
@@ -171,13 +171,15 @@ element Nucleus{
 //		}
 		++lifespan;
 		--refractoryPeriod;
-//		blr.hatchBaseLayer(id);
 		//40 was too large. 2 was too small.
 		if(refractoryPeriod < refractoryPeriod.maxof-20){
 			reproducing = false;
 			childID = 0;
 		}
 		if(!dieOfOldAge()){
+//			if(lifespan > lifespan/20){
+//				cell.breakShell(id);
+//			}
 			cl.bringGenesCloser(id,self);
 			dontStepOnEggs();
 		//	if(dt.evaluate((Seqno)1, id, comIn)>32){

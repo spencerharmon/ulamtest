@@ -33,25 +33,26 @@
 #include "Ue_102717Nucleus10_Types.h"
 //Forward Defs of other classes: //gcnl:SymbolTableOfClasses.cpp:576
 namespace MFM { template <class EC> struct Uq_10106UrSelf10; }  //FORWARD
-namespace MFM { template <class EC> struct Ue_102128EggShell10; }  //FORWARD
-namespace MFM { template <class EC> struct Uq_1010919SiteUtils10; }  //FORWARD
+namespace MFM { template <class EC> struct Ue_10106Primer10; }  //FORWARD
+namespace MFM { template <class EC> struct Uq_10106Random10; }  //FORWARD
 namespace MFM { template <class EC> struct Uq_10109211EventWindow10; }  //FORWARD
-namespace MFM { template <class EC> struct Uq_10109211ClusterByID10; }  //FORWARD
 namespace MFM { template <class EC> struct Uq_10104Cell10; }  //FORWARD
-namespace MFM { template <class EC> struct Ue_102574Gene10; }  //FORWARD
+namespace MFM { template <class EC> struct Uq_10109212DecisionTree10; }  //FORWARD
+namespace MFM { template <class EC> struct Ue_102564Gene10; }  //FORWARD
 namespace MFM { template <class EC> struct Ue_10105Empty10; }  //FORWARD
-namespace MFM { template <class EC> struct Uq_10109210ColorUtils10; }  //FORWARD
 namespace MFM { template <class EC> struct Uq_1010919AtomUtils10; }  //FORWARD
 namespace MFM { template <class EC> struct Uq_10104Fail10; }  //FORWARD
 namespace MFM { template <class EC> struct Uq_10105MDist10; }  //FORWARD
 namespace MFM { template <class EC> struct Uq_102323C2D10; }  //FORWARD
+namespace MFM { template <class EC> struct Uq_10109210ColorUtils10; }  //FORWARD
 namespace MFM { template <class EC> struct Un_10412489213WindowScanner10; }  //FORWARD
-namespace MFM { template <class EC> struct Uq_10106Random10; }  //FORWARD
+namespace MFM { template <class EC> struct Uq_10109211ClusterByID10; }  //FORWARD
+namespace MFM { template <class EC> struct Uq_1010919SiteUtils10; }  //FORWARD
+namespace MFM { template <class EC> struct Un_10411209215SiteVisitorByID10; }  //FORWARD
+namespace MFM { template <class EC> struct Ue_102158EggShell10; }  //FORWARD
 namespace MFM { template <class EC> struct Uq_10109210DebugUtils10; }  //FORWARD
 namespace MFM { template <class EC> struct Uq_10109211SiteVisitor10; }  //FORWARD
 namespace MFM { template <class EC> struct Un_102329211OutOfBounds10; }  //FORWARD
-namespace MFM { template <class EC> struct Un_10411209215SiteVisitorByID10; }  //FORWARD
-namespace MFM { template <class EC> struct Uq_10109212DecisionTree10; }  //FORWARD
 namespace MFM { template <class EC> struct Un_1035449217SiteVisitorByType10; }  //FORWARD
 
 namespace MFM{
@@ -95,50 +96,50 @@ namespace MFM{
 //! Nucleus.ulam:20: 	DecisionTree dt;
     typedef Uq_10109212DecisionTree10<EC> Ut_Um_2dt; //offset 0u //gcnl:NodeVarDeclDM.cpp:1065
 
-//! Nucleus.ulam:24: 	typedef ColorUtils.ARGB ARGB;
+//! Nucleus.ulam:23: 	typedef ColorUtils.ARGB ARGB;
 
-//! Nucleus.ulam:25: 	typedef Cell.ID ID;
+//! Nucleus.ulam:24: 	typedef Cell.ID ID;
 
-//! Nucleus.ulam:26: 	typedef Cell.Com Com;
+//! Nucleus.ulam:25: 	typedef Cell.Com Com;
 
-//! Nucleus.ulam:27: 	typedef Cell.Seqno Seqno;
+//! Nucleus.ulam:26: 	typedef Cell.Seqno Seqno;
 
-//! Nucleus.ulam:28: 	typedef DecisionTree.StoredValue StoredValue;
+//! Nucleus.ulam:27: 	typedef DecisionTree.StoredValue StoredValue;
 
-//! Nucleus.ulam:29: 	typedef EventWindow.SiteNum SiteNum;
+//! Nucleus.ulam:28: 	typedef EventWindow.SiteNum SiteNum;
 
-//! Nucleus.ulam:30: 	typedef AtomUtils.Type ElementType;
+//! Nucleus.ulam:29: 	typedef AtomUtils.Type ElementType;
 
-//! Nucleus.ulam:31: 	typedef WindowScanner.Category Category;
+//! Nucleus.ulam:30: 	typedef WindowScanner.Category Category;
 
-//! Nucleus.ulam:34: 	ID id; //the all-important cluster id
+//! Nucleus.ulam:33: 	ID id; //the all-important cluster id
     typedef UlamRefFixed<EC, 0u, 10u> Up_Um_2id; //gcnl:NodeVarDeclDM.cpp:1095
 
-//! Nucleus.ulam:35: 	ID parent1id;
+//! Nucleus.ulam:34: 	ID parent1id;
     typedef UlamRefFixed<EC, 10u, 10u> Up_Um_919parent1id; //gcnl:NodeVarDeclDM.cpp:1095
 
-//! Nucleus.ulam:36: 	ID parent2id;
+//! Nucleus.ulam:35: 	ID parent2id;
     typedef UlamRefFixed<EC, 20u, 10u> Up_Um_919parent2id; //gcnl:NodeVarDeclDM.cpp:1095
 
-//! Nucleus.ulam:39: 	Bool reproducing;
+//! Nucleus.ulam:38: 	Bool reproducing;
     typedef UlamRefFixed<EC, 30u, 1u> Up_Um_9211reproducing; //gcnl:NodeVarDeclDM.cpp:1095
 
-//! Nucleus.ulam:40: 	Unsigned(7) refractoryPeriod;
+//! Nucleus.ulam:39: 	Unsigned(7) refractoryPeriod;
     typedef UlamRefFixed<EC, 31u, 7u> Up_Um_9216refractoryPeriod; //gcnl:NodeVarDeclDM.cpp:1095
 
-//! Nucleus.ulam:41: 	Unsigned(10) lifespan;
+//! Nucleus.ulam:40: 	Unsigned(10) lifespan;
     typedef UlamRefFixed<EC, 38u, 10u> Up_Um_8lifespan; //gcnl:NodeVarDeclDM.cpp:1095
 
-//! Nucleus.ulam:42: 	Bool move;
+//! Nucleus.ulam:41: 	Bool move;
     typedef UlamRefFixed<EC, 48u, 1u> Up_Um_4move; //gcnl:NodeVarDeclDM.cpp:1095
 
-//! Nucleus.ulam:43: 	StoredValue comIn;
+//! Nucleus.ulam:42: 	StoredValue comIn;
     typedef UlamRefFixed<EC, 49u, 6u> Up_Um_5comIn; //gcnl:NodeVarDeclDM.cpp:1095
 
-//! Nucleus.ulam:44: 	StoredValue comOut;
+//! Nucleus.ulam:43: 	StoredValue comOut;
     typedef UlamRefFixed<EC, 55u, 6u> Up_Um_6comOut; //gcnl:NodeVarDeclDM.cpp:1095
 
-//! Nucleus.ulam:45: 	ID childID;
+//! Nucleus.ulam:44: 	ID childID;
     typedef UlamRefFixed<EC, 61u, 10u> Up_Um_7childID; //gcnl:NodeVarDeclDM.cpp:1095
 
     static void Uf_6behave(const UlamContext<EC>& uc, UlamRef<EC>& ur); //virtual //gcnl:SymbolFunction.cpp:451
