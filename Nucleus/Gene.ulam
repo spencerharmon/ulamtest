@@ -104,8 +104,6 @@ element Gene{
 		
 //		SiteNum slot = ws.getSiteNum(cNucleus);
 //		if(slot <= 40){
-		
-		canSeeNucleus = false;
 		for(SiteNum slot = 0; slot <=40; ++slot){
 			Atom nucleus = ew[slot];
 
@@ -173,9 +171,10 @@ element Gene{
 		nucleusCheck();
 //		canSeeNucleus = cl.geneCanSeeNucleus(id);
 		killCopies();
-		if(!cl.bringGenesCloser(id,self)){
-			cl.run();
-		}
+		cl.bringGenesCloser(id,self);
+//		if(!cl.bringGenesCloser(id,self)){
+//			cl.run();
+//		}
 //		canSeeNucleus = cl.geneCanSeeNucleus(id);
 		//currently takes comIn on the right.
 		if(canSeeNucleus){

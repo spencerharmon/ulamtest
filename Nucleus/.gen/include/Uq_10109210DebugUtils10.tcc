@@ -19,7 +19,7 @@
 #include "Uq_10109211ClusterByID10.h"
 #include "Uq_1010919SiteUtils10.h"
 #include "Un_10411209215SiteVisitorByID10.h"
-#include "Ue_102158EggShell10.h"
+#include "Ue_102188EggShell10.h"
 #include "Uq_10109211SiteVisitor10.h"
 #include "Un_102329211OutOfBounds10.h"
 #include "Un_1035449217SiteVisitorByType10.h"
@@ -40,11 +40,11 @@ namespace MFM{
   {
 
 //! DebugUtils.ulam:29:   Void print(Atom arg) { print(arg, cPRINT_MEMBERS); }
-    const T Uh_3tut44972 = Uv_3arg.read(); //gcnl:Node.cpp:691
-    Ui_Ut_102961a<EC> Uh_5tuval44973(Uh_3tut44972); //func arg& //gcnl:Node.cpp:1128
-    const u32 Uh_5tlreg44974 = 41u; //gcnl:NodeTerminal.cpp:721
-    Ui_Ut_102321t<EC> Uh_5tlval44975(Uh_5tlreg44974); //func arg& //gcnl:Node.cpp:1128
-    THE_INSTANCE.Uf_5print(uc, ur, Uh_5tuval44973, Uh_5tlval44975); //gcnl:NodeFunctionCall.cpp:1006
+    const T Uh_3tut45164 = Uv_3arg.read(); //gcnl:Node.cpp:691
+    Ui_Ut_102961a<EC> Uh_5tuval45165(Uh_3tut45164); //func arg& //gcnl:Node.cpp:1128
+    const u32 Uh_5tlreg45166 = 41u; //gcnl:NodeTerminal.cpp:721
+    Ui_Ut_102321t<EC> Uh_5tlval45167(Uh_5tlreg45166); //func arg& //gcnl:Node.cpp:1128
+    THE_INSTANCE.Uf_5print(uc, ur, Uh_5tuval45165, Uh_5tlval45167); //gcnl:NodeFunctionCall.cpp:1006
 
   } // Uf_5print
 
@@ -56,9 +56,9 @@ namespace MFM{
   {
 
 //! DebugUtils.ulam:34:   Void printContext() { printContext(cPRINT_QUARK_MEMBERS); }
-    const u32 Uh_5tlreg44978 = 553u; //gcnl:NodeTerminal.cpp:721
-    Ui_Ut_102321t<EC> Uh_5tlval44979(Uh_5tlreg44978); //func arg& //gcnl:Node.cpp:1128
-    THE_INSTANCE.Uf_9212printContext(uc, ur, Uh_5tlval44979); //gcnl:NodeFunctionCall.cpp:1006
+    const u32 Uh_5tlreg45170 = 553u; //gcnl:NodeTerminal.cpp:721
+    Ui_Ut_102321t<EC> Uh_5tlval45171(Uh_5tlreg45170); //func arg& //gcnl:Node.cpp:1128
+    THE_INSTANCE.Uf_9212printContext(uc, ur, Uh_5tlval45171); //gcnl:NodeFunctionCall.cpp:1006
 
   } // Uf_9212printContext
 

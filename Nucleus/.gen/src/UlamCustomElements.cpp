@@ -18,9 +18,9 @@ extern "C" {
       MFM::Ue_10106Primer10<MFM::StdEventConfig>::THE_INSTANCE,
       &_ueinfo11);
 
-  static MFM::UlamElementInfoForUe_102158EggShell10<MFM::StdEventConfig> _ueinfo12(MFM::Ue_102158EggShell10<MFM::StdEventConfig>::THE_INSTANCE);
+  static MFM::UlamElementInfoForUe_102188EggShell10<MFM::StdEventConfig> _ueinfo12(MFM::Ue_102188EggShell10<MFM::StdEventConfig>::THE_INSTANCE);
   static MFM::UlamElementLibraryStub<MFM::StdEventConfig> _uelstub12 (
-      MFM::Ue_102158EggShell10<MFM::StdEventConfig>::THE_INSTANCE,
+      MFM::Ue_102188EggShell10<MFM::StdEventConfig>::THE_INSTANCE,
       &_ueinfo12);
 
   static MFM::UlamElementInfoForUe_102564Gene10<MFM::StdEventConfig> _ueinfo13(MFM::Ue_102564Gene10<MFM::StdEventConfig>::THE_INSTANCE);

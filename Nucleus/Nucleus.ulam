@@ -87,14 +87,16 @@ element Nucleus{
 		EggShell eg;
 		eg.id = childID;
 		eg.first = true;
-		SiteNum emptySlot = cl.emptySlotNearMe();
-		
-		if(emptySlot != 0){
-			ew[emptySlot] = eg;
+		for(Unsigned i; i < 2u; ++i){
+			SiteNum emptySlot = cl.emptySlotNearMe();
+			if(emptySlot != 0){
+				ew[emptySlot] = eg;
+			}
 		}
 		su.setBase(child);
 	}
 	Void maybeReproduce(){
+
                 SiteVisitorByID sv;
                 WindowScanner ws;
 
@@ -163,12 +165,23 @@ element Nucleus{
 		}
 		return false;
 	}
+	Void layEgg(){
+		EggShell eg;
+		eg.id = childID;
+		eg.first = true;
+		for(Unsigned i; i < 2u; ++i){
+			SiteNum emptySlot = cl.emptySlotNearMe();
+			if(emptySlot != 0){
+				ew[emptySlot] = eg;
+			}
+		}
+	}
 	Void behave(){
 //disabling gene check for base layer reproduction test
-//		if(!geneCheck()){
-//			Empty e;
-//			ew[0] = e;
-//		}
+		if(!geneCheck()){
+			Empty e;
+			ew[0] = e;
+		}
 		++lifespan;
 		--refractoryPeriod;
 		//40 was too large. 2 was too small.
@@ -180,6 +193,9 @@ element Nucleus{
 //			if(lifespan > lifespan/20){
 //				cell.breakShell(id);
 //			}
+			if(reproducing){
+				layEgg();
+			}
 			cl.bringGenesCloser(id,self);
 			dontStepOnEggs();
 		//	if(dt.evaluate((Seqno)1, id, comIn)>32){

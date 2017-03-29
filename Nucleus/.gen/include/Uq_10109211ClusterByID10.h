@@ -49,7 +49,7 @@ namespace MFM { template <class EC> struct Ue_102717Nucleus10; }  //FORWARD
 namespace MFM { template <class EC> struct Un_10412489213WindowScanner10; }  //FORWARD
 namespace MFM { template <class EC> struct Uq_1010919SiteUtils10; }  //FORWARD
 namespace MFM { template <class EC> struct Un_10411209215SiteVisitorByID10; }  //FORWARD
-namespace MFM { template <class EC> struct Ue_102158EggShell10; }  //FORWARD
+namespace MFM { template <class EC> struct Ue_102188EggShell10; }  //FORWARD
 namespace MFM { template <class EC> struct Uq_10109210DebugUtils10; }  //FORWARD
 namespace MFM { template <class EC> struct Uq_10109211SiteVisitor10; }  //FORWARD
 namespace MFM { template <class EC> struct Un_102329211OutOfBounds10; }  //FORWARD
@@ -105,19 +105,19 @@ namespace MFM{
 
     Ui_Ut_10111b<EC> Uf_9216bringGenesCloser(const UlamContext<EC>& uc, UlamRef<EC>& ur, Ui_Ut_102101u<EC>& Uv_2id, Ui_Ut_102961a<EC>& Uv_2me) const; //gcnl:SymbolFunction.cpp:463
 
-    void Uf_3run(const UlamContext<EC>& uc, UlamRef<EC>& ur) const; //gcnl:SymbolFunction.cpp:463
-
     Ui_Ut_10161u<EC> Uf_9219findNonCellSlotNear(const UlamContext<EC>& uc, UlamRef<EC>& ur, Ui_Uq_102323C2D10<EC>& Uv_1t, Ui_Ut_102101u<EC>& Uv_2id) const; //gcnl:SymbolFunction.cpp:463
 
     Ui_Ut_10161u<EC> Uf_9219findNonCellSlotNear(const UlamContext<EC>& uc, UlamRef<EC>& ur, Ui_Ut_10161u<EC>& Uv_1t, Ui_Ut_102101u<EC>& Uv_2id) const; //gcnl:SymbolFunction.cpp:463
 
-    Ui_Ut_10161u<EC> Uf_9217nonCellSlotNearMe(const UlamContext<EC>& uc, UlamRef<EC>& ur, Ui_Ut_102961a<EC>& Uv_4atom, Ui_Ut_102101u<EC>& Uv_2id) const; //gcnl:SymbolFunction.cpp:463
+    Ui_Ut_10161u<EC> Uf_9217nonCellSlotNearMe(const UlamContext<EC>& uc, UlamRef<EC>& ur, Ui_Ut_102961a<EC>& Uv_4atom, Ui_Ut_102101u<EC>& Uv_2id, Ui_Ut_10121u<EC>& Uv_6radius) const; //gcnl:SymbolFunction.cpp:463
 
     Ui_Ut_10161u<EC> Uf_9217nonCellSlotNearMe(const UlamContext<EC>& uc, UlamRef<EC>& ur, Ui_Ut_102101u<EC>& Uv_2id) const; //gcnl:SymbolFunction.cpp:463
 
     Ui_Ut_10161u<EC> Uf_9214cellSlotNearMe(const UlamContext<EC>& uc, UlamRef<EC>& ur, Ui_Ut_102961a<EC>& Uv_4atom, Ui_Ut_102101u<EC>& Uv_2id, Ui_Ut_10121u<EC>& Uv_6radius) const; //gcnl:SymbolFunction.cpp:463
 
     Ui_Ut_10111b<EC> Uf_9217geneCanSeeNucleus(const UlamContext<EC>& uc, UlamRef<EC>& ur, Ui_Ut_102101u<EC>& Uv_2id) const; //gcnl:SymbolFunction.cpp:463
+
+    void Uf_3run(const UlamContext<EC>& uc, UlamRef<EC>& ur) const; //gcnl:SymbolFunction.cpp:463
 
     //BUILT-IN FUNCTIONS:
 

@@ -50,7 +50,7 @@ namespace MFM { template <class EC> struct Un_10412489213WindowScanner10; }  //F
 namespace MFM { template <class EC> struct Uq_10109211ClusterByID10; }  //FORWARD
 namespace MFM { template <class EC> struct Uq_1010919SiteUtils10; }  //FORWARD
 namespace MFM { template <class EC> struct Un_10411209215SiteVisitorByID10; }  //FORWARD
-namespace MFM { template <class EC> struct Ue_102158EggShell10; }  //FORWARD
+namespace MFM { template <class EC> struct Ue_102188EggShell10; }  //FORWARD
 namespace MFM { template <class EC> struct Uq_10109211SiteVisitor10; }  //FORWARD
 namespace MFM { template <class EC> struct Un_102329211OutOfBounds10; }  //FORWARD
 namespace MFM { template <class EC> struct Un_1035449217SiteVisitorByType10; }  //FORWARD
@@ -122,11 +122,11 @@ namespace MFM{
 
     void Uf_5print(const UlamContext<EC>& uc, UlamRef<EC>& ur, Ui_Ut_102321s<EC>& Uv_3arg) const; //native //gcnl:SymbolFunction.cpp:459
 
+    void Uf_5print(const UlamContext<EC>& uc, UlamRef<EC>& ur, Ui_Ut_102321i<EC>& Uv_3arg) const; //native //gcnl:SymbolFunction.cpp:459
+
     void Uf_5print(const UlamContext<EC>& uc, UlamRef<EC>& ur, Ui_Ut_10141i<EC>& Uv_3arg) const; //native //gcnl:SymbolFunction.cpp:459
 
     void Uf_5print(const UlamContext<EC>& uc, UlamRef<EC>& ur, Ui_Ut_10131i<EC>& Uv_3arg) const; //native //gcnl:SymbolFunction.cpp:459
-
-    void Uf_5print(const UlamContext<EC>& uc, UlamRef<EC>& ur, Ui_Ut_102321i<EC>& Uv_3arg) const; //native //gcnl:SymbolFunction.cpp:459
 
     void Uf_5print(const UlamContext<EC>& uc, UlamRef<EC>& ur, Ui_Ut_10131y<EC>& Uv_3arg) const; //native //gcnl:SymbolFunction.cpp:459
 

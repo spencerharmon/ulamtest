@@ -57,11 +57,11 @@ quark ClusterByID {
 
 	SiteNum nonCellSlotNearMe(ID id){		//this is for genes by default to support an older use of the function.
 		Gene gene;				//should update all instances to specify both
-		SiteNum s = nonCellSlotNearMe(gene, id);
+		SiteNum s = nonCellSlotNearMe(gene, id, (Unsigned(2))4);
 		return s;
 	}
 
-	SiteNum nonCellSlotNearMe(Atom atom, ID id){
+	SiteNum nonCellSlotNearMe(Atom atom, ID id, Unsigned(2) radius){
 		SiteVisitorByID sv;
 		WindowScanner ws;
 		
@@ -76,24 +76,39 @@ quark ClusterByID {
 
 		//only scan next radius if no hits
 		ws.scan(sv,1,1);
-		if(ws.getHits(cGene)==(Unsigned)0){
+		if(ws.getHits(cGene)==(Unsigned)0 && radius > 1){
 			ws.scan(sv,2,2);
-			if(ws.getHits(cGene)==(Unsigned)0){
+			if(ws.getHits(cGene)==(Unsigned)0 && radius > 2){
 				ws.scan(sv,3,3);
-				if(ws.getHits(cGene)==(Unsigned)0){
+				if(ws.getHits(cGene)==(Unsigned)0 && radius > 3){
 					ws.scan(sv,4,4);
-					if(ws.getHits(cGene) <= (Unsigned)41){
+					if(ws.getHits(cGene) <= (Unsigned)40){
 						return ws.getSiteNum(cGene);
 					}
 					else{
 						return 0;
 					}
 				}
+				if(ws.getHits(cGene) <= (Unsigned)40){
+					return ws.getSiteNum(cGene);
+				}
+				else{
+					return 0;
+				}
+			}
+			if(ws.getHits(cGene) <= (Unsigned)40){
 				return ws.getSiteNum(cGene);
 			}
+			else{
+				return 0;
+			}
+		}
+		if(ws.getHits(cGene) <= (Unsigned)40){
 			return ws.getSiteNum(cGene);
 		}
-		return ws.getSiteNum(cGene);
+		else{
+			return 0;
+		}
 	}
 	SiteNum cellSlotNearMe(Atom atom, ID id, Unsigned(2) radius){
 		//returns 0 if none found
@@ -117,28 +132,28 @@ quark ClusterByID {
 				ws.scan(sv,3,3);
 				if(ws.getHits(c)==(Unsigned)0 && radius > 3){
 					ws.scan(sv,4,4);
-					if(ws.getHits(c) <= (Unsigned)41){
+					if(ws.getHits(c) <= (Unsigned)40){
 						return ws.getSiteNum(c);
 					}
 					else{
 						return 0;
 					}
 				}
-				if(ws.getHits(c) <= (Unsigned)41){
+				if(ws.getHits(c) <= (Unsigned)40){
 					return ws.getSiteNum(c);
 				}
 				else{
 					return 0;
 				}
 			}
-			if(ws.getHits(c) <= (Unsigned)41){
+			if(ws.getHits(c) <= (Unsigned)40){
 				return ws.getSiteNum(c);
 			}
 			else{
 				return 0;
 			}
 		}
-		if(ws.getHits(c) <= (Unsigned)41){
+		if(ws.getHits(c) <= (Unsigned)40){
 			return ws.getSiteNum(c);
 		}
 		else{
@@ -146,6 +161,7 @@ quark ClusterByID {
 		}
 	}
 	SiteNum emptySlotNearMe(){
+		Unsigned radius = ew.getRadius();
 		SiteVisitorByID sv;
 		WindowScanner ws;
 		
@@ -158,24 +174,38 @@ quark ClusterByID {
 
 		//only scan next radius if no hits
 		ws.scan(sv,1,1);
-		if(ws.getHits(cEmpty)==(Unsigned)0){
+		if(ws.getHits(cEmpty)==(Unsigned)0 && radius > 1u){
 			ws.scan(sv,2,2);
-			if(ws.getHits(cEmpty)==(Unsigned)0){
+			if(ws.getHits(cEmpty)==(Unsigned)0 && radius > 2u){
 				ws.scan(sv,3,3);
-				if(ws.getHits(cEmpty)==(Unsigned)0){
+				if(ws.getHits(cEmpty)==(Unsigned)0 && radius > 3u){
 					ws.scan(sv,4,4);
-					if(ws.getHits(cEmpty) <= (Unsigned)41){
+					if(ws.getHits(cEmpty) <= (Unsigned)40){
 						return ws.getSiteNum(cEmpty);
 					}
 					else{
 						return 0;
 					}
 				}
+				if(ws.getHits(cEmpty) <= (Unsigned)40){
+					return ws.getSiteNum(cEmpty);
+				}
+				else{
+					return 0;
+				}
+			}
+			if(ws.getHits(cEmpty) <= (Unsigned)40){
 				return ws.getSiteNum(cEmpty);
 			}
-			return ws.getSiteNum(cEmpty);
+			else{
+				return 0;
+			}
 		}
-		return ws.getSiteNum(cEmpty);
+		if(ws.getHits(cEmpty) <= (Unsigned)40){
+			return ws.getSiteNum(cEmpty);
+		}else{
+			return 0;
+		}
 	}
 
 	Bool bringGenesCloser(ID id, Atom me){

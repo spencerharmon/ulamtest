@@ -18,7 +18,7 @@
 #include "Uq_10109211ClusterByID10.h"
 #include "Uq_1010919SiteUtils10.h"
 #include "Un_10411209215SiteVisitorByID10.h"
-#include "Ue_102158EggShell10.h"
+#include "Ue_102188EggShell10.h"
 #include "Uq_10109210DebugUtils10.h"
 #include "Uq_10109211SiteVisitor10.h"
 #include "Un_102329211OutOfBounds10.h"
@@ -40,16 +40,16 @@ namespace MFM{
   {
 
 //! EventWindow.ulam:73:   Atom& aref(C2D coord) { return aref(getSiteNumberRaw(coord)); }
-    const u32 Uh_5tlreg3302 = Uv_5coord.read(); //gcnl:Node.cpp:691
-    Ui_Uq_102323C2D10<EC> Uh_5tlval3303(Uh_5tlreg3302); //func arg& //gcnl:Node.cpp:1128
-    const Ui_Ut_10161u<EC> Uh_5tlval3305 = THE_INSTANCE.Uf_9216getSiteNumberRaw(uc, ur, Uh_5tlval3303); //gcnl:NodeFunctionCall.cpp:1006
-    const u32 Uh_5tlreg3306 = Uh_5tlval3305.read(); //gcnl:Node.cpp:1156
-    Ui_Ut_10161u<EC> Uh_5tlval3307(Uh_5tlreg3306); //func arg& //gcnl:Node.cpp:1128
-    Ui_Ut_r102961a<EC> Uh_5tuval3309 = THE_INSTANCE.Uf_4aref(uc, ur, Uh_5tlval3307); //gcnl:NodeFunctionCall.cpp:1006
-    if(_IsLocal((void *) &Uh_5tuval3309.GetStorage())) //gcnl:NodeReturnStatement.cpp:376
+    const u32 Uh_5tlreg3304 = Uv_5coord.read(); //gcnl:Node.cpp:691
+    Ui_Uq_102323C2D10<EC> Uh_5tlval3305(Uh_5tlreg3304); //func arg& //gcnl:Node.cpp:1128
+    const Ui_Ut_10161u<EC> Uh_5tlval3307 = THE_INSTANCE.Uf_9216getSiteNumberRaw(uc, ur, Uh_5tlval3305); //gcnl:NodeFunctionCall.cpp:1006
+    const u32 Uh_5tlreg3308 = Uh_5tlval3307.read(); //gcnl:Node.cpp:1156
+    Ui_Ut_10161u<EC> Uh_5tlval3309(Uh_5tlreg3308); //func arg& //gcnl:Node.cpp:1128
+    Ui_Ut_r102961a<EC> Uh_5tuval3311 = THE_INSTANCE.Uf_4aref(uc, ur, Uh_5tlval3309); //gcnl:NodeFunctionCall.cpp:1006
+    if(_IsLocal((void *) &Uh_5tuval3311.GetStorage())) //gcnl:NodeReturnStatement.cpp:376
       FAIL(UNRETURNABLE_REFERENCE); //gcnl:NodeReturnStatement.cpp:380
-    Ui_Ut_r102961a<EC> Uh_6turef3310(Uh_5tuval3309); //gcnl:Node.cpp:1586
-    return (Uh_6turef3310); //gcnl:NodeReturnStatement.cpp:407
+    Ui_Ut_r102961a<EC> Uh_6turef3312(Uh_5tuval3311); //gcnl:Node.cpp:1586
+    return (Uh_6turef3312); //gcnl:NodeReturnStatement.cpp:407
 
   } // Uf_4aref
 
@@ -61,24 +61,24 @@ namespace MFM{
   {
 
 //! EventWindow.ulam:84:   Bool isEmpty(SiteNum index) { return isLive(index) && au.isEmpty(aref(index)); }
-    u32 Uh_5tlreg3311 = false; //gcnl:NodeBinaryOpLogicalAnd.cpp:118
-    const u32 Uh_5tlreg3314 = Uv_5index.read(); //gcnl:Node.cpp:691
-    Ui_Ut_10161u<EC> Uh_5tlval3315(Uh_5tlreg3314); //func arg& //gcnl:Node.cpp:1128
-    const Ui_Ut_10111b<EC> Uh_5tlval3317 = THE_INSTANCE.Uf_6isLive(uc, ur, Uh_5tlval3315); //gcnl:NodeFunctionCall.cpp:1006
-    const u32 Uh_5tlreg3318 = Uh_5tlval3317.read(); //gcnl:Node.cpp:1156
-    if(_Bool32ToCbool(Uh_5tlreg3318, 1)) //gcnl:NodeBinaryOpLogicalAnd.cpp:137
+    u32 Uh_5tlreg3313 = false; //gcnl:NodeBinaryOpLogicalAnd.cpp:118
+    const u32 Uh_5tlreg3316 = Uv_5index.read(); //gcnl:Node.cpp:691
+    Ui_Ut_10161u<EC> Uh_5tlval3317(Uh_5tlreg3316); //func arg& //gcnl:Node.cpp:1128
+    const Ui_Ut_10111b<EC> Uh_5tlval3319 = THE_INSTANCE.Uf_6isLive(uc, ur, Uh_5tlval3317); //gcnl:NodeFunctionCall.cpp:1006
+    const u32 Uh_5tlreg3320 = Uh_5tlval3319.read(); //gcnl:Node.cpp:1156
+    if(_Bool32ToCbool(Uh_5tlreg3320, 1)) //gcnl:NodeBinaryOpLogicalAnd.cpp:137
     {
-      UlamRef<EC> Uh_3tur3320(ur, 0u, 0u, &Uq_1010919AtomUtils10<EC>::THE_INSTANCE, UlamRef<EC>::CLASSIC); //gcnl:NodeFunctionCall.cpp:923
-      const u32 Uh_5tlreg3323 = Uv_5index.read(); //gcnl:Node.cpp:691
-      Ui_Ut_10161u<EC> Uh_5tlval3324(Uh_5tlreg3323); //func arg& //gcnl:Node.cpp:1128
-      Ui_Ut_r102961a<EC> Uh_5tuval3326 = THE_INSTANCE.Uf_4aref(uc, ur, Uh_5tlval3324); //gcnl:NodeFunctionCall.cpp:1006
-      Ui_Ut_102961a<EC> Uh_5tuval3327(Uh_5tuval3326); //func arg& //gcnl:Node.cpp:1128
-      const Ui_Ut_10111b<EC> Uh_5tlval3329 = Uq_1010919AtomUtils10<EC>::THE_INSTANCE.Uf_7isEmpty(uc, Uh_3tur3320, Uh_5tuval3327); //gcnl:NodeFunctionCall.cpp:1006
-      const u32 Uh_5tlreg3330 = Uh_5tlval3329.read(); //gcnl:Node.cpp:1156
-      Uh_5tlreg3311 = Uh_5tlreg3330; //gcnl:NodeBinaryOpLogicalAnd.cpp:151
+      UlamRef<EC> Uh_3tur3322(ur, 0u, 0u, &Uq_1010919AtomUtils10<EC>::THE_INSTANCE, UlamRef<EC>::CLASSIC); //gcnl:NodeFunctionCall.cpp:923
+      const u32 Uh_5tlreg3325 = Uv_5index.read(); //gcnl:Node.cpp:691
+      Ui_Ut_10161u<EC> Uh_5tlval3326(Uh_5tlreg3325); //func arg& //gcnl:Node.cpp:1128
+      Ui_Ut_r102961a<EC> Uh_5tuval3328 = THE_INSTANCE.Uf_4aref(uc, ur, Uh_5tlval3326); //gcnl:NodeFunctionCall.cpp:1006
+      Ui_Ut_102961a<EC> Uh_5tuval3329(Uh_5tuval3328); //func arg& //gcnl:Node.cpp:1128
+      const Ui_Ut_10111b<EC> Uh_5tlval3331 = Uq_1010919AtomUtils10<EC>::THE_INSTANCE.Uf_7isEmpty(uc, Uh_3tur3322, Uh_5tuval3329); //gcnl:NodeFunctionCall.cpp:1006
+      const u32 Uh_5tlreg3332 = Uh_5tlval3331.read(); //gcnl:Node.cpp:1156
+      Uh_5tlreg3313 = Uh_5tlreg3332; //gcnl:NodeBinaryOpLogicalAnd.cpp:151
     }
-    Ui_Ut_10111b<EC> Uh_5tlval3331(Uh_5tlreg3311); //func arg& //gcnl:Node.cpp:1128
-    return (Uh_5tlval3331); //gcnl:NodeReturnStatement.cpp:343
+    Ui_Ut_10111b<EC> Uh_5tlval3333(Uh_5tlreg3313); //func arg& //gcnl:Node.cpp:1128
+    return (Uh_5tlval3333); //gcnl:NodeReturnStatement.cpp:343
 
   } // Uf_7isEmpty
 
@@ -90,24 +90,24 @@ namespace MFM{
   {
 
 //! EventWindow.ulam:85:   Bool isEmpty(C2D coord) { return isLegal(coord) && isLive(getSiteNumberRaw(coord)); }
-    u32 Uh_5tlreg3332 = false; //gcnl:NodeBinaryOpLogicalAnd.cpp:118
-    const u32 Uh_5tlreg3335 = Uv_5coord.read(); //gcnl:Node.cpp:691
-    Ui_Uq_102323C2D10<EC> Uh_5tlval3336(Uh_5tlreg3335); //func arg& //gcnl:Node.cpp:1128
-    const Ui_Ut_10111b<EC> Uh_5tlval3338 = THE_INSTANCE.Uf_7isLegal(uc, ur, Uh_5tlval3336); //gcnl:NodeFunctionCall.cpp:1006
-    const u32 Uh_5tlreg3339 = Uh_5tlval3338.read(); //gcnl:Node.cpp:1156
-    if(_Bool32ToCbool(Uh_5tlreg3339, 1)) //gcnl:NodeBinaryOpLogicalAnd.cpp:137
+    u32 Uh_5tlreg3334 = false; //gcnl:NodeBinaryOpLogicalAnd.cpp:118
+    const u32 Uh_5tlreg3337 = Uv_5coord.read(); //gcnl:Node.cpp:691
+    Ui_Uq_102323C2D10<EC> Uh_5tlval3338(Uh_5tlreg3337); //func arg& //gcnl:Node.cpp:1128
+    const Ui_Ut_10111b<EC> Uh_5tlval3340 = THE_INSTANCE.Uf_7isLegal(uc, ur, Uh_5tlval3338); //gcnl:NodeFunctionCall.cpp:1006
+    const u32 Uh_5tlreg3341 = Uh_5tlval3340.read(); //gcnl:Node.cpp:1156
+    if(_Bool32ToCbool(Uh_5tlreg3341, 1)) //gcnl:NodeBinaryOpLogicalAnd.cpp:137
     {
-      const u32 Uh_5tlreg3343 = Uv_5coord.read(); //gcnl:Node.cpp:691
-      Ui_Uq_102323C2D10<EC> Uh_5tlval3344(Uh_5tlreg3343); //func arg& //gcnl:Node.cpp:1128
-      const Ui_Ut_10161u<EC> Uh_5tlval3346 = THE_INSTANCE.Uf_9216getSiteNumberRaw(uc, ur, Uh_5tlval3344); //gcnl:NodeFunctionCall.cpp:1006
-      const u32 Uh_5tlreg3347 = Uh_5tlval3346.read(); //gcnl:Node.cpp:1156
-      Ui_Ut_10161u<EC> Uh_5tlval3348(Uh_5tlreg3347); //func arg& //gcnl:Node.cpp:1128
-      const Ui_Ut_10111b<EC> Uh_5tlval3350 = THE_INSTANCE.Uf_6isLive(uc, ur, Uh_5tlval3348); //gcnl:NodeFunctionCall.cpp:1006
-      const u32 Uh_5tlreg3351 = Uh_5tlval3350.read(); //gcnl:Node.cpp:1156
-      Uh_5tlreg3332 = Uh_5tlreg3351; //gcnl:NodeBinaryOpLogicalAnd.cpp:151
+      const u32 Uh_5tlreg3345 = Uv_5coord.read(); //gcnl:Node.cpp:691
+      Ui_Uq_102323C2D10<EC> Uh_5tlval3346(Uh_5tlreg3345); //func arg& //gcnl:Node.cpp:1128
+      const Ui_Ut_10161u<EC> Uh_5tlval3348 = THE_INSTANCE.Uf_9216getSiteNumberRaw(uc, ur, Uh_5tlval3346); //gcnl:NodeFunctionCall.cpp:1006
+      const u32 Uh_5tlreg3349 = Uh_5tlval3348.read(); //gcnl:Node.cpp:1156
+      Ui_Ut_10161u<EC> Uh_5tlval3350(Uh_5tlreg3349); //func arg& //gcnl:Node.cpp:1128
+      const Ui_Ut_10111b<EC> Uh_5tlval3352 = THE_INSTANCE.Uf_6isLive(uc, ur, Uh_5tlval3350); //gcnl:NodeFunctionCall.cpp:1006
+      const u32 Uh_5tlreg3353 = Uh_5tlval3352.read(); //gcnl:Node.cpp:1156
+      Uh_5tlreg3334 = Uh_5tlreg3353; //gcnl:NodeBinaryOpLogicalAnd.cpp:151
     }
-    Ui_Ut_10111b<EC> Uh_5tlval3352(Uh_5tlreg3332); //func arg& //gcnl:Node.cpp:1128
-    return (Uh_5tlval3352); //gcnl:NodeReturnStatement.cpp:343
+    Ui_Ut_10111b<EC> Uh_5tlval3354(Uh_5tlreg3334); //func arg& //gcnl:Node.cpp:1128
+    return (Uh_5tlval3354); //gcnl:NodeReturnStatement.cpp:343
 
   } // Uf_7isEmpty
 
@@ -126,22 +126,22 @@ namespace MFM{
 //! EventWindow.ulam:67:     typedef MDist.Index Index;
 
 //! EventWindow.ulam:68:     Unsigned rad = getRadius();
-    const Ui_Ut_102321u<EC> Uh_5tlval3355 = THE_INSTANCE.Uf_919getRadius(uc, ur); //gcnl:NodeFunctionCall.cpp:1006
-    const u32 Uh_5tlreg3356 = Uh_5tlval3355.read(); //gcnl:Node.cpp:1156
-    Ui_Ut_102321u<EC> Uv_3rad(Uh_5tlreg3356); //gcnl:NodeVarDecl.cpp:1060
+    const Ui_Ut_102321u<EC> Uh_5tlval3357 = THE_INSTANCE.Uf_919getRadius(uc, ur); //gcnl:NodeFunctionCall.cpp:1006
+    const u32 Uh_5tlreg3358 = Uh_5tlval3357.read(); //gcnl:Node.cpp:1156
+    Ui_Ut_102321u<EC> Uv_3rad(Uh_5tlreg3358); //gcnl:NodeVarDecl.cpp:1060
 
 //! EventWindow.ulam:69:     return md.getFirstIndex((Radius) (rad + 1u));
-    UlamRef<EC> Uh_3tur3358(0u, 0u, Uv_2md, &Uq_10105MDist10<EC>::THE_INSTANCE, UlamRef<EC>::CLASSIC, uc); //gcnl:NodeFunctionCall.cpp:923
-    const u32 Uh_5tlreg3359 = 1u; //gcnl:NodeTerminal.cpp:721
-    const u32 Uh_5tlreg3360 = _Unsigned32ToUnsigned32(Uh_5tlreg3359, 1, 32); //gcnl:NodeCast.cpp:723
-    const u32 Uh_5tlreg3362 = Uv_3rad.read(); //gcnl:Node.cpp:691
-    const u32 Uh_5tlreg3363 = _BinOpAddUnsigned32(Uh_5tlreg3362, Uh_5tlreg3360, 32); //gcnl:NodeBinaryOp.cpp:719
-    const u32 Uh_5tlreg3364 = _Unsigned32ToUnsigned32(Uh_5tlreg3363, 32, 3); //gcnl:NodeCast.cpp:723
-    Ui_Ut_10131u<EC> Uh_5tlval3365(Uh_5tlreg3364); //func arg& //gcnl:Node.cpp:1128
-    const Ui_Ut_10161u<EC> Uh_5tlval3367 = Ui_Uq_10105MDist10<EC>::Us::THE_INSTANCE.Uf_9213getFirstIndex(uc, Uh_3tur3358, Uh_5tlval3365); //gcnl:NodeFunctionCall.cpp:1006
-    const u32 Uh_5tlreg3368 = Uh_5tlval3367.read(); //gcnl:Node.cpp:1156
-    Ui_Ut_10161u<EC> Uh_5tlval3369(Uh_5tlreg3368); //func arg& //gcnl:Node.cpp:1128
-    return (Uh_5tlval3369); //gcnl:NodeReturnStatement.cpp:343
+    UlamRef<EC> Uh_3tur3360(0u, 0u, Uv_2md, &Uq_10105MDist10<EC>::THE_INSTANCE, UlamRef<EC>::CLASSIC, uc); //gcnl:NodeFunctionCall.cpp:923
+    const u32 Uh_5tlreg3361 = 1u; //gcnl:NodeTerminal.cpp:721
+    const u32 Uh_5tlreg3362 = _Unsigned32ToUnsigned32(Uh_5tlreg3361, 1, 32); //gcnl:NodeCast.cpp:723
+    const u32 Uh_5tlreg3364 = Uv_3rad.read(); //gcnl:Node.cpp:691
+    const u32 Uh_5tlreg3365 = _BinOpAddUnsigned32(Uh_5tlreg3364, Uh_5tlreg3362, 32); //gcnl:NodeBinaryOp.cpp:719
+    const u32 Uh_5tlreg3366 = _Unsigned32ToUnsigned32(Uh_5tlreg3365, 32, 3); //gcnl:NodeCast.cpp:723
+    Ui_Ut_10131u<EC> Uh_5tlval3367(Uh_5tlreg3366); //func arg& //gcnl:Node.cpp:1128
+    const Ui_Ut_10161u<EC> Uh_5tlval3369 = Ui_Uq_10105MDist10<EC>::Us::THE_INSTANCE.Uf_9213getFirstIndex(uc, Uh_3tur3360, Uh_5tlval3367); //gcnl:NodeFunctionCall.cpp:1006
+    const u32 Uh_5tlreg3370 = Uh_5tlval3369.read(); //gcnl:Node.cpp:1156
+    Ui_Ut_10161u<EC> Uh_5tlval3371(Uh_5tlreg3370); //func arg& //gcnl:Node.cpp:1128
+    return (Uh_5tlval3371); //gcnl:NodeReturnStatement.cpp:343
 
   } // Uf_9217getAccessibleSize
 
@@ -153,12 +153,12 @@ namespace MFM{
   {
 
 //! EventWindow.ulam:75:   Bool isLegal(SiteNum index) { return index < size(); }
-    const Ui_Ut_10161u<EC> Uh_5tlval3372 = THE_INSTANCE.Uf_4size(uc, ur); //gcnl:NodeFunctionCall.cpp:1006
-    const u32 Uh_5tlreg3373 = Uh_5tlval3372.read(); //gcnl:Node.cpp:1156
-    const u32 Uh_5tlreg3375 = Uv_5index.read(); //gcnl:Node.cpp:691
-    const u32 Uh_5tlreg3376 = _BinOpCompareLessThanUnsigned32(Uh_5tlreg3375, Uh_5tlreg3373, 6); //gcnl:NodeBinaryOpCompare.cpp:313
-    Ui_Ut_10111b<EC> Uh_5tlval3377(Uh_5tlreg3376); //func arg& //gcnl:Node.cpp:1128
-    return (Uh_5tlval3377); //gcnl:NodeReturnStatement.cpp:343
+    const Ui_Ut_10161u<EC> Uh_5tlval3374 = THE_INSTANCE.Uf_4size(uc, ur); //gcnl:NodeFunctionCall.cpp:1006
+    const u32 Uh_5tlreg3375 = Uh_5tlval3374.read(); //gcnl:Node.cpp:1156
+    const u32 Uh_5tlreg3377 = Uv_5index.read(); //gcnl:Node.cpp:691
+    const u32 Uh_5tlreg3378 = _BinOpCompareLessThanUnsigned32(Uh_5tlreg3377, Uh_5tlreg3375, 6); //gcnl:NodeBinaryOpCompare.cpp:313
+    Ui_Ut_10111b<EC> Uh_5tlval3379(Uh_5tlreg3378); //func arg& //gcnl:Node.cpp:1128
+    return (Uh_5tlval3379); //gcnl:NodeReturnStatement.cpp:343
 
   } // Uf_7isLegal
 
@@ -170,15 +170,15 @@ namespace MFM{
   {
 
 //! EventWindow.ulam:76:   Bool isLegal(C2D coord) { return isLegal(getSiteNumberRaw(coord)); }
-    const u32 Uh_5tlreg3381 = Uv_5coord.read(); //gcnl:Node.cpp:691
-    Ui_Uq_102323C2D10<EC> Uh_5tlval3382(Uh_5tlreg3381); //func arg& //gcnl:Node.cpp:1128
-    const Ui_Ut_10161u<EC> Uh_5tlval3384 = THE_INSTANCE.Uf_9216getSiteNumberRaw(uc, ur, Uh_5tlval3382); //gcnl:NodeFunctionCall.cpp:1006
-    const u32 Uh_5tlreg3385 = Uh_5tlval3384.read(); //gcnl:Node.cpp:1156
-    Ui_Ut_10161u<EC> Uh_5tlval3386(Uh_5tlreg3385); //func arg& //gcnl:Node.cpp:1128
-    const Ui_Ut_10111b<EC> Uh_5tlval3388 = THE_INSTANCE.Uf_7isLegal(uc, ur, Uh_5tlval3386); //gcnl:NodeFunctionCall.cpp:1006
-    const u32 Uh_5tlreg3389 = Uh_5tlval3388.read(); //gcnl:Node.cpp:1156
-    Ui_Ut_10111b<EC> Uh_5tlval3390(Uh_5tlreg3389); //func arg& //gcnl:Node.cpp:1128
-    return (Uh_5tlval3390); //gcnl:NodeReturnStatement.cpp:343
+    const u32 Uh_5tlreg3383 = Uv_5coord.read(); //gcnl:Node.cpp:691
+    Ui_Uq_102323C2D10<EC> Uh_5tlval3384(Uh_5tlreg3383); //func arg& //gcnl:Node.cpp:1128
+    const Ui_Ut_10161u<EC> Uh_5tlval3386 = THE_INSTANCE.Uf_9216getSiteNumberRaw(uc, ur, Uh_5tlval3384); //gcnl:NodeFunctionCall.cpp:1006
+    const u32 Uh_5tlreg3387 = Uh_5tlval3386.read(); //gcnl:Node.cpp:1156
+    Ui_Ut_10161u<EC> Uh_5tlval3388(Uh_5tlreg3387); //func arg& //gcnl:Node.cpp:1128
+    const Ui_Ut_10111b<EC> Uh_5tlval3390 = THE_INSTANCE.Uf_7isLegal(uc, ur, Uh_5tlval3388); //gcnl:NodeFunctionCall.cpp:1006
+    const u32 Uh_5tlreg3391 = Uh_5tlval3390.read(); //gcnl:Node.cpp:1156
+    Ui_Ut_10111b<EC> Uh_5tlval3392(Uh_5tlreg3391); //func arg& //gcnl:Node.cpp:1128
+    return (Uh_5tlval3392); //gcnl:NodeReturnStatement.cpp:343
 
   } // Uf_7isLegal
 
@@ -190,21 +190,21 @@ namespace MFM{
   {
 
 //! EventWindow.ulam:78:   Bool isAccessible(SiteNum index) { return index < getAccessibleSize() && isLive(index); }
-    u32 Uh_5tlreg3391 = false; //gcnl:NodeBinaryOpLogicalAnd.cpp:118
-    const Ui_Ut_10161u<EC> Uh_5tlval3394 = THE_INSTANCE.Uf_9217getAccessibleSize(uc, ur); //gcnl:NodeFunctionCall.cpp:1006
-    const u32 Uh_5tlreg3395 = Uh_5tlval3394.read(); //gcnl:Node.cpp:1156
-    const u32 Uh_5tlreg3397 = Uv_5index.read(); //gcnl:Node.cpp:691
-    const u32 Uh_5tlreg3398 = _BinOpCompareLessThanUnsigned32(Uh_5tlreg3397, Uh_5tlreg3395, 6); //gcnl:NodeBinaryOpCompare.cpp:313
-    if(_Bool32ToCbool(Uh_5tlreg3398, 1)) //gcnl:NodeBinaryOpLogicalAnd.cpp:137
+    u32 Uh_5tlreg3393 = false; //gcnl:NodeBinaryOpLogicalAnd.cpp:118
+    const Ui_Ut_10161u<EC> Uh_5tlval3396 = THE_INSTANCE.Uf_9217getAccessibleSize(uc, ur); //gcnl:NodeFunctionCall.cpp:1006
+    const u32 Uh_5tlreg3397 = Uh_5tlval3396.read(); //gcnl:Node.cpp:1156
+    const u32 Uh_5tlreg3399 = Uv_5index.read(); //gcnl:Node.cpp:691
+    const u32 Uh_5tlreg3400 = _BinOpCompareLessThanUnsigned32(Uh_5tlreg3399, Uh_5tlreg3397, 6); //gcnl:NodeBinaryOpCompare.cpp:313
+    if(_Bool32ToCbool(Uh_5tlreg3400, 1)) //gcnl:NodeBinaryOpLogicalAnd.cpp:137
     {
-      const u32 Uh_5tlreg3401 = Uv_5index.read(); //gcnl:Node.cpp:691
-      Ui_Ut_10161u<EC> Uh_5tlval3402(Uh_5tlreg3401); //func arg& //gcnl:Node.cpp:1128
-      const Ui_Ut_10111b<EC> Uh_5tlval3404 = THE_INSTANCE.Uf_6isLive(uc, ur, Uh_5tlval3402); //gcnl:NodeFunctionCall.cpp:1006
-      const u32 Uh_5tlreg3405 = Uh_5tlval3404.read(); //gcnl:Node.cpp:1156
-      Uh_5tlreg3391 = Uh_5tlreg3405; //gcnl:NodeBinaryOpLogicalAnd.cpp:151
+      const u32 Uh_5tlreg3403 = Uv_5index.read(); //gcnl:Node.cpp:691
+      Ui_Ut_10161u<EC> Uh_5tlval3404(Uh_5tlreg3403); //func arg& //gcnl:Node.cpp:1128
+      const Ui_Ut_10111b<EC> Uh_5tlval3406 = THE_INSTANCE.Uf_6isLive(uc, ur, Uh_5tlval3404); //gcnl:NodeFunctionCall.cpp:1006
+      const u32 Uh_5tlreg3407 = Uh_5tlval3406.read(); //gcnl:Node.cpp:1156
+      Uh_5tlreg3393 = Uh_5tlreg3407; //gcnl:NodeBinaryOpLogicalAnd.cpp:151
     }
-    Ui_Ut_10111b<EC> Uh_5tlval3406(Uh_5tlreg3391); //func arg& //gcnl:Node.cpp:1128
-    return (Uh_5tlval3406); //gcnl:NodeReturnStatement.cpp:343
+    Ui_Ut_10111b<EC> Uh_5tlval3408(Uh_5tlreg3393); //func arg& //gcnl:Node.cpp:1128
+    return (Uh_5tlval3408); //gcnl:NodeReturnStatement.cpp:343
 
   } // Uf_9212isAccessible
 
@@ -216,24 +216,24 @@ namespace MFM{
   {
 
 //! EventWindow.ulam:79:   Bool isAccessible(C2D coord) { return isLegal(coord) && isAccessible(getSiteNumberRaw(coord)); }
-    u32 Uh_5tlreg3407 = false; //gcnl:NodeBinaryOpLogicalAnd.cpp:118
-    const u32 Uh_5tlreg3410 = Uv_5coord.read(); //gcnl:Node.cpp:691
-    Ui_Uq_102323C2D10<EC> Uh_5tlval3411(Uh_5tlreg3410); //func arg& //gcnl:Node.cpp:1128
-    const Ui_Ut_10111b<EC> Uh_5tlval3413 = THE_INSTANCE.Uf_7isLegal(uc, ur, Uh_5tlval3411); //gcnl:NodeFunctionCall.cpp:1006
-    const u32 Uh_5tlreg3414 = Uh_5tlval3413.read(); //gcnl:Node.cpp:1156
-    if(_Bool32ToCbool(Uh_5tlreg3414, 1)) //gcnl:NodeBinaryOpLogicalAnd.cpp:137
+    u32 Uh_5tlreg3409 = false; //gcnl:NodeBinaryOpLogicalAnd.cpp:118
+    const u32 Uh_5tlreg3412 = Uv_5coord.read(); //gcnl:Node.cpp:691
+    Ui_Uq_102323C2D10<EC> Uh_5tlval3413(Uh_5tlreg3412); //func arg& //gcnl:Node.cpp:1128
+    const Ui_Ut_10111b<EC> Uh_5tlval3415 = THE_INSTANCE.Uf_7isLegal(uc, ur, Uh_5tlval3413); //gcnl:NodeFunctionCall.cpp:1006
+    const u32 Uh_5tlreg3416 = Uh_5tlval3415.read(); //gcnl:Node.cpp:1156
+    if(_Bool32ToCbool(Uh_5tlreg3416, 1)) //gcnl:NodeBinaryOpLogicalAnd.cpp:137
     {
-      const u32 Uh_5tlreg3418 = Uv_5coord.read(); //gcnl:Node.cpp:691
-      Ui_Uq_102323C2D10<EC> Uh_5tlval3419(Uh_5tlreg3418); //func arg& //gcnl:Node.cpp:1128
-      const Ui_Ut_10161u<EC> Uh_5tlval3421 = THE_INSTANCE.Uf_9216getSiteNumberRaw(uc, ur, Uh_5tlval3419); //gcnl:NodeFunctionCall.cpp:1006
-      const u32 Uh_5tlreg3422 = Uh_5tlval3421.read(); //gcnl:Node.cpp:1156
-      Ui_Ut_10161u<EC> Uh_5tlval3423(Uh_5tlreg3422); //func arg& //gcnl:Node.cpp:1128
-      const Ui_Ut_10111b<EC> Uh_5tlval3425 = THE_INSTANCE.Uf_9212isAccessible(uc, ur, Uh_5tlval3423); //gcnl:NodeFunctionCall.cpp:1006
-      const u32 Uh_5tlreg3426 = Uh_5tlval3425.read(); //gcnl:Node.cpp:1156
-      Uh_5tlreg3407 = Uh_5tlreg3426; //gcnl:NodeBinaryOpLogicalAnd.cpp:151
+      const u32 Uh_5tlreg3420 = Uv_5coord.read(); //gcnl:Node.cpp:691
+      Ui_Uq_102323C2D10<EC> Uh_5tlval3421(Uh_5tlreg3420); //func arg& //gcnl:Node.cpp:1128
+      const Ui_Ut_10161u<EC> Uh_5tlval3423 = THE_INSTANCE.Uf_9216getSiteNumberRaw(uc, ur, Uh_5tlval3421); //gcnl:NodeFunctionCall.cpp:1006
+      const u32 Uh_5tlreg3424 = Uh_5tlval3423.read(); //gcnl:Node.cpp:1156
+      Ui_Ut_10161u<EC> Uh_5tlval3425(Uh_5tlreg3424); //func arg& //gcnl:Node.cpp:1128
+      const Ui_Ut_10111b<EC> Uh_5tlval3427 = THE_INSTANCE.Uf_9212isAccessible(uc, ur, Uh_5tlval3425); //gcnl:NodeFunctionCall.cpp:1006
+      const u32 Uh_5tlreg3428 = Uh_5tlval3427.read(); //gcnl:Node.cpp:1156
+      Uh_5tlreg3409 = Uh_5tlreg3428; //gcnl:NodeBinaryOpLogicalAnd.cpp:151
     }
-    Ui_Ut_10111b<EC> Uh_5tlval3427(Uh_5tlreg3407); //func arg& //gcnl:Node.cpp:1128
-    return (Uh_5tlval3427); //gcnl:NodeReturnStatement.cpp:343
+    Ui_Ut_10111b<EC> Uh_5tlval3429(Uh_5tlreg3409); //func arg& //gcnl:Node.cpp:1128
+    return (Uh_5tlval3429); //gcnl:NodeReturnStatement.cpp:343
 
   } // Uf_9212isAccessible
 
@@ -245,24 +245,24 @@ namespace MFM{
   {
 
 //! EventWindow.ulam:82:   Bool isLive(C2D coord) { return isLegal(coord) && isLive(getSiteNumberRaw(coord)); }
-    u32 Uh_5tlreg3428 = false; //gcnl:NodeBinaryOpLogicalAnd.cpp:118
-    const u32 Uh_5tlreg3431 = Uv_5coord.read(); //gcnl:Node.cpp:691
-    Ui_Uq_102323C2D10<EC> Uh_5tlval3432(Uh_5tlreg3431); //func arg& //gcnl:Node.cpp:1128
-    const Ui_Ut_10111b<EC> Uh_5tlval3434 = THE_INSTANCE.Uf_7isLegal(uc, ur, Uh_5tlval3432); //gcnl:NodeFunctionCall.cpp:1006
-    const u32 Uh_5tlreg3435 = Uh_5tlval3434.read(); //gcnl:Node.cpp:1156
-    if(_Bool32ToCbool(Uh_5tlreg3435, 1)) //gcnl:NodeBinaryOpLogicalAnd.cpp:137
+    u32 Uh_5tlreg3430 = false; //gcnl:NodeBinaryOpLogicalAnd.cpp:118
+    const u32 Uh_5tlreg3433 = Uv_5coord.read(); //gcnl:Node.cpp:691
+    Ui_Uq_102323C2D10<EC> Uh_5tlval3434(Uh_5tlreg3433); //func arg& //gcnl:Node.cpp:1128
+    const Ui_Ut_10111b<EC> Uh_5tlval3436 = THE_INSTANCE.Uf_7isLegal(uc, ur, Uh_5tlval3434); //gcnl:NodeFunctionCall.cpp:1006
+    const u32 Uh_5tlreg3437 = Uh_5tlval3436.read(); //gcnl:Node.cpp:1156
+    if(_Bool32ToCbool(Uh_5tlreg3437, 1)) //gcnl:NodeBinaryOpLogicalAnd.cpp:137
     {
-      const u32 Uh_5tlreg3439 = Uv_5coord.read(); //gcnl:Node.cpp:691
-      Ui_Uq_102323C2D10<EC> Uh_5tlval3440(Uh_5tlreg3439); //func arg& //gcnl:Node.cpp:1128
-      const Ui_Ut_10161u<EC> Uh_5tlval3442 = THE_INSTANCE.Uf_9216getSiteNumberRaw(uc, ur, Uh_5tlval3440); //gcnl:NodeFunctionCall.cpp:1006
-      const u32 Uh_5tlreg3443 = Uh_5tlval3442.read(); //gcnl:Node.cpp:1156
-      Ui_Ut_10161u<EC> Uh_5tlval3444(Uh_5tlreg3443); //func arg& //gcnl:Node.cpp:1128
-      const Ui_Ut_10111b<EC> Uh_5tlval3446 = THE_INSTANCE.Uf_6isLive(uc, ur, Uh_5tlval3444); //gcnl:NodeFunctionCall.cpp:1006
-      const u32 Uh_5tlreg3447 = Uh_5tlval3446.read(); //gcnl:Node.cpp:1156
-      Uh_5tlreg3428 = Uh_5tlreg3447; //gcnl:NodeBinaryOpLogicalAnd.cpp:151
+      const u32 Uh_5tlreg3441 = Uv_5coord.read(); //gcnl:Node.cpp:691
+      Ui_Uq_102323C2D10<EC> Uh_5tlval3442(Uh_5tlreg3441); //func arg& //gcnl:Node.cpp:1128
+      const Ui_Ut_10161u<EC> Uh_5tlval3444 = THE_INSTANCE.Uf_9216getSiteNumberRaw(uc, ur, Uh_5tlval3442); //gcnl:NodeFunctionCall.cpp:1006
+      const u32 Uh_5tlreg3445 = Uh_5tlval3444.read(); //gcnl:Node.cpp:1156
+      Ui_Ut_10161u<EC> Uh_5tlval3446(Uh_5tlreg3445); //func arg& //gcnl:Node.cpp:1128
+      const Ui_Ut_10111b<EC> Uh_5tlval3448 = THE_INSTANCE.Uf_6isLive(uc, ur, Uh_5tlval3446); //gcnl:NodeFunctionCall.cpp:1006
+      const u32 Uh_5tlreg3449 = Uh_5tlval3448.read(); //gcnl:Node.cpp:1156
+      Uh_5tlreg3430 = Uh_5tlreg3449; //gcnl:NodeBinaryOpLogicalAnd.cpp:151
     }
-    Ui_Ut_10111b<EC> Uh_5tlval3448(Uh_5tlreg3428); //func arg& //gcnl:Node.cpp:1128
-    return (Uh_5tlval3448); //gcnl:NodeReturnStatement.cpp:343
+    Ui_Ut_10111b<EC> Uh_5tlval3450(Uh_5tlreg3430); //func arg& //gcnl:Node.cpp:1128
+    return (Uh_5tlval3450); //gcnl:NodeReturnStatement.cpp:343
 
   } // Uf_6isLive
 
@@ -274,20 +274,20 @@ namespace MFM{
   {
 
 //! EventWindow.ulam:88:   Bool swap(C2D coord1, C2D coord2) { return swap(getSiteNumberRaw(coord1), getSiteNumberRaw(coord2)); }
-    const u32 Uh_5tlreg3452 = Uv_6coord1.read(); //gcnl:Node.cpp:691
-    Ui_Uq_102323C2D10<EC> Uh_5tlval3453(Uh_5tlreg3452); //func arg& //gcnl:Node.cpp:1128
-    const Ui_Ut_10161u<EC> Uh_5tlval3455 = THE_INSTANCE.Uf_9216getSiteNumberRaw(uc, ur, Uh_5tlval3453); //gcnl:NodeFunctionCall.cpp:1006
-    const u32 Uh_5tlreg3456 = Uh_5tlval3455.read(); //gcnl:Node.cpp:1156
-    Ui_Ut_10161u<EC> Uh_5tlval3457(Uh_5tlreg3456); //func arg& //gcnl:Node.cpp:1128
-    const u32 Uh_5tlreg3460 = Uv_6coord2.read(); //gcnl:Node.cpp:691
-    Ui_Uq_102323C2D10<EC> Uh_5tlval3461(Uh_5tlreg3460); //func arg& //gcnl:Node.cpp:1128
-    const Ui_Ut_10161u<EC> Uh_5tlval3463 = THE_INSTANCE.Uf_9216getSiteNumberRaw(uc, ur, Uh_5tlval3461); //gcnl:NodeFunctionCall.cpp:1006
-    const u32 Uh_5tlreg3464 = Uh_5tlval3463.read(); //gcnl:Node.cpp:1156
-    Ui_Ut_10161u<EC> Uh_5tlval3465(Uh_5tlreg3464); //func arg& //gcnl:Node.cpp:1128
-    const Ui_Ut_10111b<EC> Uh_5tlval3467 = THE_INSTANCE.Uf_4swap(uc, ur, Uh_5tlval3457, Uh_5tlval3465); //gcnl:NodeFunctionCall.cpp:1006
-    const u32 Uh_5tlreg3468 = Uh_5tlval3467.read(); //gcnl:Node.cpp:1156
-    Ui_Ut_10111b<EC> Uh_5tlval3469(Uh_5tlreg3468); //func arg& //gcnl:Node.cpp:1128
-    return (Uh_5tlval3469); //gcnl:NodeReturnStatement.cpp:343
+    const u32 Uh_5tlreg3454 = Uv_6coord1.read(); //gcnl:Node.cpp:691
+    Ui_Uq_102323C2D10<EC> Uh_5tlval3455(Uh_5tlreg3454); //func arg& //gcnl:Node.cpp:1128
+    const Ui_Ut_10161u<EC> Uh_5tlval3457 = THE_INSTANCE.Uf_9216getSiteNumberRaw(uc, ur, Uh_5tlval3455); //gcnl:NodeFunctionCall.cpp:1006
+    const u32 Uh_5tlreg3458 = Uh_5tlval3457.read(); //gcnl:Node.cpp:1156
+    Ui_Ut_10161u<EC> Uh_5tlval3459(Uh_5tlreg3458); //func arg& //gcnl:Node.cpp:1128
+    const u32 Uh_5tlreg3462 = Uv_6coord2.read(); //gcnl:Node.cpp:691
+    Ui_Uq_102323C2D10<EC> Uh_5tlval3463(Uh_5tlreg3462); //func arg& //gcnl:Node.cpp:1128
+    const Ui_Ut_10161u<EC> Uh_5tlval3465 = THE_INSTANCE.Uf_9216getSiteNumberRaw(uc, ur, Uh_5tlval3463); //gcnl:NodeFunctionCall.cpp:1006
+    const u32 Uh_5tlreg3466 = Uh_5tlval3465.read(); //gcnl:Node.cpp:1156
+    Ui_Ut_10161u<EC> Uh_5tlval3467(Uh_5tlreg3466); //func arg& //gcnl:Node.cpp:1128
+    const Ui_Ut_10111b<EC> Uh_5tlval3469 = THE_INSTANCE.Uf_4swap(uc, ur, Uh_5tlval3459, Uh_5tlval3467); //gcnl:NodeFunctionCall.cpp:1006
+    const u32 Uh_5tlreg3470 = Uh_5tlval3469.read(); //gcnl:Node.cpp:1156
+    Ui_Ut_10111b<EC> Uh_5tlval3471(Uh_5tlreg3470); //func arg& //gcnl:Node.cpp:1128
+    return (Uh_5tlval3471); //gcnl:NodeReturnStatement.cpp:343
 
   } // Uf_4swap
 
@@ -299,28 +299,28 @@ namespace MFM{
   {
 
 //! EventWindow.ulam:107:     Symmetry old = changeSymmetry(cSYMMETRY_000L);
-    const u32 Uh_5tlreg3471 = 0u; //gcnl:NodeTerminal.cpp:721
-    Ui_Ut_10131u<EC> Uh_5tlval3472(Uh_5tlreg3471); //func arg& //gcnl:Node.cpp:1128
-    const Ui_Ut_10131u<EC> Uh_5tlval3474 = THE_INSTANCE.Uf_9214changeSymmetry(uc, ur, Uh_5tlval3472); //gcnl:NodeFunctionCall.cpp:1006
-    const u32 Uh_5tlreg3475 = Uh_5tlval3474.read(); //gcnl:Node.cpp:1156
-    Ui_Ut_10131u<EC> Uv_3old(Uh_5tlreg3475); //gcnl:NodeVarDecl.cpp:1060
+    const u32 Uh_5tlreg3473 = 0u; //gcnl:NodeTerminal.cpp:721
+    Ui_Ut_10131u<EC> Uh_5tlval3474(Uh_5tlreg3473); //func arg& //gcnl:Node.cpp:1128
+    const Ui_Ut_10131u<EC> Uh_5tlval3476 = THE_INSTANCE.Uf_9214changeSymmetry(uc, ur, Uh_5tlval3474); //gcnl:NodeFunctionCall.cpp:1006
+    const u32 Uh_5tlreg3477 = Uh_5tlval3476.read(); //gcnl:Node.cpp:1156
+    Ui_Ut_10131u<EC> Uv_3old(Uh_5tlreg3477); //gcnl:NodeVarDecl.cpp:1060
 
 //! EventWindow.ulam:108:     C2D raw = getCoord(siteNum);
-    const u32 Uh_5tlreg3478 = Uv_7siteNum.read(); //gcnl:Node.cpp:691
-    Ui_Ut_10161u<EC> Uh_5tlval3479(Uh_5tlreg3478); //func arg& //gcnl:Node.cpp:1128
-    Ui_Uq_102323C2D10<EC> Uh_5tlval3481 = THE_INSTANCE.Uf_8getCoord(uc, ur, Uh_5tlval3479); //gcnl:NodeFunctionCall.cpp:1006
-    Ui_Uq_102323C2D10<EC> Uv_3raw(Uh_5tlval3481.read()); //gcnl:NodeVarDecl.cpp:1060
+    const u32 Uh_5tlreg3480 = Uv_7siteNum.read(); //gcnl:Node.cpp:691
+    Ui_Ut_10161u<EC> Uh_5tlval3481(Uh_5tlreg3480); //func arg& //gcnl:Node.cpp:1128
+    Ui_Uq_102323C2D10<EC> Uh_5tlval3483 = THE_INSTANCE.Uf_8getCoord(uc, ur, Uh_5tlval3481); //gcnl:NodeFunctionCall.cpp:1006
+    Ui_Uq_102323C2D10<EC> Uv_3raw(Uh_5tlval3483.read()); //gcnl:NodeVarDecl.cpp:1060
 
 //! EventWindow.ulam:109:     changeSymmetry(old);
-    const u32 Uh_5tlreg3484 = Uv_3old.read(); //gcnl:Node.cpp:691
-    Ui_Ut_10131u<EC> Uh_5tlval3485(Uh_5tlreg3484); //func arg& //gcnl:Node.cpp:1128
-    const Ui_Ut_10131u<EC> Uh_5tlval3487 = THE_INSTANCE.Uf_9214changeSymmetry(uc, ur, Uh_5tlval3485); //gcnl:NodeFunctionCall.cpp:1006
-    const u32 Uh_5tlreg3488 = Uh_5tlval3487.read(); //gcnl:Node.cpp:1156
+    const u32 Uh_5tlreg3486 = Uv_3old.read(); //gcnl:Node.cpp:691
+    Ui_Ut_10131u<EC> Uh_5tlval3487(Uh_5tlreg3486); //func arg& //gcnl:Node.cpp:1128
+    const Ui_Ut_10131u<EC> Uh_5tlval3489 = THE_INSTANCE.Uf_9214changeSymmetry(uc, ur, Uh_5tlval3487); //gcnl:NodeFunctionCall.cpp:1006
+    const u32 Uh_5tlreg3490 = Uh_5tlval3489.read(); //gcnl:Node.cpp:1156
 
 //! EventWindow.ulam:110:     return raw;
-    const u32 Uh_5tlreg3490 = Uv_3raw.read(); //gcnl:Node.cpp:691
-    Ui_Uq_102323C2D10<EC> Uh_5tlval3491(Uh_5tlreg3490); //func arg& //gcnl:Node.cpp:1128
-    return (Uh_5tlval3491); //gcnl:NodeReturnStatement.cpp:343
+    const u32 Uh_5tlreg3492 = Uv_3raw.read(); //gcnl:Node.cpp:691
+    Ui_Uq_102323C2D10<EC> Uh_5tlval3493(Uh_5tlreg3492); //func arg& //gcnl:Node.cpp:1128
+    return (Uh_5tlval3493); //gcnl:NodeReturnStatement.cpp:343
 
   } // Uf_9211getCoordRaw
 

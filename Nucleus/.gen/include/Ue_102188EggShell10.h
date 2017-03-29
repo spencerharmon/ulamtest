@@ -26,11 +26,11 @@
 * @license GPL-3.0+ <http://spdx.org/licenses/GPL-3.0+>
 */
 
-#ifndef UE_102158EGGSHELL10_H
-#define UE_102158EGGSHELL10_H
+#ifndef UE_102188EGGSHELL10_H
+#define UE_102188EGGSHELL10_H
 
 #include "UlamDefs.h"
-#include "Ue_102158EggShell10_Types.h"
+#include "Ue_102188EggShell10_Types.h"
 //Forward Defs of other classes: //gcnl:SymbolTableOfClasses.cpp:576
 namespace MFM { template <class EC> struct Uq_10106UrSelf10; }  //FORWARD
 namespace MFM { template <class EC> struct Ue_10106Primer10; }  //FORWARD
@@ -58,7 +58,7 @@ namespace MFM { template <class EC> struct Un_1035449217SiteVisitorByType10; }  
 namespace MFM{
 
   template<class EC>
-  class Ue_102158EggShell10 : public UlamElement<EC> /*, Uq_10106UrSelf10 */  {
+  class Ue_102188EggShell10 : public UlamElement<EC> /*, Uq_10106UrSelf10 */  {
     // Extract short names for parameter types
     typedef typename EC::ATOM_CONFIG AC;
     typedef typename AC::ATOM_TYPE T;
@@ -70,35 +70,38 @@ namespace MFM{
 
   public:
 
-    Ue_102158EggShell10(); //gcnl:NodeBlockClass.cpp:1441
-    ~Ue_102158EggShell10(); //gcnl:NodeBlockClass.cpp:1446
+    Ue_102188EggShell10(); //gcnl:NodeBlockClass.cpp:1441
+    ~Ue_102188EggShell10(); //gcnl:NodeBlockClass.cpp:1446
 
-    static Ue_102158EggShell10 THE_INSTANCE; //gcnl:NodeBlockClass.cpp:1452
+    static Ue_102188EggShell10 THE_INSTANCE; //gcnl:NodeBlockClass.cpp:1452
 
-//! EggShell.ulam:11: 	SiteUtils su;
+//! EggShell.ulam:13: 	SiteUtils su;
     typedef Uq_1010919SiteUtils10<EC> Ut_Um_2su; //offset 0u //gcnl:NodeVarDeclDM.cpp:1065
 
-//! EggShell.ulam:12: 	EventWindow ew;
+//! EggShell.ulam:14: 	EventWindow ew;
     typedef Uq_10109211EventWindow10<EC> Ut_Um_2ew; //offset 0u //gcnl:NodeVarDeclDM.cpp:1065
 
-//! EggShell.ulam:14: 	ClusterByID cl;
+//! EggShell.ulam:16: 	ClusterByID cl;
     typedef Uq_10109211ClusterByID10<EC> Ut_Um_2cl; //offset 0u //gcnl:NodeVarDeclDM.cpp:1065
 
-//! EggShell.ulam:16: 	typedef EventWindow.SiteNum SiteNum;
+//! EggShell.ulam:18: 	typedef EventWindow.SiteNum SiteNum;
 
-//! EggShell.ulam:17: 	typedef Cell.ID ID;
+//! EggShell.ulam:19: 	typedef Cell.ID ID;
 
-//! EggShell.ulam:19: 	ID id;
+//! EggShell.ulam:21: 	ID id;
     typedef UlamRefFixed<EC, 0u, 10u> Up_Um_2id; //gcnl:NodeVarDeclDM.cpp:1095
 
-//! EggShell.ulam:20: 	Bool onCell;
+//! EggShell.ulam:22: 	Bool onCell;
     typedef UlamRefFixed<EC, 10u, 1u> Up_Um_6onCell; //gcnl:NodeVarDeclDM.cpp:1095
 
-//! EggShell.ulam:21: 	Unsigned(3) lost;
+//! EggShell.ulam:23: 	Unsigned(3) lost;
     typedef UlamRefFixed<EC, 11u, 3u> Up_Um_4lost; //gcnl:NodeVarDeclDM.cpp:1095
 
-//! EggShell.ulam:22: 	Bool first;
+//! EggShell.ulam:24: 	Bool first;
     typedef UlamRefFixed<EC, 14u, 1u> Up_Um_5first; //gcnl:NodeVarDeclDM.cpp:1095
+
+//! EggShell.ulam:25: 	Unsigned(3) wait;
+    typedef UlamRefFixed<EC, 15u, 3u> Up_Um_4wait; //gcnl:NodeVarDeclDM.cpp:1095
 
     static void Uf_6behave(const UlamContext<EC>& uc, UlamRef<EC>& ur); //virtual //gcnl:SymbolFunction.cpp:451
 
@@ -113,6 +116,8 @@ namespace MFM{
     Ui_Ut_10111b<EC> Uf_6onGene(const UlamContext<EC>& uc, UlamRef<EC>& ur, Ui_Ut_102961a<EC>& Uv_1a) const; //gcnl:SymbolFunction.cpp:463
 
     void Uf_9210clusterEgg(const UlamContext<EC>& uc, UlamRef<EC>& ur) const; //gcnl:SymbolFunction.cpp:463
+
+    void Uf_9212edgeBehavior(const UlamContext<EC>& uc, UlamRef<EC>& ur) const; //gcnl:SymbolFunction.cpp:463
 
     //BUILT-IN FUNCTIONS:
 
@@ -146,11 +151,11 @@ namespace MFM{
   };
 
   template<class EC>
-  Ue_102158EggShell10<EC> Ue_102158EggShell10<EC>::THE_INSTANCE;
+  Ue_102188EggShell10<EC> Ue_102188EggShell10<EC>::THE_INSTANCE;
 
 
 
 } //MFM
 
-#include "Ue_102158EggShell10.tcc"
-#endif //UE_102158EGGSHELL10_H
+#include "Ue_102188EggShell10.tcc"
+#endif //UE_102188EGGSHELL10_H

@@ -50,7 +50,7 @@ namespace MFM { template <class EC> struct Un_10412489213WindowScanner10; }  //F
 namespace MFM { template <class EC> struct Uq_10109211ClusterByID10; }  //FORWARD
 namespace MFM { template <class EC> struct Uq_1010919SiteUtils10; }  //FORWARD
 namespace MFM { template <class EC> struct Un_10411209215SiteVisitorByID10; }  //FORWARD
-namespace MFM { template <class EC> struct Ue_102158EggShell10; }  //FORWARD
+namespace MFM { template <class EC> struct Ue_102188EggShell10; }  //FORWARD
 namespace MFM { template <class EC> struct Uq_10109210DebugUtils10; }  //FORWARD
 namespace MFM { template <class EC> struct Un_102329211OutOfBounds10; }  //FORWARD
 namespace MFM { template <class EC> struct Un_1035449217SiteVisitorByType10; }  //FORWARD

@@ -5,7 +5,7 @@
 
 #include "Ue_10105Empty10.h"
 #include "Ue_10106Primer10.h"
-#include "Ue_102158EggShell10.h"
+#include "Ue_102188EggShell10.h"
 #include "Ue_102564Gene10.h"
 #include "Ue_102717Nucleus10.h"
 #include "Uq_10104Cell10.h"
@@ -33,7 +33,7 @@
    found in '/usr/lib/ulam/ULAM/bin/../share/ulam/stdlib/Empty.ulam'.
    Make any desired changes there!
 
-   Generated on Sat Mar 25 05:31:43 2017 UTC
+   Generated on Wed Mar 29 02:52:25 2017 UTC
    by the ULAM compilation system
 */
 
@@ -83,7 +83,7 @@ namespace MFM {
    found in './Primer.ulam'.
    Make any desired changes there!
 
-   Generated on Sat Mar 25 05:31:43 2017 UTC
+   Generated on Wed Mar 29 02:52:25 2017 UTC
    by the ULAM compilation system
 */
 
@@ -128,13 +128,13 @@ namespace MFM {
 } // MFM
 
 
-/* Metadata for UlamElementInfoForUe_102158EggShell10 */
+/* Metadata for UlamElementInfoForUe_102188EggShell10 */
 /* This is generated code!  Avoid hand editing!
    The content of this file is based on the information
    found in './EggShell.ulam'.
    Make any desired changes there!
 
-   Generated on Sat Mar 25 05:31:43 2017 UTC
+   Generated on Wed Mar 29 02:52:25 2017 UTC
    by the ULAM compilation system
 */
 
@@ -142,19 +142,19 @@ namespace MFM {
 
 namespace MFM {
   template <class EC>
-  struct UlamElementInfoForUe_102158EggShell10 : public UlamElementInfo<EC>
+  struct UlamElementInfoForUe_102188EggShell10 : public UlamElementInfo<EC>
   {
     typedef typename EC::ATOM_CONFIG AC;
     typedef typename AC::ATOM_TYPE T;
 
     UlamElement<EC> & m_ulamElement;
-    UlamElementInfoForUe_102158EggShell10(UlamElement<EC> & ue)
+    UlamElementInfoForUe_102188EggShell10(UlamElement<EC> & ue)
         : m_ulamElement(ue)
     {
       AddModelParameters();
     }
 
-    UlamElementInfoForUe_102158EggShell10() { }
+    UlamElementInfoForUe_102188EggShell10() { }
     const char * GetName() const { return "EggShell"; }
     const char * GetSymbol() const { return "Eg"; }
     const char * GetSummary() const { return "EggShell (no summary provided)"; }
@@ -166,7 +166,7 @@ namespace MFM {
     const u32 GetVersion() const { return 0; }
 
     const u32 GetElementColor() const { return 0xffbb5522; }
-    const u32 GetEventWindowBoundary() const { return 4 + 1; }
+    const u32 GetEventWindowBoundary() const { return 1 + 1; }
     const u32 GetSymmetry(const UlamContext<EC>& uc) const {
       Random & r = const_cast<UlamContext<EC> &>(uc).GetRandom();
       return r.Create(8);
@@ -185,7 +185,7 @@ namespace MFM {
    found in './Gene.ulam'.
    Make any desired changes there!
 
-   Generated on Sat Mar 25 05:31:43 2017 UTC
+   Generated on Wed Mar 29 02:52:25 2017 UTC
    by the ULAM compilation system
 */
 
@@ -236,7 +236,7 @@ namespace MFM {
    found in './Nucleus.ulam'.
    Make any desired changes there!
 
-   Generated on Sat Mar 25 05:31:43 2017 UTC
+   Generated on Wed Mar 29 02:52:25 2017 UTC
    by the ULAM compilation system
 */
 

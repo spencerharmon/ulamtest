@@ -4,8 +4,10 @@
 	\license lgpl
 	\color #b52
 	\symbol Eg
+	\radius 1
+	\diffusability 0
 
-	//form a protective layer over our buried genes in the base layer, then birth them into the event layer.
+	form a protective layer over our buried genes in the base layer, then birth them into the event layer.
  */
 element EggShell{
 	SiteUtils su;
@@ -20,6 +22,7 @@ element EggShell{
 	Bool onCell;
 	Unsigned(3) lost;
 	Bool first;
+	Unsigned(3) wait;
 
 	Void createNeighbor(){
 		SiteNum slot = cl.emptySlotNearMe();
@@ -66,12 +69,18 @@ element EggShell{
                         Atom a = ew[i];
                         if(a as EggShell){
                                 if(a.id == id && onCell && !a.onCell){
-                                        SiteNum e = cl.nonCellSlotNearMe(self,id);
-                                        ew.swap(i,e);
+                                        SiteNum e = cl.nonCellSlotNearMe(self,id,1);
+//nope                                  ew.swap(i,e);
                                 }
                         }
                 }
         }
+	Void edgeBehavior(){
+		WindowScanner ws;
+		SiteVisitorByID sv;
+
+		
+	}
 	Void behave(){
 		Atom a = su.getBase();
 		Bool onN = onNucleus(a);
@@ -79,18 +88,24 @@ element EggShell{
 		if(onN){
 			onCell = true;
 			createNeighbor();
-			hatch();
+			if(wait >= wait.maxof-1){
+				hatch();
+			}
+			++wait;
 		}
 		if(onG){
 			onCell = true;
 			createNeighbor();
-			hatch();
+			if(wait >= 1){
+				hatch();
+			}
+			++wait;
 		}
 		clusterEgg();
 		if(!onN && !onG){
 			onCell = false;
 			if(first){
-				ew.swap(0,1);
+//no moving			ew.swap(0,1);
 			}
 			++lost;
 		}

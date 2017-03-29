@@ -3275,39 +3275,39 @@ namespace MFM{
 } //MFM
 #endif /*Ud_Ui_Un_10411209215SiteVisitorByID10 */
 
-#ifndef Ud_Ui_Ue_r102158EggShell10
-#define Ud_Ui_Ue_r102158EggShell10
+#ifndef Ud_Ui_Ue_r102188EggShell10
+#define Ud_Ui_Ue_r102188EggShell10
 namespace MFM{
 
-  template<class EC> class Ue_102158EggShell10;  //forward
+  template<class EC> class Ue_102188EggShell10;  //forward
  //gcnl:UlamTypeClassElement.cpp:217
   template<class EC>
-  struct Ui_Ue_r102158EggShell10 : public UlamRef<EC>
+  struct Ui_Ue_r102188EggShell10 : public UlamRef<EC>
   {
     typedef typename EC::ATOM_CONFIG AC;
     typedef typename AC::ATOM_TYPE T;
     enum { BPA = AC::BITS_PER_ATOM };
 
-    typedef Ue_102158EggShell10<EC> Us; //gcnl:UlamTypeClassElement.cpp:239
+    typedef Ue_102188EggShell10<EC> Us; //gcnl:UlamTypeClassElement.cpp:239
 
     const T read() { return UlamRef<EC>::ReadAtom(); /* read entire element ref */ } //gcnl:UlamTypeClassElement.cpp:314
     void write(const T& targ) { if(targ.GetType() != Us::THE_INSTANCE.GetType()) FAIL(ILLEGAL_ARGUMENT); UlamRef<EC>::WriteAtom(targ); /* write entire element */ } //gcnl:UlamTypeClassElement.cpp:358
     void write(const AtomRefBitStorage<EC>& v) { if(v.GetType() != Us::THE_INSTANCE.GetType()) FAIL(ILLEGAL_ARGUMENT); UlamRef<EC>::WriteAtom(v.ReadAtom()); /* write entire atom */ } //gcnl:UlamTypeClassElement.cpp:374
-    Ui_Ue_r102158EggShell10(BitStorage<EC>& targ, u32 idx, const UlamClass<EC>* effself, const UlamContext<EC> & uc) : UlamRef<EC>(idx, 15u, targ, effself, UlamRef<EC>::ELEMENTAL, uc) { } //gcnl:UlamTypeClassElement.cpp:259
-    Ui_Ue_r102158EggShell10(const Ui_Ue_r102158EggShell10<EC>& r) : UlamRef<EC>(r, 0, r.GetLen(), r.GetEffectiveSelf(), UlamRef<EC>::ELEMENTAL) { } //gcnl:UlamTypeClassElement.cpp:272
-    Ui_Ue_r102158EggShell10(const UlamRef<EC>& arg, s32 idx, const UlamClass<EC>* effself) : UlamRef<EC>(arg, idx, 15u, effself, UlamRef<EC>::ELEMENTAL) { } //gcnl:UlamTypeClassElement.cpp:284
+    Ui_Ue_r102188EggShell10(BitStorage<EC>& targ, u32 idx, const UlamClass<EC>* effself, const UlamContext<EC> & uc) : UlamRef<EC>(idx, 18u, targ, effself, UlamRef<EC>::ELEMENTAL, uc) { } //gcnl:UlamTypeClassElement.cpp:259
+    Ui_Ue_r102188EggShell10(const Ui_Ue_r102188EggShell10<EC>& r) : UlamRef<EC>(r, 0, r.GetLen(), r.GetEffectiveSelf(), UlamRef<EC>::ELEMENTAL) { } //gcnl:UlamTypeClassElement.cpp:272
+    Ui_Ue_r102188EggShell10(const UlamRef<EC>& arg, s32 idx, const UlamClass<EC>* effself) : UlamRef<EC>(arg, idx, 18u, effself, UlamRef<EC>::ELEMENTAL) { } //gcnl:UlamTypeClassElement.cpp:284
   };
 } //MFM
-#endif /*Ud_Ui_Ue_r102158EggShell10 */
+#endif /*Ud_Ui_Ue_r102188EggShell10 */
 
-#ifndef Ud_Ui_Ue_102158EggShell10
-#define Ud_Ui_Ue_102158EggShell10
+#ifndef Ud_Ui_Ue_102188EggShell10
+#define Ud_Ui_Ue_102188EggShell10
 namespace MFM{
 
-  template<class EC> class Ue_102158EggShell10;  //forward //gcnl:UlamTypeClassElement.cpp:434
+  template<class EC> class Ue_102188EggShell10;  //forward //gcnl:UlamTypeClassElement.cpp:434
 
   template<class EC>
-  struct Ui_Ue_102158EggShell10 : public AtomBitStorage<EC>
+  struct Ui_Ue_102188EggShell10 : public AtomBitStorage<EC>
   {
     typedef typename EC::ATOM_CONFIG AC;
     typedef typename AC::ATOM_TYPE T;
@@ -3315,18 +3315,18 @@ namespace MFM{
 
     typedef AtomRefBitStorage<EC> ABS; //gcnl:UlamTypeClassElement.cpp:454
 
-    typedef Ue_102158EggShell10<EC> Us; //gcnl:UlamTypeClassElement.cpp:461
+    typedef Ue_102188EggShell10<EC> Us; //gcnl:UlamTypeClassElement.cpp:461
 
     const T read() const { return ABS::ReadAtom(); } //gcnl:UlamTypeClassElement.cpp:541
     void write(const T& v) { ABS::WriteAtom(v); } //gcnl:UlamTypeClassElement.cpp:582
-    Ui_Ue_102158EggShell10() : AtomBitStorage<EC>(Us::THE_INSTANCE.GetDefaultAtom()) { } //gcnl:UlamTypeClassElement.cpp:476
-    Ui_Ue_102158EggShell10(const T& d) : AtomBitStorage<EC>(d) { if(d.GetType() != Us::THE_INSTANCE.GetType()) FAIL(ILLEGAL_ARGUMENT); } //gcnl:UlamTypeClassElement.cpp:487
-    Ui_Ue_102158EggShell10(const Ui_Ue_102158EggShell10<EC> & arg) { this->m_stg = arg.m_stg; } //gcnl:UlamTypeClassElement.cpp:495
-    Ui_Ue_102158EggShell10(const AtomRefBitStorage<EC> & arg) : AtomBitStorage<EC>(arg.ReadAtom()) { if(arg.GetType() != Us::THE_INSTANCE.GetType()) FAIL(ILLEGAL_ARGUMENT); } //gcnl:UlamTypeClassElement.cpp:504
-    Ui_Ue_102158EggShell10(const Ui_Ue_r102158EggShell10<EC>& d) : AtomBitStorage<EC>(d.read()) { } //gcnl:UlamTypeClassElement.cpp:513
+    Ui_Ue_102188EggShell10() : AtomBitStorage<EC>(Us::THE_INSTANCE.GetDefaultAtom()) { } //gcnl:UlamTypeClassElement.cpp:476
+    Ui_Ue_102188EggShell10(const T& d) : AtomBitStorage<EC>(d) { if(d.GetType() != Us::THE_INSTANCE.GetType()) FAIL(ILLEGAL_ARGUMENT); } //gcnl:UlamTypeClassElement.cpp:487
+    Ui_Ue_102188EggShell10(const Ui_Ue_102188EggShell10<EC> & arg) { this->m_stg = arg.m_stg; } //gcnl:UlamTypeClassElement.cpp:495
+    Ui_Ue_102188EggShell10(const AtomRefBitStorage<EC> & arg) : AtomBitStorage<EC>(arg.ReadAtom()) { if(arg.GetType() != Us::THE_INSTANCE.GetType()) FAIL(ILLEGAL_ARGUMENT); } //gcnl:UlamTypeClassElement.cpp:504
+    Ui_Ue_102188EggShell10(const Ui_Ue_r102188EggShell10<EC>& d) : AtomBitStorage<EC>(d.read()) { } //gcnl:UlamTypeClassElement.cpp:513
   };
 } //MFM
-#endif /*Ud_Ui_Ue_102158EggShell10 */
+#endif /*Ud_Ui_Ue_102188EggShell10 */
 
 #ifndef Ud_Ui_Uq_r10109210DebugUtils10
 #define Ud_Ui_Uq_r10109210DebugUtils10

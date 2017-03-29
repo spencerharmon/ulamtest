@@ -49,7 +49,7 @@ namespace MFM { template <class EC> struct Un_10412489213WindowScanner10; }  //F
 namespace MFM { template <class EC> struct Uq_10109211ClusterByID10; }  //FORWARD
 namespace MFM { template <class EC> struct Uq_1010919SiteUtils10; }  //FORWARD
 namespace MFM { template <class EC> struct Un_10411209215SiteVisitorByID10; }  //FORWARD
-namespace MFM { template <class EC> struct Ue_102158EggShell10; }  //FORWARD
+namespace MFM { template <class EC> struct Ue_102188EggShell10; }  //FORWARD
 namespace MFM { template <class EC> struct Uq_10109210DebugUtils10; }  //FORWARD
 namespace MFM { template <class EC> struct Uq_10109211SiteVisitor10; }  //FORWARD
 namespace MFM { template <class EC> struct Un_102329211OutOfBounds10; }  //FORWARD
@@ -159,6 +159,8 @@ namespace MFM{
     void Uf_9213whetherToMove(const UlamContext<EC>& uc, UlamRef<EC>& ur) const; //gcnl:SymbolFunction.cpp:463
 
     Ui_Ut_10111b<EC> Uf_919geneCheck(const UlamContext<EC>& uc, UlamRef<EC>& ur) const; //gcnl:SymbolFunction.cpp:463
+
+    void Uf_6layEgg(const UlamContext<EC>& uc, UlamRef<EC>& ur) const; //gcnl:SymbolFunction.cpp:463
 
     //BUILT-IN FUNCTIONS:
 
