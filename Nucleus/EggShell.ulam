@@ -4,8 +4,8 @@
 	\license lgpl
 	\color #b52
 	\symbol Eg
-	\radius 1
 	\diffusability 0
+	\radius 1
 
 	form a protective layer over our buried genes in the base layer, then birth them into the event layer.
  */
@@ -25,11 +25,16 @@ element EggShell{
 	Unsigned(3) wait;
 
 	Void createNeighbor(){
-		SiteNum slot = cl.emptySlotNearMe();
+//		SiteNum slot = cl.emptySlotNearMe();
 		EggShell eg;
 		eg.id = id;
-		if(slot != 0){
-			ew[slot] = eg;
+//		if(slot != 0){
+//			ew[slot] = eg;
+//		}
+		for(SiteNum slot = 1; slot<=4; ++slot){
+			if(ew.isEmpty(ew[slot]){
+				ew[slot] = eg;
+			}
 		}
 	}
 	Void hatch(){
@@ -89,7 +94,7 @@ element EggShell{
 			onCell = true;
 			createNeighbor();
 			if(wait >= wait.maxof-1){
-				hatch();
+//test				hatch();
 			}
 			++wait;
 		}
@@ -97,11 +102,11 @@ element EggShell{
 			onCell = true;
 			createNeighbor();
 			if(wait >= 1){
-				hatch();
+//test				hatch();
 			}
 			++wait;
 		}
-		clusterEgg();
+//		clusterEgg();
 		if(!onN && !onG){
 			onCell = false;
 			if(first){

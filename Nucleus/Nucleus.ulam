@@ -152,7 +152,19 @@ element Nucleus{
 	}
 	Void whetherToMove(){
 		if(move = true){
-			ew.swap(0,1);
+			diffuse();
+		}
+	}
+	Void diffuse(){
+		for(SiteNum i = 1; i <= 4; ++i){
+			Atom a = ew[i];
+			if(a as Empty){
+				ew.swap(0,i);
+			}else if(a as Gene){
+				if (a.id == id){
+					ew.swap(0,i);
+				}
+			}
 		}
 	}
 	//kill self if no genes. 

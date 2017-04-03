@@ -55,13 +55,14 @@ quark ClusterByID {
 		return target;
 	}
 
-	SiteNum nonCellSlotNearMe(ID id){		//this is for genes by default to support an older use of the function.
-		Gene gene;				//should update all instances to specify both
-		SiteNum s = nonCellSlotNearMe(gene, id, (Unsigned(2))4);
+	SiteNum nonCellSlotNearMe(ID id){
+		Gene gene;
+		Unsigned radius = ew.getRadius();
+		SiteNum s = nonCellSlotNearMe(gene, id, radius);
 		return s;
 	}
 
-	SiteNum nonCellSlotNearMe(Atom atom, ID id, Unsigned(2) radius){
+	SiteNum nonCellSlotNearMe(Atom atom, ID id, Unsigned radius){
 		SiteVisitorByID sv;
 		WindowScanner ws;
 		
@@ -76,11 +77,11 @@ quark ClusterByID {
 
 		//only scan next radius if no hits
 		ws.scan(sv,1,1);
-		if(ws.getHits(cGene)==(Unsigned)0 && radius > 1){
+		if(ws.getHits(cGene)==(Unsigned)0 && radius > 1u){
 			ws.scan(sv,2,2);
-			if(ws.getHits(cGene)==(Unsigned)0 && radius > 2){
+			if(ws.getHits(cGene)==(Unsigned)0 && radius > 2u){
 				ws.scan(sv,3,3);
-				if(ws.getHits(cGene)==(Unsigned)0 && radius > 3){
+				if(ws.getHits(cGene)==(Unsigned)0 && radius > 3u){
 					ws.scan(sv,4,4);
 					if(ws.getHits(cGene) <= (Unsigned)40){
 						return ws.getSiteNum(cGene);
@@ -215,7 +216,8 @@ quark ClusterByID {
 				Atom a = ew[i];
 				if(a as Gene){
 					if(a.id == id){
-						SiteNum e = nonCellSlotNearMe(id);
+					//	SiteNum e = nonCellSlotNearMe(id);
+						SiteNum e = emptySlotNearMe();
 						ew.swap(i,e);
 					}
 				}
@@ -229,12 +231,14 @@ quark ClusterByID {
 					if(a.id == id){
 						foundGene = true;
 						if(canSeeNucleus && !a.canSeeNucleus){
+						//	SiteNum e = findNonCellSlotNear(i,id);
 							//this should avoid moving other genes/nuclei
 							SiteNum e = emptySlotNearMe();
 							ew.swap(i,e);
 						}
 						if(!canSeeNucleus && a.canSeeNucleus){
-							SiteNum e = findNonCellSlotNear(i,id);
+						//	SiteNum e = findNonCellSlotNear(i,id);
+							SiteNum e = emptySlotNearMe();
 							ew.swap(0,e);
 						}
 					}
