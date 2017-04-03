@@ -37,6 +37,7 @@ element Gene{
 	StoredValue comIn;
 	StoredValue comOut;
 	Unsigned(3) eventsAlone;
+	Bool protogene = true;
 
 	Void listen(){
 		SiteVisitorByID sv;
@@ -179,11 +180,12 @@ element Gene{
 		//currently takes comIn on the right.
 		if(canSeeNucleus){
 			eventsAlone = 0;
+			protogene = false;
 		}
 		else{
 			++eventsAlone;
 		}
-		if(eventsAlone == 7){
+		if(eventsAlone == eventsAlone.maxof && !protogene){
 			Empty e;
 			ew[0] = e;
 		}

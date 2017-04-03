@@ -84,15 +84,7 @@ element Nucleus{
 			mate.reproducing = true;
 			child.parent2id = mate.id;
 		}
-		EggShell eg;
-		eg.id = childID;
-		eg.first = true;
-		for(Unsigned i; i < 2u; ++i){
-			SiteNum emptySlot = cl.emptySlotNearMe();
-			if(emptySlot != 0){
-				ew[emptySlot] = eg;
-			}
-		}
+		layEgg();
 		su.setBase(child);
 	}
 	Void maybeReproduce(){
@@ -180,7 +172,6 @@ element Nucleus{
 	Void layEgg(){
 		EggShell eg;
 		eg.id = childID;
-		eg.first = true;
 		for(Unsigned i; i < 2u; ++i){
 			SiteNum emptySlot = cl.emptySlotNearMe();
 			if(emptySlot != 0){

@@ -20,8 +20,7 @@ element EggShell{
 
 	ID id;
 	Bool onCell;
-	Unsigned(3) lost;
-	Bool first;
+	Bool complete;
 	Unsigned(3) wait;
 
 	Void createNeighbor(){
@@ -86,6 +85,29 @@ element EggShell{
 
 		
 	}
+	Void neighborCheck(){
+		//die if no "oncell" neighbors
+		Bool dontdie = false;
+		for(SiteNum i = 1; i >= 4; ++i){
+			Atom a = ew[i];
+			if(a as EggShell){
+				if(a.id == id){
+					dontdie = true;
+					if(complete){
+						a.complete = true;
+					}
+					if(a.onCell == false){
+						//cell is an edge; consider cell complete
+						complete = true;
+					}
+				}
+			}
+		}
+		if(!dontdie && !onCell){
+			Empty e;
+			ew[0] = e;
+		}
+	}
 	Void behave(){
 		Atom a = su.getBase();
 		Bool onN = onNucleus(a);
@@ -93,30 +115,31 @@ element EggShell{
 		if(onN){
 			onCell = true;
 			createNeighbor();
-			if(wait >= wait.maxof-1){
-//test				hatch();
+			if(wait == wait.maxof){
+				hatch();
 			}
-			++wait;
+		//	if(complete){
+				++wait;
+		//	}
 		}
 		if(onG){
 			onCell = true;
 			createNeighbor();
-			if(wait >= 1){
-//test				hatch();
+			if(wait >= wait.maxof/4){
+				hatch();
 			}
-			++wait;
+		//	if(complete){
+				++wait;
+		//	}
 		}
 //		clusterEgg();
 		if(!onN && !onG){
 			onCell = false;
-			if(first){
-//no moving			ew.swap(0,1);
-			}
-			++lost;
+	//		if(complete){
+	//			Empty e;
+	//			ew[0] = e;
+	//		}
 		}
-		if(lost == lost.maxof){
-			Empty e;
-			ew[0] = e;
-		}
+		neighborCheck();
 	}
 }
