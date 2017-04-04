@@ -4,7 +4,6 @@
 	\license lgpl
 	\color #b52
 	\symbol Eg
-	\diffusability 0
 	\radius 1
 
 	form a protective layer over our buried genes in the base layer, then birth them into the event layer.
@@ -12,8 +11,7 @@
 element EggShell{
 	SiteUtils su;
 	EventWindow ew;
-
-	ClusterByID cl;
+	DebugUtils du;
 
 	typedef EventWindow.SiteNum SiteNum;
 	typedef Cell.ID ID;
@@ -37,6 +35,7 @@ element EggShell{
 		}
 	}
 	Void hatch(){
+		du.print("Hatch");
 		createNeighbor();
 		Atom a = su.getBase();
 		Empty e;
@@ -49,6 +48,7 @@ element EggShell{
 	Bool onNucleus(Atom a){
 		if(a as Nucleus){
 			if(a.id == id){
+				du.print("On Nucleus");
 				return true;
 			}else{
 				return false;
@@ -60,6 +60,7 @@ element EggShell{
 	Bool onGene(Atom a){
 		if(a as Gene){
 			if(a.id == id){
+				du.print("On Gene");
 				return true;
 			}else{
 				return false;
@@ -68,17 +69,17 @@ element EggShell{
 			return false;
 		}
 	}
-        Void clusterEgg(){
-                for(SiteNum i = 1; i <= 40;++i){
-                        Atom a = ew[i];
-                        if(a as EggShell){
-                                if(a.id == id && onCell && !a.onCell){
-                                        SiteNum e = cl.nonCellSlotNearMe(self,id,1);
+//        Void clusterEgg(){
+//                for(SiteNum i = 1; i <= 40;++i){
+//                        Atom a = ew[i];
+//                        if(a as EggShell){
+//                                if(a.id == id && onCell && !a.onCell){
+//                                        SiteNum e = cl.nonCellSlotNearMe(self,id,1);
 //nope                                  ew.swap(i,e);
-                                }
-                        }
-                }
-        }
+//                                }
+//                        }
+//                }
+//        }
 	Void edgeBehavior(){
 		WindowScanner ws;
 		SiteVisitorByID sv;
@@ -86,22 +87,23 @@ element EggShell{
 		
 	}
 	Void neighborCheck(){
+		du.print("neighborCheck()");
 		//die if no "oncell" neighbors
 		Bool dontdie = false;
+		Unsigned site = 0;
+		
 		for(SiteNum i = 1; i >= 4; ++i){
 			Atom a = ew[i];
 			if(a as EggShell){
 				if(a.id == id){
+					du.print("Found fam.");
 					dontdie = true;
-					if(complete){
-						a.complete = true;
-					}
-					if(a.onCell == false){
-						//cell is an edge; consider cell complete
-						complete = true;
-					}
+					++site;
 				}
 			}
+		}
+		if(site >= 4u){
+			complete = true;
 		}
 		if(!dontdie && !onCell){
 			Empty e;
@@ -125,7 +127,7 @@ element EggShell{
 		if(onG){
 			onCell = true;
 			createNeighbor();
-			if(wait >= wait.maxof/4){
+			if(wait >= wait.maxof/2){
 				hatch();
 			}
 		//	if(complete){
