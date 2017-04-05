@@ -17,6 +17,7 @@ quark ClusterByID {
 	EventWindow ew;
 	AtomUtils au;
 	Cell cell;
+	DebugUtils du;
 
 	//inherited typdefs
 	typedef AtomUtils.Type ElementType;

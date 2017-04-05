@@ -1,10 +1,10 @@
 /**
+	\radius 1
 	\symmetries all
 	\author Spencer Harmon
 	\license lgpl
 	\color #b52
 	\symbol Eg
-	\radius 1
 
 	form a protective layer over our buried genes in the base layer, then birth them into the event layer.
  */
@@ -12,6 +12,8 @@ element EggShell{
 	SiteUtils su;
 	EventWindow ew;
 	DebugUtils du;
+	
+	ClusterByID cl;
 
 	typedef EventWindow.SiteNum SiteNum;
 	typedef Cell.ID ID;
@@ -20,35 +22,29 @@ element EggShell{
 	Bool onCell;
 	Bool complete;
 	Unsigned(3) wait;
+	Unsigned seq;
+	Bool incrementedSeq;
+	Bool cascading;
 
 	Void createNeighbor(){
-//		SiteNum slot = cl.emptySlotNearMe();
+		Unsigned radius = ew.getRadius();
+		SiteNum slot = cl.emptySlotNearMe();
 		EggShell eg;
 		eg.id = id;
-//		if(slot != 0){
-//			ew[slot] = eg;
-//		}
-		for(SiteNum slot = 1; slot<=4; ++slot){
-			if(ew.isEmpty(ew[slot]){
-				ew[slot] = eg;
-			}
+		if(slot > 0 && slot <= 4){
+			ew[slot] = eg;
 		}
 	}
 	Void hatch(){
-		du.print("Hatch");
 		createNeighbor();
 		Atom a = su.getBase();
 		Empty e;
 		su.setBase(e);
-//		SiteNum slot = cl.emptySlotNearMe();
-//		if(slot != 0){
-			ew[0] = a;
-//		}
+		ew[0] = a;
 	}
 	Bool onNucleus(Atom a){
 		if(a as Nucleus){
 			if(a.id == id){
-				du.print("On Nucleus");
 				return true;
 			}else{
 				return false;
@@ -60,7 +56,6 @@ element EggShell{
 	Bool onGene(Atom a){
 		if(a as Gene){
 			if(a.id == id){
-				du.print("On Gene");
 				return true;
 			}else{
 				return false;
@@ -69,17 +64,6 @@ element EggShell{
 			return false;
 		}
 	}
-//        Void clusterEgg(){
-//                for(SiteNum i = 1; i <= 40;++i){
-//                        Atom a = ew[i];
-//                        if(a as EggShell){
-//                                if(a.id == id && onCell && !a.onCell){
-//                                        SiteNum e = cl.nonCellSlotNearMe(self,id,1);
-//nope                                  ew.swap(i,e);
-//                                }
-//                        }
-//                }
-//        }
 	Void edgeBehavior(){
 		WindowScanner ws;
 		SiteVisitorByID sv;
@@ -87,27 +71,82 @@ element EggShell{
 		
 	}
 	Void neighborCheck(){
-		du.print("neighborCheck()");
-		//die if no "oncell" neighbors
 		Bool dontdie = false;
-		Unsigned site = 0;
+		Unsigned fam = 0;
 		
-		for(SiteNum i = 1; i >= 4; ++i){
+		for(SiteNum i = 1; i <= 4; ++i){
 			Atom a = ew[i];
 			if(a as EggShell){
-				if(a.id == id){
-					du.print("Found fam.");
+				if(a.id == id && a.onCell == true){
 					dontdie = true;
-					++site;
+					++fam;
 				}
 			}
 		}
-		if(site >= 4u){
+		//all neighbors in moore neighborhood are eggshells with my id.
+		if(fam >= 4u){
 			complete = true;
 		}
+		//die if no "oncell" neighbors
 		if(!dontdie && !onCell){
 			Empty e;
 			ew[0] = e;
+		}
+	}
+	//an edge here is not the edge of the genes on the base layer necessarily, just the highest the findEdge function can 
+	//increment either because of lack of bitspace (unlikely; that's a lot of genes and numbers are reused when sequences fork) 
+	//or because there aren't any unfilled neighbors to increment the sequence. 
+	Void checkIfImAnEdge(){
+		Unsigned stor[5];
+		for(SiteNum i = 1; i <= 4u; ++i){
+			Atom eg = ew[i];
+			if(eg as EggShell){
+				if(eg.id == id){
+					if(eg.seq == 0u){
+						incrementedSeq = true;
+						eg.seq = seq + 1u;
+						ew[i] = eg;
+						stor[i] = stor[i].maxof;//cumbersome, but allows self to decide that I'm an edge 
+									//because I'm the largest (or I can't count higher)
+					}else{
+						stor[i] = eg.seq;
+					}
+				}else{
+					complete = false;
+				}
+			}else{
+				complete = false;
+			}
+		}
+		if(seq > stor[1] && seq > stor[2] && seq > stor[3] && seq > stor[4]){
+			cascading = true;
+		}else if(seq == seq.maxof){
+			cascading = true;
+		}else{
+			cascading = false;
+		}
+	}
+	Void cascade(){
+		cascading = true;
+		for(SiteNum i = 1; i <= 4; ++i){
+			Atom eg = ew[i];
+			if(eg as EggShell){
+				if(eg.id == id){
+					eg.cascading = true;
+					ew[i] = eg;
+				}
+			}
+		}
+	}
+	Void syncHatch(){
+		if(complete){
+			if(!incrementedSeq){
+				checkIfImAnEdge();
+			}
+		}
+		if(cascading == true){
+			cascade();
+			hatch();
 		}
 	}
 	Void behave(){
@@ -117,30 +156,16 @@ element EggShell{
 		if(onN){
 			onCell = true;
 			createNeighbor();
-			if(wait == wait.maxof){
-				hatch();
-			}
-		//	if(complete){
-				++wait;
-		//	}
+			syncHatch();
 		}
 		if(onG){
 			onCell = true;
 			createNeighbor();
-			if(wait >= wait.maxof/2){
-				hatch();
-			}
-		//	if(complete){
-				++wait;
-		//	}
+			syncHatch();
 		}
-//		clusterEgg();
 		if(!onN && !onG){
 			onCell = false;
-	//		if(complete){
-	//			Empty e;
-	//			ew[0] = e;
-	//		}
+			syncHatch();
 		}
 		neighborCheck();
 	}
