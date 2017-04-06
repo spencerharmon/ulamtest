@@ -185,7 +185,8 @@ element Gene{
 		else{
 			++eventsAlone;
 		}
-		if(eventsAlone == eventsAlone.maxof && !protogene){
+		//protogene would go here if we were using it
+		if(eventsAlone == eventsAlone.maxof){
 			Empty e;
 			ew[0] = e;
 		}
