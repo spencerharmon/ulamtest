@@ -73,7 +73,7 @@ element Nucleus{
 		//because g++ gets mad
 		return true;
 	}
-	Void makeChildNucleus(SiteNum slot, Atom mate){
+	Void makeChildNucleus(SiteNum slot,Atom mate){
 		childID = cell.genID();
 		Nucleus child;
 		child.parent1id = id;
@@ -107,12 +107,11 @@ element Nucleus{
                 SiteNum slot = ws.getSiteNum(cNucleus);
 		if(slot <= 40){
 	                Atom mate = ew[slot];
-	
 			if(mate as Nucleus){
 				if(notIncest(mate)){
 					if(refractoryPeriod == 0){
 						if(!mate.reproducing){
-							makeChildNucleus(slot, mate);
+							makeChildNucleus(slot,mate);
 						}
 						refractoryPeriod = Unsigned(7).maxof;
 						reproducing = true;
@@ -121,7 +120,7 @@ element Nucleus{
 				if(parent1id == 0 && parent2id == 0){
 					if(refractoryPeriod == 0){
 						if(!mate.reproducing){
-							makeChildNucleus(slot, mate);
+							makeChildNucleus(slot,mate);
 						}
 						reproducing = true;
 						refractoryPeriod = Unsigned(7).maxof;
@@ -181,7 +180,6 @@ element Nucleus{
 		}
 	}
 	Void behave(){
-//disabling gene check for base layer reproduction test
 		if(!geneCheck()){
 			Empty e;
 			ew[0] = e;
@@ -207,7 +205,9 @@ element Nucleus{
 		//	}
 			Atom movement = dt.findSeqno((Seqno)1, id);
 			if(movement as Gene){
-				if(r.oneIn((Unsigned)(movement.value + 1))){ //+1 because oneIn(0) causes failure.
+				if(movement.value == 0u){
+					move = false;
+				}else if(r.oneIn((Unsigned)movement.value){
 					move = true;
 				}
 			}
@@ -217,8 +217,10 @@ element Nucleus{
 			}
 			Atom reproduce = dt.findSeqno((Seqno)3, id);
 			if(reproduce as Gene){
-				if(!r.oneIn((Unsigned)(reproduce.value + 1))){
-					maybeReproduce();
+				if(reproduce.value != 0u){
+					if(!r.oneIn((Unsigned)(reproduce.value + 1))){
+						maybeReproduce();
+					}
 				}
 			}
 			whetherToMove();

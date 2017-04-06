@@ -146,6 +146,11 @@ element Gene{
 				dontCopy = true;
 			}
 		}
+		if(base as Gene){
+			if(base.id == childID){
+				dontCopy = true;
+			}
+		}
 		if(gene as Gene){
 			if(!dontCopy){
 				gene.id = childID;
