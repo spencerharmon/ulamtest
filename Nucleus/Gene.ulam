@@ -37,7 +37,7 @@ element Gene{
 	StoredValue comIn;
 	StoredValue comOut;
 	Unsigned(3) eventsAlone;
-	Bool protogene = true;
+	Bool copied;
 
 	Void listen(){
 		SiteVisitorByID sv;
@@ -118,9 +118,12 @@ element Gene{
 				//		ew[shellSite] = e;
 				//	}
 
+				//	if(nucleus.reproducing && !copied){
 					if(nucleus.reproducing){
 						ID childID = nucleus.childID;
 						copy(childID);
+					}else if(!nucleus.reproducing){
+						copied = false;
 					}
 					//we can see the nucleus, so go ahead and let ClusterByID know.
 					canSeeNucleus = true;
@@ -135,7 +138,7 @@ element Gene{
 	}
 	Void copy(ID childID){
 		//get some mutations in here later
-
+		copied = true;
 		SiteNum emptySlot = cl.emptySlotNearMe();
 		Bool dontCopy = false;
 		Atom gene = self;
@@ -185,12 +188,10 @@ element Gene{
 		//currently takes comIn on the right.
 		if(canSeeNucleus){
 			eventsAlone = 0;
-			protogene = false;
 		}
 		else{
 			++eventsAlone;
 		}
-		//protogene would go here if we were using it
 		if(eventsAlone == eventsAlone.maxof){
 			Empty e;
 			ew[0] = e;

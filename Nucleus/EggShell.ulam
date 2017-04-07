@@ -71,14 +71,16 @@ element EggShell{
 		for(SiteNum i = 1; i <= 4; ++i){
 			Atom a = ew[i];
 			if(a as EggShell){
-				if(a.id == id && a.onCell == true){
-					dontdie = true;
+				if(a.id == id){
+					if(a.onCell){
+						dontdie = true;
+					}
 					++fam;
 				}
 			}
 		}
 		//all neighbors in moore neighborhood are eggshells with my id.
-		if(fam >= 1u){
+		if(fam >= 4u){
 			complete = true;
 		}else {
 			complete = false;
@@ -89,18 +91,17 @@ element EggShell{
 			ew[0] = e;
 		}
 	}
-	//an edge here is not the edge of the genes on the base layer necessarily, just the highest the function can 
-	//increment either because of lack of bitspace (unlikely; that's a lot of genes and numbers are reused when sequences fork) 
-	//or because there aren't any unfilled neighbors to increment the sequence. 
-	Void checkIfImAnEdge(){
+	Void eggTimer(){
 		//Unsigned stor[5];
 		for(SiteNum i = 1; i <= 4u; ++i){
 			Atom eg = ew[i];
 			if(eg as EggShell){
 				if(eg.id == id){
-					if(eg.seq < seq || eg.seq == 0u){
+					if(eg.seq <= seq){
 						eg.seq = (Unsigned(8))(seq + 1);
 						ew[i] = eg;
+					}else if(eg.seq > seq){
+						seq = eg.seq;
 					}
 				}else{
 					complete = false;
@@ -111,8 +112,6 @@ element EggShell{
 		}
 		if(seq == seq.maxof){
 			cascading = true;
-		}else{
-			cascading = false;
 		}
 	}
 	Void cascade(){
@@ -128,9 +127,7 @@ element EggShell{
 	}
 	Void syncHatch(){
 		if(complete){
-			checkIfImAnEdge();
-	//		if(!incrementedSeq){
-	//		}
+			eggTimer();
 		}
 		if(cascading){
 			cascade();

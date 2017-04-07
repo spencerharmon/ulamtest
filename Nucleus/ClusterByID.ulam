@@ -112,56 +112,6 @@ quark ClusterByID {
 			return 0;
 		}
 	}
-	SiteNum cellSlotNearMe(Atom atom, ID id, Unsigned(2) radius){
-		//returns 0 if none found
-
-		SiteVisitorByID sv;
-		WindowScanner ws;
-		
-		ws.resetCategories();
-		Category c = ws.allocateCategory();
-		
-		ElementType t = au.getValidType(atom);
-		
-		sv.setType(c,t);
-		sv.setID(c,id);
-
-		//only scan next radius if no hits
-		ws.scan(sv,1,1);
-		if(ws.getHits(c)==(Unsigned)0 && radius > 1){
-			ws.scan(sv,2,2);
-			if(ws.getHits(c)==(Unsigned)0 && radius > 2){
-				ws.scan(sv,3,3);
-				if(ws.getHits(c)==(Unsigned)0 && radius > 3){
-					ws.scan(sv,4,4);
-					if(ws.getHits(c) <= (Unsigned)40){
-						return ws.getSiteNum(c);
-					}
-					else{
-						return 0;
-					}
-				}
-				if(ws.getHits(c) <= (Unsigned)40){
-					return ws.getSiteNum(c);
-				}
-				else{
-					return 0;
-				}
-			}
-			if(ws.getHits(c) <= (Unsigned)40){
-				return ws.getSiteNum(c);
-			}
-			else{
-				return 0;
-			}
-		}
-		if(ws.getHits(c) <= (Unsigned)40){
-			return ws.getSiteNum(c);
-		}
-		else{
-			return 0;
-		}
-	}
 	SiteNum emptySlotNearMe(){
 		Unsigned radius = ew.getRadius();
 		SiteVisitorByID sv;
