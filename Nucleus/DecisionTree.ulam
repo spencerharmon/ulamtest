@@ -329,28 +329,24 @@ quark DecisionTree{
 			if(my.tree0Type == 1 && my.eqTree0 == 0){
 				my.tree0Type = 0;
 				val0 = comIn;
-			}
-			if(my.tree1Type == 1 && my.eqTree1 == 0){
-				my.tree0Type = 0;
-				val1 = comIn;
-			}
-	
-			if(my.tree0Type == 1){
+			}else if(my.tree0Type == 1 && my.eqTree0 != 0){
 				gene = findSeqno((Seqno)my.eqTree0, id);
 				if(gene as Gene){
 					val0 = gene.value;
 				}
-			}
-			if(my.tree0Type == 0){
+			}else if(my.tree0Type == 0){
 				val0 = my.eqTree0;
 			}
-			if(my.tree1Type == 1){
+
+			if(my.tree1Type == 1 && my.eqTree1 == 0){
+				my.tree0Type = 0;
+				val1 = comIn;
+			}else if(my.tree1Type == 1 && my.eqTree1 !=0){
 				gene = findSeqno((Seqno)my.eqTree1, id);
 				if(gene as Gene){
 					val1 = gene.value;
 				}
-			}
-			if(my.tree1Type == 0){
+			}else if(my.tree1Type == 0){
 				val1 = my.eqTree1;
 			}
 			value = operate(val0, my.operator, val1);
