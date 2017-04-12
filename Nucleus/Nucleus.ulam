@@ -16,6 +16,7 @@ element Nucleus{
 	Cell cell;
 	AtomUtils au;
 	SiteUtils su;
+	DebugUtils du;
 	ClusterByID cl;
 	DecisionTree dt;
 	
@@ -74,7 +75,6 @@ element Nucleus{
 		return true;
 	}
 	Void makeChildNucleus(SiteNum slot, Atom mate){
-		childID = cell.genID();
 		Nucleus child;
 		child.parent1id = id;
 		child.id = childID;
@@ -85,11 +85,15 @@ element Nucleus{
 			child.parent2id = mate.id;
 			ew[slot] = mate;
 		}
-		layEgg();
 		su.setBase(child);
 	}
-	Void maybeReproduce(){
+	Void reproductionBehavior(){
 
+		if(reproducing){
+			layEgg();
+		}else{
+			childID = cell.genID();
+		}
                 SiteVisitorByID sv;
                 WindowScanner ws;
 
@@ -127,6 +131,8 @@ element Nucleus{
 						refractoryPeriod = Unsigned(7).maxof;
 					}
 				}
+			}else if(reproducing == false){
+				childID = 0;
 			}
 		}
 	}
@@ -226,43 +232,41 @@ element Nucleus{
 		++lifespan;
 		--refractoryPeriod;
 		//40 was too large. 2 was too small.
-		if(refractoryPeriod < refractoryPeriod.maxof-20){
+		if(refractoryPeriod < refractoryPeriod.maxof/2){
 			reproducing = false;
 			childID = 0;
 		}
 		if(!dieOfOldAge()){
-//			if(lifespan > lifespan/20){
-//				cell.breakShell(id);
-//			}
 			if(reproducing){
-				layEgg();
+				reproductionBehavior();
 			}
 			cl.bringGenesCloser(id,self);
 			dontStepOnEggs();
-		//	if(dt.evaluate((Seqno)1, id, comIn)>32){
-		//		ew.swap(0,1);
-		//	}
 			Atom movement = dt.findSeqno((Seqno)1, id);
 			if(movement as Gene){
-				if(r.oneIn((Unsigned)(movement.value + 1))){ //+1 because oneIn(0) causes failure.
-					move = true;
+				if(movement.value !=0){
+					if(r.oneIn((Unsigned)movement.value)){ 
+						move = true;
+					}
 				}
 			}else{
-				die();
+				lifespan = (Unsigned(10))(lifespan + 5u);
 			}
 			Atom com = dt.findSeqno((Seqno)2, id);
 			if(com as Gene){
 				comOut = com.value;
 			}else{
-				die();
+				lifespan = (Unsigned(10))(lifespan + 5u);
 			}
 			Atom reproduce = dt.findSeqno((Seqno)3, id);
 			if(reproduce as Gene){
-				if(!r.oneIn((Unsigned)(reproduce.value + 1))){
-					maybeReproduce();
+				if(reproduce.value != 0){
+					if(!r.oneIn((Unsigned)reproduce.value)){
+						reproductionBehavior();
+					}
 				}
 			}else{
-				die();
+				lifespan = (Unsigned(10))(lifespan + 5u);
 			}
 			whetherToMove();
 		}

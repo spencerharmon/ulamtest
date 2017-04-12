@@ -13,6 +13,7 @@ element Gene{
 	Cell cell;
 	DecisionTree dt;
 	SiteUtils su;
+	DebugUtils du;
 
 	//typedefs	
 	typedef Unsigned(6) Seqno; //similar to SiteNum, since we don't want to exceed an event window, but has no bearing on position
@@ -38,6 +39,7 @@ element Gene{
 	StoredValue comOut;
 	Unsigned(3) eventsAlone;
 	Bool copied;
+	Bool proto;
 
 	Void listen(){
 		SiteVisitorByID sv;
@@ -155,6 +157,7 @@ element Gene{
 			}
 		}
 		if(gene as Gene){
+			gene.proto = true;
 			if(!dontCopy){
 				gene.id = childID;
 				su.setBase(gene);
@@ -177,6 +180,25 @@ element Gene{
 
 
 	Void behave(){
+		if(proto){
+			Atom a = su.getBase();
+			if(a as Gene){
+				seqno = a.seqno;
+				eqTree0 = a.eqTree0;
+				tree0Type = a.tree0Type;
+				eqTree1 = a.eqTree1;
+				tree0Type = a.tree0Type;
+				operator = a.operator;
+				du.print("ID then seqnos, base layer first");
+				du.print(id);
+				du.print(a.seqno);
+				du.print(seqno);
+			}
+			proto = false;
+			Empty e;
+			su.setBase(e);
+		}
+
 		nucleusCheck();
 //		canSeeNucleus = cl.geneCanSeeNucleus(id);
 		killCopies();

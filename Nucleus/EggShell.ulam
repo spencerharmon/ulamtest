@@ -36,11 +36,15 @@ element EggShell{
 		}
 	}
 	Void hatch(){
-		createNeighbor();
 		Atom a = su.getBase();
 		Empty e;
-		su.setBase(e);
-		ew[0] = a;
+		if(a as Gene){
+			ew[0] = a;
+		}
+		if(a as Nucleus){
+			ew[0] = a;
+		}
+	//test	su.setBase(e);
 	}
 	Bool onNucleus(Atom a){
 		if(a as Nucleus){
