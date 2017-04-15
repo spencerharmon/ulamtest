@@ -92,41 +92,15 @@ element Gene{
 		}
 	}
 	Void nucleusCheck(){
-//                SiteVisitorByID sv;
-//                WindowScanner ws;
-
-//                ws.resetCategories();
-//                Category cNucleus = ws.allocateCategory();
-//                Nucleus aNucleus;
-//                ElementType tNucleus = au.getValidType(aNucleus);
-
-//                sv.setType(cNucleus,tNucleus);
-//                sv.setID(cNucleus,id);
-
-//                ws.scan(sv);
-		
-//		SiteNum slot = ws.getSiteNum(cNucleus);
-//		if(slot <= 40){
 		for(SiteNum slot = 0; slot <=40; ++slot){
 			Atom nucleus = ew[slot];
 
 			if(nucleus as Nucleus){
 				if(nucleus.id == id){
-					//check the age of the nucleus to decide if it's time to break the shell.
-				//	if(nucleus.lifespan > nucleus.lifespan.maxof){
-				//		EggShell eg;
-				//		SiteNum shellSite = cl.cellSlotNearMe(eg,id,1);
-				//		Empty e;
-				//		ew[shellSite] = e;
-				//	}
-
-				//	if(nucleus.reproducing && !copied){
 					if(nucleus.reproducing){
 						ID childID = nucleus.childID;
 						copy(childID);
-					}else if(!nucleus.reproducing){
-						copied = false;
-					}
+					}else copied = false;
 					//we can see the nucleus, so go ahead and let ClusterByID know.
 					canSeeNucleus = true;
 					return;
@@ -171,14 +145,12 @@ element Gene{
 			if(gene as Gene){
 				if(gene.id == id && gene.seqno == seqno){
 					Empty e;
-					ew[slot] = e;
+					ew[0] = e;
 				}
 			}
 		}
 		
 	}
-
-
 	Void behave(){
 		if(proto){
 			Atom a = su.getBase();
@@ -200,13 +172,8 @@ element Gene{
 		}
 
 		nucleusCheck();
-//		canSeeNucleus = cl.geneCanSeeNucleus(id);
-		killCopies();
+	//tst	killCopies();
 		cl.bringGenesCloser(id,self);
-//		if(!cl.bringGenesCloser(id,self)){
-//			cl.run();
-//		}
-//		canSeeNucleus = cl.geneCanSeeNucleus(id);
 		//currently takes comIn on the right.
 		if(canSeeNucleus){
 			eventsAlone = 0;
