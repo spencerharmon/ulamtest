@@ -35,8 +35,7 @@ element EggShell{
 			ew[slot] = eg;
 		}
 	}
-	Void hatch(){
-		Atom a = su.getBase();
+	Void hatch(Atom a){
 		Empty e;
 		if(a as Gene){
 			ew[0] = a;
@@ -129,13 +128,13 @@ element EggShell{
 			}
 		}
 	}
-	Void syncHatch(){
+	Void syncHatch(Atom a){
 		if(complete){
 			eggTimer();
 		}
 		if(cascading){
 			cascade();
-			hatch();
+			hatch(a);
 		}
 	}
 	Void behave(){
@@ -145,16 +144,16 @@ element EggShell{
 		if(onN){
 			onCell = true;
 			createNeighbor();
-			syncHatch();
+			syncHatch(a);
 		}
 		if(onG){
 			onCell = true;
 			createNeighbor();
-			syncHatch();
+			syncHatch(a);
 		}
 		if(!onN && !onG){
 			onCell = false;
-			syncHatch();
+			syncHatch(a);
 		}
 		neighborCheck();
 	}
