@@ -39,7 +39,7 @@ element Gene{
 	StoredValue comOut;
 	Unsigned(3) eventsAlone;
 	Bool copied;
-	Bool proto;
+//	Bool proto;
 
 	Void listen(){
 		SiteVisitorByID sv;
@@ -117,25 +117,30 @@ element Gene{
 		copied = true;
 		SiteNum emptySlot = cl.emptySlotNearMe();
 		Bool dontCopy = false;
-		Atom gene = self;
+		Gene gene;
 		Atom base = su.getBase();
 		//set dontcopy to true if the base layer contains our nucleus
 		if(base as Nucleus){
 			if(base.id == childID){
 				dontCopy = true;
 			}
-		}
-		if(base as Gene){
+		}else if(base as Gene){
 			if(base.id == childID){
 				dontCopy = true;
 			}
 		}
-		if(gene as Gene){
-			gene.proto = true;
-			if(!dontCopy){
-				gene.id = childID;
-				su.setBase(gene);
-			}
+		if(!dontCopy){
+//			gene.proto = true;
+
+			gene.id = childID;
+			gene.seqno = seqno;
+			gene.operator = operator;
+			gene.eqTree0 = eqTree0;
+			gene.tree0Type = tree0Type;
+			gene.eqTree1 = eqTree1;
+			gene.tree0Type = tree0Type;
+
+			su.setBase(gene);
 		}
 	}
 	Void killCopies(){
@@ -152,27 +157,23 @@ element Gene{
 		
 	}
 	Void behave(){
-		if(proto){
-			Atom a = su.getBase();
-			if(a as Gene){
-				seqno = a.seqno;
-				eqTree0 = a.eqTree0;
-				tree0Type = a.tree0Type;
-				eqTree1 = a.eqTree1;
-				tree0Type = a.tree0Type;
-				operator = a.operator;
-				du.print("ID then seqnos, base layer first");
-				du.print(id);
-				du.print(a.seqno);
-				du.print(seqno);
-			}
-			proto = false;
-			Empty e;
-			su.setBase(e);
-		}
+//		if(proto){
+//			Atom a = su.getBase();
+//			if(a as Gene){
+//				seqno = a.seqno;
+//				eqTree0 = a.eqTree0;
+//				tree0Type = a.tree0Type;
+//				eqTree1 = a.eqTree1;
+//				tree0Type = a.tree0Type;
+//				operator = a.operator;
+//			}
+//			proto = false;
+//			Empty e;
+//			su.setBase(e);
+//		}
 
 		nucleusCheck();
-	//tst	killCopies();
+		killCopies();
 		cl.bringGenesCloser(id,self);
 		//currently takes comIn on the right.
 		if(canSeeNucleus){

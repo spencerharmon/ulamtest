@@ -12,6 +12,7 @@ element EggShell{
 	SiteUtils su;
 	EventWindow ew;
 	DebugUtils du;
+	Random r;
 	
 	ClusterByID cl;
 
@@ -21,17 +22,19 @@ element EggShell{
 	ID id;
 	Bool onCell;
 	Bool complete;
-	Unsigned(3) wait;
 	Unsigned(8) seq;
 	Bool incrementedSeq;
 	Bool cascading;
+	Unsigned(3) wait;
+	Bool first;
 
 	Void createNeighbor(){
 		Unsigned radius = ew.getRadius();
 		SiteNum slot = cl.emptySlotNearMe();
-		EggShell eg;
-		eg.id = id;
 		if(slot > 0 && slot <= 4){
+			EggShell eg;
+			eg.id = id;
+			eg.seq = seq;
 			ew[slot] = eg;
 		}
 	}
@@ -43,7 +46,7 @@ element EggShell{
 		if(a as Nucleus){
 			ew[0] = a;
 		}
-	//test	su.setBase(e);
+		su.setBase(e);
 	}
 	Bool onNucleus(Atom a){
 		if(a as Nucleus){
@@ -138,23 +141,33 @@ element EggShell{
 		}
 	}
 	Void behave(){
-		Atom a = su.getBase();
-		Bool onN = onNucleus(a);
-		Bool onG = onGene(a);
-		if(onN){
-			onCell = true;
-			createNeighbor();
-			syncHatch(a);
+		if(first){
+			++wait;
+			if(wait == wait.maxof){
+				first = false;
+			}
+		}else{
+			Atom a = su.getBase();
+			Bool onN = onNucleus(a);
+			Bool onG = onGene(a);
+			if(onN){
+				onCell = true;
+				createNeighbor();
+				syncHatch(a);
+			}
+			if(onG){
+				onCell = true;
+				createNeighbor();
+				syncHatch(a);
+			}
+			if(!onN && !onG){
+				if(r.oneIn(25)){
+					createNeighbor();
+				}
+				onCell = false;
+				syncHatch(a);
+			}
+			neighborCheck();
 		}
-		if(onG){
-			onCell = true;
-			createNeighbor();
-			syncHatch(a);
-		}
-		if(!onN && !onG){
-			onCell = false;
-			syncHatch(a);
-		}
-		neighborCheck();
 	}
 }
