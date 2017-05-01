@@ -1,0 +1,169 @@
+quark Agent{
+	EventWindow ew;
+	AtomUtils au;
+	Cluster cl;
+
+	typedef Unsigned(16) ID;
+	typedef Unsigned(7) TypeIdx;
+	typedef EventWindow.SiteNum SiteNum;
+	typedef AtomUtils.Type Type;
+
+	ID parent;
+	ID child;
+
+	Void clusterDiffuse(){
+		SiteNum sChild;
+		SiteNum sParent;
+		SiteNum direction;
+		direction = cl.emptySlotNearMe();
+		Unsigned familySeen = 0;
+		for(SiteNum i = 1; i<41; ++i){
+			Atom a = ew[i];
+			if(a as Agent){
+				if(a.child == parent){
+					SiteNum slot = cl.emptySlotNearMe();
+					ew.swap(i,slot);
+					++familySeen;
+				}
+				if(a.parent == child){
+					SiteNum slot = cl.emptySlotNearMe();
+					ew.swap(i,slot);
+					++familySeen;
+				}
+			}
+		}
+		
+		if(familySeen == 2u){
+			diffuse();
+		}
+	}
+	Void diffuse(){
+		SiteNum slot = cl.emptySlotNearMe();
+		ew.swap(0,slot);
+	}
+	SiteNum findChild(){
+		for(SiteNum i = 1; i <41; ++i){
+			Atom a = ew[i];
+			if(a as Agent){
+				if(a.parent == child){
+					return i;
+				}
+			}else{
+				SiteNum ret = 0;
+				return ret;
+			}
+		}
+		return 0;
+	}
+	SiteNum findParent(){
+		for(SiteNum i = 1; i <41; ++i){
+			Atom a = ew[i];
+			if(a as Agent){
+				if(a.child == parent){
+					return i;
+				}
+			}else{
+				SiteNum ret = 0;
+				return ret;
+			}
+		}
+		return 0;
+	}
+	virtual Int typeFunction(Atom a);
+	virtual Int typeFunction(Atom c, Atom p);
+	virtual Void overwrite(Int val, Atom a, SiteNum slot1, SiteNum slot2);
+	virtual Void collapse(SiteNum cSlot, SiteNum pSlot){
+		Atom c = ew[cSlot];
+		Atom p = ew[pSlot];
+
+		//can see child only
+		Bool case1;
+		//can see parent only
+		Bool case2;
+		//can see both
+		Bool case3;
+		//can see neither
+		Bool case4;
+		if(cSlot > 0){
+			if(pSlot > 0){
+				if(p as OpenParenth){
+					//don't overwrite openparenth value; same behavior as child only
+					case1 = true;
+				}else{
+					//can see both
+					case3 = true;
+				}
+			}else{
+				//can see child only
+				case1 = true;
+			}
+		}else if(pSlot > 0){
+			//parent only
+			case2 = true;
+		}else{
+			//neither
+			case4 = true;
+		}
+		Int val; 
+		if(case1){
+			val = typeFunction(c);
+			Atom a;
+			if(c as Agent){
+				if(a as Agent){
+					a.parent = parent;
+					a.child = c.child;
+				}
+			}
+			overwrite(val,a,cSlot,pSlot);
+		}else if(case2){
+			val = typeFunction(p);
+			Atom a;
+			if(p as Agent){
+				if(a as Agent){
+					a.parent = p.parent;
+					a.child = child;
+				}
+			}
+			overwrite(val,a,pSlot,cSlot);
+		}else if(case3){
+			val = typeFunction(c,p);
+			Atom a;
+			if(c as Agent){
+				if(p as Agent){
+					if(a as Agent){
+						a.parent = p.parent;
+						a.child = c.child;	
+					}
+				}
+				overwrite(val,a,cSlot,pSlot);
+				Empty e;
+				ew[0] = e;
+			}
+		}else if(case4){
+			diffuse();
+		}
+	}
+	Atom changeType(Atom a, Int val, ID p, ID c){
+		Atom n;
+		n = au.new(au.getType(a));
+		if(n as OpenParenth){
+			n.value = val;
+			n.parent = p;
+			n.child = c;
+			return n;
+		}else if(n as CloseParenth){
+			n.value = val;
+			n.parent = p;
+			n.child = c;
+			return n;
+		}else if(n as Add){
+			n.value = val;
+			n.parent = p;
+			n.child = c;
+			return n;
+		}else{
+			Atom a;
+			return a;
+		}
+	}
+}

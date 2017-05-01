@@ -1,0 +1,16 @@
+/**
+	\author Spencer Harmon
+	\license lgpl
+	\symbol Cp
+	\symmetries all
+	
+ */
+element CloseParenth : Agent{
+	Int value;
+
+	typedef EventWindow.SiteNum SiteNum;
+
+	Void behave(){
+		clusterDiffuse();
+	}
+}

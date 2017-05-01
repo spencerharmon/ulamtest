@@ -1,0 +1,80 @@
+quark Cluster{
+	EventWindow ew;
+	AtomUtils au;
+
+	typedef EventWindow.SiteNum SiteNum;
+	typedef WindowScanner.Category Category;
+	typedef AtomUtils.Type ElementType;
+
+	SiteNum emptySlotNearMe(){
+		Unsigned radius = ew.getRadius();
+		SiteVisitorByType sv;
+		WindowScanner ws;
+		
+		ws.resetCategories();
+		Category cEmpty = ws.allocateCategory();
+		
+		ElementType tEmpty = au.getEmptyType();
+		
+		sv.setType(cEmpty,tEmpty);
+
+		//only scan next radius if no hits
+		ws.scan(sv,1,1);
+		if(ws.getHits(cEmpty)==(Unsigned)0 && radius > 1u){
+			ws.scan(sv,2,2);
+			if(ws.getHits(cEmpty)==(Unsigned)0 && radius > 2u){
+				ws.scan(sv,3,3);
+				if(ws.getHits(cEmpty)==(Unsigned)0 && radius > 3u){
+					ws.scan(sv,4,4);
+					if(ws.getHits(cEmpty) <= (Unsigned)40){
+						return ws.getSiteNum(cEmpty);
+					}
+					else{
+						return 0;
+					}
+				}
+				if(ws.getHits(cEmpty) <= (Unsigned)40){
+					return ws.getSiteNum(cEmpty);
+				}
+				else{
+					return 0;
+				}
+			}
+			if(ws.getHits(cEmpty) <= (Unsigned)40){
+				return ws.getSiteNum(cEmpty);
+			}
+			else{
+				return 0;
+			}
+		}
+		if(ws.getHits(cEmpty) <= (Unsigned)40){
+			return ws.getSiteNum(cEmpty);
+		}else{
+			return 0;
+		}
+	}
+	SiteNum findEmptySlotNear(SiteNum slot){
+		OutOfBounds ob;
+		C2D tprime;
+		C2D t = ew.getCoord(slot);
+
+		SiteNum target = 0;
+
+		//scan the area around t
+		for(Int x = t.x-1; x <= t.x+1; ++x){
+			for(Int y = t.y-1; y <= t.y+1; ++y){
+				if(!(x == t.x && y == t.y)){
+					tprime = tprime.make((Int(16)) x,(Int(16)) y);
+					if(!ob.isOOB(tprime)){
+						target = ew.getSiteNumber(tprime);
+						Atom a = ew[target];
+						if(a as Empty){
+							return target;
+						}
+					}
+				}
+			}
+		}
+		return target;
+	}
+}

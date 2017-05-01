@@ -1,0 +1,77 @@
+/**
+	\author Spencer Harmon
+	\license lgpl
+	\symbol Ad
+	\symmetries all
+	
+ */
+element Add : Agent{
+	Int value;
+	DebugUtils du;
+
+	typedef EventWindow.SiteNum SiteNum;
+	
+	Int typeFunction(Atom c){
+		Int ret;
+		if(c as Add){
+			ret = self.value + c.value;
+		}else if(c as CloseParenth){
+			ret = self.value + c.value;
+		}
+		return ret;
+	}
+	Int typeFunction(Atom c, Atom p){
+		Int ret;
+		if(c as Add){
+			if(p as Add){
+				ret = self.value + c.value + p.value;
+			}
+		}else if(c as CloseParenth){
+			if(p as Add){
+				ret = self.value + c.value + p.value;
+			}
+		}
+		du.print(ret);
+		return ret;
+	}
+
+	Void overwrite(Int val, Atom a, SiteNum slot1, SiteNum slot2){
+		Atom a1 = ew[slot1];
+		Atom a2 = ew[slot2];
+		ID p;
+		ID c;
+		if(a as Agent){
+			c = a.child;
+			p = a.parent;
+		}
+		if(a1 as Add){
+			a1.value = val;
+			a1.parent = p;
+			a1.child = c;
+			ew[slot1] = a1;
+		}else if(a1 as CloseParenth){
+			a1.value = val;
+			a1.parent = p;
+			a1.child = c;
+			ew[slot1] = a1;
+		}
+		if(a2 as Add){
+			a2.value = val;
+			a2.parent = p;
+			a2.child = c;
+			ew[slot2] = a2;
+		}else if(a2 as CloseParenth){
+			a2.value = val;
+			a2.parent = p;
+			a2.child = c;
+			ew[slot2] = a2;
+		}
+	}
+
+	Void behave(){
+		SiteNum cSlot = findChild();
+		SiteNum pSlot = findParent();
+		collapse(pSlot,cSlot);
+		clusterDiffuse();
+	}
+}

@@ -1,0 +1,86 @@
+/**
+	\author Spencer Harmon
+	\license lgpl
+	\symbol Op
+	
+ */
+element OpenParenth : Agent{
+	DebugUtils du;
+
+	typedef Agent.ID ID;
+	typedef EventWindow.SiteNum SiteNum;
+
+	Int value;
+	
+	Void collapse(SiteNum cSlot, SiteNum pSlot){
+		if(parent == 0){
+			if(cSlot > 0){
+				Atom a = ew[cSlot];
+				if(a as CloseParenth){
+					value = a.value;
+					du.print(value);
+				}
+			}
+		}
+
+		Atom c = ew[cSlot];
+		Atom p = ew[pSlot];
+
+		//can see child only
+		Bool case1;
+		//can see parent only
+		Bool case2;
+		//can see both
+		Bool case3;
+		//can see neither
+		Bool case4;
+		if(cSlot > 0){
+			if(pSlot > 0){
+				if(p as OpenParenth){
+					//don't overwrite openparenth value; same behavior as child only
+					case1 = true;
+				}else{
+					//can see both
+					case3 = true;
+				}
+			}else{
+				//can see child only
+				case1 = true;
+			}
+		}else if(pSlot > 0){
+			//parent only
+			case2 = true;
+		}else{
+			//neither
+			case4 = true;
+		}
+		Int val; 
+		if(case1){
+			return;
+		}else if(case2){
+			return;
+		}else if(case3){
+			if(c as CloseParenth){
+				val = c.value;
+			}
+			ID par;
+			ID chi;
+			if(p as Agent){
+				if(c as Agent){
+					chi = c.child;
+					par = p.parent;
+				}
+			}
+			Atom a = changeType(p,val,par,chi);
+			ew[0] = a;
+		}else if(case4){
+			return;
+		}
+	}
+	Void behave(){
+		SiteNum cSlot = findChild();
+		SiteNum pSlot = findParent();
+		collapse(cSlot,pSlot);
+		clusterDiffuse();
+	}
+}

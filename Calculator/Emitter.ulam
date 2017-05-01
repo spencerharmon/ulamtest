@@ -1,0 +1,43 @@
+element Emitter{
+	Random r;
+	Cluster cl;
+	EventWindow ew;
+	
+	typedef Agent.ID ID;
+	typedef EventWindow.SiteNum SiteNum;
+
+	ID idStor;	
+
+	Void clusterTest(){
+		Add a1;
+		Add a2;
+		Int val1 = (Int) r.create(a1.value.maxof);
+		Int val2 = (Int) r.create(a2.value.maxof);
+		a1.value = val1;
+		a2.value = val2;
+		
+		a1.parent = idStor;
+
+		ID aID = genID();
+		a1.child = aID;
+		a2.parent = aID;
+		
+		ID next = genID();
+		a2.child = next;
+		idStor = next;
+
+		SiteNum slot1 = cl.emptySlotNearMe();
+		SiteNum slot2 = cl.emptySlotNearMe();
+		if(slot1 > 0 && slot1 < 41 && slot2 > 0 && slot2 < 41){
+			ew[slot1] = a1;
+			ew[slot2] = a2;
+		}
+	}
+	ID genID(){
+		ID ret = (ID)r.create(ret.maxof);
+		return ret;
+	}
+	Void behave(){
+		clusterTest();
+	}
+}
