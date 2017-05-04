@@ -6,38 +6,73 @@ element Emitter{
 	typedef Agent.ID ID;
 	typedef EventWindow.SiteNum SiteNum;
 
-	ID idStor;	
+	ID idStor;
+	Unsigned agentIndex;
 
-	Void clusterTest(){
-		Add a1;
-		Add a2;
-		Int val1 = (Int) r.create(a1.value.maxof);
-		Int val2 = (Int) r.create(a2.value.maxof);
-		a1.value = val1;
-		a2.value = val2;
-		
-		a1.parent = idStor;
+	ID openParenth(SiteNum slot, ID id){
+		OpenParenth a;
+		a.parent = id;
 
 		ID aID = genID();
-		a1.child = aID;
-		a2.parent = aID;
+		a.child = aID;
 		
-		ID next = genID();
-		a2.child = next;
-		idStor = next;
+		ew[slot] = a;
 
-		SiteNum slot1 = cl.emptySlotNearMe();
-		SiteNum slot2 = cl.emptySlotNearMe();
-		if(slot1 > 0 && slot1 < 41 && slot2 > 0 && slot2 < 41){
-			ew[slot1] = a1;
-			ew[slot2] = a2;
-		}
+		return aID;
 	}
+
+	ID closeParenth(SiteNum slot, ID id){
+		CloseParenth a;
+		a.parent = id;
+
+		ID aID = genID();
+		a.child = aID;
+		
+		ew[slot] = a;
+
+		return aID;
+	}
+
+	ID add(SiteNum slot, ID id, Int val){
+		Add a;
+		a.value = val;
+		a.parent = id;
+
+		ID aID = genID();
+		a.child = aID;
+		
+		ew[slot] = a;
+
+		return aID;
+	}
+
+	Void spawnEquation(){
+		ID nextid;
+		SiteNum slot = cl.emptySlotNearMe();
+		while(slot > 0){
+			++agentIndex;
+			if(agentIndex == 1u){
+				nextid = openParenth(slot, nextid);
+			}else if(agentIndex == 2u){
+				nextid = add(slot, nextid, 2);
+			}else if (agentIndex == 3u){
+				nextid = add(slot, nextid, 3);
+			}else if(agentIndex == 4u){
+				nextid = closeParenth(slot, nextid);
+			}else{
+				return;
+			}
+
+			slot = cl.emptySlotNearMe();
+		}
+		idStor = nextid;
+	}
+
 	ID genID(){
 		ID ret = (ID)r.create(ret.maxof);
 		return ret;
 	}
 	Void behave(){
-		clusterTest();
+		spawnEquation();
 	}
 }
