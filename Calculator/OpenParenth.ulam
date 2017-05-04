@@ -21,7 +21,7 @@ element OpenParenth : Agent{
 		Int notvirtual;
 		return notvirtual;
 	}
-	Void overwrite(Int i, Atom a, SiteNum s1, SiteNum s2){
+	Void overwrite(Int i, ID p, ID c, SiteNum s1, SiteNum s2){
 		Bool virt = false;
 	}
 	Void collapse(SiteNum cSlot, SiteNum pSlot){
@@ -72,9 +72,6 @@ element OpenParenth : Agent{
 		}else if(case2){
 			return;
 		}else if(case3){
-			if(c as CloseParenth){
-				val = c.value;
-			}
 			ID par;
 			ID chi;
 			if(p as Agent){
@@ -83,8 +80,11 @@ element OpenParenth : Agent{
 					par = p.parent;
 				}
 			}
-			Atom a = changeType(p,val,par,chi);
-			ew[0] = a;
+			if(c as CloseParenth){
+				val = c.value;
+				Atom a = changeType(p,val,par,chi);
+				ew[0] = a;
+			}
 		}else if(case4){
 			return;
 		}

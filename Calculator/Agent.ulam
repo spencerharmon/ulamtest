@@ -71,7 +71,7 @@ quark Agent{
 	}
 	virtual Int typeFunction(Atom a);
 	virtual Int typeFunction(Atom c, Atom p);
-	virtual Void overwrite(Int val, Atom a, SiteNum slot1, SiteNum slot2);
+	virtual Void overwrite(Int val, ID p, ID c, SiteNum slot1, SiteNum slot2);
 	virtual Void collapse(SiteNum cSlot, SiteNum pSlot){
 		Atom c = ew[cSlot];
 		Atom p = ew[pSlot];
@@ -107,37 +107,22 @@ quark Agent{
 		Int val; 
 		if(case1){
 			val = typeFunction(c);
-			Atom a;
 			if(c as Agent){
-				if(a as Agent){
-					a.parent = parent;
-					a.child = c.child;
-				}
+				overwrite(val,parent,c.child,cSlot,pSlot);
 			}
-			overwrite(val,a,cSlot,pSlot);
 		}else if(case2){
 			val = typeFunction(p);
-			Atom a;
 			if(p as Agent){
-				if(a as Agent){
-					a.parent = p.parent;
-					a.child = child;
-				}
+				overwrite(val,p.parent,child,pSlot,cSlot);
 			}
-			overwrite(val,a,pSlot,cSlot);
 		}else if(case3){
 			val = typeFunction(c,p);
-			Atom a;
 			if(c as Agent){
 				if(p as Agent){
-					if(a as Agent){
-						a.parent = p.parent;
-						a.child = c.child;	
-					}
+					overwrite(val,p.parent,c.child,cSlot,pSlot);
+					Empty e;
+					ew[0] = e;
 				}
-				overwrite(val,a,cSlot,pSlot);
-				Empty e;
-				ew[0] = e;
 			}
 		}else if(case4){
 			diffuse();

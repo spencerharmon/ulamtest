@@ -36,15 +36,9 @@ element Add : Agent{
 		return ret;
 	}
 
-	Void overwrite(Int val, Atom a, SiteNum slot1, SiteNum slot2){
+	Void overwrite(Int val, ID p, ID c, SiteNum slot1, SiteNum slot2){
 		Atom a1 = ew[slot1];
 		Atom a2 = ew[slot2];
-		ID p;
-		ID c;
-		if(a as Agent){
-			c = a.child;
-			p = a.parent;
-		}
 		if(a1 as Add){
 			a1.value = val;
 			a1.parent = p;

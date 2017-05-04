@@ -11,14 +11,23 @@ element CloseParenth : Agent{
 	typedef EventWindow.SiteNum SiteNum;
 
 	Int typeFunction(Atom a){
-		Int notvirtual;
-		return notvirtual;
+		Int ret;
+		if(a as Add){
+			ret = a.value;
+			return ret;
+		}else if(a as CloseParenth){
+			ret = a.value;
+			return ret;
+		}else if(a as OpenParenth){
+			ret = a.value;
+			return ret;
+		}else return ret;
 	}
 	Int typeFunction(Atom a, Atom b){
 		Int notvirtual;
 		return notvirtual;
 	}
-	Void overwrite(Int i, Atom a, SiteNum s1, SiteNum s2){
+	Void overwrite(Int i, ID p, ID c, SiteNum s1, SiteNum s2){
 		Bool virt = false;
 	}
 
