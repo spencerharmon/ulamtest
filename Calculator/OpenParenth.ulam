@@ -72,18 +72,22 @@ element OpenParenth : Agent{
 		}else if(case2){
 			return;
 		}else if(case3){
-			ID par;
-			ID chi;
 			if(p as Agent){
-				if(c as Agent){
-					chi = c.child;
-					par = p.parent;
+				if(c as CloseParenth){
+					ID idChi = c.child;
+					ID idPar = p.parent;
+					val = c.value;
+
+					Atom a = changeType(p.atomof,val,idPar,idChi);
+					ew[0] = a;
+				}else if(c as Add){
+					ID idChi = c.child;
+					ID idPar = p.parent;
+					val = c.value;
+
+					Atom a = changeType(p.atomof,val,idPar,idChi);
+					ew[0] = a;
 				}
-			}
-			if(c as CloseParenth){
-				val = c.value;
-				Atom a = changeType(p,val,par,chi);
-				ew[0] = a;
 			}
 		}else if(case4){
 			return;

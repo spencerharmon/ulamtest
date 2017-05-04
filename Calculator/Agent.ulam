@@ -89,6 +89,9 @@ quark Agent{
 				if(p as OpenParenth){
 					//don't overwrite openparenth value; same behavior as child only
 					case1 = true;
+				}else if(c as CloseParenth){
+					//don't add close parathesis' value (often 0)
+					case2 = true;
 				}else{
 					//can see both
 					case3 = true;
