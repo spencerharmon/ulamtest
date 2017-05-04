@@ -3,6 +3,7 @@
 	\license lgpl
 	\symbol Ad
 	\symmetries all
+	\color #b52
 	
  */
 element Add : Agent{

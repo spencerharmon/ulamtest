@@ -2,6 +2,7 @@
 	\author Spencer Harmon
 	\license lgpl
 	\symbol Op
+	\color #000
 	
  */
 element OpenParenth : Agent{
