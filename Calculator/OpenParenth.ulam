@@ -13,11 +13,15 @@ element OpenParenth : Agent{
 
 	Int value;
 	
-	Int typeFunction(){
+	Int typeFunction(Atom a){
 		Int notvirtual;
 		return notvirtual;
 	}
-	Void overwrite(){
+	Int typeFunction(Atom a, Atom b){
+		Int notvirtual;
+		return notvirtual;
+	}
+	Void overwrite(Int i, Atom a, SiteNum s1, SiteNum s2){
 		Bool virt = false;
 	}
 	Void collapse(SiteNum cSlot, SiteNum pSlot){
