@@ -13,6 +13,13 @@ element OpenParenth : Agent{
 
 	Int value;
 	
+	Int typeFunction(){
+		Int notvirtual;
+		return notvirtual;
+	}
+	Void overwrite(){
+		Bool virt = false;
+	}
 	Void collapse(SiteNum cSlot, SiteNum pSlot){
 		if(parent == 0){
 			if(cSlot > 0){

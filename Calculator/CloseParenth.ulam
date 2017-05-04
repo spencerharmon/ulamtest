@@ -10,6 +10,14 @@ element CloseParenth : Agent{
 
 	typedef EventWindow.SiteNum SiteNum;
 
+	Int typeFunction(){
+		Int notvirtual;
+		return notvirtual;
+	}
+	Void overwrite(){
+		Bool virt = false;
+	}
+
 	Void behave(){
 		clusterDiffuse();
 	}
