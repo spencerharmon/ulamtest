@@ -24,73 +24,34 @@ element OpenParenth : Agent{
 	Void overwrite(Int i, ID p, ID c, SiteNum s1, SiteNum s2){
 		Bool virt = false;
 	}
+	Atom evaluateParenthesis(ID n, ID a){
+		Empty e;
+		return e;
+	}
 	Void collapse(SiteNum cSlot, SiteNum pSlot){
 		if(parent == 0){
 			if(cSlot > 0){
 				Atom a = ew[cSlot];
 				if(a as CloseParenth){
 					value = a.value;
+					du.print(value);
 				}
-				du.print(value);
 			}
 		}
 
 		Atom c = ew[cSlot];
 		Atom p = ew[pSlot];
 
-		//can see child only
-		Bool case1;
-		//can see parent only
-		Bool case2;
-		//can see both
-		Bool case3;
-		//can see neither
-		Bool case4;
-		if(cSlot > 0){
-			if(pSlot > 0){
-				if(p as OpenParenth){
-					//don't overwrite openparenth value; same behavior as child only
-					case1 = true;
-				}else{
-					//can see both
-					case3 = true;
-				}
-			}else{
-				//can see child only
-				case1 = true;
-			}
-		}else if(pSlot > 0){
-			//parent only
-			case2 = true;
-		}else{
-			//neither
-			case4 = true;
-		}
-		Int val; 
-		if(case1){
-			return;
-		}else if(case2){
-			return;
-		}else if(case3){
-			if(p as Agent){
+		if(cSlot > 0 && pSlot > 0){
+			if(p as OpenParenth){
 				if(c as CloseParenth){
 					ID idChi = c.child;
-					ID idPar = p.parent;
-					val = c.value;
+					Int val = c.value;
 
-					Atom a = changeType(p.atomof,val,idPar,idChi);
-					ew[0] = a;
-				}else if(c as OpenParenth){
-					ID idChi = c.child;
-					ID idPar = p.parent;
-					val = c.value;
-
-					Atom a = changeType(p.atomof,val,idPar,idChi);
+					Atom a = changeType(c.atomof,val,parent,idChi);
 					ew[0] = a;
 				}
 			}
-		}else if(case4){
-			return;
 		}
 	}
 	Void behave(){

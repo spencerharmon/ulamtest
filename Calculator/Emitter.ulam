@@ -54,12 +54,16 @@ element Emitter{
 			if(agentIndex == 1u){
 				nextid = openParenth(slot, nextid);
 			}else if(agentIndex == 2u){
+				nextid = openParenth(slot, nextid);
+			}else if(agentIndex == 3u){
 				nextid = add(slot, nextid, 2);
-			}else if (agentIndex == 3u){
-				nextid = add(slot, nextid, 3);
 			}else if (agentIndex == 4u){
 				nextid = add(slot, nextid, 3);
-			}else if(agentIndex == 5u){
+			}else if (agentIndex == 5u){
+				nextid = add(slot, nextid, 3);
+			}else if(agentIndex == 6u){
+				nextid = closeParenth(slot, nextid);
+			}else if(agentIndex == 7u){
 				nextid = closeParenth(slot, nextid);
 			}else{
 				return;

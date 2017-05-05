@@ -72,59 +72,55 @@ quark Agent{
 	virtual Int typeFunction(Atom a);
 	virtual Int typeFunction(Atom c, Atom p);
 	virtual Void overwrite(Int val, ID p, ID c, SiteNum cSlot, SiteNum pSlot);
+	virtual Atom evaluateParenthesis(ID c, ID p);
+	Void operateOnChild(Atom c,SiteNum cSlot,SiteNum pSlot){
+		Int val = typeFunction(c);
+		if(c as Agent){
+			overwrite(val,parent,c.child,cSlot,pSlot);
+		}
+	}
+	Void operateOnParent(Atom p,SiteNum cSlot,SiteNum pSlot){
+		Int val = typeFunction(p);
+		if(p as Agent){
+			overwrite(val,p.parent,child,cSlot,pSlot);
+		}
+	}
+	Void operateOnBoth(Atom c, Atom p,SiteNum cSlot,SiteNum pSlot){
+		Int val = typeFunction(p);
+		if(c as Agent){
+			if(p as Agent){
+				overwrite(val,p.parent,c.child,cSlot,pSlot);
+			}
+		}
+	}
 	virtual Void collapse(SiteNum cSlot, SiteNum pSlot){
-		Atom c = ew[cSlot];
 		Atom p = ew[pSlot];
+		Atom c = ew[cSlot];
 
-		//can see child only
-		Bool case1;
-		//can see parent only
-		Bool case2;
-		//can see both
-		Bool case3;
-		//can see neither
-		Bool case4;
+		Int val; 
 		if(cSlot > 0){
 			if(pSlot > 0){
+				//can see both
 				if(p as OpenParenth){
-					//don't overwrite openparenth value; same behavior as child only
-					case1 = true;
+					if(c as CloseParenth){
+						Atom a = evaluateParenthesis(c.child,p.parent);
+						ew[pSlot] = a;
+						ew[0] = a;
+					}else{
+						operateOnChild(c,cSlot,pSlot);
+					}
 				}else{
-					//can see both
-					case3 = true;
+					operateOnBoth(c,p,cSlot,pSlot);
 				}
 			}else{
 				//can see child only
-				case1 = true;
+				operateOnChild(c,cSlot,pSlot);
 			}
 		}else if(pSlot > 0){
 			//parent only
-			case2 = true;
+			operateOnParent(p,cSlot,pSlot);
 		}else{
 			//neither
-			case4 = true;
-		}
-		Int val; 
-		if(case1){
-			val = typeFunction(c);
-			if(c as Agent){
-				overwrite(val,parent,c.child,cSlot,pSlot);
-			}
-		}else if(case2){
-			val = typeFunction(p);
-			if(p as Agent){
-				overwrite(val,p.parent,child,cSlot,pSlot);
-			}
-		}else if(case3){
-			val = typeFunction(c,p);
-			if(c as Agent){
-				if(p as Agent){
-					overwrite(val,p.parent,c.child,cSlot,pSlot);
-					Empty e;
-					ew[0] = e;
-				}
-			}
-		}else if(case4){
 			diffuse();
 		}
 	}

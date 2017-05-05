@@ -18,6 +18,10 @@ element CloseParenth : Agent{
 		Int notvirtual;
 		return notvirtual;
 	}
+	Atom evaluateParenthesis(ID n, ID a){
+		Empty e;
+		return e;
+	}
 	Void overwrite(Int i, ID p, ID c, SiteNum s1, SiteNum s2){
 		Bool virt = false;
 	}
