@@ -12,16 +12,7 @@ element CloseParenth : Agent{
 
 	Int typeFunction(Atom a){
 		Int ret;
-		if(a as Add){
-			ret = a.value;
-			return ret;
-		}else if(a as CloseParenth){
-			ret = a.value;
-			return ret;
-		}else if(a as OpenParenth){
-			ret = a.value;
-			return ret;
-		}else return ret;
+		return ret;
 	}
 	Int typeFunction(Atom a, Atom b){
 		Int notvirtual;

@@ -30,8 +30,8 @@ element OpenParenth : Agent{
 				Atom a = ew[cSlot];
 				if(a as CloseParenth){
 					value = a.value;
-					du.print(value);
 				}
+				du.print(value);
 			}
 		}
 
@@ -80,7 +80,7 @@ element OpenParenth : Agent{
 
 					Atom a = changeType(p.atomof,val,idPar,idChi);
 					ew[0] = a;
-				}else if(c as Add){
+				}else if(c as OpenParenth){
 					ID idChi = c.child;
 					ID idPar = p.parent;
 					val = c.value;

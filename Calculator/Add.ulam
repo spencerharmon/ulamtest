@@ -15,9 +15,9 @@ element Add : Agent{
 	Int typeFunction(Atom c){
 		Int ret;
 		if(c as Add){
-			ret = self.value + c.value;
+			ret = value + c.value;
 		}else if(c as CloseParenth){
-			ret = self.value + c.value;
+			ret = value + c.value;
 		}
 		return ret;
 	}
@@ -25,42 +25,58 @@ element Add : Agent{
 		Int ret;
 		if(c as Add){
 			if(p as Add){
-				ret = self.value + c.value + p.value;
+				ret = value + c.value + p.value;
 			}
 		}else if(c as CloseParenth){
 			if(p as Add){
-				ret = self.value + c.value + p.value;
+				ret = value + c.value + p.value;
 			}
 		}
-		du.print(ret);
 		return ret;
 	}
 
-	Void overwrite(Int val, ID p, ID c, SiteNum slot1, SiteNum slot2){
-		Atom a1 = ew[slot1];
-		Atom a2 = ew[slot2];
-		if(a1 as Add){
-			a1.value = val;
-			a1.parent = p;
-			a1.child = c;
-			ew[slot1] = a1;
-		}else if(a1 as CloseParenth){
-			a1.value = val;
-			a1.parent = p;
-			a1.child = c;
-			ew[slot1] = a1;
+	Void overwrite(Int val, ID p, ID c, SiteNum pSlot, SiteNum cSlot){
+		Atom a = ew[cSlot];
+		if(a as CloseParenth){
+			CloseParenth cp;
+			cp.value = val;
+			cp.parent = p;
+			cp.child = c;
+
+			ew[cSlot] = cp.atomof;
+			ew[pSlot] = cp.atomof;
+		}else if(a as Add){
+			Add ad;
+			ad.value = val;
+			ad.parent = p;
+			ad.child = c;
+
+			ew[cSlot] = ad.atomof;
+			ew[pSlot] = ad.atomof;
 		}
-		if(a2 as Add){
-			a2.value = val;
-			a2.parent = p;
-			a2.child = c;
-			ew[slot2] = a2;
-		}else if(a2 as CloseParenth){
-			a2.value = val;
-			a2.parent = p;
-			a2.child = c;
-			ew[slot2] = a2;
-		}
+
+//		if(cNew as Add){
+//			cNew.value = val;
+//			cNew.parent = p;
+//			cNew.child = c;
+//			ew[cSlot] = cNew;
+//		}else if(cNew as CloseParenth){
+//			cNew.value = val;
+//			cNew.parent = p;
+//			cNew.child = c;
+//			ew[cSlot] = cNew;
+//		}
+//		if(pNew as Add){
+//			pNew.value = val;
+//			pNew.parent = p;
+//			pNew.child = c;
+//			ew[pSlot] = pNew;
+//		}else if(pNew as CloseParenth){
+//			pNew.value = val;
+//			pNew.parent = p;
+//			pNew.child = c;
+//			ew[pSlot] = pNew;
+//		}
 	}
 
 	Void behave(){

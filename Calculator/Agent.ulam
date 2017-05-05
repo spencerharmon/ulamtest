@@ -71,7 +71,7 @@ quark Agent{
 	}
 	virtual Int typeFunction(Atom a);
 	virtual Int typeFunction(Atom c, Atom p);
-	virtual Void overwrite(Int val, ID p, ID c, SiteNum slot1, SiteNum slot2);
+	virtual Void overwrite(Int val, ID p, ID c, SiteNum cSlot, SiteNum pSlot);
 	virtual Void collapse(SiteNum cSlot, SiteNum pSlot){
 		Atom c = ew[cSlot];
 		Atom p = ew[pSlot];
@@ -89,9 +89,6 @@ quark Agent{
 				if(p as OpenParenth){
 					//don't overwrite openparenth value; same behavior as child only
 					case1 = true;
-				}else if(c as CloseParenth){
-					//don't add close parathesis' value (often 0)
-					case2 = true;
 				}else{
 					//can see both
 					case3 = true;
@@ -116,7 +113,7 @@ quark Agent{
 		}else if(case2){
 			val = typeFunction(p);
 			if(p as Agent){
-				overwrite(val,p.parent,child,pSlot,cSlot);
+				overwrite(val,p.parent,child,cSlot,pSlot);
 			}
 		}else if(case3){
 			val = typeFunction(c,p);
