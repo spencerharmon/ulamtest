@@ -4,7 +4,6 @@ quark Agent{
 	Cluster cl;
 
 	typedef Unsigned(16) ID;
-	typedef Unsigned(7) TypeIdx;
 	typedef EventWindow.SiteNum SiteNum;
 	typedef AtomUtils.Type Type;
 
@@ -106,24 +105,27 @@ quark Agent{
 					if(c as CloseParenth){
 						Atom a = evaluateParenthesis(c.child,p.parent);
 						ew[pSlot] = a;
-						ew[0] = a;
+						CloseParenth cp;
+						cp.parent = parent;
+						cp.child = c.child;
+						ew[0] = cp;
 					}else{
 						//don't operate on openparenth
-						operateOnChild(c,pSlot);
+						operateOnChild(c,cSlot);
 					}
 				}else{
 					operateOnBoth(c,p,cSlot,pSlot);
 				}
 			}else{
 				//can see child only
-				operateOnChild(c,pSlot);
+				operateOnChild(c,cSlot);
 			}
 		}else if(pSlot > 0){
 			//parent only
 			operateOnParent(p,pSlot);
 		}else{
 			//neither
-			//diffuse();
+			diffuse();
 		}
 	}
 	Atom changeType(Atom a, Int val, ID p, ID c){

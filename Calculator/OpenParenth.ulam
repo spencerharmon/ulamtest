@@ -3,6 +3,7 @@
 	\license lgpl
 	\symbol Op
 	\color #000
+	\symmetries all
 	
  */
 element OpenParenth : Agent{
@@ -48,9 +49,10 @@ element OpenParenth : Agent{
 			if(p as OpenParenth){
 				if(c as CloseParenth){
 					ID idChi = c.child;
-					Int val = c.value;
-
-					Atom a = changeType(c.atomof,val,parent,idChi);
+					//value set by child
+					Atom a = changeType(c.atomof,(Int)0,parent,idChi);
+					p.value = value;
+					ew[pSlot] = p;
 					ew[0] = a;
 				}
 			}
