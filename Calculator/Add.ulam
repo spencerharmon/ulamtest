@@ -41,6 +41,18 @@ element Add : Agent{
 		op.child = c;
 		return op;
 	}
+	Void overwrite(Int val, ID p, ID c, SiteNum slot){
+		Atom a = ew[slot];
+		if(a as Add){
+			Add ad;
+			ad.value = val;
+			ad.parent = p;
+			ad.child = c;
+
+			ew[slot] = ad.atomof;
+			ew[0] = ad.atomof;
+		}
+	}
 	Void overwrite(Int val, ID p, ID c, SiteNum cSlot, SiteNum pSlot){
 		Atom a = ew[cSlot];
 		if(a as Add){
@@ -51,6 +63,7 @@ element Add : Agent{
 
 			ew[cSlot] = ad.atomof;
 			ew[pSlot] = ad.atomof;
+			ew[0] = ad.atomof;
 		}
 	}
 

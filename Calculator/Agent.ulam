@@ -72,21 +72,22 @@ quark Agent{
 	virtual Int typeFunction(Atom a);
 	virtual Int typeFunction(Atom c, Atom p);
 	virtual Void overwrite(Int val, ID p, ID c, SiteNum cSlot, SiteNum pSlot);
+	virtual Void overwrite(Int val, ID p, ID c, SiteNum slot);
 	virtual Atom evaluateParenthesis(ID c, ID p);
-	Void operateOnChild(Atom c,SiteNum cSlot,SiteNum pSlot){
+	Void operateOnChild(Atom c,SiteNum cSlot){
 		Int val = typeFunction(c);
 		if(c as Agent){
-			overwrite(val,parent,c.child,cSlot,pSlot);
+			overwrite(val,parent,c.child,cSlot);
 		}
 	}
-	Void operateOnParent(Atom p,SiteNum cSlot,SiteNum pSlot){
+	Void operateOnParent(Atom p,SiteNum pSlot){
 		Int val = typeFunction(p);
 		if(p as Agent){
-			overwrite(val,p.parent,child,cSlot,pSlot);
+			overwrite(val,p.parent,child,pSlot);
 		}
 	}
 	Void operateOnBoth(Atom c, Atom p,SiteNum cSlot,SiteNum pSlot){
-		Int val = typeFunction(p);
+		Int val = typeFunction(c,p);
 		if(c as Agent){
 			if(p as Agent){
 				overwrite(val,p.parent,c.child,cSlot,pSlot);
@@ -107,21 +108,22 @@ quark Agent{
 						ew[pSlot] = a;
 						ew[0] = a;
 					}else{
-						operateOnChild(c,cSlot,pSlot);
+						//don't operate on openparenth
+						operateOnChild(c,pSlot);
 					}
 				}else{
 					operateOnBoth(c,p,cSlot,pSlot);
 				}
 			}else{
 				//can see child only
-				operateOnChild(c,cSlot,pSlot);
+				operateOnChild(c,pSlot);
 			}
 		}else if(pSlot > 0){
 			//parent only
-			operateOnParent(p,cSlot,pSlot);
+			operateOnParent(p,pSlot);
 		}else{
 			//neither
-			diffuse();
+			//diffuse();
 		}
 	}
 	Atom changeType(Atom a, Int val, ID p, ID c){

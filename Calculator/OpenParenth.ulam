@@ -24,6 +24,9 @@ element OpenParenth : Agent{
 	Void overwrite(Int i, ID p, ID c, SiteNum s1, SiteNum s2){
 		Bool virt = false;
 	}
+	Void overwrite(Int i, ID p, ID c, SiteNum s1){
+		Bool virt = false;
+	}
 	Atom evaluateParenthesis(ID n, ID a){
 		Empty e;
 		return e;
@@ -33,7 +36,6 @@ element OpenParenth : Agent{
 			if(cSlot > 0){
 				Atom a = ew[cSlot];
 				if(a as CloseParenth){
-					value = a.value;
 					du.print(value);
 				}
 			}
