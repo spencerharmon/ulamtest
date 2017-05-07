@@ -1,0 +1,37 @@
+/**
+	\author Spencer Harmon
+	\license lgpl
+	\symbol Da
+	\color #f22
+	\symmetries all
+	
+ */
+element Data : Agent{
+	Int value;
+
+
+	typedef EventWindow.SiteNum SiteNum;
+
+	Int typeFunction(Atom a){
+		Int ret;
+		return ret;
+	}
+	Int typeFunction(Atom a, Atom b){
+		Int notvirtual;
+		return notvirtual;
+	}
+	Atom evaluateParenthesis(ID n, ID a){
+		Empty e;
+		return e;
+	}
+	Void overwrite(Int i, ID p, ID c, SiteNum s1, SiteNum s2){
+		Bool virt = false;
+	}
+	Void overwrite(Int i, ID p, ID c, SiteNum s1){
+		Bool virt = false;
+	}
+
+	Void behave(){
+		clusterDiffuse();
+	}
+}

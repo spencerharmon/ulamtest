@@ -46,6 +46,70 @@ element Emitter{
 		return aID;
 	}
 
+	ID subtract(SiteNum slot, ID id, Int val){
+		Subtract s;
+		s.value = val;
+		s.parent = id;
+
+		ID sID = genID();
+		s.child = sID;
+		
+		ew[slot] = s;
+
+		return sID;
+	}
+
+	ID function(SiteNum slot, ID id, Int val){
+		Function f;
+		f.value = val;
+		f.parent = id;
+
+		ID fID = genID();
+		f.child = fID;
+		
+		ew[slot] = f;
+
+		return fID;
+	}
+	
+	ID data(SiteNum slot, ID id, Int val){
+		Data d;
+		d.value = val;
+		d.parent = id;
+
+		ID dID = genID();
+		d.child = dID;
+		
+		ew[slot] = d;
+
+		return dID;
+	}
+	
+
+	Void subtracttest(){
+
+		ID nextid;
+		SiteNum slot = cl.emptySlotNearMe();
+		while(slot > 0){
+			++agentIndex;
+			if(agentIndex == 1u){
+				nextid = openParenth(slot, nextid);
+			}else if(agentIndex == 2u){
+				nextid = function(slot, nextid, 2);
+			}else if(agentIndex == 3u){
+				nextid = data(slot, nextid, 4);
+			}else if(agentIndex == 4u){
+				nextid = data(slot, nextid, 3);
+			}else if(agentIndex == 5u){
+				nextid = closeParenth(slot, nextid);
+			}else{
+				return;
+			}
+
+			slot = cl.emptySlotNearMe();
+		}
+		idStor = nextid;
+	}
 	Void spawnEquation(){
 		ID nextid;
 		SiteNum slot = cl.emptySlotNearMe();
@@ -54,16 +118,26 @@ element Emitter{
 			if(agentIndex == 1u){
 				nextid = openParenth(slot, nextid);
 			}else if(agentIndex == 2u){
-				nextid = openParenth(slot, nextid);
+				//2 is for subtract
+				Int i = 2;
+				nextid = function(slot, nextid, i);
 			}else if(agentIndex == 3u){
-				nextid = add(slot, nextid, 2);
-			}else if (agentIndex == 4u){
-				nextid = add(slot, nextid, 3);
-			}else if (agentIndex == 5u){
-				nextid = add(slot, nextid, 3);
-			}else if(agentIndex == 6u){
+				nextid = openParenth(slot, nextid);
+			}else if(agentIndex == 4u){
+				//1 is for add
+				Int i = 1;
+				nextid = function(slot, nextid, i);
+			}else if(agentIndex == 5u){
+				nextid = data(slot, nextid, 2);
+			}else if (agentIndex == 6u){
+				nextid = data(slot, nextid, 3);
+			}else if (agentIndex == 7u){
+				nextid = data(slot, nextid, 3);
+			}else if(agentIndex == 8u){
 				nextid = closeParenth(slot, nextid);
-			}else if(agentIndex == 7u){
+			}else if(agentIndex == 9u){
+				nextid = data(slot, nextid, 2);
+			}else if(agentIndex == 10u){
 				nextid = closeParenth(slot, nextid);
 			}else{
 				return;

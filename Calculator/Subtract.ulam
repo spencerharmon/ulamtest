@@ -1,20 +1,20 @@
 /**
 	\author Spencer Harmon
 	\license lgpl
-	\symbol Ad
+	\symbol Sb
 	\symmetries all
-	\color #b52
+	\color #f52
 	
  */
-element Add : Agent{
+element Subtract : Agent{
 	Int value;
 
 	typedef EventWindow.SiteNum SiteNum;
 	
 	Int typeFunction(Atom c){
 		Int ret;
-		if(c as Add){
-			ret = value + c.value;
+		if(c as Subtract){
+			ret = value - c.value;
 		}
 		return ret;
 	}
@@ -27,14 +27,27 @@ element Add : Agent{
 	}
 	Void overwrite(Int val, ID p, ID c, SiteNum slot){
 		Atom a = ew[slot];
-		if(a as Add){
-			Add ad;
-			ad.value = val;
-			ad.parent = p;
-			ad.child = c;
+		if(a as Subtract){
+			Subtract s;
+			s.value = val;
+			s.parent = p;
+			s.child = c;
 
-			ew[slot] = ad.atomof;
-			ew[0] = ad.atomof;
+			ew[slot] = s.atomof;
+			ew[0] = s.atomof;
+		}
+	}
+	Void overwrite(Int val, ID p, ID c, SiteNum cSlot, SiteNum pSlot){
+		Atom a = ew[cSlot];
+		if(a as Subtract){
+			Subtract s;
+			s.value = val;
+			s.parent = p;
+			s.child = c;
+
+			ew[cSlot] = s.atomof;
+			ew[pSlot] = s.atomof;
+			ew[0] = s.atomof;
 		}
 	}
 

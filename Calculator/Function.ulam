@@ -1,0 +1,91 @@
+/**
+	\author Spencer Harmon
+	\license lgpl
+	\symbol Fn
+	\color #82d
+	\symmetries all
+	
+ */
+element Function : Agent{
+
+	Int value;
+
+	typedef EventWindow.SiteNum SiteNum;
+
+	Int typeFunction(Atom a){
+		Int ret;
+		return ret;
+	}
+	Int typeFunction(Atom a, Atom b){
+		Int notvirtual;
+		return notvirtual;
+	}
+	Atom evaluateParenthesis(ID n, ID a){
+		Empty e;
+		return e;
+	}
+	Void overwrite(Int i, ID p, ID c, SiteNum s1, SiteNum s2){
+		Bool virt = false;
+	}
+	Void overwrite(Int i, ID p, ID c, SiteNum s1){
+		Bool virt = false;
+	}
+	Void propogateType(SiteNum cSlot){
+		SiteNum slot = cl.emptySlotNearMe();
+		Atom c = ew[cSlot];
+		if(value == 1){
+			if(c as Data){
+				Add ad;
+				ad.parent = parent;
+				ad.child = child;
+
+				ad.value = c.value;
+				
+				Function fn;
+				fn.value = value;
+				fn.child = c.child;
+				fn.parent = c.parent;
+
+				ew[0] = fn;
+				ew[cSlot] = ad;
+			}else if(c as CloseParenth){
+				CloseParenth cp;
+				cp.parent = parent;
+				cp.child = c.child;
+				ew[cSlot] = cp;
+				die();
+			}
+		}
+		if(value == 2){
+			if(c as Data){
+				Subtract sb;
+				sb.parent = parent;
+				sb.child = child;
+
+				sb.value = c.value;
+				
+				Function fn;
+				fn.value = value;
+				fn.child = c.child;
+				fn.parent = c.parent;
+
+				ew[0] = fn;
+				ew[cSlot] = sb;
+			}else if(c as CloseParenth){
+				CloseParenth cp;
+				cp.parent = parent;
+				cp.child = c.child;
+				ew[cSlot] = cp;
+				die();
+			}
+		}
+	}
+
+	Void behave(){
+		SiteNum cSlot = findChild();
+		if(cSlot > 0){
+			propogateType(cSlot);
+		}
+		clusterDiffuse();
+	}
+}

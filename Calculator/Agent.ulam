@@ -2,6 +2,7 @@ quark Agent{
 	EventWindow ew;
 	AtomUtils au;
 	Cluster cl;
+	DebugUtils du;
 
 	typedef Unsigned(16) ID;
 	typedef EventWindow.SiteNum SiteNum;
@@ -69,8 +70,8 @@ quark Agent{
 		return 0;
 	}
 	virtual Int typeFunction(Atom a);
-	virtual Int typeFunction(Atom c, Atom p);
-	virtual Void overwrite(Int val, ID p, ID c, SiteNum cSlot, SiteNum pSlot);
+//	virtual Int typeFunction(Atom c, Atom p);
+//	virtual Void overwrite(Int val, ID p, ID c, SiteNum cSlot, SiteNum pSlot);
 	virtual Void overwrite(Int val, ID p, ID c, SiteNum slot);
 	virtual Atom evaluateParenthesis(ID c, ID p);
 	Void operateOnChild(Atom c,SiteNum cSlot){
@@ -86,10 +87,10 @@ quark Agent{
 		}
 	}
 	Void operateOnBoth(Atom c, Atom p,SiteNum cSlot,SiteNum pSlot){
-		Int val = typeFunction(c,p);
+	//	Int val = typeFunction(c,p);
 		if(c as Agent){
 			if(p as Agent){
-				overwrite(val,p.parent,c.child,cSlot,pSlot);
+			//	overwrite(val,p.parent,c.child,cSlot,pSlot);
 			}
 		}
 	}
@@ -103,18 +104,20 @@ quark Agent{
 				//can see both
 				if(p as OpenParenth){
 					if(c as CloseParenth){
-						Atom a = evaluateParenthesis(c.child,p.parent);
+						Atom a = evaluateParenthesis(p.child,p.parent);
 						ew[pSlot] = a;
+						
 						CloseParenth cp;
-						cp.parent = parent;
 						cp.child = c.child;
+						cp.parent = parent;
+						ew[cSlot] = cp;
 						ew[0] = cp;
 					}else{
 						//don't operate on openparenth
 						operateOnChild(c,cSlot);
 					}
 				}else{
-					operateOnBoth(c,p,cSlot,pSlot);
+					//operateOnBoth(c,p,cSlot,pSlot);
 				}
 			}else{
 				//can see child only
@@ -122,7 +125,7 @@ quark Agent{
 			}
 		}else if(pSlot > 0){
 			//parent only
-			operateOnParent(p,pSlot);
+			//operateOnParent(p,pSlot);
 		}else{
 			//neither
 			diffuse();
@@ -150,5 +153,9 @@ quark Agent{
 			Atom a;
 			return a;
 		}
+	}
+	Void die(){
+		Empty e;
+		ew[0] = e;
 	}
 }

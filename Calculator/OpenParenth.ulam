@@ -7,7 +7,6 @@
 	
  */
 element OpenParenth : Agent{
-	DebugUtils du;
 
 	typedef Agent.ID ID;
 	typedef EventWindow.SiteNum SiteNum;
@@ -46,15 +45,15 @@ element OpenParenth : Agent{
 		Atom p = ew[pSlot];
 
 		if(cSlot > 0 && pSlot > 0){
-			if(p as OpenParenth){
-				if(c as CloseParenth){
-					ID idChi = c.child;
-					//value set by child
-					Atom a = changeType(c.atomof,(Int)0,parent,idChi);
-					p.value = value;
-					ew[pSlot] = p;
-					ew[0] = a;
-				}
+			if(c as CloseParenth){
+				ID idChi = c.child;
+				//value set by child
+				Data d;
+				d.value = value;
+				d.parent = parent;
+				d.child = c.child;
+				ew[cSlot] = d;
+			
 			}
 		}
 	}
