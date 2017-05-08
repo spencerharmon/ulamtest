@@ -11,6 +11,13 @@ element Add : Agent{
 
 	typedef EventWindow.SiteNum SiteNum;
 	
+	Atom me(){
+		Add a;
+		a.parent = parent;
+		a.child = child;
+		a.value = value;
+		return a.atomof;
+	}
 	Int typeFunction(Atom c){
 		Int ret;
 		if(c as Add){

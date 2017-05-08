@@ -12,7 +12,14 @@ element OpenParenth : Agent{
 	typedef EventWindow.SiteNum SiteNum;
 
 	Int value;
-	
+
+	Atom me(){
+		OpenParenth o;
+		o.parent = parent;
+		o.child = child;
+		o.value = value;
+		return o.atomof;
+	}	
 	Int typeFunction(Atom a){
 		Int notvirtual;
 		return notvirtual;
@@ -47,7 +54,7 @@ element OpenParenth : Agent{
 		if(cSlot > 0 && pSlot > 0){
 			if(c as CloseParenth){
 				ID idChi = c.child;
-				//value set by child
+				//value set by child in default agent collapse behavior
 				Data d;
 				d.value = value;
 				d.parent = parent;

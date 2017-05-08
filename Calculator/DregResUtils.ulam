@@ -1,4 +1,4 @@
-quark Cluster{
+quark DregResUtils{
 	EventWindow ew;
 	AtomUtils au;
 
@@ -6,55 +6,54 @@ quark Cluster{
 	typedef WindowScanner.Category Category;
 	typedef AtomUtils.Type ElementType;
 
-	SiteNum emptySlotNearMe(){
+	SiteNum resSlotNearMe(){
 		Unsigned radius = ew.getRadius();
 		SiteVisitorByType sv;
 		WindowScanner ws;
 		
 		ws.resetCategories();
-		Category cEmpty = ws.allocateCategory();
+		Category cRes = ws.allocateCategory();
+		Res r;
+		ElementType tRes = au.getValidType(r);
 		
-		ElementType tEmpty = au.getEmptyType();
-		
-		sv.setType(cEmpty,tEmpty);
+		sv.setType(cRes,tRes);
 
 		//only scan next radius if no hits
 		ws.scan(sv,1,1);
-		if(ws.getHits(cEmpty)==(Unsigned)0 && radius > 1u){
+		if(ws.getHits(cRes)==(Unsigned)0 && radius > 1u){
 			ws.scan(sv,2,2);
-			if(ws.getHits(cEmpty)==(Unsigned)0 && radius > 2u){
+			if(ws.getHits(cRes)==(Unsigned)0 && radius > 2u){
 				ws.scan(sv,3,3);
-				if(ws.getHits(cEmpty)==(Unsigned)0 && radius > 3u){
+				if(ws.getHits(cRes)==(Unsigned)0 && radius > 3u){
 					ws.scan(sv,4,4);
-					if(ws.getHits(cEmpty) <= (Unsigned)40){
-						return ws.getSiteNum(cEmpty);
+					if(ws.getSiteNum(cRes) <= (Unsigned)40){
+						return ws.getSiteNum(cRes);
 					}
 					else{
 						return 0;
 					}
 				}
-				if(ws.getHits(cEmpty) <= (Unsigned)40){
-					return ws.getSiteNum(cEmpty);
+				if(ws.getSiteNum(cRes) <= (Unsigned)40){
+					return ws.getSiteNum(cRes);
 				}
 				else{
 					return 0;
 				}
 			}
-			if(ws.getHits(cEmpty) <= (Unsigned)40){
-				return ws.getSiteNum(cEmpty);
+			if(ws.getSiteNum(cRes) <= (Unsigned)40){
+				return ws.getSiteNum(cRes);
 			}
 			else{
 				return 0;
 			}
 		}
-		if(ws.getHits(cEmpty) <= (Unsigned)40){
-			return ws.getSiteNum(cEmpty);
+		if(ws.getSiteNum(cRes) <= (Unsigned)40){
+			return ws.getSiteNum(cRes);
 		}else{
 			return 0;
 		}
 	}
-
-	SiteNum findEmptySlotNear(SiteNum slot){
+	SiteNum findResNear(SiteNum slot){
 		OutOfBounds ob;
 		C2D tprime;
 		C2D t = ew.getCoord(slot);
@@ -69,7 +68,7 @@ quark Cluster{
 					if(!ob.isOOB(tprime)){
 						target = ew.getSiteNumber(tprime);
 						Atom a = ew[target];
-						if(a as Empty){
+						if(a as Res){
 							return target;
 						}
 					}

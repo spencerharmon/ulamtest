@@ -2,12 +2,14 @@ element Emitter{
 	Random r;
 	Cluster cl;
 	EventWindow ew;
+	DregResUtils dru;
 	
 	typedef Agent.ID ID;
 	typedef EventWindow.SiteNum SiteNum;
 
 	ID idStor;
 	Unsigned agentIndex;
+	Bool finished;
 
 	ID openParenth(SiteNum slot, ID id){
 		OpenParenth a;
@@ -112,38 +114,49 @@ element Emitter{
 	}
 	Void spawnEquation(){
 		ID nextid;
-		SiteNum slot = cl.emptySlotNearMe();
+		SiteNum slot = dru.resSlotNearMe();
 		while(slot > 0){
 			++agentIndex;
 			if(agentIndex == 1u){
 				nextid = openParenth(slot, nextid);
 			}else if(agentIndex == 2u){
+				//3 is for divide
+				Int i = 3;
+				nextid = function(slot, nextid, i);
+			}else if(agentIndex == 3u){
+				nextid = data(slot, nextid, 600);
+			}else if(agentIndex == 4u){
+				nextid = openParenth(slot, nextid);
+			}else if(agentIndex == 5u){
 				//2 is for subtract
 				Int i = 2;
 				nextid = function(slot, nextid, i);
-			}else if(agentIndex == 3u){
+			}else if(agentIndex == 6u){
 				nextid = openParenth(slot, nextid);
-			}else if(agentIndex == 4u){
+			}else if(agentIndex == 7u){
 				//1 is for add
 				Int i = 1;
 				nextid = function(slot, nextid, i);
-			}else if(agentIndex == 5u){
-				nextid = data(slot, nextid, 2);
-			}else if (agentIndex == 6u){
-				nextid = data(slot, nextid, 3);
-			}else if (agentIndex == 7u){
-				nextid = data(slot, nextid, 3);
 			}else if(agentIndex == 8u){
-				nextid = closeParenth(slot, nextid);
-			}else if(agentIndex == 9u){
 				nextid = data(slot, nextid, 2);
-			}else if(agentIndex == 10u){
+			}else if (agentIndex == 9u){
+				nextid = data(slot, nextid, 3);
+			}else if (agentIndex == 10u){
+				nextid = data(slot, nextid, 3);
+			}else if(agentIndex == 11u){
+				nextid = closeParenth(slot, nextid);
+			}else if(agentIndex == 12u){
+				nextid = data(slot, nextid, 2);
+			}else if(agentIndex == 13u){
+				nextid = closeParenth(slot, nextid);
+			}else if(agentIndex == 14u){
 				nextid = closeParenth(slot, nextid);
 			}else{
+				finished = true;
 				return;
 			}
 
-			slot = cl.emptySlotNearMe();
+			slot = dru.resSlotNearMe();
 		}
 		idStor = nextid;
 	}

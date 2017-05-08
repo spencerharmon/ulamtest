@@ -12,6 +12,13 @@ element Data : Agent{
 
 	typedef EventWindow.SiteNum SiteNum;
 
+	Atom me(){
+		Data d;
+		d.parent = parent;
+		d.child = child;
+		d.value = value;
+		return d.atomof;
+	}
 	Int typeFunction(Atom a){
 		Int ret;
 		return ret;

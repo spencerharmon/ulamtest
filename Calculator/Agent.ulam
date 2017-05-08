@@ -3,6 +3,7 @@ quark Agent{
 	AtomUtils au;
 	Cluster cl;
 	DebugUtils du;
+	DregResUtils dru;
 
 	typedef Unsigned(16) ID;
 	typedef EventWindow.SiteNum SiteNum;
@@ -32,10 +33,29 @@ quark Agent{
 				}
 			}
 		}
-		
-		if(familySeen == 2u){
-			diffuse();
+		if(familySeen != 2u || parent == 0 && familySeen == 1u){
+			//diffuse();
+			copySelf();
 		}
+		agentCluster();
+
+	}
+	virtual Atom me();
+	Void copySelf(){
+			SiteNum slot = dru.resSlotNearMe();
+			Atom a = me();
+			ew[slot] = a;
+	}
+	Void agentCluster(){
+		for(SiteNum i = 1; i < 41; ++i){
+			Atom a = ew[i];
+			if(a as Agent){
+				SiteNum slot = cl.emptySlotNearMe();
+				ew.swap(slot,i);
+			}
+		}
+		SiteNum slot = cl.emptySlotNearMe();
+		ew.swap(0,slot);
 	}
 	Void diffuse(){
 		SiteNum slot = cl.emptySlotNearMe();
@@ -121,14 +141,17 @@ quark Agent{
 				}
 			}else{
 				//can see child only
-				operateOnChild(c,cSlot);
+				//testing only operate if parent is closeparenth
+				//this should force left-to-right operation, but
+				//sacrifice a higher possible rate of operation.
+				//operateOnChild(c,cSlot);
 			}
 		}else if(pSlot > 0){
 			//parent only
 			//operateOnParent(p,pSlot);
 		}else{
 			//neither
-			diffuse();
+			//diffuse();
 		}
 	}
 	Atom changeType(Atom a, Int val, ID p, ID c){
@@ -155,7 +178,7 @@ quark Agent{
 		}
 	}
 	Void die(){
-		Empty e;
-		ew[0] = e;
+		Res r;
+		ew[0] = r;
 	}
 }

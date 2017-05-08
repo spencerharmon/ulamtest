@@ -12,6 +12,13 @@ element Function : Agent{
 
 	typedef EventWindow.SiteNum SiteNum;
 
+	Atom me(){
+		Function f;
+		f.parent = parent;
+		f.child = child;
+		f.value = value;
+		return f.atomof;
+	}
 	Int typeFunction(Atom a){
 		Int ret;
 		return ret;
@@ -55,8 +62,7 @@ element Function : Agent{
 				ew[cSlot] = cp;
 				die();
 			}
-		}
-		if(value == 2){
+		}else if(value == 2){
 			if(c as Data){
 				Subtract sb;
 				sb.parent = parent;
@@ -78,9 +84,30 @@ element Function : Agent{
 				ew[cSlot] = cp;
 				die();
 			}
+		}else if(value == 3){
+			if(c as Data){
+				Divide dv;
+				dv.parent = parent;
+				dv.child = child;
+
+				dv.value = c.value;
+				
+				Function fn;
+				fn.value = value;
+				fn.child = c.child;
+				fn.parent = c.parent;
+
+				ew[0] = fn;
+				ew[cSlot] = dv;
+			}else if(c as CloseParenth){
+				CloseParenth cp;
+				cp.parent = parent;
+				cp.child = c.child;
+				ew[cSlot] = cp;
+				die();
+			}
 		}
 	}
-
 	Void behave(){
 		SiteNum cSlot = findChild();
 		if(cSlot > 0){

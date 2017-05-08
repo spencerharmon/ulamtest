@@ -1,27 +1,27 @@
 /**
 	\author Spencer Harmon
 	\license lgpl
-	\symbol Sb
+	\symbol Dv
 	\symmetries all
-	\color #f52
+	\color #052
 	
  */
-element Subtract : Agent{
+element Divide : Agent{
 	Int value;
 
 	typedef EventWindow.SiteNum SiteNum;
-	
+
 	Atom me(){
-		Subtract s;
-		s.parent = parent;
-		s.child = child;
-		s.value = value;
-		return s.atomof;
+		Divide d;
+		d.parent = parent;
+		d.child = child;
+		d.value = value;
+		return d.atomof;
 	}	
 	Int typeFunction(Atom c){
 		Int ret;
-		if(c as Subtract){
-			ret = value - c.value;
+		if(c as Divide){
+			ret = value / c.value;
 		}
 		return ret;
 	}
@@ -34,27 +34,27 @@ element Subtract : Agent{
 	}
 	Void overwrite(Int val, ID p, ID c, SiteNum slot){
 		Atom a = ew[slot];
-		if(a as Subtract){
-			Subtract s;
-			s.value = val;
-			s.parent = p;
-			s.child = c;
+		if(a as Divide){
+			Divide d;
+			d.value = val;
+			d.parent = p;
+			d.child = c;
 
-			ew[slot] = s.atomof;
-			ew[0] = s.atomof;
+			ew[slot] = d.atomof;
+			ew[0] = d.atomof;
 		}
 	}
 	Void overwrite(Int val, ID p, ID c, SiteNum cSlot, SiteNum pSlot){
 		Atom a = ew[cSlot];
-		if(a as Subtract){
-			Subtract s;
-			s.value = val;
-			s.parent = p;
-			s.child = c;
+		if(a as Divide){
+			Divide d;
+			d.value = val;
+			d.parent = p;
+			d.child = c;
 
-			ew[cSlot] = s.atomof;
-			ew[pSlot] = s.atomof;
-			ew[0] = s.atomof;
+			ew[cSlot] = d.atomof;
+			ew[pSlot] = d.atomof;
+			ew[0] = d.atomof;
 		}
 	}
 

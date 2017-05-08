@@ -10,6 +10,13 @@ element CloseParenth : Agent{
 
 	typedef EventWindow.SiteNum SiteNum;
 
+	Atom me(){
+		CloseParenth c;
+		c.parent;
+		c.child;
+		c.value;
+		return c.atomof;
+	}
 	Int typeFunction(Atom a){
 		Int ret;
 		return ret;
