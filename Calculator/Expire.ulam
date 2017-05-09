@@ -1,22 +1,20 @@
 /**
 	\author Spencer Harmon
 	\license lgpl
-	\symbol Da
-	\color #f22
+	\symbol Ex
 	\symmetries all
-	
+	\color #333
  */
-element Data : Agent{
+element Expire : Agent{
 	Int value;
-
 
 	typedef EventWindow.SiteNum SiteNum;
 
 	Bool noCopiesNearMe(){
 		for(SiteNum i = 1; i < 41; ++i){
 			Atom a = ew[i];
-			if(a as Data){
-				if(a.child == child && a.parent == parent && a.value == value){
+			if(a as Expire){
+				if(a.child == child && a.parent == parent){
 					return false;
 				}
 			}
@@ -46,6 +44,18 @@ element Data : Agent{
 	}
 
 	Void behave(){
+		Bool expired;
+		for(SiteNum i; i < 40; ++i){
+			Atom a = ew[i];
+			if(a as Agent){
+				if(a.parent == parent && a.child == child){
+					ew[i] = self;
+				}
+			}
+		}
+		if (r.oneIn(100)){
+			die();
+		}
 		clusterDiffuse();
 	}
 }

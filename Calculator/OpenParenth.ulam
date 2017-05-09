@@ -13,12 +13,19 @@ element OpenParenth : Agent{
 
 	Int value;
 
+	Bool noCopiesNearMe(){
+		for(SiteNum i = 1; i < 41; ++i){
+			Atom a = ew[i];
+			if(a as OpenParenth){
+				if(a.child == child && a.parent == parent && a.value == value){
+					return false;
+				}
+			}
+		}
+		return true;
+	}
 	Atom me(){
-		OpenParenth o;
-		o.parent = parent;
-		o.child = child;
-		o.value = value;
-		return o.atomof;
+		return self;
 	}	
 	Int typeFunction(Atom a){
 		Int notvirtual;

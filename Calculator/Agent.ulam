@@ -1,6 +1,7 @@
 quark Agent{
 	EventWindow ew;
 	AtomUtils au;
+	Random r;
 	Cluster cl;
 	DebugUtils du;
 	DregResUtils dru;
@@ -33,13 +34,23 @@ quark Agent{
 				}
 			}
 		}
-		if(familySeen != 2u || parent == 0 && familySeen == 1u){
-			//diffuse();
-			copySelf();
+		if(familySeen == 2u){
+			if(noCopiesNearMe()){
+				copySelf();
+			}
+		}else if(parent == 0 && familySeen == 1u){
+			if(noCopiesNearMe()){
+				copySelf();
+			}
+		}else{
+			if(noCopiesNearMe()){
+				copySelf();
+			}
 		}
 		agentCluster();
 
 	}
+	virtual Bool noCopiesNearMe();
 	virtual Atom me();
 	Void copySelf(){
 			SiteNum slot = dru.resSlotNearMe();
@@ -114,6 +125,12 @@ quark Agent{
 			}
 		}
 	}
+	Atom expire(){
+		Expire e;
+		e.parent = parent;
+		e.child = child;
+		return e;
+	}
 	virtual Void collapse(SiteNum cSlot, SiteNum pSlot){
 		Atom p = ew[pSlot];
 		Atom c = ew[cSlot];
@@ -131,10 +148,14 @@ quark Agent{
 						cp.child = c.child;
 						cp.parent = parent;
 						ew[cSlot] = cp;
-						ew[0] = cp;
+
+						Atom e = expire();
+						ew[0] = e;
 					}else{
 						//don't operate on openparenth
 						operateOnChild(c,cSlot);
+						Atom e = expire();
+						ew[0] = e;
 					}
 				}else{
 					//operateOnBoth(c,p,cSlot,pSlot);
@@ -163,7 +184,6 @@ quark Agent{
 			n.child = c;
 			return n;
 		}else if(n as CloseParenth){
-			n.value = val;
 			n.parent = p;
 			n.child = c;
 			return n;

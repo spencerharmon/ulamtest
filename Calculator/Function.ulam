@@ -12,12 +12,19 @@ element Function : Agent{
 
 	typedef EventWindow.SiteNum SiteNum;
 
+	Bool noCopiesNearMe(){
+		for(SiteNum i = 1; i < 41; ++i){
+			Atom a = ew[i];
+			if(a as Function){
+				if(a.child == child && a.parent == parent && a.value == value){
+					return false;
+				}
+			}
+		}
+		return true;
+	}
 	Atom me(){
-		Function f;
-		f.parent = parent;
-		f.child = child;
-		f.value = value;
-		return f.atomof;
+		return self;
 	}
 	Int typeFunction(Atom a){
 		Int ret;
@@ -37,6 +44,18 @@ element Function : Agent{
 	Void overwrite(Int i, ID p, ID c, SiteNum s1){
 		Bool virt = false;
 	}
+	Void expireCopy(){
+		//Function atoms cannot expire themselves when propogating since they need to preserve the parent and update themselves and the child.
+		for(SiteNum i; i < 41; ++i){
+			Atom a = ew[i];
+			if(a as Function){
+				if(a.parent == parent && a.child == child){
+					Atom e = expire();
+					ew[i] = e;
+				}
+			}
+		}
+	}
 	Void propogateType(SiteNum cSlot){
 		SiteNum slot = cl.emptySlotNearMe();
 		Atom c = ew[cSlot];
@@ -55,12 +74,13 @@ element Function : Agent{
 
 				ew[0] = fn;
 				ew[cSlot] = ad;
+				expireCopy();
 			}else if(c as CloseParenth){
 				CloseParenth cp;
 				cp.parent = parent;
 				cp.child = c.child;
 				ew[cSlot] = cp;
-				die();
+				expire();
 			}
 		}else if(value == 2){
 			if(c as Data){
@@ -77,12 +97,13 @@ element Function : Agent{
 
 				ew[0] = fn;
 				ew[cSlot] = sb;
+				expireCopy();
 			}else if(c as CloseParenth){
 				CloseParenth cp;
 				cp.parent = parent;
 				cp.child = c.child;
 				ew[cSlot] = cp;
-				die();
+				expire();
 			}
 		}else if(value == 3){
 			if(c as Data){
@@ -99,12 +120,13 @@ element Function : Agent{
 
 				ew[0] = fn;
 				ew[cSlot] = dv;
+				expireCopy();
 			}else if(c as CloseParenth){
 				CloseParenth cp;
 				cp.parent = parent;
 				cp.child = c.child;
 				ew[cSlot] = cp;
-				die();
+				expire();
 			}
 		}
 	}

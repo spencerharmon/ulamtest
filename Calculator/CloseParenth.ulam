@@ -6,16 +6,22 @@
 	
  */
 element CloseParenth : Agent{
-	Int value;
 
 	typedef EventWindow.SiteNum SiteNum;
 
+	Bool noCopiesNearMe(){
+		for(SiteNum i = 1; i < 41; ++i){
+			Atom a = ew[i];
+			if(a as CloseParenth){
+				if(a.child == child && a.parent == parent){
+					return false;
+				}
+			}
+		}
+		return true;
+	}
 	Atom me(){
-		CloseParenth c;
-		c.parent;
-		c.child;
-		c.value;
-		return c.atomof;
+		return self;
 	}
 	Int typeFunction(Atom a){
 		Int ret;

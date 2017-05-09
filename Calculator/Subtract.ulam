@@ -11,12 +11,19 @@ element Subtract : Agent{
 
 	typedef EventWindow.SiteNum SiteNum;
 	
+	Bool noCopiesNearMe(){
+		for(SiteNum i = 1; i < 41; ++i){
+			Atom a = ew[i];
+			if(a as Subtract){
+				if(a.child == child && a.parent == parent && a.value == value){
+					return false;
+				}
+			}
+		}
+		return true;
+	}
 	Atom me(){
-		Subtract s;
-		s.parent = parent;
-		s.child = child;
-		s.value = value;
-		return s.atomof;
+		return self;
 	}	
 	Int typeFunction(Atom c){
 		Int ret;
@@ -41,7 +48,6 @@ element Subtract : Agent{
 			s.child = c;
 
 			ew[slot] = s.atomof;
-			ew[0] = s.atomof;
 		}
 	}
 	Void overwrite(Int val, ID p, ID c, SiteNum cSlot, SiteNum pSlot){
