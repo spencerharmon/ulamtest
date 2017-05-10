@@ -67,7 +67,8 @@ element Subtract : Agent{
 	Void behave(){
 		SiteNum cSlot = findChild();
 		SiteNum pSlot = findParent();
-		collapse(cSlot,pSlot);
-		clusterDiffuse();
+		if(!collapse(cSlot,pSlot)){
+			clusterDiffuse();
+		}
 	}
 }

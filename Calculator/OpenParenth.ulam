@@ -45,7 +45,8 @@ element OpenParenth : Agent{
 		Empty e;
 		return e;
 	}
-	Void collapse(SiteNum cSlot, SiteNum pSlot){
+	Bool collapse(SiteNum cSlot, SiteNum pSlot){
+		Bool collapsed = false;
 		if(parent == 0){
 			if(cSlot > 0){
 				Atom a = ew[cSlot];
@@ -60,6 +61,7 @@ element OpenParenth : Agent{
 
 		if(cSlot > 0 && pSlot > 0){
 			if(c as CloseParenth){
+				collapsed = true;
 				ID idChi = c.child;
 				//value set by child in default agent collapse behavior
 				Data d;
@@ -67,14 +69,16 @@ element OpenParenth : Agent{
 				d.parent = parent;
 				d.child = c.child;
 				ew[cSlot] = d;
-			
+				ew[0] = d;
 			}
 		}
+		return collapsed;
 	}
 	Void behave(){
 		SiteNum cSlot = findChild();
 		SiteNum pSlot = findParent();
-		collapse(cSlot,pSlot);
-		clusterDiffuse();
+		if(!collapse(cSlot,pSlot)){
+			clusterDiffuse();
+		}
 	}
 }

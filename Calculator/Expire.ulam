@@ -42,20 +42,24 @@ element Expire : Agent{
 	Void overwrite(Int i, ID p, ID c, SiteNum s1){
 		Bool virt = false;
 	}
-
-	Void behave(){
-		Bool expired;
-		for(SiteNum i; i < 40; ++i){
+	Bool exp(){
+		Bool copied = false;
+		for(SiteNum i = 1; i < 41; ++i){
 			Atom a = ew[i];
 			if(a as Agent){
-				if(a.parent == parent && a.child == child){
+				if(a.parent == parent || a.child == child){
 					ew[i] = self;
+					copied = true;
 				}
 			}
 		}
-		if (r.oneIn(100)){
+		return copied;
+	}
+	Void behave(){
+		if(!exp()){
+			agentCluster();
+		}else if(r.oneIn(5)){
 			die();
 		}
-		clusterDiffuse();
 	}
 }

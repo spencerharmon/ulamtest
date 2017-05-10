@@ -46,17 +46,26 @@ element Function : Agent{
 	}
 	Void expireCopy(){
 		//Function atoms cannot expire themselves when propogating since they need to preserve the parent and update themselves and the child.
-		for(SiteNum i; i < 41; ++i){
+		Bool expired = false;
+		for(SiteNum i = 1; i < 41; ++i){
 			Atom a = ew[i];
 			if(a as Function){
 				if(a.parent == parent && a.child == child){
 					Atom e = expire();
 					ew[i] = e;
+					expired = true;
 				}
 			}
 		}
+		if(!expired){
+			//violate dreg/res and use empty space.
+			SiteNum slot = cl.emptySlotNearMe();
+			Atom e = expire();
+			ew[slot] = e;
+		}
 	}
-	Void propogateType(SiteNum cSlot){
+	Bool propogateType(SiteNum cSlot){
+		Bool collapsed = false;
 		SiteNum slot = cl.emptySlotNearMe();
 		Atom c = ew[cSlot];
 		if(value == 1){
@@ -71,16 +80,20 @@ element Function : Agent{
 				fn.value = value;
 				fn.child = c.child;
 				fn.parent = c.parent;
-
-				ew[0] = fn;
+				
+				collapsed = true;
 				ew[cSlot] = ad;
+				ew[0] = fn;
 				expireCopy();
 			}else if(c as CloseParenth){
 				CloseParenth cp;
 				cp.parent = parent;
 				cp.child = c.child;
 				ew[cSlot] = cp;
-				expire();
+
+				collapsed = true;
+				Atom e = expire();
+				ew[0] = e;
 			}
 		}else if(value == 2){
 			if(c as Data){
@@ -95,15 +108,18 @@ element Function : Agent{
 				fn.child = c.child;
 				fn.parent = c.parent;
 
-				ew[0] = fn;
 				ew[cSlot] = sb;
+				ew[0] = fn;
 				expireCopy();
 			}else if(c as CloseParenth){
 				CloseParenth cp;
 				cp.parent = parent;
 				cp.child = c.child;
 				ew[cSlot] = cp;
-				expire();
+
+				collapsed = true;
+				Atom e = expire();
+				ew[0] = e;
 			}
 		}else if(value == 3){
 			if(c as Data){
@@ -125,16 +141,23 @@ element Function : Agent{
 				CloseParenth cp;
 				cp.parent = parent;
 				cp.child = c.child;
+
+				collapsed = true;
 				ew[cSlot] = cp;
-				expire();
+				Atom e = expire();
+				ew[0] = e;
 			}
 		}
+		return collapsed;
 	}
 	Void behave(){
 		SiteNum cSlot = findChild();
 		if(cSlot > 0){
-			propogateType(cSlot);
+			if(!propogateType(cSlot)){
+				clusterDiffuse();
+			}
+		}else{
+			clusterDiffuse();
 		}
-		clusterDiffuse();
 	}
 }

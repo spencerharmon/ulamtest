@@ -16,8 +16,6 @@ quark Agent{
 	Void clusterDiffuse(){
 		SiteNum sChild;
 		SiteNum sParent;
-		SiteNum direction;
-		direction = cl.emptySlotNearMe();
 		Unsigned familySeen = 0;
 		for(SiteNum i = 1; i<41; ++i){
 			Atom a = ew[i];
@@ -34,20 +32,9 @@ quark Agent{
 				}
 			}
 		}
-		if(familySeen == 2u){
-			if(noCopiesNearMe()){
-				copySelf();
-			}
-		}else if(parent == 0 && familySeen == 1u){
-			if(noCopiesNearMe()){
-				copySelf();
-			}
-		}else{
-			if(noCopiesNearMe()){
-				copySelf();
-			}
-		}
-		agentCluster();
+		if(noCopiesNearMe()){
+			copySelf();
+		}else agentCluster();
 
 	}
 	virtual Bool noCopiesNearMe();
@@ -55,7 +42,9 @@ quark Agent{
 	Void copySelf(){
 			SiteNum slot = dru.resSlotNearMe();
 			Atom a = me();
-			ew[slot] = a;
+			if(slot > 0){
+				ew[slot] = a;
+			}
 	}
 	Void agentCluster(){
 		for(SiteNum i = 1; i < 41; ++i){
@@ -65,8 +54,6 @@ quark Agent{
 				ew.swap(slot,i);
 			}
 		}
-		SiteNum slot = cl.emptySlotNearMe();
-		ew.swap(0,slot);
 	}
 	Void diffuse(){
 		SiteNum slot = cl.emptySlotNearMe();
@@ -101,8 +88,6 @@ quark Agent{
 		return 0;
 	}
 	virtual Int typeFunction(Atom a);
-//	virtual Int typeFunction(Atom c, Atom p);
-//	virtual Void overwrite(Int val, ID p, ID c, SiteNum cSlot, SiteNum pSlot);
 	virtual Void overwrite(Int val, ID p, ID c, SiteNum slot);
 	virtual Atom evaluateParenthesis(ID c, ID p);
 	Void operateOnChild(Atom c,SiteNum cSlot){
@@ -111,30 +96,17 @@ quark Agent{
 			overwrite(val,parent,c.child,cSlot);
 		}
 	}
-	Void operateOnParent(Atom p,SiteNum pSlot){
-		Int val = typeFunction(p);
-		if(p as Agent){
-			overwrite(val,p.parent,child,pSlot);
-		}
-	}
-	Void operateOnBoth(Atom c, Atom p,SiteNum cSlot,SiteNum pSlot){
-	//	Int val = typeFunction(c,p);
-		if(c as Agent){
-			if(p as Agent){
-			//	overwrite(val,p.parent,c.child,cSlot,pSlot);
-			}
-		}
-	}
+
 	Atom expire(){
 		Expire e;
 		e.parent = parent;
 		e.child = child;
 		return e;
 	}
-	virtual Void collapse(SiteNum cSlot, SiteNum pSlot){
+	virtual Bool collapse(SiteNum cSlot, SiteNum pSlot){
 		Atom p = ew[pSlot];
 		Atom c = ew[cSlot];
-
+		Bool collapsed = false;
 		Int val; 
 		if(cSlot > 0){
 			if(pSlot > 0){
@@ -149,31 +121,21 @@ quark Agent{
 						cp.parent = parent;
 						ew[cSlot] = cp;
 
+						collapsed = true;
 						Atom e = expire();
 						ew[0] = e;
 					}else{
 						//don't operate on openparenth
 						operateOnChild(c,cSlot);
+
+						collapsed = true;
 						Atom e = expire();
 						ew[0] = e;
 					}
-				}else{
-					//operateOnBoth(c,p,cSlot,pSlot);
 				}
-			}else{
-				//can see child only
-				//testing only operate if parent is closeparenth
-				//this should force left-to-right operation, but
-				//sacrifice a higher possible rate of operation.
-				//operateOnChild(c,cSlot);
 			}
-		}else if(pSlot > 0){
-			//parent only
-			//operateOnParent(p,pSlot);
-		}else{
-			//neither
-			//diffuse();
 		}
+		return collapsed;
 	}
 	Atom changeType(Atom a, Int val, ID p, ID c){
 		Atom n;

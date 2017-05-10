@@ -90,7 +90,7 @@ element Emitter{
 
 	Void subtracttest(){
 
-		ID nextid;
+		ID nextid = idStor;
 		SiteNum slot = cl.emptySlotNearMe();
 		while(slot > 0){
 			++agentIndex;
