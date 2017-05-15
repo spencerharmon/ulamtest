@@ -34,8 +34,21 @@ quark Agent{
 		}
 		if(noCopiesNearMe()){
 			copySelf();
+		}else if(lowrescount()){
+			die();
 		}else agentCluster();
-
+	}
+	Bool lowrescount(){
+		Unsigned rescount;
+		for(SiteNum i = 1; i < 41; ++i){
+			Atom a = ew[i];
+			if(a as Res){
+				++rescount;
+			}
+		}
+		if(rescount < 3u){
+			return true;
+		}else return false;
 	}
 	virtual Bool noCopiesNearMe();
 	virtual Atom me();
