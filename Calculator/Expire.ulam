@@ -3,7 +3,7 @@
 	\license lgpl
 	\symbol Ex
 	\symmetries all
-	\color #333
+	\color #f33
  */
 element Expire : Agent{
 	Int value;
@@ -43,22 +43,22 @@ element Expire : Agent{
 		Bool virt = false;
 	}
 	Bool exp(){
-		Bool copied = false;
 		for(SiteNum i = 1; i < 41; ++i){
 			Atom a = ew[i];
 			if(a as Agent){
-				if(a.parent == parent || a.child == child){
-					ew[i] = self;
-					copied = true;
+				if(a.parent == parent && a.child == child){
+					Res r;
+					ew[i] = r;
+					return true;
 				}
 			}
 		}
-		return copied;
+		return false;
 	}
 	Void behave(){
 		if(!exp()){
 			agentCluster();
-		}else if(r.oneIn(5)){
+		}else if(r.oneIn(50)){
 			die();
 		}
 	}

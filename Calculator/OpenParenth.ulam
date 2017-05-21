@@ -12,6 +12,7 @@ element OpenParenth : Agent{
 	typedef EventWindow.SiteNum SiteNum;
 
 	Int value;
+	Bool evaluated;
 
 	Bool noCopiesNearMe(){
 		for(SiteNum i = 1; i < 41; ++i){
@@ -46,20 +47,18 @@ element OpenParenth : Agent{
 		return e;
 	}
 	Bool collapse(SiteNum cSlot, SiteNum pSlot){
-		Bool collapsed = false;
 		if(parent == 0){
-			if(cSlot > 0){
-				Atom a = ew[cSlot];
-				if(a as CloseParenth){
+			Atom a = ew[cSlot];
+			if(a as CloseParenth){
+				if(evaluated){
 					du.print(value);
 				}
 			}
 		}
-
-		Atom c = ew[cSlot];
-		Atom p = ew[pSlot];
-
+		Bool collapsed = false;
 		if(cSlot > 0 && pSlot > 0){
+			Atom c = ew[cSlot];
+			Atom p = ew[pSlot];
 			if(c as CloseParenth){
 				collapsed = true;
 				ID idChi = c.child;
@@ -77,6 +76,8 @@ element OpenParenth : Agent{
 	Void behave(){
 		SiteNum cSlot = findChild();
 		SiteNum pSlot = findParent();
+
+		//can't change ew[0] and move; stale reference
 		if(!collapse(cSlot,pSlot)){
 			clusterDiffuse();
 		}

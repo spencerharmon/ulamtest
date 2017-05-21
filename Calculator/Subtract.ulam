@@ -37,6 +37,7 @@ element Subtract : Agent{
 		op.value = value;
 		op.parent = p;
 		op.child = c;
+		op.evaluated = true;
 		return op;
 	}
 	Void overwrite(Int val, ID p, ID c, SiteNum slot){

@@ -112,6 +112,33 @@ element Emitter{
 		}
 		idStor = nextid;
 	}
+	Void shorteqTest(){
+		ID nextid;
+		SiteNum slot = dru.resSlotNearMe();
+		while(slot > 0){
+			++agentIndex;
+			if(agentIndex == 1u){
+				nextid = openParenth(slot, nextid);
+			}else if(agentIndex == 2u){
+				//3 is for divide
+				Int i = 3;
+				nextid = function(slot, nextid, i);
+			}else if(agentIndex == 3u){
+				nextid = data(slot, nextid, 600);
+			}else if(agentIndex == 4u){
+				nextid = data(slot, nextid, 100);
+			}else if(agentIndex == 5u){
+				nextid = closeParenth(slot, nextid);
+			}else{
+				finished = true;
+				return;
+			}
+
+			slot = dru.resSlotNearMe();
+		}
+		idStor = nextid;
+
+	}
 	Void spawnEquation(){
 		ID nextid;
 		SiteNum slot = dru.resSlotNearMe();
@@ -166,6 +193,6 @@ element Emitter{
 		return ret;
 	}
 	Void behave(){
-		spawnEquation();
+	spawnEquation();
 	}
 }

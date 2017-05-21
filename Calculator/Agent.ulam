@@ -102,7 +102,11 @@ quark Agent{
 	}
 	virtual Int typeFunction(Atom a);
 	virtual Void overwrite(Int val, ID p, ID c, SiteNum slot);
+
+	//would prefer if this was a class function, but evaluateparenthesis needs to know the value of the agent, and that's not a class member since quarks can only hold 32 bits
+	//question: why this limitation on quarks?
 	virtual Atom evaluateParenthesis(ID c, ID p);
+
 	Void operateOnChild(Atom c,SiteNum cSlot){
 		Int val = typeFunction(c);
 		if(c as Agent){

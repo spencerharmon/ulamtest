@@ -9,6 +9,7 @@
 element Function : Agent{
 
 	Int value;
+	Bool dieRandomly;
 
 	typedef EventWindow.SiteNum SiteNum;
 
@@ -45,23 +46,34 @@ element Function : Agent{
 		Bool virt = false;
 	}
 	Void expireCopy(){
-		//Function atoms cannot expire themselves when propogating since they need to preserve the parent and update themselves and the child.
-		Bool expired = false;
+		//Function atoms cannot expire themselves like most agents when propogating functions to data since they need to preserve the parent and update themselves and the child.
+		//i.e. function expire behavior, unlike other agents, necessitates the creation of an additional atom; it must consume a resource.
+		//therefore, Function has its own expire behavior, and does not utilize the expire atom except when its child is a closeparenth, when it must expire like a standard agent.
+		Function c;
+		c.child = child;
+		c.parent = parent;
 		for(SiteNum i = 1; i < 41; ++i){
 			Atom a = ew[i];
+			//try to use either copies of ourselves or res
 			if(a as Function){
 				if(a.parent == parent && a.child == child){
-					Atom e = expire();
-					ew[i] = e;
-					expired = true;
+					c.dieRandomly = true;
+					ew[i] = c;
+				}
+			}else if(a as Res){
+				//see below
+				if(!dieRandomly){
+					c.dieRandomly = true;
+					ew[i] = c;
 				}
 			}
 		}
-		if(!expired){
-			//violate dreg/res and use empty space.
+		//here, !dieRandomly is a standin for "I'm creating a unique atom and must sacrifice empty space because there's nothing else I can use safely"
+		if(!dieRandomly && !c.dieRandomly){
+			// otherwise, violate dreg/res and use empty space.
 			SiteNum slot = cl.emptySlotNearMe();
-			Atom e = expire();
-			ew[slot] = e;
+			c.dieRandomly = true;
+			ew[slot] = c;
 		}
 	}
 	Bool propogateType(SiteNum cSlot){
@@ -82,9 +94,9 @@ element Function : Agent{
 				fn.parent = c.parent;
 				
 				collapsed = true;
+				expireCopy();
 				ew[cSlot] = ad;
 				ew[0] = fn;
-				expireCopy();
 			}else if(c as CloseParenth){
 				CloseParenth cp;
 				cp.parent = parent;
@@ -108,9 +120,9 @@ element Function : Agent{
 				fn.child = c.child;
 				fn.parent = c.parent;
 
+				expireCopy();
 				ew[cSlot] = sb;
 				ew[0] = fn;
-				expireCopy();
 			}else if(c as CloseParenth){
 				CloseParenth cp;
 				cp.parent = parent;
@@ -134,9 +146,9 @@ element Function : Agent{
 				fn.child = c.child;
 				fn.parent = c.parent;
 
+				expireCopy();
 				ew[0] = fn;
 				ew[cSlot] = dv;
-				expireCopy();
 			}else if(c as CloseParenth){
 				CloseParenth cp;
 				cp.parent = parent;
@@ -151,13 +163,20 @@ element Function : Agent{
 		return collapsed;
 	}
 	Void behave(){
-		SiteNum cSlot = findChild();
-		if(cSlot > 0){
-			if(!propogateType(cSlot)){
-				clusterDiffuse();
+		if(dieRandomly){
+			expireCopy();
+			if(r.oneIn(100)){
+				die();
 			}
 		}else{
-			clusterDiffuse();
+			SiteNum cSlot = findChild();
+			if(cSlot > 0){
+				if(!propogateType(cSlot)){
+					clusterDiffuse();
+				}
+			}else{
+				clusterDiffuse();
+			}
 		}
 	}
 }
