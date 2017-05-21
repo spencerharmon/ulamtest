@@ -10,6 +10,9 @@ element Expire : Agent{
 
 	typedef EventWindow.SiteNum SiteNum;
 
+	Bool checkEvalStatus(){
+		return false;
+	}
 	Bool noCopiesNearMe(){
 		for(SiteNum i = 1; i < 41; ++i){
 			Atom a = ew[i];
@@ -43,23 +46,25 @@ element Expire : Agent{
 		Bool virt = false;
 	}
 	Bool exp(){
+		Bool b;
 		for(SiteNum i = 1; i < 41; ++i){
 			Atom a = ew[i];
 			if(a as Agent){
 				if(a.parent == parent && a.child == child){
 					Res r;
 					ew[i] = r;
-					return true;
+					b = true;
 				}
 			}
 		}
-		return false;
+		return b;
 	}
 	Void behave(){
 		if(!exp()){
 			agentCluster();
-		}else if(r.oneIn(50)){
-			die();
+			 if(r.oneIn(50)){
+				die();
+			}
 		}
 	}
 }

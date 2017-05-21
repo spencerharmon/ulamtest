@@ -120,6 +120,7 @@ quark Agent{
 		e.child = child;
 		return e;
 	}
+	virtual Bool checkEvalStatus();
 	virtual Bool collapse(SiteNum cSlot, SiteNum pSlot){
 		Atom p = ew[pSlot];
 		Atom c = ew[cSlot];
@@ -130,24 +131,33 @@ quark Agent{
 				//can see both
 				if(p as OpenParenth){
 					if(c as CloseParenth){
-						Atom a = evaluateParenthesis(p.child,p.parent);
-						ew[pSlot] = a;
-						
-						CloseParenth cp;
-						cp.child = c.child;
-						cp.parent = parent;
-						ew[cSlot] = cp;
-
-						collapsed = true;
-						Atom e = expire();
-						ew[0] = e;
+						if(checkEvalStatus()){
+							Atom a = evaluateParenthesis(p.child,p.parent);
+							ew[pSlot] = a;
+							
+							CloseParenth cp;
+							cp.child = c.child;
+							cp.parent = parent;
+							ew[cSlot] = cp;
+	
+							collapsed = true;
+							Atom e = expire();
+							ew[0] = e;
+						}
 					}else{
 						//don't operate on openparenth
-						operateOnChild(c,cSlot);
+						if(c as OpenParenth){
+							//no nothing
+						}else if(c as CloseParenth){
 
-						collapsed = true;
-						Atom e = expire();
-						ew[0] = e;
+						}else{
+							operateOnChild(c,cSlot);
+
+							collapsed = true;
+							Atom e = expire();
+							ew[0] = e;
+						}
+
 					}
 				}
 			}
@@ -167,6 +177,16 @@ quark Agent{
 			n.child = c;
 			return n;
 		}else if(n as Add){
+			n.value = val;
+			n.parent = p;
+			n.child = c;
+			return n;
+		}else if(n as Subtract){
+			n.value = val;
+			n.parent = p;
+			n.child = c;
+			return n;
+		}else if(n as Divide){
 			n.value = val;
 			n.parent = p;
 			n.child = c;

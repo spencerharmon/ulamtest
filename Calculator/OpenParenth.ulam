@@ -14,6 +14,9 @@ element OpenParenth : Agent{
 	Int value;
 	Bool evaluated;
 
+	Bool checkEvalStatus(){
+		return evaluated;
+	}
 	Bool noCopiesNearMe(){
 		for(SiteNum i = 1; i < 41; ++i){
 			Atom a = ew[i];
@@ -60,15 +63,17 @@ element OpenParenth : Agent{
 			Atom c = ew[cSlot];
 			Atom p = ew[pSlot];
 			if(c as CloseParenth){
-				collapsed = true;
-				ID idChi = c.child;
-				//value set by child in default agent collapse behavior
-				Data d;
-				d.value = value;
-				d.parent = parent;
-				d.child = c.child;
-				ew[cSlot] = d;
-				ew[0] = d;
+				if(evaluated){
+					collapsed = true;
+					ID idChi = c.child;
+					//value set by child in default agent collapse behavior
+					Data d;
+					d.value = value;
+					d.parent = parent;
+					d.child = c.child;
+					ew[cSlot] = d;
+					ew[0] = d;
+				}
 			}
 		}
 		return collapsed;

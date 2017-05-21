@@ -140,6 +140,7 @@ element Emitter{
 
 	}
 	Void spawnEquation(){
+		// (/ 600 (- (+ 2 3 3) 2)) = 100
 		ID nextid;
 		SiteNum slot = dru.resSlotNearMe();
 		while(slot > 0){

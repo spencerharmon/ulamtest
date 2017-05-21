@@ -13,6 +13,9 @@ element Function : Agent{
 
 	typedef EventWindow.SiteNum SiteNum;
 
+	Bool checkEvalStatus(){
+		return false;
+	}
 	Bool noCopiesNearMe(){
 		for(SiteNum i = 1; i < 41; ++i){
 			Atom a = ew[i];
@@ -38,9 +41,6 @@ element Function : Agent{
 	Atom evaluateParenthesis(ID n, ID a){
 		Empty e;
 		return e;
-	}
-	Void overwrite(Int i, ID p, ID c, SiteNum s1, SiteNum s2){
-		Bool virt = false;
 	}
 	Void overwrite(Int i, ID p, ID c, SiteNum s1){
 		Bool virt = false;
@@ -104,8 +104,7 @@ element Function : Agent{
 				ew[cSlot] = cp;
 
 				collapsed = true;
-				Atom e = expire();
-				ew[0] = e;
+				dieRandomly = true;
 			}
 		}else if(value == 2){
 			if(c as Data){
@@ -130,8 +129,7 @@ element Function : Agent{
 				ew[cSlot] = cp;
 
 				collapsed = true;
-				Atom e = expire();
-				ew[0] = e;
+				dieRandomly = true;
 			}
 		}else if(value == 3){
 			if(c as Data){
@@ -156,8 +154,7 @@ element Function : Agent{
 
 				collapsed = true;
 				ew[cSlot] = cp;
-				Atom e = expire();
-				ew[0] = e;
+				dieRandomly = true;
 			}
 		}
 		return collapsed;

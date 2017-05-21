@@ -8,9 +8,13 @@
  */
 element Add : Agent{
 	Int value;
+	Bool evaluated;
 
 	typedef EventWindow.SiteNum SiteNum;
 	
+	Bool checkEvalStatus(){
+		return evaluated;
+	}
 	Bool noCopiesNearMe(){
 		for(SiteNum i = 1; i < 41; ++i){
 			Atom a = ew[i];
@@ -47,6 +51,7 @@ element Add : Agent{
 			ad.value = val;
 			ad.parent = p;
 			ad.child = c;
+			ad.evaluated = true;
 
 			ew[slot] = ad.atomof;
 		}

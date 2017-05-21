@@ -8,9 +8,13 @@
  */
 element Subtract : Agent{
 	Int value;
+	Bool evaluated;
 
 	typedef EventWindow.SiteNum SiteNum;
 	
+	Bool checkEvalStatus(){
+		return evaluated;
+	}
 	Bool noCopiesNearMe(){
 		for(SiteNum i = 1; i < 41; ++i){
 			Atom a = ew[i];
@@ -47,21 +51,9 @@ element Subtract : Agent{
 			s.value = val;
 			s.parent = p;
 			s.child = c;
+			s.evaluated = true;
 
 			ew[slot] = s.atomof;
-		}
-	}
-	Void overwrite(Int val, ID p, ID c, SiteNum cSlot, SiteNum pSlot){
-		Atom a = ew[cSlot];
-		if(a as Subtract){
-			Subtract s;
-			s.value = val;
-			s.parent = p;
-			s.child = c;
-
-			ew[cSlot] = s.atomof;
-			ew[pSlot] = s.atomof;
-			ew[0] = s.atomof;
 		}
 	}
 

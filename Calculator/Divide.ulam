@@ -8,9 +8,13 @@
  */
 element Divide : Agent{
 	Int value;
+	Bool evaluated;
 
 	typedef EventWindow.SiteNum SiteNum;
 
+	Bool checkEvalStatus(){
+		return evaluated;
+	}
 	Bool noCopiesNearMe(){
 		for(SiteNum i = 1; i < 41; ++i){
 			Atom a = ew[i];
@@ -28,7 +32,9 @@ element Divide : Agent{
 	Int typeFunction(Atom c){
 		Int ret;
 		if(c as Divide){
-			ret = value / c.value;
+			if(c.value > 0){
+				ret = value / c.value;
+			}
 		}
 		return ret;
 	}
@@ -47,21 +53,9 @@ element Divide : Agent{
 			d.value = val;
 			d.parent = p;
 			d.child = c;
+			d.evaluated = true;
 
 			ew[slot] = d.atomof;
-		}
-	}
-	Void overwrite(Int val, ID p, ID c, SiteNum cSlot, SiteNum pSlot){
-		Atom a = ew[cSlot];
-		if(a as Divide){
-			Divide d;
-			d.value = val;
-			d.parent = p;
-			d.child = c;
-
-			ew[cSlot] = d.atomof;
-			ew[pSlot] = d.atomof;
-			ew[0] = d.atomof;
 		}
 	}
 
