@@ -34,7 +34,6 @@ quark Agent{
 		}
 		if(numCopiesNearMe() < 2u){
 			copySelf();
-			agentCluster();
 		}else if(lowrescount()){
 			die();
 		}else agentCluster();
@@ -105,8 +104,8 @@ quark Agent{
 	virtual Atom evaluateParenthesis(ID c, ID p);
 
 	Void operateOnChild(Atom c,SiteNum cSlot){
-		Int val = typeFunction(c);
 		if(c as Agent){
+			Int val = typeFunction(c.atomof);
 			overwrite(val,parent,c.child,cSlot);
 		}
 	}
@@ -145,8 +144,6 @@ quark Agent{
 						//don't operate on openparenth
 						if(c as OpenParenth){
 							//no nothing
-						}else if(c as CloseParenth){
-
 						}else{
 							operateOnChild(c,cSlot);
 
