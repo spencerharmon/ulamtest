@@ -9,7 +9,7 @@ quark Agent{
 	typedef Unsigned(16) ID;
 	typedef EventWindow.SiteNum SiteNum;
 	typedef AtomUtils.Type Type;
-
+	
 	ID parent;
 	ID child;
 
@@ -32,8 +32,9 @@ quark Agent{
 				}
 			}
 		}
-		if(noCopiesNearMe()){
+		if(numCopiesNearMe() < 2u){
 			copySelf();
+			agentCluster();
 		}else if(lowrescount()){
 			die();
 		}else agentCluster();
@@ -46,25 +47,27 @@ quark Agent{
 				++rescount;
 			}
 		}
-		if(rescount < 3u){
+		if(rescount < 7u){
 			return true;
 		}else return false;
 	}
-	virtual Bool noCopiesNearMe();
+	virtual Unsigned numCopiesNearMe();
 	virtual Atom me();
 	Void copySelf(){
 			SiteNum slot = dru.resSlotNearMe();
 			Atom a = me();
 			if(slot > 0){
 				ew[slot] = a;
-			}
+			}else{ die(); }
 	}
 	Void agentCluster(){
 		for(SiteNum i = 1; i < 41; ++i){
 			Atom a = ew[i];
 			if(a as Agent){
 				SiteNum slot = cl.emptySlotNearMe();
-				ew.swap(slot,i);
+				if(r.oneIn(10)){
+					ew.swap(slot,i);
+				}
 			}
 		}
 	}
@@ -79,9 +82,6 @@ quark Agent{
 				if(a.parent == child){
 					return i;
 				}
-			}else{
-				SiteNum ret = 0;
-				return ret;
 			}
 		}
 		return 0;
@@ -93,9 +93,6 @@ quark Agent{
 				if(a.child == parent){
 					return i;
 				}
-			}else{
-				SiteNum ret = 0;
-				return ret;
 			}
 		}
 		return 0;

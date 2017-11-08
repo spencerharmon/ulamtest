@@ -13,16 +13,17 @@ element Expire : Agent{
 	Bool checkEvalStatus(){
 		return false;
 	}
-	Bool noCopiesNearMe(){
+	Unsigned numCopiesNearMe(){
+		Unsigned num;
 		for(SiteNum i = 1; i < 41; ++i){
 			Atom a = ew[i];
 			if(a as Expire){
 				if(a.child == child && a.parent == parent){
-					return false;
+					++num;
 				}
 			}
 		}
-		return true;
+		return num;
 	}
 	Atom me(){
 		return self;

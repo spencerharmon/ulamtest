@@ -15,16 +15,17 @@ element Subtract : Agent{
 	Bool checkEvalStatus(){
 		return evaluated;
 	}
-	Bool noCopiesNearMe(){
+	Unsigned numCopiesNearMe(){
+		Unsigned num;
 		for(SiteNum i = 1; i < 41; ++i){
 			Atom a = ew[i];
 			if(a as Subtract){
 				if(a.child == child && a.parent == parent && a.value == value){
-					return false;
+					++num;
 				}
 			}
 		}
-		return true;
+		return num;
 	}
 	Atom me(){
 		return self;

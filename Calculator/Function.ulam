@@ -16,16 +16,17 @@ element Function : Agent{
 	Bool checkEvalStatus(){
 		return false;
 	}
-	Bool noCopiesNearMe(){
+	Unsigned numCopiesNearMe(){
+		Unsigned num;
 		for(SiteNum i = 1; i < 41; ++i){
 			Atom a = ew[i];
 			if(a as Function){
 				if(a.child == child && a.parent == parent && a.value == value){
-					return false;
+					++num;
 				}
 			}
 		}
-		return true;
+		return num;
 	}
 	Atom me(){
 		return self;
@@ -78,7 +79,6 @@ element Function : Agent{
 	}
 	Bool propogateType(SiteNum cSlot){
 		Bool collapsed = false;
-		SiteNum slot = cl.emptySlotNearMe();
 		Atom c = ew[cSlot];
 		if(value == 1){
 			if(c as Data){
@@ -95,8 +95,8 @@ element Function : Agent{
 				
 				collapsed = true;
 				expireCopy();
-				ew[cSlot] = ad;
 				ew[0] = fn;
+				ew[cSlot] = ad;
 			}else if(c as CloseParenth){
 				CloseParenth cp;
 				cp.parent = parent;
@@ -119,9 +119,10 @@ element Function : Agent{
 				fn.child = c.child;
 				fn.parent = c.parent;
 
+				collapsed = true;
 				expireCopy();
-				ew[cSlot] = sb;
 				ew[0] = fn;
+				ew[cSlot] = sb;
 			}else if(c as CloseParenth){
 				CloseParenth cp;
 				cp.parent = parent;
@@ -144,6 +145,7 @@ element Function : Agent{
 				fn.child = c.child;
 				fn.parent = c.parent;
 
+				collapsed = true;
 				expireCopy();
 				ew[0] = fn;
 				ew[cSlot] = dv;

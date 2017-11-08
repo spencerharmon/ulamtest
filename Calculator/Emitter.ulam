@@ -113,21 +113,32 @@ element Emitter{
 		idStor = nextid;
 	}
 	Void shorteqTest(){
-		ID nextid;
+		// (- 10 (/ 600 100)) = 4
+		ID nextid = idStor;
 		SiteNum slot = dru.resSlotNearMe();
 		while(slot > 0){
 			++agentIndex;
 			if(agentIndex == 1u){
 				nextid = openParenth(slot, nextid);
 			}else if(agentIndex == 2u){
+				//2 is for subtract
+				Int i = 2;
+				nextid = function(slot, nextid, i);
+			}else if(agentIndex == 3u){
+				nextid = data(slot, nextid, 10);
+			}else if(agentIndex == 4u){
+				nextid = openParenth(slot, nextid);
+			}else if(agentIndex == 5u){
 				//3 is for divide
 				Int i = 3;
 				nextid = function(slot, nextid, i);
-			}else if(agentIndex == 3u){
+			}else if(agentIndex == 6u){
 				nextid = data(slot, nextid, 600);
-			}else if(agentIndex == 4u){
+			}else if(agentIndex == 7u){
 				nextid = data(slot, nextid, 100);
-			}else if(agentIndex == 5u){
+			}else if(agentIndex == 8u){
+				nextid = closeParenth(slot, nextid);
+			}else if(agentIndex == 9u){
 				nextid = closeParenth(slot, nextid);
 			}else{
 				finished = true;
@@ -194,6 +205,6 @@ element Emitter{
 		return ret;
 	}
 	Void behave(){
-	spawnEquation();
+	shorteqTest();
 	}
 }

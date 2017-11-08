@@ -15,16 +15,17 @@ element Data : Agent{
 	Bool checkEvalStatus(){
 		return false;
 	}
-	Bool noCopiesNearMe(){
+	Unsigned numCopiesNearMe(){
+		Unsigned num;
 		for(SiteNum i = 1; i < 41; ++i){
 			Atom a = ew[i];
 			if(a as Data){
 				if(a.child == child && a.parent == parent && a.value == value){
-					return false;
+					++num;
 				}
 			}
 		}
-		return true;
+		return num;
 	}
 	Atom me(){
 		return self;
@@ -52,17 +53,17 @@ element Data : Agent{
 		for(SiteNum i = 1; i < 41; ++i){
 			Atom a = ew[i];
 			if(a as Add){
-				if(a.child == child && a.parent == parent){
+				if(a.child == parent){
 					changed = true;
 					ew[0] = a;
 				}
 			}else if(a as Subtract){
-				if(a.child == child && a.parent == parent){
+				if(a.child == parent){
 					changed = true;
 					ew[0] = a;
 				}
 			}else if(a as Divide){
-				if(a.child == child && a.parent == parent){
+				if(a.child == parent){
 					changed = true;
 					ew[0] = a;
 				}
@@ -72,8 +73,8 @@ element Data : Agent{
 	}
 
 	Void behave(){
-		//if(!mimic()){
+//		if(!mimic()){
 			clusterDiffuse();
-		//}
+//		}
 	}
 }
