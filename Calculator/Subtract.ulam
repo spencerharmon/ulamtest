@@ -63,6 +63,8 @@ element Subtract : Agent{
 		SiteNum pSlot = findParent();
 		if(!collapse(cSlot,pSlot)){
 			clusterDiffuse();
+		}else{
+			du.print("Subtract-----------------------------------------------------------------");
 		}
 	}
 }

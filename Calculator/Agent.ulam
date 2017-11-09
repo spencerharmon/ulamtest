@@ -14,29 +14,12 @@ quark Agent{
 	ID child;
 
 	Void clusterDiffuse(){
-		SiteNum sChild;
-		SiteNum sParent;
-		Unsigned familySeen = 0;
-		for(SiteNum i = 1; i<41; ++i){
-			Atom a = ew[i];
-			if(a as Agent){
-				if(a.child == parent){
-					SiteNum slot = cl.emptySlotNearMe();
-					ew.swap(i,slot);
-					++familySeen;
-				}
-				if(a.parent == child){
-					SiteNum slot = cl.emptySlotNearMe();
-					ew.swap(i,slot);
-					++familySeen;
-				}
-			}
-		}
+		agentCluster();
 		if(numCopiesNearMe() < 2u){
 			copySelf();
 		}else if(lowrescount()){
 			die();
-		}else agentCluster();
+		}
 	}
 	Bool lowrescount(){
 		Unsigned rescount;
@@ -57,16 +40,16 @@ quark Agent{
 			Atom a = me();
 			if(slot > 0){
 				ew[slot] = a;
-			}else{ die(); }
+			}
 	}
 	Void agentCluster(){
 		for(SiteNum i = 1; i < 41; ++i){
 			Atom a = ew[i];
 			if(a as Agent){
 				SiteNum slot = cl.emptySlotNearMe();
-				if(r.oneIn(10)){
+//				if(r.oneIn(10)){
 					ew.swap(slot,i);
-				}
+//				}
 			}
 		}
 	}
@@ -78,7 +61,14 @@ quark Agent{
 		for(SiteNum i = 1; i <41; ++i){
 			Atom a = ew[i];
 			if(a as Agent){
-				if(a.parent == child){
+				Atom b = ew[i];
+				if(b as Data){
+					if(self as Function){
+						if(a.parent == child){
+							return i;
+						}
+					}
+				}else if(a.parent == child){
 					return i;
 				}
 			}
@@ -104,8 +94,8 @@ quark Agent{
 	virtual Atom evaluateParenthesis(ID c, ID p);
 
 	Void operateOnChild(Atom c,SiteNum cSlot){
+		Int val = typeFunction(c);
 		if(c as Agent){
-			Int val = typeFunction(c.atomof);
 			overwrite(val,parent,c.child,cSlot);
 		}
 	}
@@ -144,6 +134,8 @@ quark Agent{
 						//don't operate on openparenth
 						if(c as OpenParenth){
 							//no nothing
+						}else if(c as Function){
+
 						}else{
 							operateOnChild(c,cSlot);
 
