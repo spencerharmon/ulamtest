@@ -6,7 +6,7 @@ quark Agent{
 	DebugUtils du;
 	DregResUtils dru;
 
-	typedef Unsigned(16) ID;
+	typedef Unsigned(15) ID;
 	typedef EventWindow.SiteNum SiteNum;
 	typedef AtomUtils.Type Type;
 	
@@ -99,12 +99,58 @@ quark Agent{
 			overwrite(val,parent,c.child,cSlot);
 		}
 	}
-
-	Atom expire(){
-		Expire e;
-		e.parent = parent;
-		e.child = child;
-		return e;
+	Atom expire(Atom a){
+		if(a as Add){
+			Expire e;
+			e.type = 1u;
+			e.value = a.value;
+			e.parent = a.parent;
+			e.child = a.child;
+			return e;
+		}else if(a as Subtract){
+			Expire e;
+			e.type = 2u;
+			e.value = a.value;
+			e.parent = a.parent;
+			e.child = a.child;
+			return e;
+		}else if(a as Divide){
+			Expire e;
+			e.type = 3u;
+			e.value = a.value;
+			e.parent = a.parent;
+			e.child = a.child;
+			return e;
+		}else if(a as OpenParenth){
+			Expire e;
+			e.type = 4u;
+			e.value = a.value;
+			e.parent = a.parent;
+			e.child = a.child;
+			return e;
+		}else if(a as CloseParenth){
+			Expire e;
+			e.type = 5u;
+			e.parent = a.parent;
+			e.child = a.child;
+			return e;
+		}else if(a as Data){
+			Expire e;
+			e.type = 6u;
+			e.value = a.value;
+			e.parent = a.parent;
+			e.child = a.child;
+			return e;
+		}else if(a as Function){
+			Expire e;
+			e.type = 7u;
+			e.value = a.value;
+			e.parent = a.parent;
+			e.child = a.child;
+			return e;
+		}
+		Res r;
+		return r;
 	}
 	virtual Bool checkEvalStatus();
 	virtual Bool collapse(SiteNum cSlot, SiteNum pSlot){
@@ -127,7 +173,7 @@ quark Agent{
 							ew[cSlot] = cp;
 	
 							collapsed = true;
-							Atom e = expire();
+							Atom e = expire(me());
 							ew[0] = e;
 						}
 					}else{
@@ -140,7 +186,7 @@ quark Agent{
 							operateOnChild(c,cSlot);
 
 							collapsed = true;
-							Atom e = expire();
+							Atom e = expire(me());
 							ew[0] = e;
 						}
 

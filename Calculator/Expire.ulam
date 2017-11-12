@@ -4,9 +4,23 @@
 	\symbol Ex
 	\symmetries all
 	\color #f33
+
+The purpose of expire is to ensure that old, vesigial agents related to our equation
+are not consuming resources past their usefulness. In other words, to ensure clean dying.
+My initial inclination was to bake-in the expire behavior into agent, but the limitation
+of 32 bits to a quark means theat this would have to be in lieu of using these extra bits
+for IDs. Granted, the use of addressing at all is a departure from the principle of
+no global addressingfor robust-first computing, we'll pretend like the random addresses
+and inevitable collisions we'll deal with can make for a robust distributed machine 
+that's at least correct most of the time.
+So, instead of dooming ourselves to maintain separate expire behavior in each element, 
+we'll entrust expire to be the shepherd of our agents and brokers of our Res.
  */
 element Expire : Agent{
+	//value of agent to expire
 	Int value;
+	//type of agent to expire
+	Unsigned(5) type;
 
 	typedef EventWindow.SiteNum SiteNum;
 
@@ -46,11 +60,67 @@ element Expire : Agent{
 	Void overwrite(Int i, ID p, ID c, SiteNum s1){
 		Bool virt = false;
 	}
-	Bool exp(){
-		Bool b;
+	Bool expAdd(){
+		Bool  b = false;
 		for(SiteNum i = 1; i < 41; ++i){
 			Atom a = ew[i];
-			if(a as Agent){
+			if(a as Add){
+				if(a.parent == parent && a.child == child && a.value == value){
+					Res r;
+					ew[i] = r;
+					b = true;
+				}
+			}
+		}
+		return b;
+	}
+	Bool expSubtract(){
+		Bool b = false;
+		for(SiteNum i = 1; i < 41; ++i){
+			Atom a = ew[i];
+			if(a as Subtract){
+				if(a.parent == parent && a.child == child && a.value == value){
+					Res r;
+					ew[i] = r;
+					b = true;
+				}
+			}
+		}
+		return b;
+	}
+	Bool expDivide(){
+		Bool b = false;
+		for(SiteNum i = 1; i < 41; ++i){
+			Atom a = ew[i];
+			if(a as Divide){
+				if(a.parent == parent && a.child == child && a.value == value){
+					Res r;
+					ew[i] = r;
+					b = true;
+				}
+			}
+		}
+		return b;
+	}
+	Bool expOpenParenth(){
+		Bool b = false;
+		for(SiteNum i = 1; i < 41; ++i){
+			Atom a = ew[i];
+			if(a as OpenParenth){
+				if(a.parent == parent && a.child == child && a.value == value){
+					Res r;
+					ew[i] = r;
+					b = true;
+				}
+			}
+		}
+		return b;
+	}
+	Bool expCloseParenth(){
+		Bool b = false;
+		for(SiteNum i = 1; i < 41; ++i){
+			Atom a = ew[i];
+			if(a as CloseParenth){
 				if(a.parent == parent && a.child == child){
 					Res r;
 					ew[i] = r;
@@ -60,10 +130,59 @@ element Expire : Agent{
 		}
 		return b;
 	}
+	Bool expData(){
+		Bool b = false;
+		for(SiteNum i = 1; i < 41; ++i){
+			Atom a = ew[i];
+			if(a as Data){
+				if(a.parent == parent && a.child == child && a.value == value){
+					Res r;
+					ew[i] = r;
+					b = true;
+				}
+			}
+		}
+		return b;
+	}
+	Bool expFunction(){
+		Bool b = false;
+		for(SiteNum i = 1; i < 41; ++i){
+			Atom a = ew[i];
+			if(a as Function){
+				if(a.parent == parent && a.child == child && a.value == value){
+					Res r;
+					ew[i] = r;
+					b = true;
+				}
+			}
+		}
+		return b;
+	}
+	Bool exp(){
+		Bool b = false;
+		if(type == 1u){
+			b = expAdd();
+		}else if(type ==1u){
+			b = expSubtract();
+		}else if(type ==2u){
+			b = expDivide();
+		}else if(type ==3u){
+			b = expOpenParenth();
+		}else if(type ==4u){
+			b = expCloseParenth();
+		}else if(type ==5u){
+			b = expData();
+		}else if(type ==6u){
+			//function expire doesn't yet use this mechanism
+			b = expFunction();
+		}
+		return b;
+	}
 	Void behave(){
+		//changed from agentCluster() to promote copying
+		clusterDiffuse();
 		if(!exp()){
-			agentCluster();
-			 if(r.oneIn(50)){
+			 if(r.oneIn(10)){
 				die();
 			}
 		}
