@@ -164,14 +164,31 @@ quark Agent{
 				if(p as OpenParenth){
 					if(c as CloseParenth){
 						if(checkEvalStatus()){
+							//expire parent
+							Atom exP = expire(p);
+							SiteNum exPSlot = dru.resSlotNearMe();
+							if(exPSlot > 0){
+								ew[exPSlot] = exP;
+							}
+
+							//expire child
+							Atom exC = expire(c);
+							SiteNum exCSlot = dru.resSlotNearMe();
+							if(exCSlot > 0){
+								ew[exCSlot] = exC;
+							}
+
+							//complete evaluation step
 							Atom a = evaluateParenthesis(p.child,p.parent);
 							ew[pSlot] = a;
-							
+
+							//collapse closeparenth
 							CloseParenth cp;
 							cp.child = c.child;
 							cp.parent = parent;
 							ew[cSlot] = cp;
-	
+
+							//expire self
 							collapsed = true;
 							Atom e = expire(me());
 							ew[0] = e;
@@ -183,8 +200,16 @@ quark Agent{
 						}else if(c as Function){
 
 						}else{
+							//expire child
+							Atom exC = expire(c);
+							SiteNum exCSlot = dru.resSlotNearMe();
+							if(exCSlot > 0){
+								ew[exCSlot] = exC;
+							}
+
 							operateOnChild(c,cSlot);
 
+							//expire self
 							collapsed = true;
 							Atom e = expire(me());
 							ew[0] = e;

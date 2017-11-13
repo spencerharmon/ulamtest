@@ -66,8 +66,7 @@ element Expire : Agent{
 			Atom a = ew[i];
 			if(a as Add){
 				if(a.parent == parent && a.child == child && a.value == value){
-					Res r;
-					ew[i] = r;
+					ew[i] = self;
 					b = true;
 				}
 			}
@@ -80,8 +79,7 @@ element Expire : Agent{
 			Atom a = ew[i];
 			if(a as Subtract){
 				if(a.parent == parent && a.child == child && a.value == value){
-					Res r;
-					ew[i] = r;
+					ew[i] = self;
 					b = true;
 				}
 			}
@@ -94,8 +92,7 @@ element Expire : Agent{
 			Atom a = ew[i];
 			if(a as Divide){
 				if(a.parent == parent && a.child == child && a.value == value){
-					Res r;
-					ew[i] = r;
+					ew[i] = self;
 					b = true;
 				}
 			}
@@ -108,8 +105,7 @@ element Expire : Agent{
 			Atom a = ew[i];
 			if(a as OpenParenth){
 				if(a.parent == parent && a.child == child && a.value == value){
-					Res r;
-					ew[i] = r;
+					ew[i] = self;
 					b = true;
 				}
 			}
@@ -122,8 +118,7 @@ element Expire : Agent{
 			Atom a = ew[i];
 			if(a as CloseParenth){
 				if(a.parent == parent && a.child == child){
-					Res r;
-					ew[i] = r;
+					ew[i] = self;
 					b = true;
 				}
 			}
@@ -136,8 +131,7 @@ element Expire : Agent{
 			Atom a = ew[i];
 			if(a as Data){
 				if(a.parent == parent && a.child == child && a.value == value){
-					Res r;
-					ew[i] = r;
+					ew[i] = self;
 					b = true;
 				}
 			}
@@ -150,8 +144,7 @@ element Expire : Agent{
 			Atom a = ew[i];
 			if(a as Function){
 				if(a.parent == parent && a.child == child && a.value == value){
-					Res r;
-					ew[i] = r;
+					ew[i] = self;
 					b = true;
 				}
 			}
@@ -179,12 +172,12 @@ element Expire : Agent{
 		return b;
 	}
 	Void behave(){
-		//changed from agentCluster() to promote copying
-		clusterDiffuse();
 		if(!exp()){
+			agentCluster();
 			 if(r.oneIn(10)){
 				die();
 			}
 		}
 	}
 }
+
