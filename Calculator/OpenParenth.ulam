@@ -60,13 +60,27 @@ element OpenParenth : Agent{
 			}
 		}
 		Bool collapsed = false;
-		if(cSlot > 0 && pSlot > 0){
+		if(cSlot > 0){
 			Atom c = ew[cSlot];
-			Atom p = ew[pSlot];
 			if(c as CloseParenth){
 				if(evaluated){
 					collapsed = true;
-					ID idChi = c.child;
+
+					//expire the child if res available
+					Atom expC = expire(c);
+					SiteNum resSlot = dru.resSlotNearMe();
+					if(resSlot > 0){
+						ew[resSlot] = expC;
+					}
+
+					//expire self if possible
+					Atom expSelf = expire(self);
+					SiteNum res2 = dru.resSlotNearMe();
+					if(resSlot > 0){
+						ew[res2] = expSelf;
+					}
+
+					//most importantly, create the data
 					//value set by child in default agent collapse behavior
 					Data d;
 					d.value = value;
