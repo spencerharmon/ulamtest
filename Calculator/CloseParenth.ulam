@@ -7,6 +7,8 @@
  */
 element CloseParenth : Agent{
 
+	Unsigned evolution;
+
 	typedef EventWindow.SiteNum SiteNum;
 
 	Bool checkEvalStatus(){
@@ -45,8 +47,34 @@ element CloseParenth : Agent{
 	Void overwrite(Int i, ID p, ID c, SiteNum s1){
 		Bool virt = false;
 	}
+	//not very expressive, but since the equation evaluates from 
+	//left to right, CloseParenth is passive. Scanning for later 
+	//evloutions of our type, CloseParenth can begin the expire 
+	//process for its clones. 
+	Bool detectExp(){
+		Bool ret = false;
+		for(SiteNum i; i < 41; ++i){
+			Atom a = ew[i];
 
+			//we'll expire as many CloseParenth as we can up 
+			//to the maximum available bits. After that, 
+			//it'll have to be some other process or not 
+			//happen at all
+			if(evolution != evolution.maxof){
+				if(a as CloseParenth){
+					if(a.evolution > evolution){
+						Atom exp = expire(self);
+						ew[0] = exp;
+						ret = true;
+					}
+				}
+			}
+		}
+		return ret;
+	}
 	Void behave(){
-		clusterDiffuse();
+		if(!detectExp()){
+			clusterDiffuse();
+		}
 	}
 }
