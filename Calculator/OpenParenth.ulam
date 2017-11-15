@@ -17,6 +17,9 @@ element OpenParenth : Agent{
 	Bool checkEvalStatus(){
 		return evaluated;
 	}
+	Int getValue(){
+		return value;
+	}
 	Unsigned numCopiesNearMe(){
 		Unsigned num;
 		for(SiteNum i = 1; i < 41; ++i){
@@ -45,10 +48,6 @@ element OpenParenth : Agent{
 	}
 	Void overwrite(Int i, ID p, ID c, SiteNum s1){
 		Bool virt = false;
-	}
-	Atom evaluateParenthesis(ID n, ID a){
-		Empty e;
-		return e;
 	}
 	Bool collapse(SiteNum cSlot, SiteNum pSlot){
 		if(parent == 0){

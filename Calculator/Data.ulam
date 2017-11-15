@@ -15,6 +15,9 @@ element Data : Agent{
 	Bool checkEvalStatus(){
 		return false;
 	}
+	Int getValue(){
+		return value;
+	}
 	Unsigned numCopiesNearMe(){
 		Unsigned num;
 		for(SiteNum i = 1; i < 41; ++i){
@@ -38,7 +41,7 @@ element Data : Agent{
 		Int notvirtual;
 		return notvirtual;
 	}
-	Atom evaluateParenthesis(ID n, ID a){
+	Atom getEvaluatedAgent(ID n, ID a){
 		Empty e;
 		return e;
 	}

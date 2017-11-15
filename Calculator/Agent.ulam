@@ -35,6 +35,7 @@ quark Agent{
 	}
 	virtual Unsigned numCopiesNearMe();
 	virtual Atom me();
+	virtual Int getValue();
 	Void copySelf(){
 			SiteNum slot = dru.resSlotNearMe();
 			Atom a = me();
@@ -89,9 +90,49 @@ quark Agent{
 	virtual Int typeFunction(Atom a);
 	virtual Void overwrite(Int val, ID p, ID c, SiteNum slot);
 
-	//would prefer if this was a class function, but evaluateparenthesis needs to know the value of the agent, and that's not a class member since quarks can only hold 32 bits
-	//question: why this limitation on quarks?
-	virtual Atom evaluateParenthesis(ID c, ID p);
+
+	Void evalOParenth(ID c, ID p, SiteNum slot){
+		OpenParenth op;
+		op.value = getValue();
+		op.parent = p;
+		op.child = c;
+		op.evaluated = true;
+		ew[slot] = op;
+	}
+	Void evalCParenth(ID c, ID p, SiteNum slot, Unsigned evolution){
+		CloseParenth cp;
+		++evolution;
+		cp.evolution = evolution;
+		cp.child = c;
+		cp.parent = p;
+		ew[slot] = cp;
+
+
+	}
+
+	Void expireChild(Atom c){
+		//expire child
+		Atom exC = expire(c);
+		SiteNum exCSlot = dru.resSlotNearMe();
+		if(exCSlot > 0){
+			ew[exCSlot] = exC;
+		}
+		
+	}
+
+	Void expireParent(Atom p){
+		Atom exP = expire(p);
+		SiteNum exPSlot = dru.resSlotNearMe();
+		if(exPSlot > 0){
+			ew[exPSlot] = exP;
+		}
+		
+	}
+
+	Void expireSelf(){
+		Atom e = expire(me());
+		ew[0] = e;
+	}
 
 	Void operateOnChild(Atom c,SiteNum cSlot){
 		Int val = typeFunction(c);
@@ -157,66 +198,31 @@ quark Agent{
 		Atom p = ew[pSlot];
 		Atom c = ew[cSlot];
 		Bool collapsed = false;
-		Int val; 
 		if(cSlot > 0){
 			if(pSlot > 0){
 				//can see both
 				if(p as OpenParenth){
 					if(c as CloseParenth){
 						if(checkEvalStatus()){
-							//expire parent
-							Atom exP = expire(p);
-							SiteNum exPSlot = dru.resSlotNearMe();
-							if(exPSlot > 0){
-								ew[exPSlot] = exP;
-							}
+							evalOParenth(p.child,p.parent,pSlot);
+							evalCParenth(c.child, parent, cSlot, c.evolution);
 
-							//expire child
-							Atom exC = expire(c);
-							SiteNum exCSlot = dru.resSlotNearMe();
-							if(exCSlot > 0){
-								ew[exCSlot] = exC;
-							}
+							expireParent(p);
+							expireChild(c);
 
-							//complete evaluation step
-							Atom a = evaluateParenthesis(p.child,p.parent);
-							ew[pSlot] = a;
-
-							//collapse closeparenth
-							CloseParenth cp;
-							++c.evolution;
-							cp.evolution = c.evolution;
-							cp.child = c.child;
-							cp.parent = parent;
-							ew[cSlot] = cp;
-
-							//expire self
+							expireSelf();
 							collapsed = true;
-							Atom e = expire(me());
-							ew[0] = e;
 						}
+					}else if(c as OpenParenth){
+						//no nothing
+					}else if(c as Function){
+
 					}else{
-						//don't operate on openparenth
-						if(c as OpenParenth){
-							//no nothing
-						}else if(c as Function){
+						operateOnChild(c,cSlot);
+						expireChild(c);
 
-						}else{
-							//expire child
-							Atom exC = expire(c);
-							SiteNum exCSlot = dru.resSlotNearMe();
-							if(exCSlot > 0){
-								ew[exCSlot] = exC;
-							}
-
-							operateOnChild(c,cSlot);
-
-							//expire self
-							collapsed = true;
-							Atom e = expire(me());
-							ew[0] = e;
-						}
-
+						expireSelf();
+						collapsed = true;
 					}
 				}
 			}
