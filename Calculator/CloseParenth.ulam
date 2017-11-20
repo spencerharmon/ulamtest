@@ -56,14 +56,14 @@ element CloseParenth : Agent{
 	//process for its clones. 
 	Bool detectExp(){
 		Bool ret = false;
-		for(SiteNum i; i < 41; ++i){
-			Atom a = ew[i];
-
-			//we'll expire as many CloseParenth as we can up 
-			//to the maximum available bits. After that, 
-			//it'll have to be some other process or not 
-			//happen at all
-			if(evolution != evolution.maxof){
+		//we'll expire as many CloseParenth as we can up 
+		//to the maximum available bits. After that, 
+		//it'll have to be some other process or not 
+		//happen at all
+		if(evolution != evolution.maxof){
+			for(SiteNum i; i < 41; ++i){
+				Atom a = ew[i];
+	
 				if(a as CloseParenth){
 					//CloseParenth retains its child until
 					//expired by function for its parenthetical

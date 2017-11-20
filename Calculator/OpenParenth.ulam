@@ -63,7 +63,7 @@ element OpenParenth : Agent{
 					collapsed = true;
 
 					expireChild(c);
-					expireAgent(self);
+					expireSelf();
 
 					//most importantly, create the data
 					//value set by child in default agent collapse behavior
