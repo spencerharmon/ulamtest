@@ -174,9 +174,9 @@ element Expire : Agent{
 	Void behave(){
 		if(!exp()){
 			agentCluster();
-			 if(r.oneIn(10)){
-				die();
-			}
+		}
+		 if(r.oneIn(10)){
+			die();
 		}
 	}
 }
