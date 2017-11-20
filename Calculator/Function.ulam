@@ -51,14 +51,9 @@ element Function : Agent{
 		if(c as CloseParenth){
 			evalCParenth(c.child, parent, cSlot, c.evolution);
 			//double check eval
-			Atom new = ew[cSlot];
-			if(new as CloseParenth){
-				if(new.evolution > c.evolution){
-					expireSelf();
-					expireChild(c);
-					collapsed = true;
-				}
-			}
+			expireSelf();
+			expireChild(c);
+			collapsed = true;
 		}else if(c as Data){
 			Function fn;
 			fn.value = value;

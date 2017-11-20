@@ -212,6 +212,7 @@ element Emitter{
 		return ret;
 	}
 	Void behave(){
+//	subtracttest();
 //	shorteqTest();
 	spawnEquation();
 	}

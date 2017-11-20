@@ -49,10 +49,10 @@ quark Agent{
 		for(SiteNum i = 1; i < 41; ++i){
 			Atom a = ew[i];
 			if(a as Agent){
-				if(a.child == parent || a.parent == child || r.oneIn(10)){
+//				if(a.child == parent || a.parent == child || r.oneIn(10)){
 					SiteNum slot = cl.emptySlotNearMe();
 					ew.swap(slot,i);
-				}
+//				}
 			}
 		}
 	}
