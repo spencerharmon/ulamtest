@@ -3,6 +3,7 @@
 	\license lgpl
 	\symbol Cp
 	\symmetries all
+	\#555
 	
  */
 element CloseParenth : Agent{
@@ -45,11 +46,9 @@ element CloseParenth : Agent{
 		Empty e;
 		return e;
 	}
-	Void overwrite(Int i, ID p, ID c, SiteNum s1, SiteNum s2){
+	Bool overwrite(Int i, ID p, ID c, SiteNum s1){
 		Bool virt = false;
-	}
-	Void overwrite(Int i, ID p, ID c, SiteNum s1){
-		Bool virt = false;
+		return false;
 	}
 	//not very expressive, but since the equation evaluates from 
 	//left to right, CloseParenth is passive. Scanning for later 
@@ -66,10 +65,16 @@ element CloseParenth : Agent{
 			//happen at all
 			if(evolution != evolution.maxof){
 				if(a as CloseParenth){
-					if(a.evolution > evolution){
-						Atom exp = expire(self);
-						ew[0] = exp;
-						ret = true;
+					//CloseParenth retains its child until
+					//expired by function for its parenthetical
+					//By comparing child IDs, we only expire for
+					//evolutions within our parenthetical.
+					if(a.child == child){
+						if(a.evolution > evolution){
+							Atom exp = expire(self);
+							ew[0] = exp;
+							ret = true;
+						}
 					}
 				}
 			}

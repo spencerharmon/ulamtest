@@ -43,13 +43,12 @@ element OpenParenth : Agent{
 		Int notvirtual;
 		return notvirtual;
 	}
-	Void overwrite(Int i, ID p, ID c, SiteNum s1, SiteNum s2){
+	Bool overwrite(Int i, ID p, ID c, SiteNum s1){
 		Bool virt = false;
-	}
-	Void overwrite(Int i, ID p, ID c, SiteNum s1){
-		Bool virt = false;
+		return false;
 	}
 	Bool collapse(SiteNum cSlot, SiteNum pSlot){
+		Bool collapsed = false;
 		if(parent == 0){
 			Atom a = ew[cSlot];
 			if(a as CloseParenth){
@@ -57,27 +56,14 @@ element OpenParenth : Agent{
 					du.print(value);
 				}
 			}
-		}
-		Bool collapsed = false;
-		if(cSlot > 0){
+		}else if(cSlot > 0){
 			Atom c = ew[cSlot];
 			if(c as CloseParenth){
 				if(evaluated){
 					collapsed = true;
 
-					//expire the child if res available
-					Atom expC = expire(c);
-					SiteNum resSlot = dru.resSlotNearMe();
-					if(resSlot > 0){
-						ew[resSlot] = expC;
-					}
-
-					//expire self if possible
-					Atom expSelf = expire(self);
-					SiteNum res2 = dru.resSlotNearMe();
-					if(resSlot > 0){
-						ew[res2] = expSelf;
-					}
+					expireChild(c);
+					expireAgent(self);
 
 					//most importantly, create the data
 					//value set by child in default agent collapse behavior

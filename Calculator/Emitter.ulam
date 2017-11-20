@@ -1,4 +1,5 @@
 element Emitter{
+	DebugUtils du;
 	Random r;
 	Cluster cl;
 	EventWindow ew;
@@ -32,6 +33,7 @@ element Emitter{
 		
 		ew[slot] = a;
 
+		du.print(a);
 		return aID;
 	}
 
@@ -152,7 +154,7 @@ element Emitter{
 	}
 	Void spawnEquation(){
 		// (/ 600 (- (+ 2 3 3) 2)) = 100
-		ID nextid;
+		ID nextid = idStor;
 		SiteNum slot = dru.resSlotNearMe();
 		while(slot > 0){
 			++agentIndex;
@@ -205,6 +207,7 @@ element Emitter{
 		return ret;
 	}
 	Void behave(){
-	shorteqTest();
+//	shorteqTest();
+	spawnEquation();
 	}
 }

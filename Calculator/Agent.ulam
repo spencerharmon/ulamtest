@@ -36,6 +36,7 @@ quark Agent{
 	virtual Unsigned numCopiesNearMe();
 	virtual Atom me();
 	virtual Int getValue();
+	virtual Bool checkEvalStatus();
 	Void copySelf(){
 			SiteNum slot = dru.resSlotNearMe();
 			Atom a = me();
@@ -69,6 +70,8 @@ quark Agent{
 							return i;
 						}
 					}
+				}else if(b as Function){
+					//do nothing
 				}else if(a.parent == child){
 					return i;
 				}
@@ -88,7 +91,7 @@ quark Agent{
 		return 0;
 	}
 	virtual Int typeFunction(Atom a);
-	virtual Void overwrite(Int val, ID p, ID c, SiteNum slot);
+	virtual Bool overwrite(Int val, ID p, ID c, SiteNum slot);
 
 
 	Void evalOParenth(ID c, ID p, SiteNum slot){
@@ -111,34 +114,32 @@ quark Agent{
 	}
 
 	Void expireChild(Atom c){
-		//expire child
-		Atom exC = expire(c);
-		SiteNum exCSlot = dru.resSlotNearMe();
-		if(exCSlot > 0){
-			ew[exCSlot] = exC;
-		}
-		
+		expireAgent(c);
 	}
 
 	Void expireParent(Atom p){
-		Atom exP = expire(p);
-		SiteNum exPSlot = dru.resSlotNearMe();
-		if(exPSlot > 0){
-			ew[exPSlot] = exP;
+		expireAgent(p);		
+	}
+	Void expireAgent(Atom a){
+		Atom e = expire(a);
+		SiteNum slot = dru.resSlotNearMe();
+		if(slot > 0){
+			ew[slot] = e;
 		}
 		
 	}
-
 	Void expireSelf(){
-		Atom e = expire(me());
-		ew[0] = e;
+		expireAgent(me());
+//		Atom e = expire(me());
+//		ew[0] = e;
 	}
 
-	Void operateOnChild(Atom c,SiteNum cSlot){
+	Bool operateOnChild(Atom c,SiteNum cSlot){
 		Int val = typeFunction(c);
 		if(c as Agent){
-			overwrite(val,parent,c.child,cSlot);
-		}
+			Bool ret = overwrite(val,parent,c.child,cSlot);
+			return ret;
+		}else return false;
 	}
 	Atom expire(Atom a){
 		if(a as Add){
@@ -174,6 +175,8 @@ quark Agent{
 			e.type = 5u;
 			e.parent = a.parent;
 			e.child = a.child;
+			du.print(me());
+			du.print(e);
 			return e;
 		}else if(a as Data){
 			Expire e;
@@ -193,7 +196,6 @@ quark Agent{
 		Res r;
 		return r;
 	}
-	virtual Bool checkEvalStatus();
 	virtual Bool collapse(SiteNum cSlot, SiteNum pSlot){
 		Atom p = ew[pSlot];
 		Atom c = ew[cSlot];
@@ -207,22 +209,25 @@ quark Agent{
 							evalOParenth(p.child,p.parent,pSlot);
 							evalCParenth(c.child, parent, cSlot, c.evolution);
 
+				//potentially dangerous. 
+				//may expire before eval
+
 							expireParent(p);
 							expireChild(c);
-
 							expireSelf();
+
 							collapsed = true;
 						}
 					}else if(c as OpenParenth){
 						//no nothing
 					}else if(c as Function){
-
+					}else if(c as Data){
 					}else{
-						operateOnChild(c,cSlot);
-						expireChild(c);
-
-						expireSelf();
-						collapsed = true;
+						if(operateOnChild(c,cSlot)){
+							expireChild(c);
+							expireSelf();
+							collapsed = true;
+						}
 					}
 				}
 			}

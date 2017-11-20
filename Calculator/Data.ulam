@@ -45,11 +45,9 @@ element Data : Agent{
 		Empty e;
 		return e;
 	}
-	Void overwrite(Int i, ID p, ID c, SiteNum s1, SiteNum s2){
+	Bool overwrite(Int i, ID p, ID c, SiteNum s1){
 		Bool virt = false;
-	}
-	Void overwrite(Int i, ID p, ID c, SiteNum s1){
-		Bool virt = false;
+		return false;
 	}
 	Bool mimic(){
 		Bool changed = false;

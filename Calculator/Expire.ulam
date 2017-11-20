@@ -57,11 +57,9 @@ element Expire : Agent{
 		Empty e;
 		return e;
 	}
-	Void overwrite(Int i, ID p, ID c, SiteNum s1, SiteNum s2){
+	Bool overwrite(Int i, ID p, ID c, SiteNum s1){
 		Bool virt = false;
-	}
-	Void overwrite(Int i, ID p, ID c, SiteNum s1){
-		Bool virt = false;
+		return false;
 	}
 	Bool expAdd(){
 		Bool  b = false;
@@ -158,18 +156,17 @@ element Expire : Agent{
 		Bool b = false;
 		if(type == 1u){
 			b = expAdd();
-		}else if(type ==1u){
-			b = expSubtract();
 		}else if(type ==2u){
-			b = expDivide();
+			b = expSubtract();
 		}else if(type ==3u){
-			b = expOpenParenth();
+			b = expDivide();
 		}else if(type ==4u){
-			b = expCloseParenth();
+			b = expOpenParenth();
 		}else if(type ==5u){
-			b = expData();
+			b = expCloseParenth();
 		}else if(type ==6u){
-			//function expire doesn't yet use this mechanism
+			b = expData();
+		}else if(type ==7u){
 			b = expFunction();
 		}
 		return b;

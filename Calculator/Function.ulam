@@ -42,8 +42,9 @@ element Function : Agent{
 		Int notvirtual;
 		return notvirtual;
 	}
-	Void overwrite(Int i, ID p, ID c, SiteNum s1){
+	Bool overwrite(Int i, ID p, ID c, SiteNum s1){
 		Bool virt = false;
+		return false;
 	}
 	Bool expireCopy(){
 		//Function atoms cannot expire themselves like most agents when propogating functions to data since they need to preserve the parent and update themselves and the child.
@@ -89,106 +90,66 @@ element Function : Agent{
 	Bool propogateType(SiteNum cSlot){
 		Bool collapsed = false;
 		Atom c = ew[cSlot];
-		if(value == 1){
-			if(c as Data){
-				Add ad;
-				ad.parent = parent;
-				ad.child = child;
-
-				ad.value = c.value;
-				
-				Function fn;
-				fn.value = value;
-				fn.child = c.child;
-				fn.parent = c.parent;
-				
-				if(expireCopy()){
-					ew[0] = fn;
-					ew[cSlot] = ad;
+		if(c as CloseParenth){
+			evalCParenth(c.child, parent, cSlot, c.evolution);
+			//double check eval
+			Atom new = ew[cSlot];
+			if(new as CloseParenth){
+				if(new.evolution > c.evolution){
+					expireSelf();
+					expireChild(c);
 					collapsed = true;
 				}
-			}else if(c as CloseParenth){
-				CloseParenth cp;
-				cp.parent = parent;
-				cp.child = c.child;
-				ew[cSlot] = cp;
-
-				collapsed = true;
-				dieRandomly = true;
 			}
-		}else if(value == 2){
-			if(c as Data){
-				Subtract sb;
-				sb.parent = parent;
-				sb.child = child;
+		}else if(c as Data){
+			Function fn;
+			fn.value = value;
+			fn.child = c.child;
+			fn.parent = c.parent;
+			
+			Atom oper = getOperator(c);
+			ew[cSlot] = oper;
+			//ew[0] taken
+			expireAgent(self);
+			expireChild(c);
 
-				sb.value = c.value;
-				
-				Function fn;
-				fn.value = value;
-				fn.child = c.child;
-				fn.parent = c.parent;
-
-				if(expireCopy()){
-					ew[0] = fn;
-					ew[cSlot] = sb;
-					collapsed = true;
-				}
-			}else if(c as CloseParenth){
-				CloseParenth cp;
-				cp.parent = parent;
-				cp.child = c.child;
-				ew[cSlot] = cp;
-
-				collapsed = true;
-				dieRandomly = true;
-			}
-		}else if(value == 3){
-			if(c as Data){
-				Divide dv;
-				dv.parent = parent;
-				dv.child = child;
-
-				dv.value = c.value;
-				
-				Function fn;
-				fn.value = value;
-				fn.child = c.child;
-				fn.parent = c.parent;
-
-				if(expireCopy()){
-					ew[0] = fn;
-					ew[cSlot] = dv;
-					collapsed = true;
-				}
-			}else if(c as CloseParenth){
-				CloseParenth cp;
-				cp.parent = parent;
-				cp.child = c.child;
-
-				collapsed = true;
-				ew[cSlot] = cp;
-				dieRandomly = true;
-			}
+			ew[0] = fn;
+			collapsed = true;
 		}
 		return collapsed;
 	}
+	Atom getOperator(Data c){
+		if(value == 1){
+			Add ad;
+			ad.parent = parent;
+			ad.child = child;
+			ad.value = c.value;
+			return ad;
+		}else if(value == 2){
+			Subtract sb;
+			sb.parent = parent;
+			sb.child = child;
+			sb.value = c.value;
+			return sb;
+		}else if(value == 3){
+			Divide dv;
+			dv.parent = parent;
+			dv.child = child;
+			dv.value = c.value;
+			return dv;
+		}
+		//gcc non-void-function warning
+		Res r;
+		return r;
+	}
 	Void behave(){
 		SiteNum cSlot = findChild();
-		if(dieRandomly){
+		if(cSlot > 0){
 			if(!propogateType(cSlot)){
-				if(expireCopy()){
-					die();
-				}
-			}
-		}else{
-			if(cSlot > 0){
-				if(!propogateType(cSlot)){
-					clusterDiffuse();
-				}
-			}else{
 				clusterDiffuse();
 			}
+		}else{
+			clusterDiffuse();
 		}
 	}
 }

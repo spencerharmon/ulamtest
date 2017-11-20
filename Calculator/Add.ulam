@@ -40,7 +40,7 @@ element Add : Agent{
 		}
 		return ret;
 	}
-	Void overwrite(Int val, ID p, ID c, SiteNum slot){
+	Bool overwrite(Int val, ID p, ID c, SiteNum slot){
 		Atom a = ew[slot];
 		if(a as Add){
 			Add ad;
@@ -50,7 +50,8 @@ element Add : Agent{
 			ad.evaluated = true;
 
 			ew[slot] = ad.atomof;
-		}
+			return true;
+		}else return false;
 	}
 
 	Void behave(){
