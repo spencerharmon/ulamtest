@@ -9,6 +9,7 @@
 element CloseParenth : Agent{
 
 	Unsigned evolution;
+	Bool preventFunctionShift = false;
 
 	typedef EventWindow.SiteNum SiteNum;
 

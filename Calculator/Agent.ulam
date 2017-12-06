@@ -108,6 +108,7 @@ quark Agent{
 		CloseParenth cp;
 		++evolution;
 		cp.evolution = evolution;
+		cp.preventFunctionShift = true;
 		cp.child = c;
 		cp.parent = p;
 		ew[slot] = cp;

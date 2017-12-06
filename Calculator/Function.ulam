@@ -49,11 +49,13 @@ element Function : Agent{
 		Bool collapsed = false;
 		Atom c = ew[cSlot];
 		if(c as CloseParenth){
-			evalCParenth(c.child, parent, cSlot, c.evolution);
-			//double check eval
-			expireSelf();
-			expireChild(c);
-			collapsed = true;
+			if(!c.preventFunctionShift){
+				evalCParenth(c.child, parent, cSlot, c.evolution);
+				//double check eval
+				expireSelf();
+				expireChild(c);
+				collapsed = true;
+			}
 		}else if(c as Data){
 			Function fn;
 			fn.value = value;
@@ -72,19 +74,19 @@ element Function : Agent{
 		return collapsed;
 	}
 	Atom getOperator(Data c){
-		if(value == 1){
+		if(value == 1u){
 			Add ad;
 			ad.parent = parent;
 			ad.child = child;
 			ad.value = c.value;
 			return ad;
-		}else if(value == 2){
+		}else if(value == 2u){
 			Subtract sb;
 			sb.parent = parent;
 			sb.child = child;
 			sb.value = c.value;
 			return sb;
-		}else if(value == 3){
+		}else if(value == 3u){
 			Divide dv;
 			dv.parent = parent;
 			dv.child = child;

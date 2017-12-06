@@ -213,7 +213,7 @@ element Emitter{
 	}
 	Void behave(){
 //	subtracttest();
-//	shorteqTest();
-	spawnEquation();
+	shorteqTest();
+//	spawnEquation();
 	}
 }
