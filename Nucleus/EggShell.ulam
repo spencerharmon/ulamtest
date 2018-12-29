@@ -1,173 +1,173 @@
 /**
-	\radius 1
-	\symmetries all
-	\author Spencer Harmon
-	\license lgpl
-	\color #b52
-	\symbol Eg
+  \radius 1
+  \symmetries all
+  \author Spencer Harmon
+  \license lgpl
+  \color #b52
+  \symbol Eg
 
-	form a protective layer over our buried genes in the base layer, then birth them into the event layer.
+  form a protective layer over our buried genes in the base layer, then birth them into the event layer.
  */
 element EggShell{
-	SiteUtils su;
-	EventWindow ew;
-	DebugUtils du;
-	Random r;
-	
-	ClusterByID cl;
+  SiteUtils su;
+  EventWindow ew;
+  DebugUtils du;
+  Random r;
+  
+  ClusterByID cl;
 
-	typedef EventWindow.SiteNum SiteNum;
-	typedef Cell.ID ID;
+  typedef EventWindow.SiteNum SiteNum;
+  typedef Cell.ID ID;
 
-	ID id;
-	Bool onCell;
-	Bool complete;
-	Unsigned(8) seq;
-	Bool incrementedSeq;
-	Bool cascading;
-	Unsigned(3) wait;
-	Bool first;
+  ID id;
+  Bool onCell;
+  Bool complete;
+  Unsigned(8) seq;
+  Bool incrementedSeq;
+  Bool cascading;
+  Unsigned(3) wait;
+  Bool first;
 
-	Void createNeighbor(){
-		Unsigned radius = ew.getRadius();
-		SiteNum slot = cl.emptySlotNearMe();
-		if(slot > 0 && slot <= 4){
-			EggShell eg;
-			eg.id = id;
-			eg.seq = seq;
-			ew[slot] = eg;
-		}
-	}
-	Void hatch(Atom a){
-		Empty e;
-		if(a as Gene){
-			ew[0] = a;
-		}
-		if(a as Nucleus){
-			ew[0] = a;
-		}
-		su.setBase(e);
-	}
-	Bool onNucleus(Atom a){
-		if(a as Nucleus){
-			if(a.id == id){
-				return true;
-			}else{
-				return false;
-			}
-		}else{
-			return false;
-		}
-	}
-	Bool onGene(Atom a){
-		if(a as Gene){
-			if(a.id == id){
-				return true;
-			}else{
-				return false;
-			}
-		}else{
-			return false;
-		}
-	}
-	Void neighborCheck(){
-		Bool dontdie = false;
-		Unsigned fam = 0;
+  Void createNeighbor(){
+    Unsigned radius = ew.getRadius();
+    SiteNum slot = cl.emptySlotNearMe();
+    if(slot > 0 && slot <= 4){
+      EggShell eg;
+      eg.id = id;
+      eg.seq = seq;
+      ew[slot] = eg;
+    }
+  }
+  Void hatch(Atom a){
+    Empty e;
+    if(a as Gene){
+      ew[0] = a;
+    }
+    if(a as Nucleus){
+      ew[0] = a;
+    }
+    su.setBase(e);
+  }
+  Bool onNucleus(Atom a){
+    if(a as Nucleus){
+      if(a.id == id){
+        return true;
+      }else{
+        return false;
+      }
+    }else{
+      return false;
+    }
+  }
+  Bool onGene(Atom a){
+    if(a as Gene){
+      if(a.id == id){
+        return true;
+      }else{
+        return false;
+      }
+    }else{
+      return false;
+    }
+  }
+  Void neighborCheck(){
+    Bool dontdie = false;
+    Unsigned fam = 0;
 
-		for(SiteNum i = 1; i <= 4; ++i){
-			Atom a = ew[i];
-			if(a as EggShell){
-				if(a.id == id){
-					if(a.onCell){
-						dontdie = true;
-					}
-					++fam;
-				}
-			}
-		}
-		//all neighbors in moore neighborhood are eggshells with my id.
-		if(fam >= 4u){
-			complete = true;
-		}else {
-			complete = false;
-		}
-		//die if no "oncell" neighbors
-		if(!dontdie && !onCell){
-			Empty e;
-			ew[0] = e;
-		}
-	}
-	Void eggTimer(){
-		//Unsigned stor[5];
-		for(SiteNum i = 1; i <= 4u; ++i){
-			Atom eg = ew[i];
-			if(eg as EggShell){
-				if(eg.id == id){
-					if(eg.seq <= seq){
-						eg.seq = (Unsigned(8))(seq + 1);
-						ew[i] = eg;
-					}else if(eg.seq > seq){
-						seq = eg.seq;
-					}
-				}else{
-					complete = false;
-				}
-			}else{
-				complete = false;
-			}
-		}
-		if(seq == seq.maxof){
-			cascading = true;
-		}
-	}
-	Void cascade(){
-		for(SiteNum i = 1; i <= 4; ++i){
-			Atom eg = ew[i];
-			if(eg as EggShell){
-				if(eg.id == id){
-					eg.cascading = true;
-					ew[i] = eg;
-				}
-			}
-		}
-	}
-	Void syncHatch(Atom a){
-		if(complete){
-			eggTimer();
-		}
-		if(cascading){
-			cascade();
-			hatch(a);
-		}
-	}
-	Void behave(){
-		if(first){
-			++wait;
-			if(wait == wait.maxof){
-				first = false;
-			}
-		}else{
-			Atom a = su.getBase();
-			Bool onN = onNucleus(a);
-			Bool onG = onGene(a);
-			if(onN){
-				onCell = true;
-				createNeighbor();
-				syncHatch(a);
-			}
-			if(onG){
-				onCell = true;
-				createNeighbor();
-				syncHatch(a);
-			}
-			if(!onN && !onG){
-				if(r.oneIn(25)){
-					createNeighbor();
-				}
-				onCell = false;
-				syncHatch(a);
-			}
-			neighborCheck();
-		}
-	}
+    for(SiteNum i = 1; i <= 4; ++i){
+      Atom a = ew[i];
+      if(a as EggShell){
+        if(a.id == id){
+          if(a.onCell){
+            dontdie = true;
+          }
+          ++fam;
+        }
+      }
+    }
+    //all neighbors in moore neighborhood are eggshells with my id.
+    if(fam >= 4u){
+      complete = true;
+    }else {
+      complete = false;
+    }
+    //die if no "oncell" neighbors
+    if(!dontdie && !onCell){
+      Empty e;
+      ew[0] = e;
+    }
+  }
+  Void eggTimer(){
+    //Unsigned stor[5];
+    for(SiteNum i = 1; i <= 4u; ++i){
+      Atom eg = ew[i];
+      if(eg as EggShell){
+        if(eg.id == id){
+          if(eg.seq <= seq){
+            eg.seq = (Unsigned(8))(seq + 1);
+            ew[i] = eg;
+          }else if(eg.seq > seq){
+            seq = eg.seq;
+          }
+        }else{
+          complete = false;
+        }
+      }else{
+        complete = false;
+      }
+    }
+    if(seq == seq.maxof){
+      cascading = true;
+    }
+  }
+  Void cascade(){
+    for(SiteNum i = 1; i <= 4; ++i){
+      Atom eg = ew[i];
+      if(eg as EggShell){
+        if(eg.id == id){
+          eg.cascading = true;
+          ew[i] = eg;
+        }
+      }
+    }
+  }
+  Void syncHatch(Atom a){
+    if(complete){
+      eggTimer();
+    }
+    if(cascading){
+      cascade();
+      hatch(a);
+    }
+  }
+  Void behave(){
+    if(first){
+      ++wait;
+      if(wait == wait.maxof){
+        first = false;
+      }
+    }else{
+      Atom a = su.getBase();
+      Bool onN = onNucleus(a);
+      Bool onG = onGene(a);
+      if(onN){
+        onCell = true;
+        createNeighbor();
+        syncHatch(a);
+      }
+      if(onG){
+        onCell = true;
+        createNeighbor();
+        syncHatch(a);
+      }
+      if(!onN && !onG){
+        if(r.oneIn(25)){
+          createNeighbor();
+        }
+        onCell = false;
+        syncHatch(a);
+      }
+      neighborCheck();
+    }
+  }
 }

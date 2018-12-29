@@ -1,372 +1,373 @@
 /**
-	The idea is to construct a decision tree using Genes
-	
-	\author Spencer Harmon
-	\license lgpl
+  The idea is to construct a decision tree using Genes
+  
+  \author Spencer Harmon
+  \license lgpl
  */
 quark DecisionTree{
-	Random r;
-	EventWindow ew;
-	AtomUtils au;
+  Random r;
+  EventWindow ew;
+  AtomUtils au;
 
-	typedef Unsigned(6) StoredValue;
+  typedef Unsigned(6) StoredValue;
 
-	typedef AtomUtils.Type ElementType;
-	typedef WindowScanner.Category Category;
-	typedef Cell.Seqno Seqno;
-	typedef Cell.ID ID;
+  typedef AtomUtils.Type ElementType;
+  typedef WindowScanner.Category Category;
+  typedef Cell.Seqno Seqno;
+  typedef Cell.ID ID;
 
-	Unsigned(2) initGene(Seqno mySeqno, Seqno refSeqno, ID id, Unsigned(4) specialVars,Bool isVar){
+  Unsigned(2) initGene(Seqno mySeqno, Seqno refSeqno, ID id, Unsigned(4) specialVars,Bool isVar){
 
-			//These nodes and their Stored Values represent the binary tree structure and
-			//content of the equation tree
+    //These nodes and their Stored Values represent the binary tree structure and
+    //content of the equation tree
 
-		//this is the return value for initGene;
-		Unsigned(2) numberOfGenesToAddToMyTree;
+    //this is the return value for initGene
+    Unsigned(2) numberOfGenesToAddToMyTree;
 
-		Gene gene;
+    Gene gene;
 
-		gene.seqno = mySeqno;
-		gene.id = id;
-		
-		//representing addition, subtraction, multiplication, and division
-		gene.operator = (Unsigned(2)) r.create(3);
+    gene.seqno = mySeqno;
+    gene.id = id;
 
-		// I Don't like the way this reads, but the idea is
-		// that if valTypSwitch is true, it signifies a 
-		// stored value (left or right in the binary tree)
-		// if of type reference. Here, that means a Seqno of
-		// another gene which represents an operator node and a
-		// branch of the equation tree. If ValTypSwitch if 
-		// false, then the stored value is of type constant, 
-		// indicating a terminator in the equation tree and
-		// a value in itself to be calculated.
-		//
-		// Left and right are represented, respectively, by
-		// array keys 0 and 1 in the following arrays.
-		//
+    //representing addition, subtraction, multiplication, and division
+//    gene.operator = Unsigned(2) r.create(3);
 
-		Unsigned valTypSwitch0;
-		Unsigned valTypSwitch1;
-		
-		valTypSwitch0 = r.create(100);
-		valTypSwitch1 = r.create(100);
+    // I Don't like the way this reads, but the idea is
+    // that if valTypSwitch is true, it signifies a 
+    // stored value (left or right in the binary tree)
+    // if of type reference. Here, that means a Seqno of
+    // another gene which represents an operator node and a
+    // branch of the equation tree. If ValTypSwitch if 
+    // false, then the stored value is of type constant, 
+    // indicating a terminator in the equation tree and
+    // a value in itself to be calculated.
+    //
+    // Left and right are represented, respectively, by
+    // array keys 0 and 1 in the following arrays.
+    //
 
-		//30% chance
-		if(valTypSwitch0 >= (Unsigned)0 && valTypSwitch0 < (Unsigned)30){
-			//terminator
-			gene.tree0Type = 0;
-			gene.eqTree0 = (Unsigned(6)) r.create(63);
-		}
-		//10% chance
-		if(valTypSwitch0 >= (Unsigned)30 && valTypSwitch0 < (Unsigned)40){
-			//why not some extra chance of nothing? (terminator)
-			gene.tree0Type = 0;
-			gene.eqTree0 = (StoredValue) 0;
-		}
-		//10% chance
-		if(valTypSwitch0 >= (Unsigned)40 && valTypSwitch0 < (Unsigned)50){
-			//comIn 
-			//comIn is technically a terminator, but it "feels" like a reference
-			//to the equation tree of another Nucleus.
-			//Also, type 0 value 0 already has the distinct meaning "the number 0"
+    Unsigned valTypSwitch0;
+    Unsigned valTypSwitch1;
+    
+    valTypSwitch0 = r.create(100);
+    valTypSwitch1 = r.create(100);
 
-			gene.tree0Type = 1;
+    //30% chance
+    if(valTypSwitch0 >= (Unsigned)0 && valTypSwitch0 < (Unsigned)30){
+      //terminator
+      gene.tree0Type = 0;
+      gene.eqTree0 = (Unsigned(6)) r.create(63);
+    }
+    //10% chance
+    if(valTypSwitch0 >= (Unsigned)30 && valTypSwitch0 < (Unsigned)40){
+      //why not some extra chance of nothing? (terminator)
+      gene.tree0Type = 0;
+      gene.eqTree0 = (StoredValue) 0;
+    }
+    //10% chance
+    if(valTypSwitch0 >= (Unsigned)40 && valTypSwitch0 < (Unsigned)50){
+      //comIn 
+      //comIn is technically a terminator, but it "feels" like a reference
+      //to the equation tree of another Nucleus.
+      //Also, type 0 value 0 already has the distinct meaning "the number 0"
 
-			// Type 1 value 0 represents comIn. Since seqno starts with 1, this
-			// should not conflict with anything
-			gene.eqTree0 = (StoredValue)0;
-		}
-		if(valTypSwitch0 >= (Unsigned)50 && valTypSwitch0 < (Unsigned)75){
-			//operator (seqno reference)
-			gene.tree0Type = 1;
+      gene.tree0Type = 1;
 
-			//add the gene, then create a reference to it.
-			++numberOfGenesToAddToMyTree;
+      // Type 1 value 0 represents comIn. Since seqno starts with 1, this
+      // should not conflict with anything
+      gene.eqTree0 = (StoredValue)0;
+    }
+    if(valTypSwitch0 >= (Unsigned)50 && valTypSwitch0 < (Unsigned)75){
+      //operator (seqno reference)
+      gene.tree0Type = 1;
 
-			if(isVar){
-				gene.eqTree0 = (StoredValue)(refSeqno+numberOfGenesToAddToMyTree-1);
-			}
-			else{				
-				gene.eqTree0 = (StoredValue)(refSeqno+numberOfGenesToAddToMyTree);
-			}
-		}
-		if(valTypSwitch0 >= (Unsigned)75 && valTypSwitch0 < (Unsigned)100){
-			//special variables, still operator type
-			gene.tree0Type = 1;
-			
-			//specialVars holds the count of special variables. add 3 to get
-			//their seqno.
-			gene.eqTree0 = (StoredValue)((StoredValue)r.create(specialVars)+(StoredValue)4);
+      //add the gene, then create a reference to it.
+      ++numberOfGenesToAddToMyTree;
 
-			//this is a loop; should not happen (but would otherwise)
-			if(gene.eqTree0 == gene.seqno){
-				gene.tree0Type = 0;
-			}
-		}
-		//30% chance
-		if(valTypSwitch1 >= (Unsigned)0 && valTypSwitch1 < (Unsigned)30){
-			//terminator
-			gene.tree1Type = 0;
-			gene.eqTree1 = (Unsigned(6)) r.create(63);
-		}
-		//10% chance
-		if(valTypSwitch1 >= (Unsigned)30 && valTypSwitch1 < (Unsigned)40){
-			//why not some extra chance of nothing? (terminator)
-			gene.tree1Type = 0;
-			gene.eqTree1 = (StoredValue) 0;
-		}
-		//10% chance
-		if(valTypSwitch1 >= (Unsigned)40 && valTypSwitch1 < (Unsigned)50){
-			//comIn 
-			//comIn is technically a terminator, but it "feels" like a reference
-			//to the equation tree of another Nucleus.
-			//Also, type 0 value 0 already has the distinct meaning "the number 0"
+      if(isVar){
+        gene.eqTree0 = (StoredValue)(refSeqno+numberOfGenesToAddToMyTree-1);
+      }
+      else{        
+        gene.eqTree0 = (StoredValue)(refSeqno+numberOfGenesToAddToMyTree);
+      }
+    }
+    if(valTypSwitch0 >= (Unsigned)75 && valTypSwitch0 < (Unsigned)100){
+      //special variables, still operator type
+      gene.tree0Type = 1;
+      
+      //specialVars holds the count of special variables. add 3 to get
+      //their seqno.
+      gene.eqTree0 = (StoredValue)((StoredValue)r.create(specialVars)+(StoredValue)4);
 
-			gene.tree1Type = 1;
+      //this is a loop; should not happen (but would otherwise)
+      if(gene.eqTree0 == gene.seqno){
+        gene.tree0Type = 0;
+      }
+    }
+    //30% chance
+    if(valTypSwitch1 >= (Unsigned)0 && valTypSwitch1 < (Unsigned)30){
+      //terminator
+      gene.tree1Type = 0;
+      gene.eqTree1 = (Unsigned(6)) r.create(63);
+    }
+    //10% chance
+    if(valTypSwitch1 >= (Unsigned)30 && valTypSwitch1 < (Unsigned)40){
+      //why not some extra chance of nothing? (terminator)
+      gene.tree1Type = 0;
+      gene.eqTree1 = (StoredValue) 0;
+    }
+    //10% chance
+    if(valTypSwitch1 >= (Unsigned)40 && valTypSwitch1 < (Unsigned)50){
+      //comIn 
+      //comIn is technically a terminator, but it "feels" like a reference
+      //to the equation tree of another Nucleus.
+      //Also, type 0 value 0 already has the distinct meaning "the number 0"
 
-			// Type 1 value 0 represents comIn. Since seqno starts with 1, this
-			// should not conflict with anything
-			gene.eqTree1 = (StoredValue)0;
-		}
-		if(valTypSwitch1 >= (Unsigned)50 && valTypSwitch1 < (Unsigned)75){
-			//operator (seqno reference)
-			gene.tree1Type = 1;
+      gene.tree1Type = 1;
 
-			//add the gene, then create a reference to it.
-			++numberOfGenesToAddToMyTree;
+      // Type 1 value 0 represents comIn. Since seqno starts with 1, this
+      // should not conflict with anything
+      gene.eqTree1 = (StoredValue)0;
+    }
+    if(valTypSwitch1 >= (Unsigned)50 && valTypSwitch1 < (Unsigned)75){
+      //operator (seqno reference)
+      gene.tree1Type = 1;
 
-			if(isVar){
-				gene.eqTree1 = (StoredValue)(refSeqno+numberOfGenesToAddToMyTree-1);
-			}
-			else{				
-				gene.eqTree1 = (StoredValue)(refSeqno+numberOfGenesToAddToMyTree);
-			}
-		}
-		if(valTypSwitch1 >= (Unsigned)75 && valTypSwitch1 < (Unsigned)100){
-			//special variables, still operator type
-			gene.tree1Type = 1;
-			
-			//specialVars holds the count of special variables. add 3 to get
-			//their seqno.
-			gene.eqTree1 = (StoredValue)((StoredValue)r.create(specialVars)+(StoredValue)4);
+      //add the gene, then create a reference to it.
+      ++numberOfGenesToAddToMyTree;
 
-			//this is a loop; should not happen (but would otherwise)
-			if(gene.eqTree1 == gene.seqno){
-				gene.tree1Type = 0;
-			}
-		}
-		
-		//go ahead and plop it down, hopefully not on anything important.
-		if(mySeqno <= (Seqno)40){
-			ew[mySeqno]=gene;
-		}
-		return numberOfGenesToAddToMyTree;
-	}
+      if(isVar){
+        gene.eqTree1 = (StoredValue)(refSeqno+numberOfGenesToAddToMyTree-1);
+      }
+      else{        
+        gene.eqTree1 = (StoredValue)(refSeqno+numberOfGenesToAddToMyTree);
+      }
+    }
+    if(valTypSwitch1 >= (Unsigned)75 && valTypSwitch1 < (Unsigned)100){
+      //special variables, still operator type
+      gene.tree1Type = 1;
+      
+      //specialVars holds the count of special variables. add 3 to get
+      //their seqno.
+      gene.eqTree1 = (StoredValue)((StoredValue)r.create(specialVars)+(StoredValue)4);
 
-	//
-	// Initialize variables. The equation tree is generated procedurally from 
-	// the first node in the tree. These first nodes are the "variables" which
-	// are either the seqnos read by the nucleaus for decision making or the
-	// shared references by the "primary variables'" equation trees.
-	//
-	Void initVars(ID id){
+      //this is a loop; should not happen (but would otherwise)
+      if(gene.eqTree1 == gene.seqno){
+        gene.tree1Type = 0;
+      }
+    }
+    
+    //go ahead and plop it down, hopefully not on anything important.
+    if(mySeqno <= (Seqno)40){
+      ew[mySeqno]=gene;
+    }
+    return numberOfGenesToAddToMyTree;
+  }
 
-		// The randomness here is to have common variables accessible to the three
-		// main variables.
-		// Must have at least three vars (represent symmetry, movement, and comout)
-		//
-		Seqno numVars = (Seqno)(r.create(3)+(Unsigned(32))3);
-		Seqno seqno = (Seqno) (numVars+1);
+  //
+  // Initialize variables. The equation tree is generated procedurally from 
+  // the first node in the tree. These first nodes are the "variables" which
+  // are either the seqnos read by the nucleaus for decision making or the
+  // shared references by the "primary variables'" equation trees.
+  //
+  Void initVars(ID id){
 
-		//because the first seqnos are for variables, 
-		for(Seqno i = 1; i <= numVars; ++i){
-			//love that this recursive statement works.
-			seqno = initTree(i,seqno,numVars,id);
-		}
-	}
-	Seqno initTree(Seqno i,Seqno seqno,Seqno numVars,ID id){
-		Seqno genesLeftToCreate;
-	
-			//initGene returns 0, 1, or 2, representing the number of genes this
-			//tree member would like to create.
-			//these genes get i for seqno because they are the variables
+    // The randomness here is to have common variables accessible to the three
+    // main variables.
+    // Must have at least three vars (represent symmetry, movement, and comout)
+    //
+    Seqno numVars = (Seqno)(r.create(3)+(Unsigned(32))3);
+    Seqno seqno = (Seqno) (numVars+1);
 
-		genesLeftToCreate += initGene(i,seqno,id,(Unsigned(4))(numVars-3),true);
+    //because the first seqnos are for variables, 
+    for(Seqno i = 1; i <= numVars; ++i){
+      //love that this recursive statement works.
+      seqno = initTree(i,seqno,numVars,id);
+    }
+  }
+  Seqno initTree(Seqno i,Seqno seqno,Seqno numVars,ID id){
+    Seqno genesLeftToCreate;
+  
+      //initGene returns 0, 1, or 2, representing the number of genes this
+      //tree member would like to create.
+      //these genes get i for seqno because they are the variables
 
-		while(genesLeftToCreate > 0){
-			genesLeftToCreate += initGene(seqno,seqno,id,(Unsigned(4))(numVars-3),false);
-			--genesLeftToCreate;
-			++seqno;
-		}
-		return seqno;
-	}
-	Atom findSeqno(Seqno seqno, ID id){
-		Empty e;
+    genesLeftToCreate += initGene(i,seqno,id,(Unsigned(4))(numVars-3),true);
 
-		for(Seqno i = 0; i <=40; ++i){
-			Atom gene = ew[i];
-			if(gene as Gene){
-				if(gene.id == id && gene.seqno == seqno){
-					return gene;
-				}
-			}
-		}
-		return e;		
-	}
-	StoredValue evaluate(Seqno var, ID id, StoredValue comIn){
-		Bool evaluated[40];
-		Bool checked[40];
+    while(genesLeftToCreate > 0){
+      genesLeftToCreate += initGene(seqno,seqno,id,(Unsigned(4))(numVars-3),false);
+      --genesLeftToCreate;
+      ++seqno;
+    }
+    return seqno;
+  }
+  Atom findSeqno(Seqno seqno, ID id){
+    Empty e;
 
-		StoredValue value[40];
-		Seqno parent[40];
+    for(Seqno i = 0; i <=40; ++i){
+      Atom gene = ew[i];
+      if(gene as Gene){
+        if(gene.id == id && gene.seqno == seqno){
+          return gene;
+        }
+      }
+    }
+    return e;    
+  }
+  StoredValue evaluate(Seqno var, ID id, StoredValue comIn){
+    Bool evaluated[40];
+    Bool checked[40];
 
-		Unsigned(2) operator[40];
+    StoredValue value[40];
+    Seqno parent[40];
 
-		Bits(2) tree0Type[40];
-		StoredValue eqTree0[40];
+//    Unsigned(2) operator[40];
 
-		Bits(2) tree1Type[40];
-		StoredValue eqTree1[40];
+    Bits(2) tree0Type[40];
+    StoredValue eqTree0[40];
 
-		Bool keepRecursing = true;
-		Seqno seqno = var;
+    Bits(2) tree1Type[40];
+    StoredValue eqTree1[40];
 
-		Unsigned(2) dejavu;
-		while(keepRecursing){
-			if(evaluated[var]){
-				return value[var];
-			}
-			if(!evaluated[seqno] && !checked[seqno]){
-				//
-				//Populate some stuff.
-				//
-				Atom gene = findSeqno(seqno, id);
-				
-				//will only return here if checked wasn't set because gene
-				//seqno wasn't found. 
-				//dejavu tells us if we're scanning one too many times.
-				++dejavu;
-				if(dejavu > 1){
-					return (StoredValue) 0;
-				}
-				if(gene as Gene){
-					checked[seqno] = true;
+    Bool keepRecursing = true;
+    Seqno seqno = var;
 
-					operator[seqno] = gene.operator;
+    Unsigned(2) dejavu;
+    while(keepRecursing){
+      if(evaluated[var]){
+        return value[var];
+      }
+      if(!evaluated[seqno] && !checked[seqno]){
+        //
+        //Populate some stuff.
+        //
+        Atom gene = findSeqno(seqno, id);
+        
+        //will only return here if checked wasn't set because gene
+        //seqno wasn't found. 
+        //dejavu tells us if we're scanning one too many times.
+        ++dejavu;
+        if(dejavu > 1){
+          return (StoredValue) 0;
+        }
+        if(gene as Gene){
+          checked[seqno] = true;
 
-					tree0Type[seqno] = gene.tree0Type;
-					eqTree0[seqno] = gene.eqTree0;
+//          operator[seqno] = gene.operator;
 
-					tree1Type[seqno] = gene.tree1Type;
-					eqTree1[seqno] = gene.eqTree1;
-				}
-			}
-			//
-			// prepare comIn value and call it a terminator
-			//
-			if(tree0Type[seqno] == 1 && eqTree0[seqno] == 0){
-				tree0Type[seqno] = 0;
-				eqTree0[seqno] = comIn;
-			}
-			if(tree1Type[seqno] == 1 && eqTree1[seqno] == 0){
-				tree0Type[seqno] = 0;
-				eqTree0[seqno] = comIn;
-			}
-			//
-			// Do maths operation if child nodes are terminator type.
-			// Pass control back to parent.
-			//
-			if(tree0Type[seqno] == 0 && tree1Type[seqno] == 0){
-				value[seqno] = operate(eqTree0[seqno], operator[seqno], eqTree1[seqno]);
-				evaluated[seqno] = true;
-				keepRecursing = true;
-				seqno = parent[seqno];
-			}
-			//
-			// Collapse child nodes and recurse
-			//
-			if(tree0Type[seqno] == 1){
-				Seqno childseqno = (Seqno)eqTree0[seqno];
-				if(!evaluated[childseqno]){
-					parent[childseqno] = seqno;
-					seqno = childseqno;
-					keepRecursing = true;
-				}
-				else{
-					tree0Type[seqno] = 0;
-					eqTree0[seqno] = value[childseqno];
-					keepRecursing = true;
-				}	
-			}
-			else{
-				if(tree1Type[seqno] == 1){
-					Seqno childseqno = (Seqno)eqTree1[seqno];
-					if(!evaluated[childseqno]){
-						parent[childseqno] = seqno;
-						seqno = childseqno;
-						keepRecursing = true;
-					}
-					else{
-						tree1Type[seqno] = 0;
-						eqTree1[seqno] = value[childseqno];
-						keepRecursing = true;
-					}
-				}
-			}
-		}// while keepRecursing loop
-		//g++ complains without returning something at this namespace, even though
-		//control shouldn't reach here.
-		return value[var];
-	}//evaluate() namespace
-	StoredValue selfEvaluate(Seqno var, ID id, StoredValue comIn){
-		StoredValue val0;
-		StoredValue val1;
-		StoredValue value;
-		Atom gene;
-		Atom my = ew[0];
-		if(my as Gene){
-			if(my.tree0Type == 1 && my.eqTree0 == 0){
-				my.tree0Type = 0;
-				val0 = comIn;
-			}else if(my.tree0Type == 1 && my.eqTree0 != 0){
-				gene = findSeqno((Seqno)my.eqTree0, id);
-				if(gene as Gene){
-					val0 = gene.value;
-				}
-			}else if(my.tree0Type == 0){
-				val0 = my.eqTree0;
-			}
+          tree0Type[seqno] = gene.tree0Type;
+          eqTree0[seqno] = gene.eqTree0;
 
-			if(my.tree1Type == 1 && my.eqTree1 == 0){
-				my.tree0Type = 0;
-				val1 = comIn;
-			}else if(my.tree1Type == 1 && my.eqTree1 !=0){
-				gene = findSeqno((Seqno)my.eqTree1, id);
-				if(gene as Gene){
-					val1 = gene.value;
-				}
-			}else if(my.tree1Type == 0){
-				val1 = my.eqTree1;
-			}
-			value = operate(val0, my.operator, val1);
-		}
-		return value;
-	}//selfEvaluate() namespace
-	StoredValue operate(StoredValue val1, Unsigned(2) operator, StoredValue val2){
-		StoredValue value;
-		if(operator == 0){
-			value = (StoredValue)(val1 + val2);
-		}
-		if(operator == 1){
-			value = (StoredValue)(val1 - val2);
-		}
-		if(operator == 2){
-			value = (StoredValue)(val1 * val2);
-		}
-		if(operator == 3){
-			value = (StoredValue)(val1 / val2);
-		}
-		return value;
-	}
+          tree1Type[seqno] = gene.tree1Type;
+          eqTree1[seqno] = gene.eqTree1;
+        }
+      }
+      //
+      // prepare comIn value and call it a terminator
+      //
+      if(tree0Type[seqno] == 1 && eqTree0[seqno] == 0){
+        tree0Type[seqno] = 0;
+        eqTree0[seqno] = comIn;
+      }
+      if(tree1Type[seqno] == 1 && eqTree1[seqno] == 0){
+        tree0Type[seqno] = 0;
+        eqTree0[seqno] = comIn;
+      }
+      //
+      // Do maths operation if child nodes are terminator type.
+      // Pass control back to parent.
+      //
+      if(tree0Type[seqno] == 0 && tree1Type[seqno] == 0){
+//        value[seqno] = operate(eqTree0[seqno], operator[seqno], eqTree1[seqno]);
+        evaluated[seqno] = true;
+        keepRecursing = true;
+        seqno = parent[seqno];
+      }
+      //
+      // Collapse child nodes and recurse
+      //
+      if(tree0Type[seqno] == 1){
+        Seqno childseqno = (Seqno)eqTree0[seqno];
+        if(!evaluated[childseqno]){
+          parent[childseqno] = seqno;
+          seqno = childseqno;
+          keepRecursing = true;
+        }
+        else{
+          tree0Type[seqno] = 0;
+          eqTree0[seqno] = value[childseqno];
+          keepRecursing = true;
+        }  
+      }
+      else{
+        if(tree1Type[seqno] == 1){
+          Seqno childseqno = (Seqno)eqTree1[seqno];
+          if(!evaluated[childseqno]){
+            parent[childseqno] = seqno;
+            seqno = childseqno;
+            keepRecursing = true;
+          }
+          else{
+            tree1Type[seqno] = 0;
+            eqTree1[seqno] = value[childseqno];
+            keepRecursing = true;
+          }
+        }
+      }
+    }// while keepRecursing loop
+    //g++ complains without returning something at this namespace, even though
+    //control shouldn't reach here.
+    return value[var];
+  }//evaluate() namespace
+  StoredValue selfEvaluate(Seqno var, ID id, StoredValue comIn){
+    StoredValue val0;
+    StoredValue val1;
+    StoredValue value;
+    Atom gene;
+    Atom my = ew[0];
+    if(my as Gene){
+      if(my.tree0Type == 1 && my.eqTree0 == 0){
+        my.tree0Type = 0;
+        val0 = comIn;
+      }else if(my.tree0Type == 1 && my.eqTree0 != 0){
+        gene = findSeqno((Seqno)my.eqTree0, id);
+        if(gene as Gene){
+          val0 = gene.value;
+        }
+      }else if(my.tree0Type == 0){
+        val0 = my.eqTree0;
+      }
+
+      if(my.tree1Type == 1 && my.eqTree1 == 0){
+        my.tree0Type = 0;
+        val1 = comIn;
+      }else if(my.tree1Type == 1 && my.eqTree1 !=0){
+        gene = findSeqno((Seqno)my.eqTree1, id);
+        if(gene as Gene){
+          val1 = gene.value;
+        }
+      }else if(my.tree1Type == 0){
+        val1 = my.eqTree1;
+      }
+//      value = operate(val0, my.operator, val1);
+    }
+    return value;
+  }//selfEvaluate() namespace
+/*  StoredValue operate(StoredValue val1, Unsigned(2) operator, StoredValue val2){
+    StoredValue value;
+    if(operator == 0){
+      value = (StoredValue)(val1 + val2);
+    }
+    if(operator == 1){
+      value = (StoredValue)(val1 - val2);
+    }
+    if(operator == 2){
+      value = (StoredValue)(val1 * val2);
+    }
+    if(operator == 3){
+      value = (StoredValue)(val1 / val2);
+    }
+    return value;
+  }
+*/
 }//DecisionTree namespace

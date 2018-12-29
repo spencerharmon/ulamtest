@@ -1,50 +1,50 @@
 /**
-	Determine if a site is out of bounds in the current event window. Useful check before checking adjacent coordinates to atoms 
+  Determine if a site is out of bounds in the current event window. Useful check before checking adjacent coordinates to atoms 
 with manhattan distance of four.
 
-	/author Spencer Harmon
-	/license lgpl
+  /author Spencer Harmon
+  /license lgpl
  */
 transient OutOfBounds{
-	EventWindow ew;
-	C2D cd;
+  EventWindow ew;
+  C2D cd;
 
-	//inherited typedefs
-	typedef EventWindow.SiteNum SiteNum;
+  //inherited typedefs
+  typedef EventWindow.SiteNum SiteNum;
 
-	//data members
-	C2D abs(C2D site){
-		Int x;
-		Int y;
-		if (site.x > 0){
-			x = site.x;
-		}	
-		else{
-			x = site.x*-1;
-		}
-		if (site.y > 0){
-			y = site.y;
-		}	
-		else{
-			y = site.y*-1;
-		}
-		C2D val = cd.make((Int(16)) x,(Int(16)) y);
-		return val;
-	}
-		
-	Bool isOOB(SiteNum site){
-		return isOOB(ew.getCoord(site));
-	}
-	Bool isOOB(C2D site){
-		C2D val = abs(site);
-		Int(16) x;
-		x = val.x;
-		Int(16) y;
-		y = val.y;
+  //data members
+  C2D abs(C2D site){
+    Int x;
+    Int y;
+    if (site.x > 0){
+      x = site.x;
+    }  
+    else{
+      x = site.x*-1;
+    }
+    if (site.y > 0){
+      y = site.y;
+    }  
+    else{
+      y = site.y*-1;
+    }
+    C2D val = cd.make((Int(16)) x,(Int(16)) y);
+    return val;
+  }
+    
+  Bool isOOB(SiteNum site){
+    return isOOB(ew.getCoord(site));
+  }
+  Bool isOOB(C2D site){
+    C2D val = abs(site);
+    Int(16) x;
+    x = val.x;
+    Int(16) y;
+    y = val.y;
 
-		if ((Int(16)) x + (Int(16)) y > (Int(17)) ew.getRadius()){
-			 return true;
-		}
-		else return false;
-	}
+    if ((Int(16)) x + (Int(16)) y > (Int(17)) ew.getRadius()){
+       return true;
+    }
+    else return false;
+  }
 }

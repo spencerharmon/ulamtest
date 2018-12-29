@@ -1,102 +1,101 @@
-ulam 2;
 use Cell;
 /**
-	Nucleus reads Genes to determine its behavior
+  Nucleus reads Genes to determine its behavior
 
-	\symbol Nu
-	\author Spencer Harmon
-	\license lgpl
-	\symmetries all
-	\color #1f0
+  \symbol Nu
+  \author Spencer Harmon
+  \license lgpl
+  \symmetries all
+  \color #1f0
 
  */
 element Nucleus{
-	EventWindow ew;
-	Random r;
-	Cell cell;
-	AtomUtils au;
-	SiteUtils su;
-	DebugUtils du;
-	ClusterByID cl;
-	DecisionTree dt;
-	
-	//typedefs
-	typedef ColorUtils.ARGB ARGB;
-	typedef Cell.ID ID;
-	typedef Cell.Com Com;
-	typedef Cell.Seqno Seqno;
-	typedef DecisionTree.StoredValue StoredValue;
-	typedef EventWindow.SiteNum SiteNum;
-	typedef AtomUtils.Type ElementType;
-	typedef WindowScanner.Category Category;
+  EventWindow ew;
+  Random r;
+  Cell cell;
+  AtomUtils au;
+  SiteUtils su;
+  DebugUtils du;
+  ClusterByID cl;
+  DecisionTree dt;
+  
+  //typedefs
+  typedef ColorUtils.ARGB ARGB;
+  typedef Cell.ID ID;
+  typedef Cell.Com Com;
+  typedef Cell.Seqno Seqno;
+  typedef DecisionTree.StoredValue StoredValue;
+  typedef EventWindow.SiteNum SiteNum;
+  typedef AtomUtils.Type ElementType;
+  typedef WindowScanner.Category Category;
 
-	//data members
-	ID id; //the all-important cluster id
-	ID parent1id;
-	ID parent2id;
+  //data members
+  ID id; //the all-important cluster id
+  ID parent1id;
+  ID parent2id;
 
-	//probably should have called this "genecopy" or something
-	Bool reproducing;
-	Unsigned(7) refractoryPeriod;
-	Unsigned(10) lifespan;
-	StoredValue comIn;
-	StoredValue comOut;
-	ID childID;
+  //probably should have called this "genecopy" or something
+  Bool reproducing;
+  Unsigned(7) refractoryPeriod;
+  Unsigned(10) lifespan;
+  StoredValue comIn;
+  StoredValue comOut;
+  ID childID;
 
-	Bool dieOfOldAge(){
-		if(lifespan == lifespan.maxof){
-			Empty e;
-			ew[0] = e;
-			return true;
-		}
-		else{
-			return false;
-		}
-	}
-	Bool notIncest(Atom mate){
-		if(mate as Nucleus){
-			if(parent1id == mate.parent1id || 
-			parent1id == mate.parent1id || 
-			parent1id == mate.parent2id || 
-			parent2id == mate.parent1id || 
-			parent2id == mate.parent2id ||
-			id == mate.parent1id ||
-			id == mate.parent2id ||
-			parent1id == mate.id || 
-			parent2id == mate.id){
-				return false;
-			}
-		}else{
-			return true;
-		}
-		//because g++ gets mad
-		return true;
-	}
-	Void makeChildNucleus(SiteNum slot, Atom mate){
-		Atom base = su.getBase();
-		if(base as Nucleus){
-			if(base.id != id){
-				Nucleus child;
-				child.parent1id = id;
-				child.id = childID;
+  Bool dieOfOldAge(){
+    if(lifespan == lifespan.maxof){
+      Empty e;
+      ew[0] = e;
+      return true;
+    }
+    else{
+      return false;
+    }
+  }
+  Bool notIncest(Atom mate){
+    if(mate as Nucleus){
+      if(parent1id == mate.parent1id || 
+      parent1id == mate.parent1id || 
+      parent1id == mate.parent2id || 
+      parent2id == mate.parent1id || 
+      parent2id == mate.parent2id ||
+      id == mate.parent1id ||
+      id == mate.parent2id ||
+      parent1id == mate.id || 
+      parent2id == mate.id){
+        return false;
+      }
+    }else{
+      return true;
+    }
+    //because g++ gets mad
+    return true;
+  }
+  Void makeChildNucleus(SiteNum slot, Atom mate){
+    Atom base = su.getBase();
+    if(base as Nucleus){
+      if(base.id != id){
+        Nucleus child;
+        child.parent1id = id;
+        child.id = childID;
 
-				if(mate as Nucleus){
-					child.parent2id = mate.id;
-					su.setBase(child);
-				}
-			}
-		}else{
-			Nucleus child;
-			child.parent1id = id;
-			child.id = childID;
-	
-			if(mate as Nucleus){
-				child.parent2id = mate.id;
-				su.setBase(child);
-			}
-		}
-	}
-	SiteNum nucleusScan(){
+        if(mate as Nucleus){
+          child.parent2id = mate.id;
+          su.setBase(child);
+        }
+      }
+    }else{
+      Nucleus child;
+      child.parent1id = id;
+      child.id = childID;
+  
+      if(mate as Nucleus){
+        child.parent2id = mate.id;
+        su.setBase(child);
+      }
+    }
+  }
+  SiteNum nucleusScan(){
                 SiteVisitorByID sv;
                 WindowScanner ws;
 
@@ -107,207 +106,207 @@ element Nucleus{
 
                 sv.setType(cNucleus,tNucleus);
                 sv.setID(cNucleus,id);
-		sv.neighborCell(cNucleus);
+    sv.neighborCell(cNucleus);
 
                 ws.scan(sv);
 
                 SiteNum slot = ws.getSiteNum(cNucleus);
-		if(slot <= 40){
-			return slot;
-		}else{
-			return (SiteNum)0;
-		}
-	}
-	Void initReproBehavior(){
-		SiteNum slot = nucleusScan();
-		if(slot != 0 && !reproducing && refractoryPeriod == 0){
-			Atom mate = ew[slot];
-			childID = cell.genID();
-			if(mate as Nucleus){
-				if((mate.refractoryPeriod == 0) &&
-					((parent1id == 0 && parent2id == 0) ||
-					notIncest(mate))){
-						refractoryPeriod = refractoryPeriod.maxof;
-						mate.refractoryPeriod = refractoryPeriod.maxof;
-						reproducing = true;
-						mate.reproducing = true;
-						mate.childID = childID;
-						ew[slot] = mate;
-						makeChildNucleus(slot, mate);
-				}
-			}
-		}
-	}
-	Void continueReproducing(){
-		SiteNum slot = nucleusScan();
-		if(slot != 0){
-			Atom mate = ew[slot];
-			if(mate as Nucleus){
-				if(mate.childID == childID){
-					makeChildNucleus(slot,mate);
-				}
-			}
-		}
-	}
-	Bool dontStepOnEggs(){
-		Atom a = su.getBase();
-		if(a as Nucleus){
-			if(a.id == childID){
-				return true;
-			}
-		}else if(a as Gene){
-			if(a.id == childID){
-				return true;
-			}
-		}
-		return false;
-	}
-	Void whetherToMove(Bool move){
-		if(move = true){
-			cl.bringGenesCloser(id,self);
-			diffuse();
-		}
-	}
-	Bool onEgg(){
-		Atom a = su.getBase();
-		if(a as Nucleus){
-			if(a.id == childID){
-				return true;
-			}else{
-				return false;
-			}
-		}else if(a as Gene){
-			if(a.id == childID){
-				return true;
-			}else{
-				return false;
-			}
-		}else{
-			return false;
-		}
-	}
-	SiteNum farthestGene(){
-		SiteNum ret;
-		for(SiteNum i = 41; i > 0; --i){
-			Atom a = ew[i];
-			if(a as Gene){
-				if(a.id == id){
-					ret = i;
-				}
-			}
-		}
-		return ret;
-	}
-	Void diffuse(){
-		Atom a = ew[1];
-		if(onEgg()){
-			SiteNum slot = cl.emptySlotNearMe();
-			if(slot == 0){
-				slot = farthestGene();
-			}
-			ew.swap(0,slot);
-		}else if(a as Empty){
-			ew.swap(0,1);
-		}else if(a as Gene){
-			if (a.id == id){
-				ew.swap(0,1);
-			}
-		}
-	}
-	//kill self if no genes. 
-	Bool geneCheck(){
-		for(Seqno i = 1; i <= 40; ++i){
-			Atom a = dt.findSeqno(i, id);
-			if(a as Gene){
-				return true;
-			}
-		}
-		return false;
-	}
-	Void layEgg(){
-		EggShell eg;
-		eg.id = childID;
-		eg.first = true;
-		for(Unsigned i; i < 2u; ++i){
-			SiteNum emptySlot = cl.emptySlotNearMe();
-			if(emptySlot != 0){
-				ew[emptySlot] = eg;
-			}
-		}
-	}
-	Void die(){
-		Empty e;
-		ew[0] = e;
-	}
-	Void killCopies(){
-		for(SiteNum slot = 1; slot <=40; ++slot){
-			Atom a = ew[slot];
-			if(a as Nucleus){
-				if(a.id == self.id){
-					Empty e;
-					ew[0] = e;
-				}
-			}
-		}
-	}
-	Void eqTreeBehavior(){
-		killCopies();
-		Bool move = dontStepOnEggs();
+    if(slot <= 40){
+      return slot;
+    }else{
+      return (SiteNum)0;
+    }
+  }
+  Void initReproBehavior(){
+    SiteNum slot = nucleusScan();
+    if(slot != 0 && !reproducing && refractoryPeriod == 0){
+      Atom mate = ew[slot];
+      childID = cell.genID();
+      if(mate as Nucleus){
+        if((mate.refractoryPeriod == 0) &&
+          ((parent1id == 0 && parent2id == 0) ||
+          notIncest(mate))){
+            refractoryPeriod = refractoryPeriod.maxof;
+            mate.refractoryPeriod = refractoryPeriod.maxof;
+            reproducing = true;
+            mate.reproducing = true;
+            mate.childID = childID;
+            ew[slot] = mate;
+            makeChildNucleus(slot, mate);
+        }
+      }
+    }
+  }
+  Void continueReproducing(){
+    SiteNum slot = nucleusScan();
+    if(slot != 0){
+      Atom mate = ew[slot];
+      if(mate as Nucleus){
+        if(mate.childID == childID){
+          makeChildNucleus(slot,mate);
+        }
+      }
+    }
+  }
+  Bool dontStepOnEggs(){
+    Atom a = su.getBase();
+    if(a as Nucleus){
+      if(a.id == childID){
+        return true;
+      }
+    }else if(a as Gene){
+      if(a.id == childID){
+        return true;
+      }
+    }
+    return false;
+  }
+  Void whetherToMove(Bool move){
+    if(move = true){
+      cl.bringGenesCloser(id,self);
+      diffuse();
+    }
+  }
+  Bool onEgg(){
+    Atom a = su.getBase();
+    if(a as Nucleus){
+      if(a.id == childID){
+        return true;
+      }else{
+        return false;
+      }
+    }else if(a as Gene){
+      if(a.id == childID){
+        return true;
+      }else{
+        return false;
+      }
+    }else{
+      return false;
+    }
+  }
+  SiteNum farthestGene(){
+    SiteNum ret;
+    for(SiteNum i = 41; i > 0; --i){
+      Atom a = ew[i];
+      if(a as Gene){
+        if(a.id == id){
+          ret = i;
+        }
+      }
+    }
+    return ret;
+  }
+  Void diffuse(){
+    Atom a = ew[1];
+    if(onEgg()){
+      SiteNum slot = cl.emptySlotNearMe();
+      if(slot == 0){
+        slot = farthestGene();
+      }
+      ew.swap(0,slot);
+    }else if(a as Empty){
+      ew.swap(0,1);
+    }else if(a as Gene){
+      if (a.id == id){
+        ew.swap(0,1);
+      }
+    }
+  }
+  //kill self if no genes. 
+  Bool geneCheck(){
+    for(Seqno i = 1; i <= 40; ++i){
+      Atom a = dt.findSeqno(i, id);
+      if(a as Gene){
+        return true;
+      }
+    }
+    return false;
+  }
+  Void layEgg(){
+    EggShell eg;
+    eg.id = childID;
+    eg.first = true;
+    for(Unsigned i; i < 2u; ++i){
+      SiteNum emptySlot = cl.emptySlotNearMe();
+      if(emptySlot != 0){
+        ew[emptySlot] = eg;
+      }
+    }
+  }
+  Void die(){
+    Empty e;
+    ew[0] = e;
+  }
+  Void killCopies(){
+    for(SiteNum slot = 1; slot <=40; ++slot){
+      Atom a = ew[slot];
+      if(a as Nucleus){
+        if(a.id == self.id){
+          Empty e;
+          ew[0] = e;
+        }
+      }
+    }
+  }
+  Void eqTreeBehavior(){
+    killCopies();
+    Bool move = dontStepOnEggs();
 
-		Atom movement = dt.findSeqno((Seqno)1, id);
-		if(movement as Gene){
-			if(movement.value !=0){
-				if(r.oneIn((Unsigned)movement.value)){ 
-					move = true;
-				}
-			}
-		}else{
-			lifespan = (Unsigned(10))(lifespan + 5u);
-		}
-		whetherToMove(move);
+    Atom movement = dt.findSeqno((Seqno)1, id);
+    if(movement as Gene){
+      if(movement.value !=0){
+        if(r.oneIn((Unsigned)movement.value)){ 
+          move = true;
+        }
+      }
+    }else{
+      lifespan = (Unsigned(10))(lifespan + 5u);
+    }
+    whetherToMove(move);
 
-		Atom com = dt.findSeqno((Seqno)2, id);
-		if(com as Gene){
-			comOut = com.value;
-		}else{
-			lifespan = (Unsigned(10))(lifespan + 5u);
-		}
+    Atom com = dt.findSeqno((Seqno)2, id);
+    if(com as Gene){
+      comOut = com.value;
+    }else{
+      lifespan = (Unsigned(10))(lifespan + 5u);
+    }
 
-		Atom reproduce = dt.findSeqno((Seqno)3, id);
-		if(reproduce as Gene){
-			if(reproduce.value != 0 && lifespan > lifespan.maxof/8){
-				if(!r.oneIn((Unsigned)reproduce.value)){
-					initReproBehavior();
-				}
-			}
-		}else{
-			lifespan = (Unsigned(10))(lifespan + 5u);
-		}
-	}
-	Void behave(){
-		if(!geneCheck()){
-			die();
-		}
-		++lifespan;
-		--refractoryPeriod;
-		//40 was too large. 2 was too small.
-		if(!dieOfOldAge()){
-			if(refractoryPeriod > 0){
-				if(refractoryPeriod > refractoryPeriod.maxof*80/100
-					&& refractoryPeriod <= refractoryPeriod.maxof){
-					continueReproducing();
-				}else if(refractoryPeriod > refractoryPeriod.maxof*75/100
-					&& refractoryPeriod <= refractoryPeriod.maxof*80/100){
-					layEgg();
-					eqTreeBehavior();
-				}else if(refractoryPeriod <= refractoryPeriod.maxof*75/100){
-					reproducing = false;
-					childID = 0;
-					eqTreeBehavior();
-				}else eqTreeBehavior();
-			}else{
-				eqTreeBehavior();
-			}
-		}
-	}
+    Atom reproduce = dt.findSeqno((Seqno)3, id);
+    if(reproduce as Gene){
+      if(reproduce.value != 0 && lifespan > lifespan.maxof/8){
+        if(!r.oneIn((Unsigned)reproduce.value)){
+          initReproBehavior();
+        }
+      }
+    }else{
+      lifespan = (Unsigned(10))(lifespan + 5u);
+    }
+  }
+  Void behave(){
+    if(!geneCheck()){
+      die();
+    }
+    ++lifespan;
+    --refractoryPeriod;
+    //40 was too large. 2 was too small.
+    if(!dieOfOldAge()){
+      if(refractoryPeriod > 0){
+        if(refractoryPeriod > refractoryPeriod.maxof*80/100
+          && refractoryPeriod <= refractoryPeriod.maxof){
+          continueReproducing();
+        }else if(refractoryPeriod > refractoryPeriod.maxof*75/100
+          && refractoryPeriod <= refractoryPeriod.maxof*80/100){
+          layEgg();
+          eqTreeBehavior();
+        }else if(refractoryPeriod <= refractoryPeriod.maxof*75/100){
+          reproducing = false;
+          childID = 0;
+          eqTreeBehavior();
+        }else eqTreeBehavior();
+      }else{
+        eqTreeBehavior();
+      }
+    }
+  }
 }

@@ -1,5 +1,5 @@
 quark DirectionUtils {
-	typedef EventWindow.Symmetry Symmetry;
+  typedef EventWindow.Symmetry Symmetry;
 
         Symmetry turnAround(Symmetry symmetry){
                 if(symmetry < 4){
@@ -8,6 +8,6 @@ quark DirectionUtils {
                 if(symmetry >=4){
                         symmetry -=4;
                 }
-		return symmetry;
-	}
+    return symmetry;
+  }
 }
