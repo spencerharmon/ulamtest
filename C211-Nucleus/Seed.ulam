@@ -7,9 +7,9 @@ transient SPLATKeyState_10Seed_At : SPLATKeyStateSelf {
 transient SPLATKeyState_10Seed_Underline : SPLATKeyStateEmpty {
 } // transient SPLATKeyState_10Seed_Underline
 transient SPLATKeyState_10Seed_c : SPLATKeyState {
-  // change c isa Content 
+  // accept the futility of changing Content to Primer.
   Void change(SPLATRuleSet & splATTROoB__rs, SN splATTROoB__cursn, Atom & splATTROoB__curatom) {
-   ew[splATTROoB__cursn] = Content.instanceof;
+   ew[splATTROoB__cursn] = Primer.instanceof;
   }
 } // transient SPLATKeyState_10Seed_c
 transient SPLATKeyState_10Seed_i : SPLATKeyState {
