@@ -1,0 +1,110 @@
+/**
+
+    \sa WindowServices
+    \author Dave Ackley
+  as mangled by:
+    \author Spencer Harmon
+    \license lgpl
+ */
+transient SiteVisitorByID : SiteVisitor {
+  typedef EventWindow.SiteNum SiteNum;
+  AtomUtils au;
+  EventWindow ew;
+
+  typedef Gene.Seqno Seqno;
+  typedef Cell.ID ID;
+  typedef Unsigned(16) ElementType;
+  typedef WindowScanner.Category Category;
+  constant Unsigned cCATEGORY_COUNT = Category.maxof + 1;// XXX Wish it was: WindowScanner.cCATEGORY_COUNT;
+
+  Seqno mSeqno[cCATEGORY_COUNT];
+  ID mID[cCATEGORY_COUNT];
+  ElementType mType[cCATEGORY_COUNT];
+  Bool mInUse[cCATEGORY_COUNT];
+  Bool mInvert[cCATEGORY_COUNT];
+  Bool mNeighbor[cCATEGORY_COUNT];
+
+  Void reset() {
+    for (Unsigned i = 0; i < cCATEGORY_COUNT; ++i) 
+      unsetType((Category) i);
+  }
+  
+  Void setType(Category c, ElementType et) {
+    mType[c] = et;
+    mInUse[c] = true;
+  }
+
+  Void setID(Category c, ID id) {
+    mID[c] = id;
+    mInUse[c] = true;
+  }
+
+  Void setSeqno(Category c, Seqno seqno) {
+    mSeqno[c] = seqno;
+    mInUse[c] = true;
+  }
+
+  Void unsetType(Category c) {
+    mInUse[c] = false;
+    mType[c] = 0;
+  }
+
+  ID getID(SiteNum sn){
+    Atom a = ew[sn];
+    if(a as Nucleus){
+      return a.id;
+    }
+    if(a as Gene){
+      return a.id;
+    }
+    else{
+      return 0;
+    }
+  }
+  //I named this invert before I realized the existance, and importance,
+  //of the other kinds of inversion.
+  Void invert(Category c){
+    mInvert[c] = true;
+  }
+  Void neighborCell(Category c){
+    mNeighbor[c] = true;
+  }
+  Seqno getSeqno(SiteNum sn){
+    Atom a = ew[sn];
+    if(a as Gene){
+      return a.seqno;
+    }
+    else{
+      return (Seqno)0;
+    }
+  }
+
+  virtual Void visit(WindowScanner& wsrv, Atom & a, SiteNum sn){
+    ElementType et = (ElementType) au.getType(a);
+    ID id = getID(sn);
+    Seqno seqno = getSeqno(sn);
+
+    for (Unsigned i = 0; i < cCATEGORY_COUNT; ++i){
+      if(mSeqno[i] > 0){
+        if (mInUse[i] && mType[i] == et && (ID) mID[i] == (ID) id && mSeqno[i] == seqno){
+          wsrv.categorize(sn, (Category) i);
+        }
+      }
+      if(mInvert[i]){
+        if (mInUse[i] && (mType[i] != et || (ID) mID[i] != (ID) id)){
+          wsrv.categorize(sn, (Category) i);
+        }
+      }
+      if(!mInvert[i] && mNeighbor[i]){
+        if (mInUse[i] && (mType[i] == et) && ((ID) mID[i] != (ID) id)){
+          wsrv.categorize(sn, (Category) i);
+        }
+      }
+      if(!mInvert[i] && !mNeighbor[i]){
+        if (mInUse[i] && (mType[i] == et) && ((ID) mID[i] == (ID) id)){
+          wsrv.categorize(sn, (Category) i);
+        }
+      }
+    }
+  }
+}

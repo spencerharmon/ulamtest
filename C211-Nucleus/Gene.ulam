@@ -1,0 +1,201 @@
+/**
+  \author Spencer Harmon
+  \license lgpl
+  \symbol Ge
+  \symmetries all
+  \color #7ee
+ */
+
+element Gene{
+  AtomUtils au;
+  EventWindow ew;
+  ClusterByID cl;
+  Cell cell;
+  DecisionTree dt;
+  SiteUtils su;
+  DebugUtils du;
+
+  //typedefs  
+  //similar to SiteNum, since we don't want to exceed an event window, but has no bearing on position
+  typedef Unsigned(6) Seqno; 
+
+  typedef EventWindow.SiteNum SiteNum;
+  typedef AtomUtils.Type ElementType;
+  typedef WindowScanner.Category Category;
+  typedef Cell.ID ID;
+  typedef DecisionTree.StoredValue StoredValue;
+  typedef Unsigned(2) Operator;
+  typedef Unsigned(2) TreeType;
+  typedef Unsigned(3) AloneCounter;
+
+  //data members
+  ID id;
+  Seqno seqno;
+  Bool canSeeNucleus = true;
+//  Operator operator;
+  TreeType tree0Type;
+  StoredValue eqTree0;
+  TreeType tree1Type;
+  StoredValue eqTree1;
+  StoredValue value;
+  StoredValue comIn;
+  StoredValue comOut;
+  AloneCounter eventsAlone;
+  Bool copied;
+//  Bool proto;
+
+  Void listen(){
+    SiteVisitorByID sv;
+                WindowScanner ws;
+
+    sv.reset();
+                ws.resetCategories();
+                Category cGene = ws.allocateCategory();
+                Gene aGene;
+                ElementType tGene = au.getValidType(aGene);
+
+                sv.setType(cGene,tGene);
+                sv.setID(cGene,id);
+    sv.neighborCell(cGene);
+                ws.scan(sv);
+
+    SiteNum slot = ws.getSiteNum(cGene);
+
+    if(slot != (SiteNum)0 && slot <= 40){
+      Atom cell = ew[slot];
+      if(cell as Gene){
+        comIn = cell.comOut;
+      }
+    }
+    else{
+      comIn = 0;
+    }    
+  }
+  Void speak(){
+                SiteVisitorByID sv;
+                WindowScanner ws;
+    
+    sv.reset();
+                ws.resetCategories();
+                Category cNucleus = ws.allocateCategory();
+                Nucleus aNucleus;
+                ElementType tNucleus = au.getValidType(aNucleus);
+    
+                sv.setType(cNucleus,tNucleus);
+                sv.setID(cNucleus,id);
+
+                ws.scan(sv);
+    
+    SiteNum slot = ws.getSiteNum(cNucleus);
+    if(slot <= 40){
+      Atom nucleus = ew[slot];
+      if(nucleus as Nucleus){
+        comOut = nucleus.comOut;
+      }
+    }
+  }
+  Void nucleusCheck(){
+    for(SiteNum slot = 0; slot <=40; ++slot){
+      Atom nucleus = ew[slot];
+
+      if(nucleus as Nucleus){
+        if(nucleus.id == id){
+          if(nucleus.reproducing){
+            ID childID = nucleus.childID;
+            copy(childID);
+          }else copied = false;
+          //we can see the nucleus, so go ahead and let ClusterByID know.
+          canSeeNucleus = true;
+          return;
+        }
+        else{
+          canSeeNucleus = false;
+        }
+      }
+      else canSeeNucleus = false;
+    }
+  }
+  Void copy(ID childID){
+    //get some mutations in here later
+    copied = true;
+    SiteNum emptySlot = cl.emptySlotNearMe();
+    Bool dontCopy = false;
+    Gene gene;
+    Atom base = su.getBase();
+    //set dontcopy to true if the base layer contains our nucleus
+    if(base as Nucleus){
+      if(base.id == childID){
+        dontCopy = true;
+      }
+    }else if(base as Gene){
+      if(base.id == childID){
+        dontCopy = true;
+      }
+    }
+    if(!dontCopy){
+//      gene.proto = true;
+
+      gene.id = childID;
+      gene.seqno = seqno;
+//      gene.operator = operator;
+      gene.eqTree0 = eqTree0;
+      gene.tree0Type = tree0Type;
+      gene.eqTree1 = eqTree1;
+      gene.tree0Type = tree0Type;
+
+      su.setBase(gene);
+    }
+  }
+  Void killCopies(){
+    for(SiteNum slot = 1; slot <=40; ++slot){
+      Atom gene = ew[slot];
+
+      if(gene as Gene){
+        if(gene.id == id && gene.seqno == seqno){
+          Empty e;
+          ew[0] = e;
+        }
+      }
+    }
+    
+  }
+  Void behave(){
+//    if(proto){
+//      Atom a = su.getBase();
+//      if(a as Gene){
+//        seqno = a.seqno;
+//        eqTree0 = a.eqTree0;
+//        tree0Type = a.tree0Type;
+//        eqTree1 = a.eqTree1;
+//        tree0Type = a.tree0Type;
+//        operator = a.operator;
+//      }
+//      proto = false;
+//      Empty e;
+//      su.setBase(e);
+//    }
+
+    nucleusCheck();
+    killCopies();
+    cl.bringGenesCloser(id,self);
+    //currently takes comIn on the right.
+    if(canSeeNucleus){
+      eventsAlone = 0;
+    }
+    else{
+      ++eventsAlone;
+    }
+    if(eventsAlone == eventsAlone.maxof){
+      Empty e;
+      ew[0] = e;
+    }
+    //Equation tree solution step:
+    value = dt.selfEvaluate(seqno,id,comIn);
+    //look for other cells' comOut
+    listen();
+    //spread word of nucleus' comOut
+    ////timer for this? variable timer?
+    speak();
+    nucleusCheck();
+  }
+}

@@ -1,0 +1,13 @@
+quark DirectionUtils {
+  typedef EventWindow.Symmetry Symmetry;
+
+        Symmetry turnAround(Symmetry symmetry){
+                if(symmetry < 4){
+                        symmetry += 4;
+                }
+                if(symmetry >=4){
+                        symmetry -=4;
+                }
+    return symmetry;
+  }
+}

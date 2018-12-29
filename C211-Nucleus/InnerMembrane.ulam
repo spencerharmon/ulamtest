@@ -1,0 +1,20 @@
+//ALTERATION IS FUTILE: THIS FILE AUTOMATICALLY GENERATED FROM InnerMembrane.splat
+//CREATED "Sat Dec 29 20:37:51 2018 GMT" BY /usr/bin/vendor_perl/splattr FOR spencer
+//BEGIN InnerMembrane.ulam (in ./.splatgen)
+
+
+/** 
+  \symbol IM
+  \color #6789ab
+  \symmetries all
+ */
+element InnerMembrane : QMembrane {
+  // Data members
+  virtual Bool evaluateRuleSets() {
+    if (super.evaluateRuleSets()) return true; // Maybe super's got something
+    return false;   // We got nothing
+  }
+
+} // element InnerMembrane
+
+//END InnerMembrane.ulam
