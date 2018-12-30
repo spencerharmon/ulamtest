@@ -165,24 +165,16 @@ element Gene : QContent{
     
   }
   Void behave(){
-//    if(proto){
-//      Atom a = su.getBase();
-//      if(a as Gene){
-//        seqno = a.seqno;
-//        eqTree0 = a.eqTree0;
-//        tree0Type = a.tree0Type;
-//        eqTree1 = a.eqTree1;
-//        tree0Type = a.tree0Type;
-//        operator = a.operator;
-//      }
-//      proto = false;
-//      Empty e;
-//      su.setBase(e);
-//    }
 
     nucleusCheck();
     killCopies();
-    cl.bringGenesCloser(id,self);
+//    cl.bringGenesCloser(id,self);
+    //diffuse
+    Atom a = ew[1];
+    if(a as Empty){
+      ew[1] = ew[0];
+      ew[0] = a;
+    }
     //currently takes comIn on the right.
     if(canSeeNucleus){
       eventsAlone = 0;
