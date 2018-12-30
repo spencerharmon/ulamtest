@@ -9,7 +9,7 @@ use Cell;
   \color #1f0
 
  */
-element Nucleus{
+element Nucleus : QContent{
   EventWindow ew;
   Random r;
   Cell cell;

@@ -8,7 +8,7 @@
   \license lgpl;
 
  */
-element Primer{
+element Primer : QContent{
   Random r;
   EventWindow ew;
   Cell cell;
@@ -16,6 +16,16 @@ element Primer{
   
   typedef Cell.ID ID;
   typedef EventWindow.SiteNum SiteNum;
+  typedef Cell.Seqno Seqno;
+  typedef Unsigned(6) Treeno;
+  typedef DecisionTree.StoredValue StoredValue;
+
+  Seqno numVars;
+  Seqno curgene;
+  Seqno treeGenesLeftToCreate;
+  Treeno currentTree;
+  ID id;
+  Bool finished;
 
   Bool decide(){
     Unsigned(1) odds;
@@ -31,51 +41,208 @@ element Primer{
     Atom nu = cell.makeNucleus(id,0,0);
     ew[0] = nu;
   }
-  Void generate(){
-    ID id;
-    Gene gene1;
-    gene1.id = id;
-    gene1.seqno = 1;
-    ew[2] = gene1;
-
-    Gene gene2;
-    gene2.id = id;
-    gene2.seqno = 2;
-    ew[3] = gene2;
-
-    Gene gene3;
-    gene3.id = id;
-    gene3.seqno = 3;
-    ew[4] = gene3;
-
-    Gene gene4;
-    gene4.id = id;
-    gene4.seqno = 4;
-    ew[5] = gene4;
-
-    Gene gene5;
-    gene5.id = id;
-    gene5.seqno = 5;
-    ew[6] = gene5;
-
-    Gene gene6;
-    gene6.id = id;
-    gene6.seqno = 6;
-    ew[7] = gene6;
-
-    Gene gene7;
-    gene7.id = id;
-    gene7.seqno = 7;
-    ew[8] = gene7;
+  Atom initVars(ID id){
+    Empty e;
+    Atom a = e.atomof;
+    if(currentTree <= numVars){
+      a = initTree(currentTree,curgene,numVars,id);
+    }
+    else{
+      finished = true;
+    }
+    return a;
   }
+
+  Atom initTree(Treeno tree,Seqno seqno, Seqno numVars,ID id){
+
+      //initGene returns 0, 1, or 2, representing the number of genes this
+      //tree member would like to create.
+      //these genes get i for seqno because they are the variables
+    Atom a;
+    if(treeGenesLeftToCreate > 0){
+      a = initGene(seqno,seqno,id,(Unsigned(4))(numVars-3),false);
+      --treeGenesLeftToCreate;
+      ++seqno;
+    }
+    else{
+      treeGenesLeftToCreate = 1;
+      currentTree = (Treeno) (tree + (Treeno) 1);
+    }
+    curgene = seqno;
+    return a;
+  }
+
+  Atom initGene(Seqno mySeqno, Seqno refSeqno, ID id, Unsigned(4) specialVars,Bool isVar){
+
+    //These nodes and their Stored Values represent the binary tree structure and
+    //content of the equation tree
+
+    //this is the return value for initGene
+    Unsigned(2) numberOfGenesToAddToMyTree;
+
+    Gene gene;
+
+    gene.seqno = mySeqno;
+    gene.id = id;
+
+    //representing addition, subtraction, multiplication, and division
+//    gene.operator = Unsigned(2) r.create(3);
+
+    // I Don't like the way this reads, but the idea is
+    // that if valTypSwitch is true, it signifies a 
+    // stored value (left or right in the binary tree)
+    // if of type reference. Here, that means a Seqno of
+    // another gene which represents an operator node and a
+    // branch of the equation tree. If ValTypSwitch if 
+    // false, then the stored value is of type constant, 
+    // indicating a terminator in the equation tree and
+    // a value in itself to be calculated.
+    //
+    // Left and right are represented, respectively, by
+    // array keys 0 and 1 in the following arrays.
+    //
+
+    Unsigned valTypSwitch0;
+    Unsigned valTypSwitch1;
+    
+    valTypSwitch0 = r.create(100);
+    valTypSwitch1 = r.create(100);
+
+    //30% chance
+    if(valTypSwitch0 >= (Unsigned)0 && valTypSwitch0 < (Unsigned)30){
+      //terminator
+      gene.tree0Type = 0;
+      gene.eqTree0 = (Unsigned(6)) r.create(63);
+    }
+    //10% chance
+    if(valTypSwitch0 >= (Unsigned)30 && valTypSwitch0 < (Unsigned)40){
+      //why not some extra chance of nothing? (terminator)
+      gene.tree0Type = 0;
+      gene.eqTree0 = (StoredValue) 0;
+    }
+    //10% chance
+    if(valTypSwitch0 >= (Unsigned)40 && valTypSwitch0 < (Unsigned)50){
+      //comIn 
+      //comIn is technically a terminator, but it "feels" like a reference
+      //to the equation tree of another Nucleus.
+      //Also, type 0 value 0 already has the distinct meaning "the number 0"
+
+      gene.tree0Type = 1;
+
+      // Type 1 value 0 represents comIn. Since seqno starts with 1, this
+      // should not conflict with anything
+      gene.eqTree0 = (StoredValue)0;
+    }
+    if(valTypSwitch0 >= (Unsigned)50 && valTypSwitch0 < (Unsigned)75){
+      //operator (seqno reference)
+      gene.tree0Type = 1;
+
+      //add the gene, then create a reference to it.
+      ++numberOfGenesToAddToMyTree;
+
+      if(isVar){
+        gene.eqTree0 = (StoredValue)(refSeqno+numberOfGenesToAddToMyTree-1);
+      }
+      else{        
+        gene.eqTree0 = (StoredValue)(refSeqno+numberOfGenesToAddToMyTree);
+      }
+    }
+    if(valTypSwitch0 >= (Unsigned)75 && valTypSwitch0 < (Unsigned)100){
+      //special variables, still operator type
+      gene.tree0Type = 1;
+      
+      //specialVars holds the count of special variables. add 3 to get
+      //their seqno.
+      gene.eqTree0 = (StoredValue)((StoredValue)r.create(specialVars)+(StoredValue)4);
+
+      //this is a loop; should not happen (but would otherwise)
+      if(gene.eqTree0 == gene.seqno){
+        gene.tree0Type = 0;
+      }
+    }
+    //30% chance
+    if(valTypSwitch1 >= (Unsigned)0 && valTypSwitch1 < (Unsigned)30){
+      //terminator
+      gene.tree1Type = 0;
+      gene.eqTree1 = (Unsigned(6)) r.create(63);
+    }
+    //10% chance
+    if(valTypSwitch1 >= (Unsigned)30 && valTypSwitch1 < (Unsigned)40){
+      //why not some extra chance of nothing? (terminator)
+      gene.tree1Type = 0;
+      gene.eqTree1 = (StoredValue) 0;
+    }
+    //10% chance
+    if(valTypSwitch1 >= (Unsigned)40 && valTypSwitch1 < (Unsigned)50){
+      //comIn 
+      //comIn is technically a terminator, but it "feels" like a reference
+      //to the equation tree of another Nucleus.
+      //Also, type 0 value 0 already has the distinct meaning "the number 0"
+
+      gene.tree1Type = 1;
+
+      // Type 1 value 0 represents comIn. Since seqno starts with 1, this
+      // should not conflict with anything
+      gene.eqTree1 = (StoredValue)0;
+    }
+    if(valTypSwitch1 >= (Unsigned)50 && valTypSwitch1 < (Unsigned)75){
+      //operator (seqno reference)
+      gene.tree1Type = 1;
+
+      //add the gene, then create a reference to it.
+      ++numberOfGenesToAddToMyTree;
+
+      if(isVar){
+        gene.eqTree1 = (StoredValue)(refSeqno+numberOfGenesToAddToMyTree-1);
+      }
+      else{        
+        gene.eqTree1 = (StoredValue)(refSeqno+numberOfGenesToAddToMyTree);
+      }
+    }
+    if(valTypSwitch1 >= (Unsigned)75 && valTypSwitch1 < (Unsigned)100){
+      //special variables, still operator type
+      gene.tree1Type = 1;
+      
+      //specialVars holds the count of special variables. add 3 to get
+      //their seqno.
+      gene.eqTree1 = (StoredValue)((StoredValue)r.create(specialVars)+(StoredValue)4);
+
+      //this is a loop; should not happen (but would otherwise)
+      if(gene.eqTree1 == gene.seqno){
+        gene.tree1Type = 0;
+      }
+    }
+    
+    treeGenesLeftToCreate += numberOfGenesToAddToMyTree;
+    return gene.atomof;
+  }
+
   Void killself(){
     Empty e;
     ew[0] = e;
   }
   Void behave(){
-//    generate();
-    ID id = cell.genID();
-    dt.initVars(id);
-    nucleus(id);
+    if(numVars < 3){
+      treeGenesLeftToCreate = 1;
+
+      // The randomness here is to have common variables accessible to the three
+      // main variables.
+      // Must have at least three vars (represent symmetry, movement, and comout)
+      //
+      numVars = (Seqno)(r.create(3)+(Unsigned(32))3);
+
+      //because the first seqnos are for variables,
+      curgene = (Seqno) (numVars+1);
+    }
+    if(id == 0){
+      id = cell.genID();
+    }
+    Atom a = ew[1];
+    if(a as Empty){
+      ew[1] = initVars(id);
+    }
+    if(finished){
+      nucleus(id);
+    }
   }
 }

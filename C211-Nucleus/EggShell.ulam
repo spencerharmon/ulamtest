@@ -8,7 +8,7 @@
 
   form a protective layer over our buried genes in the base layer, then birth them into the event layer.
  */
-element EggShell{
+element EggShell : QContent{
   SiteUtils su;
   EventWindow ew;
   DebugUtils du;

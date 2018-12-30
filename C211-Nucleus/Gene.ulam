@@ -6,7 +6,7 @@
   \color #7ee
  */
 
-element Gene{
+element Gene : QContent{
   AtomUtils au;
   EventWindow ew;
   ClusterByID cl;
