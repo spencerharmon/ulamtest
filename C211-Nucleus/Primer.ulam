@@ -86,7 +86,7 @@ element Primer : QContent{
     gene.id = id;
 
     //representing addition, subtraction, multiplication, and division
-    gene.op = Unsigned(2) r.create(3);
+    gene.op = (Unsigned(2)) r.create(3);
 
     // I Don't like the way this reads, but the idea is
     // that if valTypSwitch is true, it signifies a 
