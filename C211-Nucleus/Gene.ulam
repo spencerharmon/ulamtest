@@ -96,23 +96,28 @@ element Gene : QContent{
   }
   Void nucleusCheck(){
     for(SiteNum slot = 0; slot <=40; ++slot){
-      Atom nucleus = ew[slot];
+      Atom a = ew[slot];
 
-      if(nucleus as Nucleus){
-        if(nucleus.id == id){
-          if(nucleus.reproducing){
-            ID childID = nucleus.childID;
+      if(a as Nucleus){
+        if(a.id == id){
+          if(a.reproducing){
+            ID childID = a.childID;
             copy(childID);
           }else copied = false;
           //we can see the nucleus, so go ahead and let ClusterByID know.
           canSeeNucleus = true;
           return;
-        }
-        else{
+        }else{
           canSeeNucleus = false;
         }
       }
-      else canSeeNucleus = false;
+      else if(a as Primer){
+        if(a.id == id){
+          //don't die before nucleus is created
+          canSeeNucleus = true;
+          return;
+        }
+      }else canSeeNucleus = false;
     }
   }
   Void copy(ID childID){
