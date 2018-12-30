@@ -13,6 +13,7 @@ element Primer : QContent{
   EventWindow ew;
   Cell cell;
   DecisionTree dt;
+  DebugUtils du;
   
   typedef Cell.ID ID;
   typedef EventWindow.SiteNum SiteNum;
@@ -22,6 +23,8 @@ element Primer : QContent{
 
   Seqno numVars;
   Seqno curgene;
+  Seqno curvar;
+  Bool makevar;
   Seqno treeGenesLeftToCreate;
   Treeno currentTree;
   ID id;
@@ -53,6 +56,7 @@ element Primer : QContent{
     return a;
   }
 
+//todo: seqno can probably be replaced with global curgene/curvar
   Atom initTree(Treeno tree,Seqno seqno, Seqno numVars,ID id){
 
       //initGene returns 0, 1, or 2, representing the number of genes this
@@ -60,11 +64,18 @@ element Primer : QContent{
       //these genes get i for seqno because they are the variables
     Atom a;
     if(treeGenesLeftToCreate > 0){
-      a = initGene(seqno,seqno,id,(Unsigned(4))(numVars-3),false);
+      if(makevar){
+        a = initGene(curvar,seqno,id,(Unsigned(4))(numVars-3),true);
+        makevar = false;
+      }else{
+        a = initGene(seqno,seqno,id,(Unsigned(4))(numVars-3),false);
+      }
       --treeGenesLeftToCreate;
       ++seqno;
     }
     else{
+      makevar = true;
+      ++curvar;
       treeGenesLeftToCreate = 1;
       currentTree = (Treeno) (tree + (Treeno) 1);
     }
@@ -72,6 +83,8 @@ element Primer : QContent{
     return a;
   }
 
+//todo: mySeqno and refSeqno can probably be replaced by global curgene
+//also isVar replaced by global makevar
   Atom initGene(Seqno mySeqno, Seqno refSeqno, ID id, Unsigned(4) specialVars,Bool isVar){
 
     //These nodes and their Stored Values represent the binary tree structure and
@@ -106,12 +119,14 @@ element Primer : QContent{
     Unsigned valTypSwitch1;
     
     valTypSwitch0 = r.create(100);
+    
     valTypSwitch1 = r.create(100);
 
     //30% chance
     if(valTypSwitch0 >= (Unsigned)0 && valTypSwitch0 < (Unsigned)30){
       //terminator
       gene.tree0Type = 0;
+
       gene.eqTree0 = (Unsigned(6)) r.create(63);
     }
     //10% chance
@@ -153,7 +168,8 @@ element Primer : QContent{
       
       //specialVars holds the count of special variables. add 3 to get
       //their seqno.
-      gene.eqTree0 = (StoredValue)((StoredValue)r.create(specialVars)+(StoredValue)4);
+
+      gene.eqTree0 = (StoredValue)(r.create((Unsigned)specialVars)+4u);
 
       //this is a loop; should not happen (but would otherwise)
       if(gene.eqTree0 == gene.seqno){
@@ -164,6 +180,7 @@ element Primer : QContent{
     if(valTypSwitch1 >= (Unsigned)0 && valTypSwitch1 < (Unsigned)30){
       //terminator
       gene.tree1Type = 0;
+
       gene.eqTree1 = (Unsigned(6)) r.create(63);
     }
     //10% chance
@@ -205,7 +222,8 @@ element Primer : QContent{
       
       //specialVars holds the count of special variables. add 3 to get
       //their seqno.
-      gene.eqTree1 = (StoredValue)((StoredValue)r.create(specialVars)+(StoredValue)4);
+
+      gene.eqTree1 = (StoredValue)(r.create((Unsigned)specialVars)+4u);
 
       //this is a loop; should not happen (but would otherwise)
       if(gene.eqTree1 == gene.seqno){
@@ -224,12 +242,15 @@ element Primer : QContent{
   Void behave(){
     if(numVars < 3){
       treeGenesLeftToCreate = 1;
+      makevar = true;
+      curvar = 1;
 
       // The randomness here is to have common variables accessible to the three
       // main variables.
       // Must have at least three vars (represent symmetry, movement, and comout)
       //
-      numVars = (Seqno)(r.create(3)+(Unsigned(32))3);
+
+      numVars = (Seqno)(r.create(3)+3u);
 
       //because the first seqnos are for variables,
       curgene = (Seqno) (numVars+1);
