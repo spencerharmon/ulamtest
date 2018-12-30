@@ -127,24 +127,6 @@ quark ClusterByID {
     ws.scan(sv,1,1);
     if(ws.getHits(cEmpty)==(Unsigned)0 && radius > 1u){
       ws.scan(sv,2,2);
-      if(ws.getHits(cEmpty)==(Unsigned)0 && radius > 2u){
-        ws.scan(sv,3,3);
-        if(ws.getHits(cEmpty)==(Unsigned)0 && radius > 3u){
-          ws.scan(sv,4,4);
-          if(ws.getHits(cEmpty) <= (Unsigned)40){
-            return ws.getSiteNum(cEmpty);
-          }
-          else{
-            return 0;
-          }
-        }
-        if(ws.getHits(cEmpty) <= (Unsigned)40){
-          return ws.getSiteNum(cEmpty);
-        }
-        else{
-          return 0;
-        }
-      }
       if(ws.getHits(cEmpty) <= (Unsigned)40){
         return ws.getSiteNum(cEmpty);
       }
