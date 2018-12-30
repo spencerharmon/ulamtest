@@ -162,9 +162,11 @@ element Nucleus : QContent{
     return false;
   }
   Void whetherToMove(Bool move){
+    du.print("in whethertomove");
     if(move = true){
-      cl.bringGenesCloser(id,self);
       diffuse();
+    }else{
+      cl.bringGenesCloser(id,self);
     }
   }
   Bool onEgg(){
@@ -250,6 +252,7 @@ element Nucleus : QContent{
     }
   }
   Void eqTreeBehavior(){
+    du.print("in eqTreeBehavior()");
     killCopies();
     Bool move = dontStepOnEggs();
 
@@ -260,16 +263,12 @@ element Nucleus : QContent{
           move = true;
         }
       }
-    }else{
-      lifespan = (Unsigned(10))(lifespan + 5u);
     }
     whetherToMove(move);
 
     Atom com = dt.findSeqno((Seqno)2, id);
     if(com as Gene){
       comOut = com.value;
-    }else{
-      lifespan = (Unsigned(10))(lifespan + 5u);
     }
 
     Atom reproduce = dt.findSeqno((Seqno)3, id);
@@ -279,14 +278,12 @@ element Nucleus : QContent{
           initReproBehavior();
         }
       }
-    }else{
-      lifespan = (Unsigned(10))(lifespan + 5u);
     }
   }
   Void behave(){
-    if(!geneCheck()){
-      die();
-    }
+//    if(!geneCheck()){
+//      die();
+//    }
     ++lifespan;
     --refractoryPeriod;
     //40 was too large. 2 was too small.

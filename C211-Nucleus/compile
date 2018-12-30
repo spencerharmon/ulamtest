@@ -1,5 +1,5 @@
 /usr/bin/ulam --sd /usr/bin/vendor_perl/lib --sd /usr/share/perl5/vendor_perl/auto/share/dist/SPLAT --sd ./ a.mfz \
-Cell.ulam ClusterByID.ulam Commander.ulam Content.ulam DecisionTree.ulam DirectionUtils.ulam EggShell.ulam Gene.ulam \
+Cell.ulam ClusterByID.ulam Commander.ulam DecisionTree.ulam DirectionUtils.ulam EggShell.ulam Gene.ulam \
 InnerMembrane.ulam Nucleus.ulam OuterMembrane.ulam OutOfBounds.ulam Primer.ulam QContent.ulam QMembrane.ulam Seed.ulam \
-SiteVisitorByID.ulam Commander.splat Content.splat InnerMembrane.splat OuterMembrane.splat QContent.splat QMembrane.splat \
+SiteVisitorByID.ulam Commander.splat InnerMembrane.splat OuterMembrane.splat QContent.splat QMembrane.splat \
 Seed.splat

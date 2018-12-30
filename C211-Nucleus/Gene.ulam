@@ -14,6 +14,7 @@ element Gene : QContent{
   DecisionTree dt;
   SiteUtils su;
   DebugUtils du;
+  Random r;
 
   //typedefs  
   //similar to SiteNum, since we don't want to exceed an event window, but has no bearing on position
@@ -24,7 +25,6 @@ element Gene : QContent{
   typedef WindowScanner.Category Category;
   typedef Cell.ID ID;
   typedef DecisionTree.StoredValue StoredValue;
-  typedef Unsigned(2) Operator;
   typedef Unsigned(2) TreeType;
   typedef Unsigned(3) AloneCounter;
 
@@ -32,7 +32,7 @@ element Gene : QContent{
   ID id;
   Seqno seqno;
   Bool canSeeNucleus = true;
-//  Operator operator;
+  Unsigned(2) op;
   TreeType tree0Type;
   StoredValue eqTree0;
   TreeType tree1Type;
@@ -142,7 +142,7 @@ element Gene : QContent{
 
       gene.id = childID;
       gene.seqno = seqno;
-//      gene.operator = operator;
+      gene.op = op;
       gene.eqTree0 = eqTree0;
       gene.tree0Type = tree0Type;
       gene.eqTree1 = eqTree1;
@@ -168,12 +168,13 @@ element Gene : QContent{
 
     nucleusCheck();
     killCopies();
-//    cl.bringGenesCloser(id,self);
     //diffuse
     Atom a = ew[1];
     if(a as Empty){
       ew[1] = ew[0];
       ew[0] = a;
+    }else if(r.oneIn(10u)){
+      cl.bringGenesCloser(id,self);
     }
     //currently takes comIn on the right.
     if(canSeeNucleus){
@@ -182,10 +183,11 @@ element Gene : QContent{
     else{
       ++eventsAlone;
     }
-    if(eventsAlone == eventsAlone.maxof){
+/*    if(eventsAlone == eventsAlone.maxof){
       Empty e;
       ew[0] = e;
     }
+*/
     //Equation tree solution step:
     value = dt.selfEvaluate(seqno,id,comIn);
     //look for other cells' comOut

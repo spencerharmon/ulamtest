@@ -6,6 +6,7 @@
  */
 quark DecisionTree{
   Random r;
+  DebugUtils du;
   EventWindow ew;
   AtomUtils au;
 
@@ -15,11 +16,12 @@ quark DecisionTree{
   typedef WindowScanner.Category Category;
   typedef Cell.Seqno Seqno;
   typedef Cell.ID ID;
+  typedef EventWindow.SiteNum SiteNum;
 
   Atom findSeqno(Seqno seqno, ID id){
     Empty e;
 
-    for(Seqno i = 0; i <=40; ++i){
+    for(SiteNum i = 1; i <=40; ++i){
       Atom gene = ew[i];
       if(gene as Gene){
         if(gene.id == id && gene.seqno == seqno){
@@ -36,7 +38,7 @@ quark DecisionTree{
     StoredValue value[40];
     Seqno parent[40];
 
-//    Unsigned(2) operator[40];
+    Unsigned(2) op[40];
 
     Bits(2) tree0Type[40];
     StoredValue eqTree0[40];
@@ -68,7 +70,7 @@ quark DecisionTree{
         if(gene as Gene){
           checked[seqno] = true;
 
-//          operator[seqno] = gene.operator;
+          op[seqno] = gene.op;
 
           tree0Type[seqno] = gene.tree0Type;
           eqTree0[seqno] = gene.eqTree0;
@@ -93,7 +95,7 @@ quark DecisionTree{
       // Pass control back to parent.
       //
       if(tree0Type[seqno] == 0 && tree1Type[seqno] == 0){
-//        value[seqno] = operate(eqTree0[seqno], operator[seqno], eqTree1[seqno]);
+        value[seqno] = operate(eqTree0[seqno], op[seqno], eqTree1[seqno]);
         evaluated[seqno] = true;
         keepRecursing = true;
         seqno = parent[seqno];
@@ -164,25 +166,24 @@ quark DecisionTree{
       }else if(my.tree1Type == 0){
         val1 = my.eqTree1;
       }
-//      value = operate(val0, my.operator, val1);
+      value = operate(val0, my.op, val1);
     }
     return value;
   }//selfEvaluate() namespace
-/*  StoredValue operate(StoredValue val1, Unsigned(2) operator, StoredValue val2){
+  StoredValue operate(StoredValue val1, Unsigned(2) op, StoredValue val2){
     StoredValue value;
-    if(operator == 0){
+    if(op == 0){
       value = (StoredValue)(val1 + val2);
     }
-    if(operator == 1){
+    if(op == 1){
       value = (StoredValue)(val1 - val2);
     }
-    if(operator == 2){
+    if(op == 2){
       value = (StoredValue)(val1 * val2);
     }
-    if(operator == 3){
+    if(op == 3){
       value = (StoredValue)(val1 / val2);
     }
     return value;
   }
-*/
 }//DecisionTree namespace
