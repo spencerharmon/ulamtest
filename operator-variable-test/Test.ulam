@@ -12,9 +12,19 @@ element Test{
   //Are there others? Why is this? Is this ok? Is this documented?
 
 //  Unsigned operator;
-  Bool operator;
+//  Bool operator;
 
-  void behave(){
-    ew.swap(0,1)
+  //this is also disallowed
+/*
+  Void method(Unsigned operator){
+    return;
+  }
+*/
+  //also a problem
+  Void operator(){
+    return;
+  }
+  Void behave(){
+    ew.swap(0,1);
   }
 }
