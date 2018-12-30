@@ -162,7 +162,6 @@ element Nucleus : QContent{
     return false;
   }
   Void whetherToMove(Bool move){
-    du.print("in whethertomove");
     if(move = true){
       diffuse();
     }else{
@@ -252,7 +251,6 @@ element Nucleus : QContent{
     }
   }
   Void eqTreeBehavior(){
-    du.print("in eqTreeBehavior()");
     killCopies();
     Bool move = dontStepOnEggs();
 
