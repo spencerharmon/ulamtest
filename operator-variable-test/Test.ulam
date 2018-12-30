@@ -1,0 +1,20 @@
+/**
+  \author Spencer Harmon
+  \license lgpl
+  \symbol Te
+  \symmetries all
+ */
+
+element Test{
+  EventWindow ew;
+
+  //Looks like something has caused the lexer to barf when a data member is named operator.
+  //Are there others? Why is this? Is this ok? Is this documented?
+
+//  Unsigned operator;
+  Bool operator;
+
+  void behave(){
+    ew.swap(0,1)
+  }
+}
