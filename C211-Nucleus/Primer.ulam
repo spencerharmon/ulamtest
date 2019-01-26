@@ -18,17 +18,24 @@ element Primer : QContent{
   typedef Cell.ID ID;
   typedef EventWindow.SiteNum SiteNum;
   typedef Cell.Seqno Seqno;
-  typedef Unsigned(6) Treeno;
   typedef DecisionTree.StoredValue StoredValue;
 
-  Seqno numVars;
+  //the total number of valid variables, including default variables
+  Seqno numTrees;
+  //the next non-variable gene number to be created
   Seqno curgene;
-  Seqno curvar;
-  Bool makevar;
+  //Whether the next gene created is the first in its tree
+  Bool makeTree;
+  //the number of genes left to create for this tree
   Seqno treeGenesLeftToCreate;
-  Treeno currentTree;
+  //the seqno number of the current tree
+  Seqno currentTree;
+  //the id of the cell
   ID id;
+  //whether the final gene in the last gene has been created
   Bool finished;
+  //default number of trees created. Update here when new trees are added.
+  constant Unsigned defaultTrees = 3;
 
   Bool decide(){
     Unsigned(1) odds;
@@ -40,15 +47,20 @@ element Primer : QContent{
       return false;
     }
   }
-  Void nucleus(ID id){
+  Void nucleus(){
     Atom nu = cell.makeNucleus(id,0,0);
     ew[0] = nu;
   }
-  Atom initVars(ID id){
+  Atom initVars(){
+    if(treeGenesLeftToCreate == 0){
+      makeTree = true;
+      treeGenesLeftToCreate = 1;
+      ++currentTree;
+    }
     Empty e;
     Atom a = e.atomof;
-    if(currentTree <= numVars){
-      a = initTree(currentTree,curgene,numVars,id);
+    if(currentTree <= numTrees){
+      a = initTree();
     }
     else{
       finished = true;
@@ -56,36 +68,23 @@ element Primer : QContent{
     return a;
   }
 
-//todo: seqno can probably be replaced with global curgene/curvar
-  Atom initTree(Treeno tree,Seqno seqno, Seqno numVars,ID id){
+//todo: seqno can probably be replaced with global curgene/currentTree
+//numTrees is already global, and so is ID.
+  Atom initTree(){
 
-      //initGene returns 0, 1, or 2, representing the number of genes this
-      //tree member would like to create.
-      //these genes get i for seqno because they are the variables
     Atom a;
-    if(treeGenesLeftToCreate > 0){
-      if(makevar){
-        a = initGene(curvar,seqno,id,(Unsigned(4))(numVars-3),true);
-        makevar = false;
-      }else{
-        a = initGene(seqno,seqno,id,(Unsigned(4))(numVars-3),false);
-      }
-      --treeGenesLeftToCreate;
-      ++seqno;
+    if(makeTree){
+      a = initGene(currentTree);
+      makeTree = false;
+    }else{
+      a = initGene(curgene);
+      ++curgene;
     }
-    else{
-      makevar = true;
-      ++curvar;
-      treeGenesLeftToCreate = 1;
-      currentTree = (Treeno) (tree + (Treeno) 1);
-    }
-    curgene = seqno;
+    --treeGenesLeftToCreate;
     return a;
   }
 
-//todo: mySeqno and refSeqno can probably be replaced by global curgene
-//also isVar replaced by global makevar
-  Atom initGene(Seqno mySeqno, Seqno refSeqno, ID id, Unsigned(4) specialVars,Bool isVar){
+  Atom initGene(Seqno mySeqno){
 
     //These nodes and their Stored Values represent the binary tree structure and
     //content of the equation tree
@@ -152,24 +151,25 @@ element Primer : QContent{
       //operator (seqno reference)
       gene.tree0Type = 1;
 
-      //add the gene, then create a reference to it.
-      ++numberOfGenesToAddToMyTree;
 
-      if(isVar){
-        gene.eqTree0 = (StoredValue)(refSeqno+numberOfGenesToAddToMyTree-1);
+      if(makeTree){
+        //when makeTree is true, the reference needs to be to curgene
+        //since numberofgenestoaddtomytree should always be at least one
+        //in this stage
+        gene.eqTree0 = (StoredValue)(curgene);
       }
       else{        
-        gene.eqTree0 = (StoredValue)(refSeqno+numberOfGenesToAddToMyTree);
+        gene.eqTree0 = (StoredValue)(curgene+numberOfGenesToAddToMyTree);
       }
+      //after creating the reference, record that another gene needs 
+      //to be created
+      ++numberOfGenesToAddToMyTree;
     }
     if(valTypSwitch0 >= (Unsigned)75 && valTypSwitch0 < (Unsigned)100){
       //special variables, still operator type
       gene.tree0Type = 1;
       
-      //specialVars holds the count of special variables. add 3 to get
-      //their seqno.
-
-      gene.eqTree0 = (StoredValue)(r.create((Unsigned)specialVars)+4u);
+      gene.eqTree1 = (StoredValue)(r.create((Unsigned)(numTrees-defaultTrees))+defaultTrees);
 
       //this is a loop; should not happen (but would otherwise)
       if(gene.eqTree0 == gene.seqno){
@@ -206,24 +206,19 @@ element Primer : QContent{
       //operator (seqno reference)
       gene.tree1Type = 1;
 
-      //add the gene, then create a reference to it.
-      ++numberOfGenesToAddToMyTree;
-
-      if(isVar){
-        gene.eqTree1 = (StoredValue)(refSeqno+numberOfGenesToAddToMyTree-1);
+      if(makeTree){
+        gene.eqTree1 = (StoredValue)(curgene);
       }
       else{        
-        gene.eqTree1 = (StoredValue)(refSeqno+numberOfGenesToAddToMyTree);
+        gene.eqTree1 = (StoredValue)(curgene+numberOfGenesToAddToMyTree);
       }
+      ++numberOfGenesToAddToMyTree;
     }
     if(valTypSwitch1 >= (Unsigned)75 && valTypSwitch1 < (Unsigned)100){
       //special variables, still operator type
       gene.tree1Type = 1;
       
-      //specialVars holds the count of special variables. add 3 to get
-      //their seqno.
-
-      gene.eqTree1 = (StoredValue)(r.create((Unsigned)specialVars)+4u);
+      gene.eqTree1 = (StoredValue)(r.create((Unsigned)(numTrees-defaultTrees-1u))+defaultTrees+1u);
 
       //this is a loop; should not happen (but would otherwise)
       if(gene.eqTree1 == gene.seqno){
@@ -232,6 +227,7 @@ element Primer : QContent{
     }
     
     treeGenesLeftToCreate += numberOfGenesToAddToMyTree;
+    du.print(gene.seqno);
     return gene.atomof;
   }
 
@@ -240,30 +236,30 @@ element Primer : QContent{
     ew[0] = e;
   }
   Void behave(){
-    if(numVars < 3){
+    if(numTrees < 3){
       treeGenesLeftToCreate = 1;
-      makevar = true;
-      curvar = 1;
+      makeTree = true;
+      currentTree = 1;
 
       // The randomness here is to have common variables accessible to the three
       // main variables.
       // Must have at least three vars (represent symmetry, movement, and comout)
       //
 
-      numVars = (Seqno)(r.create(3)+3u);
+      numTrees = (Seqno)(r.create(3)+3u);
 
       //because the first seqnos are for variables,
-      curgene = (Seqno) (numVars+1);
+      curgene = (Seqno) (numTrees+1);
     }
     if(id == 0){
       id = cell.genID();
     }
     Atom a = ew[1];
     if(a as Empty){
-      ew[1] = initVars(id);
+      ew[1] = initVars();
     }
     if(finished){
-      nucleus(id);
+      nucleus();
     }
   }
 }
