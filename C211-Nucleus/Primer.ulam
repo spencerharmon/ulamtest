@@ -19,6 +19,7 @@ element Primer : QContent{
   typedef EventWindow.SiteNum SiteNum;
   typedef Cell.Seqno Seqno;
   typedef DecisionTree.StoredValue StoredValue;
+  typedef EventWindow.Symmetry Symmetry;
 
   //the total number of valid variables, including default variables
   Seqno numTrees;
@@ -35,7 +36,7 @@ element Primer : QContent{
   //whether the final gene in the last gene has been created
   Bool finished;
   //default number of trees created. Update here when new trees are added.
-  constant Unsigned defaultTrees = 3;
+  constant Unsigned defaultTrees = 4;
 
   Bool decide(){
     Unsigned(1) odds;
@@ -113,6 +114,24 @@ element Primer : QContent{
     // Left and right are represented, respectively, by
     // array keys 0 and 1 in the following arrays.
     //
+    // The below logic determines the value and type for both
+    // sides of the binary tree, represented as eqTree0 and
+    // eqTree1 for value and tree0Type and tree1Type for type.
+    // Values are of type StoredValue, as defined in DecisionTree.ulam
+    // Type can be 0 or 1. Type 0 indicates that the value of eqTreeX
+    // is to be interpreted as a literal value (aka terminator), while
+    // a value of 1 indicates that the corresponding eqTreeX value 
+    // represents the seqno of a gene that is being referenced (aka
+    // reference type). A reference could be to another gene within
+    // the current tree or to one of the special variables tress.
+    //
+    // There is a special combination represented by treeXType 1
+    // with value 0, that represents a reference to the gene's current
+    // comIn value.
+    //
+    // valTypSwitchX provides a basis on which to make weighted random
+    // selections for each possible combinations of type and value.
+
 
     Unsigned valTypSwitch0;
     Unsigned valTypSwitch1;
@@ -120,6 +139,28 @@ element Primer : QContent{
     valTypSwitch0 = r.create(100);
     
     valTypSwitch1 = r.create(100);
+
+    //avoid special variables case if there are none
+    Unsigned numOfSpecialVars = (Unsigned)(numTrees-defaultTrees);
+    if(numOfSpecialVars == 0u){
+      if(valTypSwitch0 >=75u){
+        valTypSwitch0 -= 25u;
+      }
+      if(valTypSwitch1 >=75u){
+        valTypSwitch1 -= 25u;
+      }
+    }
+
+    // avoid creating child genes past StoredValue's max
+    // this is a local limited address space. Good idea? who knows?
+    if(gene.seqno == 63u){
+      if(valTypSwitch0 >= 50u && valTypSwitch0 < 75u){
+        valTypSwitch0 -= 25u;
+      }
+      if(valTypSwitch1 >= 50u && valTypSwitch1 < 75u){
+        valTypSwitch1 -= 25u;
+      }
+    }
 
     //30% chance
     if(valTypSwitch0 >= (Unsigned)0 && valTypSwitch0 < (Unsigned)30){
@@ -169,7 +210,12 @@ element Primer : QContent{
       //special variables, still operator type
       gene.tree0Type = 1;
       
-      gene.eqTree1 = (StoredValue)(r.create((Unsigned)(numTrees-defaultTrees))+defaultTrees);
+      if(numOfSpecialVars == 1u){
+        //can't use r.create on values <= 1.
+        gene.eqTree0 = (StoredValue)(numOfSpecialVars + defaultTrees);
+      }else{
+        gene.eqTree0 = (StoredValue)(r.create((Unsigned)numOfSpecialVars-1u)+1u+defaultTrees);
+      }
 
       //this is a loop; should not happen (but would otherwise)
       if(gene.eqTree0 == gene.seqno){
@@ -218,7 +264,12 @@ element Primer : QContent{
       //special variables, still operator type
       gene.tree1Type = 1;
       
-      gene.eqTree1 = (StoredValue)(r.create((Unsigned)(numTrees-defaultTrees-1u))+defaultTrees+1u);
+      if(numOfSpecialVars == 1u){
+        //can't use r.create on values <= 1.
+        gene.eqTree1 = (StoredValue)(numOfSpecialVars + defaultTrees);
+      }else{
+        gene.eqTree1 = (StoredValue)(r.create((Unsigned)numOfSpecialVars-1u)+1u+defaultTrees);
+      }
 
       //this is a loop; should not happen (but would otherwise)
       if(gene.eqTree1 == gene.seqno){

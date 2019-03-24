@@ -5,7 +5,6 @@ use Cell;
   \symbol Nu
   \author Spencer Harmon
   \license lgpl
-  \symmetries all
   \color #1f0
 
  */
@@ -28,6 +27,7 @@ element Nucleus : QContent{
   typedef EventWindow.SiteNum SiteNum;
   typedef AtomUtils.Type ElementType;
   typedef WindowScanner.Category Category;
+  typedef EventWindow.Symmetry Symmetry;
 
   //data members
   ID id; //the all-important cluster id
@@ -41,6 +41,7 @@ element Nucleus : QContent{
   StoredValue comIn;
   StoredValue comOut;
   ID childID;
+  Symmetry sym;
 
   Bool dieOfOldAge(){
     if(lifespan == lifespan.maxof){
@@ -163,6 +164,7 @@ element Nucleus : QContent{
   }
   Void whetherToMove(Bool move){
     if(move = true){
+      ew.changeSymmetry(sym);
       diffuse();
     }else{
       cl.bringGenesCloser(id,self);
@@ -262,7 +264,6 @@ element Nucleus : QContent{
         }
       }
     }
-    whetherToMove(move);
 
     Atom com = dt.findSeqno((Seqno)2, id);
     if(com as Gene){
@@ -277,6 +278,11 @@ element Nucleus : QContent{
         }
       }
     }
+    Atom direction = dt.findSeqno((Seqno)4, id);
+    if(direction as Gene){
+      sym = (Symmetry)(direction.value % 8);
+    }
+    whetherToMove(move);
   }
   Void behave(){
 //    if(!geneCheck()){
