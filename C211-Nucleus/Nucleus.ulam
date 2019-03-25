@@ -226,9 +226,24 @@ element Nucleus : QContent{
       comOut = com.value;
     }
 
+    if(refractoryPeriod > 0){
+      if(refractoryPeriod > refractoryPeriod.maxof*80/100
+        && refractoryPeriod <= refractoryPeriod.maxof){
+        if(reproType == 0){
+          laySpawn();
+        }else{
+          layEgg();
+        }
+      }else if(refractoryPeriod <= refractoryPeriod.maxof*75/100){
+        reproducing = false;
+        childID = 0;
+        eqTreeBehavior();
+      }else eqTreeBehavior();
+    }
+
     Atom reproduce = dt.findSeqno((Seqno)3, id);
     if(reproduce as Gene){
-      if(reproduce.value > 1 && lifespan > lifespan.maxof/8){
+      if(reproduce.value > 0){
         if(r.oneIn((Unsigned)reproduce.value)){
           reproType = 0;
           laySpawn();
@@ -247,6 +262,7 @@ element Nucleus : QContent{
         }
       }
     }
+
     Atom direction = dt.findSeqno((Seqno)4, id);
     if(direction as Gene){
       sym = (Symmetry)(direction.value % 8);
@@ -254,29 +270,10 @@ element Nucleus : QContent{
     whetherToMove(move);
   }
   Void behave(){
-//    if(!geneCheck()){
-//      die();
-//    }
     ++lifespan;
     --refractoryPeriod;
-    //40 was too large. 2 was too small.
     if(!dieOfOldAge()){
-      if(refractoryPeriod > 0){
-        if(refractoryPeriod > refractoryPeriod.maxof*80/100
-          && refractoryPeriod <= refractoryPeriod.maxof){
-          laySpawn();
-        }else if(refractoryPeriod > refractoryPeriod.maxof*75/100
-          && refractoryPeriod <= refractoryPeriod.maxof*80/100){
-          layEgg();
-          eqTreeBehavior();
-        }else if(refractoryPeriod <= refractoryPeriod.maxof*75/100){
-          reproducing = false;
-          childID = 0;
-          eqTreeBehavior();
-        }else eqTreeBehavior();
-      }else{
-        eqTreeBehavior();
-      }
+      eqTreeBehavior();
     }
   }
 }
