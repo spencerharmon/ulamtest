@@ -101,18 +101,6 @@ element Primer : QContent{
     //representing addition, subtraction, multiplication, and division
     gene.op = (Unsigned(2)) r.create(3);
 
-    // I Don't like the way this reads, but the idea is
-    // that if valTypSwitch is true, it signifies a 
-    // stored value (left or right in the binary tree)
-    // if of type reference. Here, that means a Seqno of
-    // another gene which represents an operator node and a
-    // branch of the equation tree. If ValTypSwitch if 
-    // false, then the stored value is of type constant, 
-    // indicating a terminator in the equation tree and
-    // a value in itself to be calculated.
-    //
-    // Left and right are represented, respectively, by
-    // array keys 0 and 1 in the following arrays.
     //
     // The below logic determines the value and type for both
     // sides of the binary tree, represented as eqTree0 and

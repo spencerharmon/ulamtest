@@ -42,6 +42,8 @@ element Nucleus : QContent{
   StoredValue comOut;
   ID childID;
   Symmetry sym;
+  //0 = spawning, 1 = ovulating
+  Bits(1) reproType;
 
   Bool dieOfOldAge(){
     if(lifespan == lifespan.maxof){
@@ -72,29 +74,14 @@ element Nucleus : QContent{
     //because g++ gets mad
     return true;
   }
-  Void makeChildNucleus(SiteNum slot, Atom mate){
-    Atom base = su.getBase();
-    if(base as Nucleus){
-      if(base.id != id){
-        Nucleus child;
-        child.parent1id = id;
-        child.id = childID;
+  Void laySpawn(){
+    refractoryPeriod = refractoryPeriod.maxof;
+    reproducing = true;
 
-        if(mate as Nucleus){
-          child.parent2id = mate.id;
-          su.setBase(child);
-        }
-      }
-    }else{
-      Nucleus child;
-      child.parent1id = id;
-      child.id = childID;
-  
-      if(mate as Nucleus){
-        child.parent2id = mate.id;
-        su.setBase(child);
-      }
-    }
+    Nucleus child;
+    child.parent1id = id;
+    child.id = childID;
+    su.setBase(child);
   }
   SiteNum nucleusScan(){
                 SiteVisitorByID sv;
@@ -116,37 +103,6 @@ element Nucleus : QContent{
       return slot;
     }else{
       return (SiteNum)0;
-    }
-  }
-  Void initReproBehavior(){
-    SiteNum slot = nucleusScan();
-    if(slot != 0 && !reproducing && refractoryPeriod == 0){
-      Atom mate = ew[slot];
-      childID = cell.genID();
-      if(mate as Nucleus){
-        if((mate.refractoryPeriod == 0) &&
-          ((parent1id == 0 && parent2id == 0) ||
-          notIncest(mate))){
-            refractoryPeriod = refractoryPeriod.maxof;
-            mate.refractoryPeriod = refractoryPeriod.maxof;
-            reproducing = true;
-            mate.reproducing = true;
-            mate.childID = childID;
-            ew[slot] = mate;
-            makeChildNucleus(slot, mate);
-        }
-      }
-    }
-  }
-  Void continueReproducing(){
-    SiteNum slot = nucleusScan();
-    if(slot != 0){
-      Atom mate = ew[slot];
-      if(mate as Nucleus){
-        if(mate.childID == childID){
-          makeChildNucleus(slot,mate);
-        }
-      }
     }
   }
   Bool dontStepOnEggs(){
@@ -272,9 +228,22 @@ element Nucleus : QContent{
 
     Atom reproduce = dt.findSeqno((Seqno)3, id);
     if(reproduce as Gene){
-      if(reproduce.value != 0 && lifespan > lifespan.maxof/8){
-        if(!r.oneIn((Unsigned)reproduce.value)){
-          initReproBehavior();
+      if(reproduce.value > 1 && lifespan > lifespan.maxof/8){
+        if(r.oneIn((Unsigned)reproduce.value)){
+          reproType = 0;
+          laySpawn();
+        }else{
+          Atom base = su.getBase();
+          if(base as Nucleus){
+            //fertilize spawn in base layer and lay egg.
+            base.parent1id = id;
+            reproducing = true;
+            refractoryPeriod = refractoryPeriod.maxof;
+            childID = base.id;
+            su.setBase(base);
+            reproType = 1;
+            layEgg();
+          }
         }
       }
     }
@@ -295,7 +264,7 @@ element Nucleus : QContent{
       if(refractoryPeriod > 0){
         if(refractoryPeriod > refractoryPeriod.maxof*80/100
           && refractoryPeriod <= refractoryPeriod.maxof){
-          continueReproducing();
+          laySpawn();
         }else if(refractoryPeriod > refractoryPeriod.maxof*75/100
           && refractoryPeriod <= refractoryPeriod.maxof*80/100){
           layEgg();
