@@ -12,7 +12,7 @@ quark Cell{
   typedef ColorUtils.ARGB ARGB;  
   typedef Unsigned(9) ID;
   typedef Unsigned(8) Com;
-  typedef Unsigned(6) Seqno;
+  typedef Unsigned(5) Seqno;
   typedef EventWindow.SiteNum SiteNum;
 
   ID genID(){

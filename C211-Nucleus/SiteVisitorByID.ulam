@@ -11,7 +11,7 @@ transient SiteVisitorByID : SiteVisitor {
   AtomUtils au;
   EventWindow ew;
 
-  typedef Gene.Seqno Seqno;
+  typedef Cell.Seqno Seqno;
   typedef Cell.ID ID;
   typedef Unsigned(16) ElementType;
   typedef WindowScanner.Category Category;

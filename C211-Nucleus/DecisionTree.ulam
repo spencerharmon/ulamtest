@@ -10,7 +10,7 @@ quark DecisionTree{
   EventWindow ew;
   AtomUtils au;
 
-  typedef Unsigned(6) StoredValue;
+  typedef Cell.Seqno StoredValue;
 
   typedef AtomUtils.Type ElementType;
   typedef WindowScanner.Category Category;

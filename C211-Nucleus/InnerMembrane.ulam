@@ -1,7 +1,107 @@
 //ALTERATION IS FUTILE: THIS FILE AUTOMATICALLY GENERATED FROM InnerMembrane.splat
-//CREATED "Sat Dec 29 20:37:51 2018 GMT" BY /usr/bin/vendor_perl/splattr FOR spencer
+//CREATED "Tue Mar 26 02:18:34 2019 GMT" BY /usr/bin/vendor_perl/splattr FOR spencer
 //BEGIN InnerMembrane.ulam (in ./.splatgen)
 
+transient SPLATKeyState_10InnerMembrane_Dot : SPLATKeyStateAny {
+} // transient SPLATKeyState_10InnerMembrane_Dot
+transient SPLATKeyState_10InnerMembrane_At : SPLATKeyStateSelf {
+  // given @ isa InnerMembrane { 
+  //    Atom me = ew[0];
+  //    if(me as InnerMembrane){
+  //      if(me.new_sym){
+  //        return true;
+  //      }else{
+  //        return false;
+  //      }
+  //    }
+  //  
+  Bool given(SPLATRuleSet & splATTROoB__rs, SN splATTROoB__cursn, Atom & splATTROoB__curatom) {
+    if (!(splATTROoB__curatom is InnerMembrane)) return false;
+    InnerMembrane & splATTROoB__self = (InnerMembrane &) splATTROoB__curatom;
+  {
+
+     Atom me = ew[0];
+     if(me as InnerMembrane){
+       if(me.new_sym){
+         return true;
+       }else{
+         return false;
+       }
+     }
+   
+  }
+  return true;
+  }
+} // transient SPLATKeyState_10InnerMembrane_At
+transient SPLATKeyState_10InnerMembrane_I : SPLATKeyState {
+  // change I  { 
+  //   Atom me = ew[0];
+  //   if(me as InnerMembrane){
+  //     ew[$cursn] = me;
+  //     me.new_sym = false;
+  //     ew[0] = me;
+  //   }
+  //  
+  Void change(SPLATRuleSet & splATTROoB__rs, SN splATTROoB__cursn, Atom & splATTROoB__curatom) {
+  {
+
+    Atom me = ew[0];
+    if(me as InnerMembrane){
+      ew[splATTROoB__cursn] = me;
+      me.new_sym = false;
+      ew[0] = me;
+    }
+   
+  }
+  }
+} // transient SPLATKeyState_10InnerMembrane_I
+transient SPLATKeyState_10InnerMembrane_i : SPLATKeyState {
+  // given i isa InnerMembrane 
+  Bool given(SPLATRuleSet & splATTROoB__rs, SN splATTROoB__cursn, Atom & splATTROoB__curatom) {
+    if (!(splATTROoB__curatom is InnerMembrane)) return false;
+    InnerMembrane & splATTROoB__self = (InnerMembrane &) splATTROoB__curatom;
+   return (true); 
+  }
+} // transient SPLATKeyState_10InnerMembrane_i
+
+transient SPLATRuleSet_10InnerMembrane : SPLATRuleSet {
+  SPLATKeyState_10InnerMembrane_Dot key_Dot;
+  SPLATKeyState_10InnerMembrane_At key_At;
+  SPLATKeyState_10InnerMembrane_I key_I;
+  SPLATKeyState_10InnerMembrane_i key_i;
+  virtual Void reset() {
+    super.reset();
+    key_Dot.define('.');
+    key_At.define('@');
+    key_I.define('I');
+    key_i.define('i');
+  }
+  virtual Void beginSiteEval() {
+    super.beginSiteEval();
+    key_Dot.beginSiteEval();
+    key_At.beginSiteEval();
+    key_I.beginSiteEval();
+    key_i.beginSiteEval();
+  }
+  virtual SPLATKeyState & getKeyState(ASCII key) {
+    which (key) {
+    case '.': { return key_Dot; }
+    case '@': { return key_At; }
+    case 'I': { return key_I; }
+    case 'i': { return key_i; }
+    }
+    return super.getKeyState(key);
+  }
+
+  virtual Bool evaluateRules() {
+    SPLATRuleDriver pd;
+    //           
+    //  i@ ->  I.
+    if (pd.evaluateRule(self, "\000@\001i\377\001I\376"))
+      return true;
+    return false;
+  }
+} // SPLATRuleSet_10InnerMembrane
 
 /** 
   \symbol IM
@@ -10,7 +110,14 @@
  */
 element InnerMembrane : QMembrane {
   // Data members
+  Bool new_sym;
+  typedef EventWindow.Symmetry Symmetry;
+  Symmetry sym;
   virtual Bool evaluateRuleSets() {
+    {
+      SPLATRuleSet_10InnerMembrane rs;
+      if (rs.evaluateRules()) return true;
+    }
     if (super.evaluateRuleSets()) return true; // Maybe super's got something
     return false;   // We got nothing
   }
