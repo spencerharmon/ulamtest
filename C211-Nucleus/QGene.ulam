@@ -1,0 +1,235 @@
+/**
+  \author Spencer Harmon
+  \license lgpl
+ */
+
+quark QGene : QContent{
+  AtomUtils au;
+  EventWindow ew;
+  ClusterByID cl;
+  Cell cell;
+  DecisionTree dt;
+  SiteUtils su;
+  DebugUtils du;
+  Random r;
+
+  //typedefs  
+  //similar to SiteNum, since we don't want to exceed an event window, but has no bearing on position
+
+  typedef Cell.Seqno Seqno; 
+  typedef EventWindow.SiteNum SiteNum;
+  typedef AtomUtils.Type ElementType;
+  typedef WindowScanner.Category Category;
+  typedef Cell.ID ID;
+  typedef DecisionTree.StoredValue StoredValue;
+  typedef Unsigned(2) TreeType;
+  typedef Unsigned(3) AloneCounter;
+  typedef EventWindow.Symmetry Symmetry;
+
+  //data members
+  ID id;
+//  Seqno seqno;
+//  Bool canSeeNucleus = true;
+  Unsigned(2) op;
+  TreeType tree0Type;
+  StoredValue eqTree0;
+  TreeType tree1Type;
+  StoredValue eqTree1;
+  StoredValue value;
+//  AloneCounter eventsAlone;
+  Bool copied;
+  
+//  StoredValue comIn;
+//  StoredValue comOut;
+//  Bool proto;
+
+  Void listen(){
+    SiteVisitorByID sv;
+                WindowScanner ws;
+
+    sv.reset();
+                ws.resetCategories();
+                Category cGene = ws.allocateCategory();
+                Gene aGene;
+                ElementType tGene = au.getValidType(aGene);
+
+                sv.setType(cGene,tGene);
+                sv.setID(cGene,id);
+    sv.neighborCell(cGene);
+                ws.scan(sv);
+
+    SiteNum slot = ws.getSiteNum(cGene);
+
+    if(slot != (SiteNum)0 && slot <= 40){
+      Atom cell = ew[slot];
+      if(cell as Gene){
+//        comIn = cell.comOut;
+      }
+    }
+    else{
+//      comIn = 0;
+    }    
+  }
+  Void speak(){
+                SiteVisitorByID sv;
+                WindowScanner ws;
+    
+    sv.reset();
+                ws.resetCategories();
+                Category cNucleus = ws.allocateCategory();
+                Nucleus aNucleus;
+                ElementType tNucleus = au.getValidType(aNucleus);
+    
+                sv.setType(cNucleus,tNucleus);
+                sv.setID(cNucleus,id);
+
+                ws.scan(sv);
+    
+    SiteNum slot = ws.getSiteNum(cNucleus);
+    if(slot <= 40){
+      Atom nucleus = ew[slot];
+      if(nucleus as Nucleus){
+//        comOut = nucleus.comOut;
+      }
+    }
+  }
+/*  Void nucleusCheck(){
+    for(SiteNum slot = 0; slot <=40; ++slot){
+      Atom a = ew[slot];
+
+      if(a as Nucleus){
+        if(a.id == id){
+          if(a.reproducing){
+            ID childID = a.childID;
+            copy(childID);
+          }else copied = false;
+          //we can see the nucleus, so go ahead and let ClusterByID know.
+          canSeeNucleus = true;
+          return;
+        }else{
+          canSeeNucleus = false;
+        }
+      }
+      else if(a as Primer){
+        if(a.id == id){
+          //don't die before nucleus is created
+          canSeeNucleus = true;
+          return;
+        }
+      }else canSeeNucleus = false;
+    }
+  }
+*/
+  Void copy(ID childID){
+    //get some mutations in here later
+    copied = true;
+    SiteNum emptySlot = cl.emptySlotNearMe();
+    Bool dontCopy = false;
+    Atom base = su.getBase();
+    //set dontcopy to true if the base layer contains our nucleus
+    if(base as Nucleus){
+      if(base.id == childID){
+        dontCopy = true;
+      }
+    }else if(base as Gene){
+      if(base.id == childID){
+        dontCopy = true;
+      }
+    }
+    if(!dontCopy){
+//      gene.proto = true;
+      Atom me = ew[0];
+      if(me as Gene){
+        Gene gene;
+        gene.id = childID;
+        gene.seqno = me.seqno;
+        gene.treeno = me.treeno;
+        gene.op = op;
+        gene.eqTree0 = eqTree0;
+        gene.tree0Type = tree0Type;
+        gene.eqTree1 = eqTree1;
+        gene.tree0Type = tree0Type;
+        su.setBase(gene);
+      }else if(me as Tree){
+        Tree tree;
+        tree.id = childID;
+        tree.treeno = me.treeno;
+        tree.op = op;
+        tree.eqTree0 = eqTree0;
+        tree.tree0Type = tree0Type;
+        tree.eqTree1 = eqTree1;
+        tree.tree0Type = tree0Type;
+        su.setBase(tree);
+      }
+    }
+  }
+  Void killCopies(){
+    Atom me = ew[0];
+    for(SiteNum slot = 1; slot <=40; ++slot){
+      if(me as Gene){
+        Atom gene = ew[slot];
+
+        if(gene as Gene){
+          if(gene.id == id && gene.seqno == me.seqno && gene.treeno == me.treeno){
+            Empty e;
+            ew[0] = e;
+          }
+        }
+      }else if(me as Tree){
+        Atom tree = ew[slot];
+
+        if(tree as Tree){
+          if(tree.id == id && tree.treeno == me.treeno){
+            Empty e;
+            ew[0] = e;
+          }
+        }
+      }
+    }
+  }
+  Void behave(){
+
+//    nucleusCheck();
+    killCopies();
+    //diffuse
+    Bool touchingMembrane = false;
+    for(SiteNum i = 4; i > 0; --i){
+      Atom a = ew[i];
+      if(a as InnerMembrane){
+        touchingMembrane = true;
+        ew.changeSymmetry(a.sym);
+      }
+    }
+    if(!touchingMembrane){
+      ew.changeSymmetry((Symmetry) r.create(7));
+    }
+    Atom a = ew[1];
+    if(a as Empty){
+      ew[1] = ew[0];
+      ew[0] = a;
+    }
+/*    else if(r.oneIn(10u)){
+      cl.bringGenesCloser(id,self);
+    }
+    //currently takes comIn on the right.
+    if(canSeeNucleus){
+      eventsAlone = 0;
+    }
+    else{
+      ++eventsAlone;
+    }
+    if(eventsAlone == eventsAlone.maxof){
+      Empty e;
+      ew[0] = e;
+    }
+    //Equation tree solution step:
+    value = dt.selfEvaluate(seqno,id,comIn);
+    //look for other cells' comOut
+    listen();
+    //spread word of nucleus' comOut
+    ////timer for this? variable timer?
+    speak();
+    nucleusCheck();
+*/
+  }
+}

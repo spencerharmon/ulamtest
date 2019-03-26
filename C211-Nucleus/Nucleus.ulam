@@ -268,6 +268,14 @@ element Nucleus : QContent{
       sym = (Symmetry)(direction.value % 8);
     }
     whetherToMove(move);
+    for(SiteNum i = 4; i > 0; --i){
+      Atom a = ew[i];
+      if(a as InnerMembrane){
+        a.sym = sym;
+        a.new_sym = true;
+        ew[i] = a;
+      }
+    }
   }
   Void behave(){
     ++lifespan;
