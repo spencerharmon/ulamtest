@@ -1,11 +1,10 @@
 /**
   \author Spencer Harmon
   \license lgpl
-  \symbol Ge
-  \color #7ee
+  \symbol Tr
+  \color #fee
   \symmetries all
  */
-element Gene : QGene{
-  Seqno seqno;
+element Tree : QGene{
   Seqno treeno;
 }

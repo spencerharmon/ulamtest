@@ -155,7 +155,7 @@ element Primer : QContent{
       //terminator
       gene.tree0Type = 0;
 
-      gene.eqTree0 = (Unsigned(6)) r.create(63);
+      gene.eqTree0 = (StoredValue) r.create(63);
     }
     //10% chance
     if(valTypSwitch0 >= (Unsigned)30 && valTypSwitch0 < (Unsigned)40){
@@ -215,7 +215,7 @@ element Primer : QContent{
       //terminator
       gene.tree1Type = 0;
 
-      gene.eqTree1 = (Unsigned(6)) r.create(63);
+      gene.eqTree1 = (StoredValue) r.create(63);
     }
     //10% chance
     if(valTypSwitch1 >= (Unsigned)30 && valTypSwitch1 < (Unsigned)40){
