@@ -123,7 +123,7 @@ element Nucleus : QContent{
       ew.changeSymmetry(sym);
       diffuse();
     }else{
-      cl.bringGenesCloser(id,self);
+      cl.bringTreesCloser(id);
     }
   }
   Bool onEgg(){
@@ -175,9 +175,11 @@ element Nucleus : QContent{
   //kill self if no genes. 
   Bool geneCheck(){
     for(Seqno i = 1; i <= 40; ++i){
-      Atom a = dt.findSeqno(i, id);
+      Atom a = ew[i];
       if(a as Gene){
-        return true;
+        if(a.id == id){
+          return true;
+        }
       }
     }
     return false;
@@ -212,7 +214,7 @@ element Nucleus : QContent{
     killCopies();
     Bool move = dontStepOnEggs();
 
-    Atom movement = dt.findSeqno((Seqno)1, id);
+    Atom movement = dt.findTreeno((Seqno)1, id);
     if(movement as Gene){
       if(movement.value !=0){
         if(r.oneIn((Unsigned)movement.value)){ 
@@ -221,7 +223,7 @@ element Nucleus : QContent{
       }
     }
 
-    Atom com = dt.findSeqno((Seqno)2, id);
+    Atom com = dt.findTreeno((Seqno)2, id);
     if(com as Gene){
       comOut = com.value;
     }
@@ -241,7 +243,7 @@ element Nucleus : QContent{
       }else eqTreeBehavior();
     }
 
-    Atom reproduce = dt.findSeqno((Seqno)3, id);
+    Atom reproduce = dt.findTreeno((Seqno)3, id);
     if(reproduce as Gene){
       if(reproduce.value > 0){
         if(r.oneIn((Unsigned)reproduce.value)){
@@ -263,7 +265,7 @@ element Nucleus : QContent{
       }
     }
 
-    Atom direction = dt.findSeqno((Seqno)4, id);
+    Atom direction = dt.findTreeno((Seqno)4, id);
     if(direction as Gene){
       sym = (Symmetry)(direction.value % 8);
     }

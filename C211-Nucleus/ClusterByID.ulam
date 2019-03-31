@@ -24,7 +24,7 @@ quark ClusterByID {
   typedef WindowScanner.Radius Radius;
   typedef C2D.Coord Coord;
   typedef WindowScanner.Category Category;
-
+  typedef Cell.Seqno Seqno;
   typedef Cell.ID ID;
 
   SiteNum findNonCellSlotNear(SiteNum t,ID id){
@@ -141,47 +141,32 @@ quark ClusterByID {
     }
   }
 
-  Bool bringGenesCloser(ID id, Atom me){
-    Bool foundGene = false;
-    if(me as Nucleus){
-      for(SiteNum i = 1; i <= 40;++i){
-        Atom a = ew[i];
-        if(a as Gene){
-          if(a.id == id){
-          //  SiteNum e = nonCellSlotNearMe(id);
-            SiteNum e = emptySlotNearMe();
-            ew.swap(i,e);
-          }
+  Void bringGenesCloser(ID id, Seqno treeno){
+    for(SiteNum i = 1; i <= 40;++i){
+      Atom a = ew[i];
+      if(a as Gene){
+        if(a.id == id && a.treeno == treeno){
+      //  SiteNum e = nonCellSlotNearMe(id);
+          SiteNum e = emptySlotNearMe();
+          ew.swap(i,e);
         }
       }
     }
-/*
-    if(me as Gene){
-      Bool canSeeNucleus = me.canSeeNucleus;
-      for(SiteNum i = 1; i <= 40;++i){
-        Atom a = ew[i];
-        if(a as Gene){
-          if(a.id == id){
-            foundGene = true;
-            if(canSeeNucleus && !a.canSeeNucleus){
-            //  SiteNum e = findNonCellSlotNear(i,id);
-              //this should avoid moving other genes/nuclei
-              SiteNum e = emptySlotNearMe();
-              ew.swap(i,e);
-            }
-            if(!canSeeNucleus && a.canSeeNucleus){
-            //  SiteNum e = findNonCellSlotNear(i,id);
-              SiteNum e = emptySlotNearMe();
-              ew.swap(0,e);
-            }
-          }
-        }
-      }
-    }
-*/
-    return foundGene;
   }
   
+  Void bringTreesCloser(ID id){
+    for(SiteNum i = 1; i <= 40;++i){
+      Atom a = ew[i];
+      if(a as Tree){
+        if(a.id == id){
+        //  SiteNum e = nonCellSlotNearMe(id);
+          SiteNum e = emptySlotNearMe();
+          ew.swap(i,e);
+        }
+      }
+    }
+  }
+
   Bool geneCanSeeNucleus(ID id){
     SiteVisitorByID sv;
     WindowScanner ws;

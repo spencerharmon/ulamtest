@@ -17,21 +17,35 @@ quark DecisionTree{
   typedef Cell.Seqno Seqno;
   typedef Cell.ID ID;
   typedef EventWindow.SiteNum SiteNum;
+  typedef QGene.TreeOperator TreeOperator;
 
-  Atom findSeqno(Seqno seqno, ID id){
+  Atom findSeqno(Seqno treeno, Seqno seqno, ID id){
     Empty e;
 
     for(SiteNum i = 1; i <=40; ++i){
       Atom gene = ew[i];
       if(gene as Gene){
-        if(gene.id == id && gene.seqno == seqno){
+        if(gene.id == id && gene.seqno == seqno && gene.treeno == treeno){
           return gene;
         }
       }
     }
     return e;    
   }
-  StoredValue evaluate(Seqno var, ID id, StoredValue comIn){
+  Atom findTreeno(Seqno treeno, ID id){
+    Empty e;
+
+    for(SiteNum i = 1; i <=40; ++i){
+      Atom tree = ew[i];
+      if(tree as Tree){
+        if(tree.id == id && tree.treeno == treeno){
+          return tree;
+        }
+      }
+    }
+    return e;    
+  }
+  StoredValue evaluate(Seqno treeno, Seqno seqno, ID id, StoredValue comIn){
     Bool evaluated[40];
     Bool checked[40];
 
@@ -47,18 +61,17 @@ quark DecisionTree{
     StoredValue eqTree1[40];
 
     Bool keepRecursing = true;
-    Seqno seqno = var;
 
     Unsigned(2) dejavu;
     while(keepRecursing){
-      if(evaluated[var]){
-        return value[var];
+      if(evaluated[seqno]){
+        return value[seqno];
       }
       if(!evaluated[seqno] && !checked[seqno]){
         //
         //Populate some stuff.
         //
-        Atom gene = findSeqno(seqno, id);
+        Atom gene = findSeqno(treeno, seqno, id);
         
         //will only return here if checked wasn't set because gene
         //seqno wasn't found. 
@@ -134,41 +147,124 @@ quark DecisionTree{
     }// while keepRecursing loop
     //g++ complains without returning something at this namespace, even though
     //control shouldn't reach here.
-    return value[var];
+    return value[seqno];
   }//evaluate() namespace
-  StoredValue selfEvaluate(Seqno var, ID id, StoredValue comIn){
+  StoredValue comIn(){
+    for(SiteNum i; i <= 41; ++i){
+      Atom a = ew[i];
+      if(a as OuterMembrane){
+        StoredValue test;
+        test = test.maxof;
+        return test;
+      }
+    }
+    return (StoredValue) 0;
+  }
+  StoredValue selfEvaluate(){
     StoredValue val0;
     StoredValue val1;
-    StoredValue value;
-    Atom gene;
+    TreeOperator op;
+    Bool val0set = false;
+    Bool val1set = false;
     Atom my = ew[0];
     if(my as Gene){
-      if(my.tree0Type == 1 && my.eqTree0 == 0){
-        my.tree0Type = 0;
-        val0 = comIn;
-      }else if(my.tree0Type == 1 && my.eqTree0 != 0){
-        gene = findSeqno((Seqno)my.eqTree0, id);
+      op = my.op;
+      if(my.tree0Type == 2 && my.eqTree0 == 0){
+        val0 = comIn();
+        val0set = true;
+      }else if(my.tree0Type == 2 && my.eqTree0 > 0){
+        val0set = true;
+        Atom tree = findTreeno((Seqno)my.eqTree0, my.id);
+        if(tree as Tree){
+          val0 = tree.value;
+          val0set = true;
+        }
+      }else if(my.tree0Type == 1){
+        Atom gene = findSeqno(my.treeno,(Seqno)my.eqTree0, my.id);
         if(gene as Gene){
           val0 = gene.value;
+          val0set = true;
         }
       }else if(my.tree0Type == 0){
         val0 = my.eqTree0;
+        val0set = true;
       }
 
-      if(my.tree1Type == 1 && my.eqTree1 == 0){
-        my.tree0Type = 0;
-        val1 = comIn;
-      }else if(my.tree1Type == 1 && my.eqTree1 !=0){
-        gene = findSeqno((Seqno)my.eqTree1, id);
+      if(my.tree1Type == 2 && my.eqTree1 == 0){
+        val1 = comIn();
+        val1set = true;
+      }else if(my.tree1Type == 2 && my.eqTree1 > 0){
+        my.tree1Type = 0;
+        
+        Atom tree = findTreeno((Seqno)my.eqTree1, my.id);
+        if(tree as Tree){
+          val1 = tree.value;
+          val1set = true;
+        }
+      }else if(my.tree1Type == 1){
+        Atom gene = findSeqno(my.treeno, (Seqno)my.eqTree1, my.id);
         if(gene as Gene){
           val1 = gene.value;
+          val1set = true;
         }
       }else if(my.tree1Type == 0){
         val1 = my.eqTree1;
+        val1set = true;
       }
-      value = operate(val0, my.op, val1);
+    }else if(my as Tree){
+      op = my.op;
+      if(my.tree0Type == 2 && my.eqTree0 == 0){
+        my.tree0Type = 0;
+        val0 = comIn();
+        val0set = true;
+      }else if(my.tree0Type == 2 && my.eqTree0 > 0){
+        my.tree0Type = 0;
+        val0set = true;
+        Atom tree = findTreeno((Seqno)my.eqTree0, my.id);
+        if(tree as Tree){
+          val0 = tree.value;
+          val0set = true;
+        }
+      }else if(my.tree0Type == 1){
+        Atom gene = findSeqno(my.treeno, (Seqno)my.eqTree0, my.id);
+        if(gene as Gene){
+          val0 = gene.value;
+          val0set = true;
+        }
+      }else if(my.tree0Type == 0){
+        val0 = my.eqTree0;
+        val0set = true;
+      }
+
+      if(my.tree1Type == 2 && my.eqTree1 == 0){
+        val1 = comIn();
+        val1set = true;
+      }else if(my.tree1Type == 2 && my.eqTree1 > 0){
+        
+        Atom tree = findTreeno((Seqno)my.eqTree1, my.id);
+        if(tree as Tree){
+          val1 = tree.value;
+          val1set = true;
+        }
+      }else if(my.tree1Type == 1){
+        Atom gene = findSeqno(my.treeno, (Seqno)my.eqTree1, my.id);
+        if(gene as Gene){
+          val1 = gene.value;
+          val1set = true;
+        }
+      }else if(my.tree1Type == 0){
+        val1 = my.eqTree1;
+        val1set = true;
+      }
     }
-    return value;
+    if(val0set && val1set){
+      StoredValue val = operate(val0, op, val1);
+      du.print(val);
+      return val;
+    }else{
+      du.print((Int)0);
+      return (StoredValue) 0;
+    }
   }//selfEvaluate() namespace
   StoredValue operate(StoredValue val1, Unsigned(2) op, StoredValue val2){
     StoredValue value;

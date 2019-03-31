@@ -25,12 +25,13 @@ quark QGene : QContent{
   typedef Unsigned(2) TreeType;
   typedef Unsigned(3) AloneCounter;
   typedef EventWindow.Symmetry Symmetry;
+  typedef Unsigned(2) TreeOperator;
 
   //data members
   ID id;
 //  Seqno seqno;
 //  Bool canSeeNucleus = true;
-  Unsigned(2) op;
+  TreeOperator op;
   TreeType tree0Type;
   StoredValue eqTree0;
   TreeType tree1Type;
@@ -205,11 +206,14 @@ quark QGene : QContent{
     }
     Atom a = ew[1];
     if(a as Empty){
-      ew[1] = ew[0];
-      ew[0] = a;
+      ew.swap(0,1);
+    }else if(self as Gene){
+      cl.bringGenesCloser(id,self.treeno);
+    }else if(self as Tree){
+      cl.bringGenesCloser(id,self.treeno);
     }
+    value = dt.selfEvaluate();
 /*    else if(r.oneIn(10u)){
-      cl.bringGenesCloser(id,self);
     }
     //currently takes comIn on the right.
     if(canSeeNucleus){
@@ -223,7 +227,6 @@ quark QGene : QContent{
       ew[0] = e;
     }
     //Equation tree solution step:
-    value = dt.selfEvaluate(seqno,id,comIn);
     //look for other cells' comOut
     listen();
     //spread word of nucleus' comOut

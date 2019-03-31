@@ -23,16 +23,18 @@ element Primer : QContent{
 
   //the total number of valid variables, including default variables
   Seqno numTrees;
+
   //the next non-variable gene number to be created
-  Seqno curgene;
+  Seqno curgene = 0;
   //Whether the next gene created is the first in its tree
   Bool makeTree;
   //the number of genes left to create for this tree
-  Seqno treeGenesLeftToCreate;
+  Seqno treeGenesLeftToCreate = 0;
   //the seqno number of the current tree
-  Seqno currentTree;
+  Seqno currentTree = 0;
   //the id of the cell
   ID id;
+
   //whether the final gene in the last gene has been created
   Bool finished;
   //default number of trees created. Update here when new trees are added.
@@ -52,50 +54,68 @@ element Primer : QContent{
     Atom nu = cell.makeNucleus(id,0,0);
     ew[0] = nu;
   }
-  Atom initVars(){
-    if(treeGenesLeftToCreate == 0){
-      makeTree = true;
-      treeGenesLeftToCreate = 1;
-      ++currentTree;
-    }
+  Atom nextGene(){
     Empty e;
     Atom a = e.atomof;
-    if(currentTree <= numTrees){
-      a = initTree();
-    }
-    else{
-      finished = true;
-    }
-    return a;
-  }
+    if(treeGenesLeftToCreate == 0){
+      if (currentTree <= numTrees){
+        ++currentTree;
+        curgene = 0;
 
-//todo: seqno can probably be replaced with global curgene/currentTree
-//numTrees is already global, and so is ID.
-  Atom initTree(){
+        makeTree = true;
+        QGene q = randGeneData();
+        makeTree = false;
 
-    Atom a;
-    if(makeTree){
-      a = initGene(currentTree);
-      makeTree = false;
+        Tree t;
+
+        t.treeno = currentTree;
+        t.id = q.id;
+        t.op = q.op;
+        t.tree0Type = q.tree0Type;
+        t.eqTree0 = q.eqTree0;
+        t.tree1Type = q.tree1Type;
+        t.eqTree1 = q.eqTree1;
+        t.value = q.value;
+        t.copied = q.copied; 
+        a = t;
+
+      }else{
+        finished = true;
+      }
     }else{
-      a = initGene(curgene);
+      QGene q = randGeneData();
+      Gene g;
+
+      g.seqno = curgene;
+      g.treeno = currentTree;
+      g.id = q.id;
+      g.op = q.op;
+      g.tree0Type = q.tree0Type;
+      g.eqTree0 = q.eqTree0;
+      g.tree1Type = q.tree1Type;
+      g.eqTree1 = q.eqTree1;
+      g.value = q.value;
+      g.copied = q.copied; 
+      a = g;
+
       ++curgene;
+      --treeGenesLeftToCreate;
     }
-    --treeGenesLeftToCreate;
+    du.print(currentTree);
+    du.print(curgene);
+
     return a;
   }
 
-  Atom initGene(Seqno mySeqno){
+  QGene randGeneData(){
 
     //These nodes and their Stored Values represent the binary tree structure and
     //content of the equation tree
 
-    //this is the return value for initGene
     Unsigned(2) numberOfGenesToAddToMyTree;
 
-    Gene gene;
+    QGene gene;
 
-    gene.seqno = mySeqno;
     gene.id = id;
 
     //representing addition, subtraction, multiplication, and division
@@ -140,63 +160,42 @@ element Primer : QContent{
     }
 
     // avoid creating child genes past StoredValue's max
-    // this is a local limited address space. Good idea? who knows?
-    if(gene.seqno == 63u){
-      if(valTypSwitch0 >= 50u && valTypSwitch0 < 75u){
-        valTypSwitch0 -= 25u;
+    Seqno s;
+    if(curgene + treeGenesLeftToCreate == s.maxof){
+      if(valTypSwitch0 >= 40u && valTypSwitch0 < 75u){
+        valTypSwitch0 -= 35u;
       }
-      if(valTypSwitch1 >= 50u && valTypSwitch1 < 75u){
-        valTypSwitch1 -= 25u;
+      if(valTypSwitch1 >= 40u && valTypSwitch1 < 75u){
+        valTypSwitch1 -= 35u;
       }
     }
 
     //30% chance
-    if(valTypSwitch0 >= (Unsigned)0 && valTypSwitch0 < (Unsigned)30){
+    if(valTypSwitch0 >= (Unsigned)0 && valTypSwitch0 < (Unsigned)40){
       //terminator
       gene.tree0Type = 0;
 
-      gene.eqTree0 = (StoredValue) r.create(63);
+      gene.eqTree0 = (StoredValue) r.create(gene.eqTree0.maxof);
     }
-    //10% chance
-    if(valTypSwitch0 >= (Unsigned)30 && valTypSwitch0 < (Unsigned)40){
-      //why not some extra chance of nothing? (terminator)
-      gene.tree0Type = 0;
-      gene.eqTree0 = (StoredValue) 0;
-    }
-    //10% chance
-    if(valTypSwitch0 >= (Unsigned)40 && valTypSwitch0 < (Unsigned)50){
-      //comIn 
-      //comIn is technically a terminator, but it "feels" like a reference
-      //to the equation tree of another Nucleus.
-      //Also, type 0 value 0 already has the distinct meaning "the number 0"
-
-      gene.tree0Type = 1;
-
-      // Type 1 value 0 represents comIn. Since seqno starts with 1, this
-      // should not conflict with anything
-      gene.eqTree0 = (StoredValue)0;
-    }
-    if(valTypSwitch0 >= (Unsigned)50 && valTypSwitch0 < (Unsigned)75){
+    if(valTypSwitch0 >= (Unsigned)40 && valTypSwitch0 < (Unsigned)75){
       //operator (seqno reference)
       gene.tree0Type = 1;
 
 
-      if(makeTree){
+      if(makeTree && false){
         //when makeTree is true, the reference needs to be to curgene
         //since numberofgenestoaddtomytree should always be at least one
         //in this stage
         gene.eqTree0 = (StoredValue)(curgene);
       }
       else{        
+        ++numberOfGenesToAddToMyTree;
         gene.eqTree0 = (StoredValue)(curgene+numberOfGenesToAddToMyTree);
       }
-      //after creating the reference, record that another gene needs 
-      //to be created
-      ++numberOfGenesToAddToMyTree;
     }
     if(valTypSwitch0 >= (Unsigned)75 && valTypSwitch0 < (Unsigned)100){
       //special variables, still operator type
-      gene.tree0Type = 1;
+      gene.tree0Type = 2;
       
       if(numOfSpecialVars == 1u){
         //can't use r.create on values <= 1.
@@ -204,53 +203,31 @@ element Primer : QContent{
       }else{
         gene.eqTree0 = (StoredValue)(r.create((Unsigned)numOfSpecialVars-1u)+1u+defaultTrees);
       }
-
-      //this is a loop; should not happen (but would otherwise)
-      if(gene.eqTree0 == gene.seqno){
-        gene.tree0Type = 0;
-      }
     }
+
+    // SIDE 1
     //30% chance
-    if(valTypSwitch1 >= (Unsigned)0 && valTypSwitch1 < (Unsigned)30){
+    if(valTypSwitch1 >= (Unsigned)0 && valTypSwitch1 < (Unsigned)40){
       //terminator
       gene.tree1Type = 0;
 
-      gene.eqTree1 = (StoredValue) r.create(63);
+      gene.eqTree1 = (StoredValue) r.create(gene.eqTree1.maxof);
     }
-    //10% chance
-    if(valTypSwitch1 >= (Unsigned)30 && valTypSwitch1 < (Unsigned)40){
-      //why not some extra chance of nothing? (terminator)
-      gene.tree1Type = 0;
-      gene.eqTree1 = (StoredValue) 0;
-    }
-    //10% chance
-    if(valTypSwitch1 >= (Unsigned)40 && valTypSwitch1 < (Unsigned)50){
-      //comIn 
-      //comIn is technically a terminator, but it "feels" like a reference
-      //to the equation tree of another Nucleus.
-      //Also, type 0 value 0 already has the distinct meaning "the number 0"
-
-      gene.tree1Type = 1;
-
-      // Type 1 value 0 represents comIn. Since seqno starts with 1, this
-      // should not conflict with anything
-      gene.eqTree1 = (StoredValue)0;
-    }
-    if(valTypSwitch1 >= (Unsigned)50 && valTypSwitch1 < (Unsigned)75){
+    if(valTypSwitch1 >= (Unsigned)40 && valTypSwitch1 < (Unsigned)75){
       //operator (seqno reference)
       gene.tree1Type = 1;
 
-      if(makeTree){
+      if(makeTree && false){
         gene.eqTree1 = (StoredValue)(curgene);
       }
       else{        
+        ++numberOfGenesToAddToMyTree;
         gene.eqTree1 = (StoredValue)(curgene+numberOfGenesToAddToMyTree);
       }
-      ++numberOfGenesToAddToMyTree;
     }
     if(valTypSwitch1 >= (Unsigned)75 && valTypSwitch1 < (Unsigned)100){
       //special variables, still operator type
-      gene.tree1Type = 1;
+      gene.tree1Type = 2;
       
       if(numOfSpecialVars == 1u){
         //can't use r.create on values <= 1.
@@ -258,16 +235,10 @@ element Primer : QContent{
       }else{
         gene.eqTree1 = (StoredValue)(r.create((Unsigned)numOfSpecialVars-1u)+1u+defaultTrees);
       }
-
-      //this is a loop; should not happen (but would otherwise)
-      if(gene.eqTree1 == gene.seqno){
-        gene.tree1Type = 0;
-      }
     }
     
     treeGenesLeftToCreate += numberOfGenesToAddToMyTree;
-    du.print(gene.seqno);
-    return gene.atomof;
+    return gene;
   }
 
   Void killself(){
@@ -275,27 +246,13 @@ element Primer : QContent{
     ew[0] = e;
   }
   Void behave(){
-    if(numTrees < 3){
-      treeGenesLeftToCreate = 1;
-      makeTree = true;
-      currentTree = 1;
-
-      // The randomness here is to have common variables accessible to the three
-      // main variables.
-      // Must have at least three vars (represent symmetry, movement, and comout)
-      //
-
-      numTrees = (Seqno)(r.create(3)+3u);
-
-      //because the first seqnos are for variables,
-      curgene = (Seqno) (numTrees+1);
-    }
-    if(id == 0){
+    if(numTrees == (Seqno) 0){
       id = cell.genID();
+      numTrees = (Seqno)(r.create(3) + defaultTrees);
     }
     Atom a = ew[1];
     if(a as Empty){
-      ew[1] = initVars();
+      ew[1] = nextGene();
     }
     if(finished){
       nucleus();
