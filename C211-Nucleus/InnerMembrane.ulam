@@ -1,5 +1,5 @@
 //ALTERATION IS FUTILE: THIS FILE AUTOMATICALLY GENERATED FROM InnerMembrane.splat
-//CREATED "Tue Mar 26 02:18:34 2019 GMT" BY /usr/bin/vendor_perl/splattr FOR spencer
+//CREATED "Mon Apr  1 03:52:48 2019 GMT" BY /usr/bin/vendor_perl/splattr FOR spencer
 //BEGIN InnerMembrane.ulam (in ./.splatgen)
 
 transient SPLATKeyState_10InnerMembrane_Dot : SPLATKeyStateAny {
@@ -110,6 +110,7 @@ transient SPLATRuleSet_10InnerMembrane : SPLATRuleSet {
  */
 element InnerMembrane : QMembrane {
   // Data members
+  Bool set;
   Bool new_sym;
   typedef EventWindow.Symmetry Symmetry;
   Symmetry sym;

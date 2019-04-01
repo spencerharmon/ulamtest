@@ -43,7 +43,7 @@ element Nucleus : QContent{
   ID childID;
   Symmetry sym;
   //0 = spawning, 1 = ovulating
-  Bits(1) reproType;
+  Unsigned(1) reproType;
 
   Bool dieOfOldAge(){
     if(lifespan == lifespan.maxof){
@@ -215,7 +215,7 @@ element Nucleus : QContent{
     Bool move = dontStepOnEggs();
 
     Atom movement = dt.findTreeno((Seqno)1, id);
-    if(movement as Gene){
+    if(movement as Tree){
       if(movement.value !=0){
         if(r.oneIn((Unsigned)movement.value)){ 
           move = true;
@@ -224,14 +224,14 @@ element Nucleus : QContent{
     }
 
     Atom com = dt.findTreeno((Seqno)2, id);
-    if(com as Gene){
+    if(com as Tree){
       comOut = com.value;
     }
 
     if(refractoryPeriod > 0){
       if(refractoryPeriod > refractoryPeriod.maxof*80/100
         && refractoryPeriod <= refractoryPeriod.maxof){
-        if(reproType == 0){
+        if(reproType == 0u){
           laySpawn();
         }else{
           layEgg();
@@ -244,14 +244,11 @@ element Nucleus : QContent{
     }
 
     Atom reproduce = dt.findTreeno((Seqno)3, id);
-    if(reproduce as Gene){
+    if(reproduce as Tree){
       if(reproduce.value > 0){
-        if(r.oneIn((Unsigned)reproduce.value)){
-          reproType = 0;
-          laySpawn();
-        }else{
-          Atom base = su.getBase();
-          if(base as Nucleus){
+        Atom base = su.getBase();
+        if(base as Nucleus){
+          if(base.parent1id != id){
             //fertilize spawn in base layer and lay egg.
             base.parent1id = id;
             reproducing = true;
@@ -260,13 +257,16 @@ element Nucleus : QContent{
             su.setBase(base);
             reproType = 1;
             layEgg();
+          }else if(r.oneIn((Unsigned)reproduce.value)){
+            reproType = 0;
+            laySpawn();
           }
         }
       }
     }
 
     Atom direction = dt.findTreeno((Seqno)4, id);
-    if(direction as Gene){
+    if(direction as Tree){
       sym = (Symmetry)(direction.value % 8);
     }
     whetherToMove(move);
@@ -275,6 +275,7 @@ element Nucleus : QContent{
       if(a as InnerMembrane){
         a.sym = sym;
         a.new_sym = true;
+        a.set = true;
         ew[i] = a;
       }
     }

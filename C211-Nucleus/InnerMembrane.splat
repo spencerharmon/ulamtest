@@ -5,6 +5,7 @@
 
 == Data Members
 
+u Bool set;
 u Bool new_sym;
 u typedef EventWindow.Symmetry Symmetry;
 u Symmetry sym;
