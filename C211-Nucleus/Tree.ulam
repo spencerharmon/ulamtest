@@ -7,4 +7,37 @@
  */
 element Tree : QGene{
   Seqno treeno;
+
+  Void behave(){
+    value = dt.selfEvaluate();
+    killCopies();
+    Bool touchingMembrane = false;
+    SiteNum slot = 0;
+    for(SiteNum i = 4; i > 0; --i){
+      Atom a = ew[i];
+      if(a as InnerMembrane){
+        if(a.set){
+          touchingMembrane = true;
+          ew.changeSymmetry(a.sym);
+        }
+      }
+    }
+    if(touchingMembrane){
+      Atom s = ew[1];
+      if(s as Empty){
+        slot = (SiteNum) 1;
+      }
+    }else{
+      
+      for(SiteNum i = 4; i > 0; --i){
+        Atom a = ew[i];
+        if(a as Empty){
+          slot = i;
+        }
+      }
+    }
+    if(slot != (SiteNum) 0 && !cl.canSeeNucleus(id)){
+      ew.swap(0,slot);
+    }
+  }
 }

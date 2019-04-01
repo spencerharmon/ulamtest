@@ -188,7 +188,7 @@ quark QGene : QContent{
       }
     }
   }
-  Void behave(){
+  virtual Void behave(){
 
 //    nucleusCheck();
     value = dt.selfEvaluate();

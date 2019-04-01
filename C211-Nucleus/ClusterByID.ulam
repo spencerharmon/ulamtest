@@ -141,13 +141,49 @@ quark ClusterByID {
     }
   }
 
+  SiteNum emptyOrGene(){
+    //prefers closer spots. returns sitenum for nearest empty or gene
+    Unsigned radius = ew.getRadius();
+    SiteVisitorByID sv;
+    WindowScanner ws;
+    
+    ws.resetCategories();
+    Category cEmpty = ws.allocateCategory();
+    ElementType tEmpty = au.getEmptyType();
+    sv.setType(cEmpty,tEmpty);
+
+    Category cGene = ws.allocateCategory();
+    Gene g;
+    ElementType tGene = au.getValidType((Atom)g);
+    sv.setType(cGene,tGene);
+
+    //only scan next radius if no hits
+    ws.scan(sv,1,1);
+    if(ws.getHits(cEmpty) == 0u && ws.getHits(cGene) == 0u && radius > 1u){
+      ws.scan(sv,2,2);
+      if(ws.getHits(cEmpty) > 0u){
+        return ws.getSiteNum(cEmpty);
+      }else if (ws.getHits(cGene) > 0u){
+        return ws.getSiteNum(cGene);
+      }else{
+        return 0;
+      }
+    }else if(ws.getHits(cEmpty) > 0u){
+      return ws.getSiteNum(cEmpty);
+    }else if (ws.getHits(cGene) > 0u){
+      return ws.getSiteNum(cGene);
+    }else{
+      return 0;
+    }
+  }
+
   Void bringGenesCloser(ID id, Seqno treeno){
     for(SiteNum i = 1; i <= 40;++i){
       Atom a = ew[i];
       if(a as Gene){
         if(a.id == id && a.treeno == treeno){
       //  SiteNum e = nonCellSlotNearMe(id);
-          SiteNum e = emptySlotNearMe();
+          SiteNum e = emptyOrGene();
           ew.swap(i,e);
         }
       }
@@ -160,14 +196,14 @@ quark ClusterByID {
       if(a as Tree){
         if(a.id == id){
         //  SiteNum e = nonCellSlotNearMe(id);
-          SiteNum e = emptySlotNearMe();
+          SiteNum e = emptyOrGene();
           ew.swap(i,e);
         }
       }
     }
   }
 
-  Bool geneCanSeeNucleus(ID id){
+  Bool canSeeNucleus(ID id){
     SiteVisitorByID sv;
     WindowScanner ws;
     
@@ -188,6 +224,30 @@ quark ClusterByID {
       return false;
     }
   }
+
+  Bool canSeeTree(ID id, Seqno treeno){
+    SiteVisitorByID sv;
+    WindowScanner ws;
+    
+    ws.resetCategories();
+    Category cTree = ws.allocateCategory();
+    Nucleus aTree;
+    ElementType tTree = au.getValidType(aTree);
+    
+    sv.setType(cTree,tTree);
+    sv.setID(cTree,id);
+    sv.setTreeno(cTree, treeno);
+
+    ws.scan(sv);
+
+    if(ws.getHits(cTree)>(Unsigned)0){
+      return true;
+    }
+    else{
+      return false;
+    }
+  }
+
   Void run(){
     ew.swap(0,40);
   }

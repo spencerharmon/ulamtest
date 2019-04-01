@@ -33,11 +33,11 @@ quark Cell{
 
     return gene;
   }
-  Atom makeNucleus(ID child, ID parent1, ID parent2){
+  Atom makeNucleus(ID child, ID parent0, ID parent1){
     Nucleus nu;
     nu.id = child;
+    nu.parent0id = parent0;
     nu.parent1id = parent1;
-    nu.parent2id = parent2;
     return nu;
   }
   Bool inTheCell(Atom a,ID id){

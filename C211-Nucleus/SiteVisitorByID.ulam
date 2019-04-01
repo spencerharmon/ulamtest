@@ -18,8 +18,11 @@ transient SiteVisitorByID : SiteVisitor {
   constant Unsigned cCATEGORY_COUNT = Category.maxof + 1;// XXX Wish it was: WindowScanner.cCATEGORY_COUNT;
 
   Seqno mSeqno[cCATEGORY_COUNT];
+  Seqno mTreeno[cCATEGORY_COUNT];
   ID mID[cCATEGORY_COUNT];
   ElementType mType[cCATEGORY_COUNT];
+  Bool mSeqnoInUse[cCATEGORY_COUNT];
+  Bool mTreenoInUse[cCATEGORY_COUNT];
   Bool mInUse[cCATEGORY_COUNT];
   Bool mInvert[cCATEGORY_COUNT];
   Bool mNeighbor[cCATEGORY_COUNT];
@@ -39,9 +42,14 @@ transient SiteVisitorByID : SiteVisitor {
     mInUse[c] = true;
   }
 
+  Void setTreeno(Category c, Seqno treeno) {
+    mTreeno[c] = treeno;
+    mTreenoInUse[c] = true;
+  }
+
   Void setSeqno(Category c, Seqno seqno) {
     mSeqno[c] = seqno;
-    mInUse[c] = true;
+    mSeqnoInUse[c] = true;
   }
 
   Void unsetType(Category c) {
@@ -54,13 +62,27 @@ transient SiteVisitorByID : SiteVisitor {
     if(a as Nucleus){
       return a.id;
     }
-    if(a as Gene){
+    if(a as QGene){
       return a.id;
     }
     else{
       return 0;
     }
   }
+
+  Seqno getTreeno(SiteNum sn){
+    Atom a = ew[sn];
+    if(a as Gene){
+      return a.treeno;
+    }
+    if(a as Tree){
+      return a.treeno;
+    }
+    else{
+      return 0;
+    }
+  }
+
   //I named this invert before I realized the existance, and importance,
   //of the other kinds of inversion.
   Void invert(Category c){
@@ -83,10 +105,16 @@ transient SiteVisitorByID : SiteVisitor {
     ElementType et = (ElementType) au.getType(a);
     ID id = getID(sn);
     Seqno seqno = getSeqno(sn);
+    Seqno treeno = getTreeno(sn);
 
     for (Unsigned i = 0; i < cCATEGORY_COUNT; ++i){
-      if(mSeqno[i] > 0){
+      if(mSeqnoInUse[i]){
         if (mInUse[i] && mType[i] == et && (ID) mID[i] == (ID) id && mSeqno[i] == seqno){
+          wsrv.categorize(sn, (Category) i);
+        }
+      }
+      if(mTreenoInUse[i]){
+        if (mInUse[i] && mType[i] == et && (ID) mID[i] == (ID) id && mTreeno[i] == treeno){
           wsrv.categorize(sn, (Category) i);
         }
       }
