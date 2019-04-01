@@ -161,16 +161,12 @@ element Primer : QContent{
 
     // avoid creating child genes past StoredValue's max
     Seqno s;
-    if(curgene + treeGenesLeftToCreate == s.maxof){
+    if(curgene + treeGenesLeftToCreate + numberOfGenesToAddToMyTree == s.maxof){
       if(valTypSwitch0 >= 40u && valTypSwitch0 < 75u){
         valTypSwitch0 -= 35u;
       }
-      if(valTypSwitch1 >= 40u && valTypSwitch1 < 75u){
-        valTypSwitch1 -= 35u;
-      }
     }
 
-    //30% chance
     if(valTypSwitch0 >= (Unsigned)0 && valTypSwitch0 < (Unsigned)40){
       //terminator
       gene.tree0Type = 0;
@@ -181,19 +177,10 @@ element Primer : QContent{
       //operator (seqno reference)
       gene.tree0Type = 1;
 
-
-      if(makeTree && false){
-        //when makeTree is true, the reference needs to be to curgene
-        //since numberofgenestoaddtomytree should always be at least one
-        //in this stage
-        gene.eqTree0 = (StoredValue)(curgene);
-      }
-      else{        
-        ++numberOfGenesToAddToMyTree;
-        gene.eqTree0 = (StoredValue)(curgene+numberOfGenesToAddToMyTree);
-      }
+      ++numberOfGenesToAddToMyTree;
+      gene.eqTree0 = (StoredValue)(curgene+numberOfGenesToAddToMyTree);
     }
-    if(valTypSwitch0 >= (Unsigned)75 && valTypSwitch0 < (Unsigned)100){
+    if(valTypSwitch0 >= (Unsigned)75 && valTypSwitch0 <= (Unsigned)100){
       //special variables, still operator type
       gene.tree0Type = 2;
       
@@ -206,7 +193,14 @@ element Primer : QContent{
     }
 
     // SIDE 1
-    //30% chance
+
+    // avoid creating child genes past StoredValue's max
+    if(curgene + treeGenesLeftToCreate + numberOfGenesToAddToMyTree == s.maxof){
+      if(valTypSwitch1 >= 40u && valTypSwitch1 < 75u){
+        valTypSwitch1 -= 35u;
+      }
+    }
+
     if(valTypSwitch1 >= (Unsigned)0 && valTypSwitch1 < (Unsigned)40){
       //terminator
       gene.tree1Type = 0;
@@ -217,15 +211,10 @@ element Primer : QContent{
       //operator (seqno reference)
       gene.tree1Type = 1;
 
-      if(makeTree && false){
-        gene.eqTree1 = (StoredValue)(curgene);
-      }
-      else{        
-        ++numberOfGenesToAddToMyTree;
-        gene.eqTree1 = (StoredValue)(curgene+numberOfGenesToAddToMyTree);
-      }
+      ++numberOfGenesToAddToMyTree;
+      gene.eqTree1 = (StoredValue)(curgene+numberOfGenesToAddToMyTree);
     }
-    if(valTypSwitch1 >= (Unsigned)75 && valTypSwitch1 < (Unsigned)100){
+    if(valTypSwitch1 >= (Unsigned)75 && valTypSwitch1 <= (Unsigned)100){
       //special variables, still operator type
       gene.tree1Type = 2;
       

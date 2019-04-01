@@ -218,8 +218,6 @@ quark DecisionTree{
         val0 = comIn();
         val0set = true;
       }else if(my.tree0Type == 2 && my.eqTree0 > 0){
-        my.tree0Type = 0;
-        val0set = true;
         Atom tree = findTreeno((Seqno)my.eqTree0, my.id);
         if(tree as Tree){
           val0 = tree.value;
@@ -259,10 +257,8 @@ quark DecisionTree{
     }
     if(val0set && val1set){
       StoredValue val = operate(val0, op, val1);
-      du.print(val);
       return val;
     }else{
-      du.print((Int)0);
       return (StoredValue) 0;
     }
   }//selfEvaluate() namespace
