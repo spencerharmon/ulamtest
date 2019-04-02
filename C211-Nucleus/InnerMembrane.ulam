@@ -1,5 +1,5 @@
 //ALTERATION IS FUTILE: THIS FILE AUTOMATICALLY GENERATED FROM InnerMembrane.splat
-//CREATED "Mon Apr  1 03:52:48 2019 GMT" BY /usr/bin/vendor_perl/splattr FOR spencer
+//CREATED "Mon Apr  1 21:16:53 2019 GMT" BY /usr/bin/vendor_perl/splattr FOR spencer
 //BEGIN InnerMembrane.ulam (in ./.splatgen)
 
 transient SPLATKeyState_10InnerMembrane_Dot : SPLATKeyStateAny {
@@ -95,9 +95,11 @@ transient SPLATRuleSet_10InnerMembrane : SPLATRuleSet {
 
   virtual Bool evaluateRules() {
     SPLATRuleDriver pd;
-    //           
-    //  i@ ->  I.
-    if (pd.evaluateRule(self, "\000@\001i\377\001I\376"))
+    //             
+    //  iii     III
+    //  i@i ->  I.I
+    //  iii     III
+    if (pd.evaluateRule(self, "\000@\001i\002i\003i\004i\005i\006i\007i\010i\377\001I\002I\003I\004I\005I\006I\007I\010I\376"))
       return true;
     return false;
   }

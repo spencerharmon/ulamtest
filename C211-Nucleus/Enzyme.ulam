@@ -1,0 +1,20 @@
+/**
+  \symmetries all
+  \color #b94
+ */
+quark Enzyme : QContent{
+  typedef EventWindow.SiteNum SiteNum;
+  EventWindow ew;
+  ClusterByID cl;
+  Unsigned(5) lifespan;
+  Void behave(){
+    ++lifespan;
+    if(lifespan == lifespan.maxof){
+      Empty e;
+      ew[0] = e;
+    }else{
+      SiteNum slot = cl.emptySlotNearMe();
+      ew.swap(0,slot);
+    }
+  }
+}

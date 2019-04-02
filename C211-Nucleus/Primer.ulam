@@ -162,18 +162,18 @@ element Primer : QContent{
     // avoid creating child genes past StoredValue's max
     Seqno s;
     if(curgene + treeGenesLeftToCreate + numberOfGenesToAddToMyTree == s.maxof){
-      if(valTypSwitch0 >= 40u && valTypSwitch0 < 75u){
-        valTypSwitch0 -= 35u;
+      if(valTypSwitch0 >= 50u && valTypSwitch0 < 75u){
+        valTypSwitch0 -= 25u;
       }
     }
 
-    if(valTypSwitch0 >= (Unsigned)0 && valTypSwitch0 < (Unsigned)40){
+    if(valTypSwitch0 >= (Unsigned)0 && valTypSwitch0 < (Unsigned)50){
       //terminator
       gene.tree0Type = 0;
 
       gene.eqTree0 = (StoredValue) r.create(gene.eqTree0.maxof);
     }
-    if(valTypSwitch0 >= (Unsigned)40 && valTypSwitch0 < (Unsigned)75){
+    if(valTypSwitch0 >= (Unsigned)50 && valTypSwitch0 < (Unsigned)75){
       //operator (seqno reference)
       gene.tree0Type = 1;
 
@@ -196,18 +196,18 @@ element Primer : QContent{
 
     // avoid creating child genes past StoredValue's max
     if(curgene + treeGenesLeftToCreate + numberOfGenesToAddToMyTree == s.maxof){
-      if(valTypSwitch1 >= 40u && valTypSwitch1 < 75u){
-        valTypSwitch1 -= 35u;
+      if(valTypSwitch1 >= 50u && valTypSwitch1 < 75u){
+        valTypSwitch1 -= 25u;
       }
     }
 
-    if(valTypSwitch1 >= (Unsigned)0 && valTypSwitch1 < (Unsigned)40){
+    if(valTypSwitch1 >= (Unsigned)0 && valTypSwitch1 < (Unsigned)50){
       //terminator
       gene.tree1Type = 0;
 
       gene.eqTree1 = (StoredValue) r.create(gene.eqTree1.maxof);
     }
-    if(valTypSwitch1 >= (Unsigned)40 && valTypSwitch1 < (Unsigned)75){
+    if(valTypSwitch1 >= (Unsigned)50 && valTypSwitch1 < (Unsigned)75){
       //operator (seqno reference)
       gene.tree1Type = 1;
 

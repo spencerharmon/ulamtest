@@ -39,6 +39,7 @@ quark QGene : QContent{
   StoredValue value;
 //  AloneCounter eventsAlone;
   Bool copied;
+  Bool reproducing;
   
 //  StoredValue comIn;
 //  StoredValue comOut;
@@ -138,7 +139,6 @@ quark QGene : QContent{
       }
     }
     if(!dontCopy){
-//      gene.proto = true;
       Atom me = ew[0];
       if(me as Gene){
         Gene gene;

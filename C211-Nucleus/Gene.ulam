@@ -37,10 +37,19 @@ element Gene : QGene{
         }
       }
     }
-    if(slot != (SiteNum) 0 && !cl.canSeeTree(id, treeno)){
-      ew.swap(0,slot);
-    }else{
+    SiteNum tree = cl.treeSiteNum(id, treeno);
+    if(tree > 0){
+      //don't move and check if we're reproducing.
+      SiteNum cgsn = cl.childGeneSiteNum(treeno);
+      if(cgsn > 0){
+        Atom a = ew[cgsn];
+        if(a as ChildGene){
+          copy(a.childID);
+        }
+      }
       cl.bringGenesCloser(id, treeno);
+    }else if(slot != (SiteNum)0){
+      ew.swap(0,slot);
     }
   }
 }

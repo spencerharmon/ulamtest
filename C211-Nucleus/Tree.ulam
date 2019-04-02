@@ -36,7 +36,37 @@ element Tree : QGene{
         }
       }
     }
-    if(slot != (SiteNum) 0 && !cl.canSeeNucleus(id)){
+    SiteNum sNucleus = cl.nucleusSiteNum(id);
+    if(sNucleus > 0){
+      //don't move and check if we're reproducing.
+      Atom aNucleus = ew[sNucleus];
+      if(aNucleus as Nucleus){
+        self.reproducing = aNucleus.reproducing;
+        if(reproducing){
+          //even and odd are copied based on reprotype
+          if(aNucleus.reproType == 0u){
+            if(treeno % 2 == 0){
+              copy(aNucleus.childID);
+              slot = cl.emptySlotNearMe();
+              ChildGene cg;
+              cg.childID = aNucleus.childID;
+              cg.treeno = treeno;
+              ew[slot] = cg;
+            }
+          }else{
+            if(treeno % 2 == 1){
+              copy(aNucleus.childID);
+              slot = cl.emptySlotNearMe();
+              ChildGene cg;
+              cg.childID = aNucleus.childID;
+              cg.treeno = treeno;
+              ew[slot] = cg;
+            }
+          }
+        }
+      } 
+      cl.bringGenesCloser(id, treeno);
+    }else if(slot != (SiteNum) 0){
       ew.swap(0,slot);
     }
   }

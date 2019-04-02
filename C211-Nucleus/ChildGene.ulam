@@ -1,0 +1,6 @@
+element ChildGene : Enzyme{
+  typedef Cell.Seqno Seqno;
+  typedef Cell.ID ID;
+  Seqno treeno;
+  ID childID;
+}

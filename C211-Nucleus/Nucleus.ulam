@@ -171,6 +171,10 @@ element Nucleus : QContent{
     return false;
   }
   Void layEgg(){
+    refractoryPeriod = refractoryPeriod.maxof;
+    reproducing = true;
+    reproType = 1;
+
     EggShell eg;
     eg.id = childID;
     eg.first = true;
@@ -243,10 +247,10 @@ element Nucleus : QContent{
             su.setBase(base);
             reproType = 1;
             layEgg();
-          }else if(r.oneIn((Unsigned)reproduce.value)){
-            reproType = 0;
-            laySpawn();
           }
+        }else if(r.oneIn((Unsigned)reproduce.value)){
+          reproType = 0;
+          laySpawn();
         }
       }
     }

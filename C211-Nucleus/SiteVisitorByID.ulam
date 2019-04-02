@@ -78,6 +78,9 @@ transient SiteVisitorByID : SiteVisitor {
     if(a as Tree){
       return a.treeno;
     }
+    if(a as ChildGene){
+      return a.treeno;
+    }
     else{
       return 0;
     }

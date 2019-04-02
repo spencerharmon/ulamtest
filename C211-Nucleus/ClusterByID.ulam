@@ -203,7 +203,8 @@ quark ClusterByID {
     }
   }
 
-  Bool canSeeNucleus(ID id){
+  SiteNum nucleusSiteNum(ID id){
+    //0 if not found
     SiteVisitorByID sv;
     WindowScanner ws;
     
@@ -218,14 +219,37 @@ quark ClusterByID {
     ws.scan(sv);
 
     if(ws.getHits(cNucleus)>(Unsigned)0){
-      return true;
+      return ws.getSiteNum(cNucleus);
     }
     else{
-      return false;
+      return (SiteNum)0;
     }
   }
 
-  Bool canSeeTree(ID id, Seqno treeno){
+  SiteNum childGeneSiteNum(Seqno treeno){
+    //0 if not found
+    SiteVisitorByID sv;
+    WindowScanner ws;
+    
+    ws.resetCategories();
+    Category cChildGene = ws.allocateCategory();
+    ChildGene aChildGene;
+    ElementType tChildGene = au.getValidType(aChildGene);
+    
+    sv.setType(cChildGene,tChildGene);
+    sv.setTreeno(cChildGene,treeno);
+
+    ws.scan(sv);
+
+    if(ws.getHits(cChildGene)>(Unsigned)0){
+      return ws.getSiteNum(cChildGene);
+    }
+    else{
+      return (SiteNum)0;
+    }
+  }
+
+  SiteNum treeSiteNum(ID id, Seqno treeno){
     SiteVisitorByID sv;
     WindowScanner ws;
     
@@ -241,10 +265,10 @@ quark ClusterByID {
     ws.scan(sv);
 
     if(ws.getHits(cTree)>(Unsigned)0){
-      return true;
+      return ws.getSiteNum(cTree);
     }
     else{
-      return false;
+      return (SiteNum)0;
     }
   }
 
