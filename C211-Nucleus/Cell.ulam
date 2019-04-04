@@ -16,7 +16,7 @@ quark Cell{
   typedef EventWindow.SiteNum SiteNum;
 
   ID genID(){
-    ID id = (ID) r.create(1023);
+    ID id = (ID) r.create(id.maxof);
     return id;
   }
   Atom copyGene(Atom gene){
@@ -38,6 +38,7 @@ quark Cell{
     nu.id = child;
     nu.parent0id = parent0;
     nu.parent1id = parent1;
+    nu.lifespan = nu.lifespan.maxof;
     return nu;
   }
   Bool inTheCell(Atom a,ID id){

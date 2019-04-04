@@ -137,6 +137,10 @@ quark QGene : QContent{
       if(base.id == childID){
         dontCopy = true;
       }
+    }else if(base as Tree){
+      if(base.id == childID){
+        dontCopy = true;
+      }
     }
     if(!dontCopy){
       Atom me = ew[0];

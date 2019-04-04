@@ -23,6 +23,7 @@ transient SiteVisitorByID : SiteVisitor {
   ElementType mType[cCATEGORY_COUNT];
   Bool mSeqnoInUse[cCATEGORY_COUNT];
   Bool mTreenoInUse[cCATEGORY_COUNT];
+  Bool mIDInUse[cCATEGORY_COUNT];
   Bool mInUse[cCATEGORY_COUNT];
   Bool mInvert[cCATEGORY_COUNT];
   Bool mNeighbor[cCATEGORY_COUNT];
@@ -45,11 +46,13 @@ transient SiteVisitorByID : SiteVisitor {
   Void setTreeno(Category c, Seqno treeno) {
     mTreeno[c] = treeno;
     mTreenoInUse[c] = true;
+    mInUse[c] = true;
   }
 
   Void setSeqno(Category c, Seqno seqno) {
     mSeqno[c] = seqno;
     mSeqnoInUse[c] = true;
+    mInUse[c] = true;
   }
 
   Void unsetType(Category c) {
@@ -116,8 +119,13 @@ transient SiteVisitorByID : SiteVisitor {
           wsrv.categorize(sn, (Category) i);
         }
       }
-      if(mTreenoInUse[i]){
+      if(mTreenoInUse[i] && mIDInUse[i]){
         if (mInUse[i] && mType[i] == et && (ID) mID[i] == (ID) id && mTreeno[i] == treeno){
+          wsrv.categorize(sn, (Category) i);
+        }
+      }else if(mTreenoInUse[i]){
+        //childgenes don't have ids
+        if (mInUse[i] && mType[i] == et && mTreeno[i] == treeno){
           wsrv.categorize(sn, (Category) i);
         }
       }

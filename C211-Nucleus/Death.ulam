@@ -1,0 +1,36 @@
+/**
+  \symmetries all
+ */
+element Death : QContent{
+  EventWindow ew;
+  typedef EventWindow.SiteNum SiteNum;
+  typedef Cell.ID ID;
+  ID id;
+  Unsigned(6) lifespan;
+  Void behave(){
+    ++lifespan;
+    for(SiteNum i = 0; i <= 40; ++i){
+      Atom a = ew[i];
+      
+      Empty e;
+      if(a as Gene){
+        if(a.id == id){
+          ew[i] = e;
+        }
+      }else if(a as Tree){
+        if(a.id == id){
+          ew[i] = e;
+        }
+      }
+      if(i <= 4){
+        Atom a = ew[i];
+        if(a as InnerMembrane){
+          ew[i] = self;
+        }
+      }
+      if(lifespan == lifespan.maxof){
+        ew[0] = e;
+      }
+    }
+  }
+}

@@ -46,21 +46,27 @@ element Tree : QGene{
           //even and odd are copied based on reprotype
           if(aNucleus.reproType == 0u){
             if(treeno % 2 == 0){
+              du.print("even");
               copy(aNucleus.childID);
               slot = cl.emptySlotNearMe();
               ChildGene cg;
               cg.childID = aNucleus.childID;
               cg.treeno = treeno;
-              ew[slot] = cg;
+              if(slot > 0){
+                ew[slot] = cg;
+              }
             }
           }else{
             if(treeno % 2 == 1){
+              du.print("odd");
               copy(aNucleus.childID);
               slot = cl.emptySlotNearMe();
               ChildGene cg;
               cg.childID = aNucleus.childID;
               cg.treeno = treeno;
-              ew[slot] = cg;
+              if(slot > 0){
+                ew[slot] = cg;
+              }
             }
           }
         }
