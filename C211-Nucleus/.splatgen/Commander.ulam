@@ -1,0 +1,215 @@
+//ALTERATION IS FUTILE: THIS FILE AUTOMATICALLY GENERATED FROM Commander.splat
+//CREATED "Thu Apr  4 19:13:19 2019 GMT" BY /usr/bin/vendor_perl/splattr FOR spencer
+//BEGIN Commander.ulam (in ./.splatgen)
+
+
+quark QCommander : SPLATInstance {
+  // Data members
+  typedef EventWindow.Dir Dir;
+  typedef Content.Velocity Velocity;
+  virtual Bool evaluateRuleSets() {
+    {
+      SPLATRuleSet_10QCommander rs;
+      if (rs.evaluateRules()) return true;
+    }
+    return false;   // We got nothing
+  }
+virtual Bool getSplit() {
+   return false;  // Don't split
+ }virtual Dir getDir() {
+   Random random;
+   return (Dir) random.create(Dir.maxof); // Random dir by default
+ }virtual Velocity getVelocity() {
+   Random random;
+   return (Velocity) random.between(1,Velocity.maxof); // Random (non-zero) by default
+ }
+} // quark QCommander
+
+transient SPLATKeyState_10QCommander_Dot : SPLATKeyStateAny {
+} // transient SPLATKeyState_10QCommander_Dot
+
+transient SPLATKeyState_10QCommander_At : SPLATKeyStateSelf {
+  // change @ isa QCommander { 
+  //  typedef QCommander.Dir Dir;
+  //  Dir dir = $self.getDir();  // Find chosen direction
+
+  //  typedef QCommander.Velocity Velocity;
+  //  Velocity vel = $self.getVelocity(); // And speed
+
+  //  Bool split = $self.getSplit(); // And whether to split
+
+  //  Content & c = (Content&) ew[$c.$winsn];
+  //  c.m_cmdPrio.increment();             // Advance its command priority
+  //  c.setDir(dir,vel,c.m_cmdPrio.get(),split); // and give it its new orders
+  //  ew[0] = Empty.instanceof;  // and die
+  Void change(SPLATRuleSet & splATTROoB__rs, SN splATTROoB__cursn, Atom & splATTROoB__curatom) {
+    if (!(splATTROoB__curatom is QCommander)) return ;
+    QCommander & splATTROoB__self = (QCommander &) splATTROoB__curatom;
+  {
+
+   typedef QCommander.Dir Dir;
+   Dir dir = splATTROoB__self.getDir();  // Find chosen direction
+
+   typedef QCommander.Velocity Velocity;
+   Velocity vel = splATTROoB__self.getVelocity(); // And speed
+
+   Bool split = splATTROoB__self.getSplit(); // And whether to split
+
+   Content & c = (Content&) ew[(splATTROoB__rs.getKeyState('c')).getWinnerSN()];
+   c.m_cmdPrio.increment();             // Advance its command priority
+   c.setDir(dir,vel,c.m_cmdPrio.get(),split); // and give it its new orders
+   ew[0] = Empty.instanceof;  // and die
+
+  }
+  }
+} // transient SPLATKeyState_10QCommander_At
+
+transient SPLATKeyState_10QCommander_c : SPLATKeyState {
+  // given c isa Content 
+  Bool given(SPLATRuleSet & splATTROoB__rs, SN splATTROoB__cursn, Atom & splATTROoB__curatom) {
+    if (!(splATTROoB__curatom is Content)) return false;
+    Content & splATTROoB__self = (Content &) splATTROoB__curatom;
+   return (true); 
+  }
+} // transient SPLATKeyState_10QCommander_c
+
+transient SPLATRuleSet_10QCommander : SPLATRuleSet {
+  SPLATKeyState_10QCommander_Dot key_Dot;
+  SPLATKeyState_10QCommander_At key_At;
+  SPLATKeyState_10QCommander_c key_c;
+  virtual Void reset() {
+    super.reset();
+    key_Dot.define('.');
+    key_At.define('@');
+    key_c.define('c');
+  }
+  virtual Void beginSiteEval() {
+    super.beginSiteEval();
+    key_Dot.beginSiteEval();
+    key_At.beginSiteEval();
+    key_c.beginSiteEval();
+  }
+  virtual SPLATKeyState & getKeyState(ASCII key) {
+    which (key) {
+    case '.': { return key_Dot; }
+    case '@': { return key_At; }
+    case 'c': { return key_c; }
+    }
+    return super.getKeyState(key);
+  }
+
+  virtual Bool evaluateRules() {
+    SPLATRuleDriver pd;
+    DebugUtils du;
+     m_scratchVars[0] = (
+0
+);
+     m_scratchVars[1] = (
+0
+);
+     m_scratchVars[2] = (
+0
+);
+     m_scratchVars[3] = (
+0
+);
+     m_scratchVars[4] = (
+0
+);
+     m_scratchVars[5] = (
+0
+);
+     m_scratchVars[6] = (
+0
+);
+     m_scratchVars[7] = (
+0
+);
+     m_scratchVars[8] = (
+0
+);
+     m_scratchVars[9] = (
+0
+);
+    //           
+    //  @c ->  @.
+    if (splatControl.cPRINT_RULES) {
+      du.print("Considering:");
+      du.print("          ");
+      du.print(" @c ->  @.");
+    }
+    if (pd.evaluateRule(self, "\000@\004c\377\000@\376")) {
+      if (splatControl.cPRINT_RULES) du.print("Success");
+      return true;
+    };
+    //         
+    //  @ ->  .
+    if (splatControl.cPRINT_RULES) {
+      du.print("Considering:");
+      du.print("        ");
+      du.print(" @ ->  .");
+    }
+    if (pd.evaluateRule(self, "\000@\377\376")) {
+      if (splatControl.cPRINT_RULES) du.print("Success");
+      return true;
+    };
+    return false;
+  }
+} // SPLATRuleSet_10QCommander
+
+/** 
+  \symbol CM
+
+  \color #f0f
+
+  \symmetries all
+
+ */
+element Commander : QCommander {
+  // Data members
+  virtual Bool evaluateRuleSets() {
+    if (super.evaluateRuleSets()) return true; // Maybe super's got something
+    return false;   // We got nothing
+  }
+
+} // element Commander
+
+/** 
+  \symbol SC
+
+  \color #f00
+
+  \symmetries all
+
+ */
+element StopCommand : QCommander {
+  // Data members
+  virtual Bool evaluateRuleSets() {
+    if (super.evaluateRuleSets()) return true; // Maybe super's got something
+    return false;   // We got nothing
+  }
+virtual Dir getDir() { return 0u; }virtual Velocity getVelocity() { return (Velocity) 0u; }
+} // element StopCommand
+
+/** 
+  \symbol SP
+
+  \color #bbe
+
+  \symmetries all
+
+ */
+element SplitCommand : QCommander {
+  // Data members
+  virtual Bool evaluateRuleSets() {
+    if (super.evaluateRuleSets()) return true; // Maybe super's got something
+    return false;   // We got nothing
+  }
+virtual Dir getDir() {
+   Random random;
+   // The QMembrane fission rule prefers orthogonal directions
+   return (Dir) (random.create(Dir.maxof/2u)*2u); // So pick from 0,2,4,6
+ }virtual Velocity getVelocity() { return (Velocity) 7u; }virtual Bool getSplit() { return true; }  // Go for it!
+} // element SplitCommand
+
+//END Commander.ulam

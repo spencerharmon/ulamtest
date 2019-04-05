@@ -1,0 +1,247 @@
+//ALTERATION IS FUTILE: THIS FILE AUTOMATICALLY GENERATED FROM QContent.splat
+//CREATED "Thu Apr  4 19:13:19 2019 GMT" BY /usr/bin/vendor_perl/splattr FOR spencer
+//BEGIN QContent.ulam (in ./.splatgen)
+
+
+/** The parent class of membrane-enclosed content
+  \symmetries rotations
+
+ */
+quark QContent : SPLATInstance {
+  // Data members
+  virtual Bool evaluateRuleSets() {
+    {
+      SPLATRuleSet_10QContent rs;
+      if (rs.evaluateRules()) return true;
+    }
+    {
+      SPLATRuleSet_11QContent rs;
+      if (rs.evaluateRules()) return true;
+    }
+    return false;   // We got nothing
+  }
+
+} // quark QContent
+
+transient SPLATKeyState_10QContent_Dot : SPLATKeyStateAny {
+} // transient SPLATKeyState_10QContent_Dot
+
+transient SPLATKeyState_10QContent_At : SPLATKeyStateSelf {
+  // check @  : random.oneIn(100)    // 1% death rate when isolated
+  Bool check(SPLATRuleSet & splATTROoB__rs) {
+  return (
+  random.oneIn(100)    // 1% death rate when isolated
+  );
+  }
+} // transient SPLATKeyState_10QContent_At
+
+transient SPLATKeyState_10QContent_Underline : SPLATKeyStateEmpty {
+} // transient SPLATKeyState_10QContent_Underline
+
+transient SPLATKeyState_10QContent_n : SPLATKeyState {
+  // given n  : !(ew[$cursn] is QContent) && !(ew[$cursn] is InnerMembrane)
+  Bool given(SPLATRuleSet & splATTROoB__rs, SN splATTROoB__cursn, Atom & splATTROoB__curatom) {
+    return (
+  !(ew[splATTROoB__cursn] is QContent) && !(ew[splATTROoB__cursn] is InnerMembrane)
+  );
+  }
+} // transient SPLATKeyState_10QContent_n
+
+transient SPLATRuleSet_10QContent : SPLATRuleSet {
+  SPLATKeyState_10QContent_Dot key_Dot;
+  SPLATKeyState_10QContent_At key_At;
+  SPLATKeyState_10QContent_Underline key_Underline;
+  SPLATKeyState_10QContent_n key_n;
+  virtual Void reset() {
+    super.reset();
+    key_Dot.define('.');
+    key_At.define('@');
+    key_Underline.define('_');
+    key_n.define('n');
+  }
+  virtual Void beginSiteEval() {
+    super.beginSiteEval();
+    key_Dot.beginSiteEval();
+    key_At.beginSiteEval();
+    key_Underline.beginSiteEval();
+    key_n.beginSiteEval();
+  }
+  virtual SPLATKeyState & getKeyState(ASCII key) {
+    which (key) {
+    case '.': { return key_Dot; }
+    case '@': { return key_At; }
+    case '_': { return key_Underline; }
+    case 'n': { return key_n; }
+    }
+    return super.getKeyState(key);
+  }
+
+  virtual Bool evaluateRules() {
+    SPLATRuleDriver pd;
+    DebugUtils du;
+     m_scratchVars[0] = (
+0
+);
+     m_scratchVars[1] = (
+0
+);
+     m_scratchVars[2] = (
+0
+);
+     m_scratchVars[3] = (
+0
+);
+     m_scratchVars[4] = (
+0
+);
+     m_scratchVars[5] = (
+0
+);
+     m_scratchVars[6] = (
+0
+);
+     m_scratchVars[7] = (
+0
+);
+     m_scratchVars[8] = (
+0
+);
+     m_scratchVars[9] = (
+0
+);
+    //                 
+    //  nnnnn     .....
+    //  nnnnn     .....
+    //  nn@nn ->  .._..
+    //  nnnnn     .....
+    //  nnnnn     .....
+    if (splatControl.cPRINT_RULES) {
+      du.print("Considering:");
+      du.print("                ");
+      du.print(" nnnnn     .....");
+      du.print(" nnnnn     .....");
+      du.print(" nn@nn ->  .._..");
+      du.print(" nnnnn     .....");
+      du.print(" nnnnn     .....");
+    }
+    if (pd.evaluateRule(self, "\000@\001n\002n\003n\004n\005n\006n\007n\010n\011n\012n\013n\014n\015n\016n\017n\020n\021n\022n\023n\024n\031n\032n\033n\034n\377\000_\376")) {
+      if (splatControl.cPRINT_RULES) du.print("Success");
+      return true;
+    };
+    return false;
+  }
+} // SPLATRuleSet_10QContent
+
+transient SPLATKeyState_11QContent_Dot : SPLATKeyStateAny {
+} // transient SPLATKeyState_11QContent_Dot
+
+transient SPLATKeyState_11QContent_At : SPLATKeyStateSelf {
+} // transient SPLATKeyState_11QContent_At
+
+transient SPLATKeyState_11QContent_i : SPLATKeyState {
+  // given i  : ew[$cursn] is InnerMembrane
+  Bool given(SPLATRuleSet & splATTROoB__rs, SN splATTROoB__cursn, Atom & splATTROoB__curatom) {
+    return (
+  ew[splATTROoB__cursn] is InnerMembrane
+  );
+  }
+} // transient SPLATKeyState_11QContent_i
+
+transient SPLATKeyState_11QContent_x : SPLATKeyState {
+  // given x  : ew[$cursn] is QContent || ew[$cursn] is Empty
+  Bool given(SPLATRuleSet & splATTROoB__rs, SN splATTROoB__cursn, Atom & splATTROoB__curatom) {
+    return (
+  ew[splATTROoB__cursn] is QContent || ew[splATTROoB__cursn] is Empty
+  );
+  }
+} // transient SPLATKeyState_11QContent_x
+
+transient SPLATRuleSet_11QContent : SPLATRuleSet {
+  SPLATKeyState_11QContent_Dot key_Dot;
+  SPLATKeyState_11QContent_At key_At;
+  SPLATKeyState_11QContent_i key_i;
+  SPLATKeyState_11QContent_x key_x;
+  virtual Void reset() {
+    super.reset();
+    key_Dot.define('.');
+    key_At.define('@');
+    key_i.define('i');
+    key_x.define('x');
+  }
+  virtual Void beginSiteEval() {
+    super.beginSiteEval();
+    key_Dot.beginSiteEval();
+    key_At.beginSiteEval();
+    key_i.beginSiteEval();
+    key_x.beginSiteEval();
+  }
+  virtual SPLATKeyState & getKeyState(ASCII key) {
+    which (key) {
+    case '.': { return key_Dot; }
+    case '@': { return key_At; }
+    case 'i': { return key_i; }
+    case 'x': { return key_x; }
+    }
+    return super.getKeyState(key);
+  }
+
+  virtual Bool evaluateRules() {
+    SPLATRuleDriver pd;
+    DebugUtils du;
+     m_scratchVars[0] = (
+0
+);
+     m_scratchVars[1] = (
+0
+);
+     m_scratchVars[2] = (
+0
+);
+     m_scratchVars[3] = (
+0
+);
+     m_scratchVars[4] = (
+0
+);
+     m_scratchVars[5] = (
+0
+);
+     m_scratchVars[6] = (
+0
+);
+     m_scratchVars[7] = (
+0
+);
+     m_scratchVars[8] = (
+0
+);
+     m_scratchVars[9] = (
+0
+);
+    //           
+    //  @x ->  x@
+    if (splatControl.cPRINT_RULES) {
+      du.print("Considering:");
+      du.print("          ");
+      du.print(" @x ->  x@");
+    }
+    if (pd.evaluateRule(self, "\000@\004x\377\000x\004@\376")) {
+      if (splatControl.cPRINT_RULES) du.print("Success");
+      return true;
+    };
+    //           
+    //  i@ ->  ..
+    if (splatControl.cPRINT_RULES) {
+      du.print("Considering:");
+      du.print("          ");
+      du.print(" i@ ->  ..");
+    }
+    if (pd.evaluateRule(self, "\000@\001i\377\376")) {
+      if (splatControl.cPRINT_RULES) du.print("Success");
+      return true;
+    };
+    return false;
+  }
+} // SPLATRuleSet_11QContent
+
+//END QContent.ulam

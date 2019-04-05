@@ -1,0 +1,21 @@
+quark Button : TouchReporter{
+  AtomUtils au;
+  typedef EventWindow.SiteNum SiteNum;
+  virtual Void produce();
+  virtual Atom me();
+  Bool center;
+  Void behave(){
+    if(center){
+      for(SiteNum i = 1; i <= 8; ++i){
+        Atom n = au.new(au.getType(me()));
+        if(n as Button){
+          n.center = false;
+          ew[i] = n.atomof;
+        }
+      }
+    }
+    if(touchReport()){
+      produce();
+    }
+  }
+}

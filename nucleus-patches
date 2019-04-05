@@ -1,0 +1,239 @@
+diff --git a/C211-Nucleus/DecisionTree.ulam b/C211-Nucleus/DecisionTree.ulam
+index 081d455..1502b43 100644
+--- a/C211-Nucleus/DecisionTree.ulam
++++ b/C211-Nucleus/DecisionTree.ulam
+@@ -6,6 +6,7 @@
+  */
+ quark DecisionTree{
+   Random r;
++  DebugUtils du;
+   EventWindow ew;
+   AtomUtils au;
+ 
+@@ -15,11 +16,12 @@ quark DecisionTree{
+   typedef WindowScanner.Category Category;
+   typedef Cell.Seqno Seqno;
+   typedef Cell.ID ID;
++//  typedef EventWindow.SiteNum SiteNum;
+ 
+   Atom findSeqno(Seqno seqno, ID id){
+     Empty e;
+ 
+-    for(Seqno i = 0; i <=40; ++i){
++    for(Seqno i = 1; i <=40; ++i){
+       Atom gene = ew[i];
+       if(gene as Gene){
+         if(gene.id == id && gene.seqno == seqno){
+@@ -36,7 +38,7 @@ quark DecisionTree{
+     StoredValue value[40];
+     Seqno parent[40];
+ 
+-//    Unsigned(2) operator[40];
++    Unsigned(2) op[40];
+ 
+     Bits(2) tree0Type[40];
+     StoredValue eqTree0[40];
+@@ -68,7 +70,7 @@ quark DecisionTree{
+         if(gene as Gene){
+           checked[seqno] = true;
+ 
+-//          operator[seqno] = gene.operator;
++          op[seqno] = gene.op;
+ 
+           tree0Type[seqno] = gene.tree0Type;
+           eqTree0[seqno] = gene.eqTree0;
+@@ -93,7 +95,7 @@ quark DecisionTree{
+       // Pass control back to parent.
+       //
+       if(tree0Type[seqno] == 0 && tree1Type[seqno] == 0){
+-//        value[seqno] = operate(eqTree0[seqno], operator[seqno], eqTree1[seqno]);
++        value[seqno] = operate(eqTree0[seqno], op[seqno], eqTree1[seqno]);
+         evaluated[seqno] = true;
+         keepRecursing = true;
+         seqno = parent[seqno];
+@@ -164,25 +166,24 @@ quark DecisionTree{
+       }else if(my.tree1Type == 0){
+         val1 = my.eqTree1;
+       }
+-//      value = operate(val0, my.operator, val1);
++      value = operate(val0, my.op, val1);
+     }
+     return value;
+   }//selfEvaluate() namespace
+-/*  StoredValue operate(StoredValue val1, Unsigned(2) operator, StoredValue val2){
++  StoredValue operate(StoredValue val1, Unsigned(2) op, StoredValue val2){
+     StoredValue value;
+-    if(operator == 0){
++    if(op == 0){
+       value = (StoredValue)(val1 + val2);
+     }
+-    if(operator == 1){
++    if(op == 1){
+       value = (StoredValue)(val1 - val2);
+     }
+-    if(operator == 2){
++    if(op == 2){
+       value = (StoredValue)(val1 * val2);
+     }
+-    if(operator == 3){
++    if(op == 3){
+       value = (StoredValue)(val1 / val2);
+     }
+     return value;
+   }
+-*/
+ }//DecisionTree namespace
+diff --git a/C211-Nucleus/Gene.ulam b/C211-Nucleus/Gene.ulam
+index 8f67011..abe5037 100644
+--- a/C211-Nucleus/Gene.ulam
++++ b/C211-Nucleus/Gene.ulam
+@@ -14,6 +14,7 @@ element Gene : QContent{
+   DecisionTree dt;
+   SiteUtils su;
+   DebugUtils du;
++//  Random r;
+ 
+   //typedefs  
+   //similar to SiteNum, since we don't want to exceed an event window, but has no bearing on position
+@@ -24,7 +25,6 @@ element Gene : QContent{
+   typedef WindowScanner.Category Category;
+   typedef Cell.ID ID;
+   typedef DecisionTree.StoredValue StoredValue;
+-  typedef Unsigned(2) Operator;
+   typedef Unsigned(2) TreeType;
+   typedef Unsigned(3) AloneCounter;
+ 
+@@ -32,7 +32,7 @@ element Gene : QContent{
+   ID id;
+   Seqno seqno;
+   Bool canSeeNucleus = true;
+-//  Operator operator;
++  Unsigned(2) op;
+   TreeType tree0Type;
+   StoredValue eqTree0;
+   TreeType tree1Type;
+@@ -142,7 +142,7 @@ element Gene : QContent{
+ 
+       gene.id = childID;
+       gene.seqno = seqno;
+-//      gene.operator = operator;
++      gene.op = op;
+       gene.eqTree0 = eqTree0;
+       gene.tree0Type = tree0Type;
+       gene.eqTree1 = eqTree1;
+@@ -168,13 +168,16 @@ element Gene : QContent{
+ 
+     nucleusCheck();
+     killCopies();
+-//    cl.bringGenesCloser(id,self);
+     //diffuse
+     Atom a = ew[1];
+     if(a as Empty){
+       ew[1] = ew[0];
+       ew[0] = a;
+     }
++/*    }else if(r.oneIn(10u)){
++      cl.bringGenesCloser(id,self);
++    }
++*/
+     //currently takes comIn on the right.
+     if(canSeeNucleus){
+       eventsAlone = 0;
+@@ -182,10 +185,11 @@ element Gene : QContent{
+     else{
+       ++eventsAlone;
+     }
+-    if(eventsAlone == eventsAlone.maxof){
++/*    if(eventsAlone == eventsAlone.maxof){
+       Empty e;
+       ew[0] = e;
+     }
++*/
+     //Equation tree solution step:
+     value = dt.selfEvaluate(seqno,id,comIn);
+     //look for other cells' comOut
+diff --git a/C211-Nucleus/Nucleus.ulam b/C211-Nucleus/Nucleus.ulam
+index 39318b9..9d4db3a 100644
+--- a/C211-Nucleus/Nucleus.ulam
++++ b/C211-Nucleus/Nucleus.ulam
+@@ -162,9 +162,11 @@ element Nucleus : QContent{
+     return false;
+   }
+   Void whetherToMove(Bool move){
++    du.print("in whethertomove");
+     if(move = true){
+-      cl.bringGenesCloser(id,self);
+       diffuse();
++    }else{
++      cl.bringGenesCloser(id,self);
+     }
+   }
+   Bool onEgg(){
+@@ -250,6 +252,7 @@ element Nucleus : QContent{
+     }
+   }
+   Void eqTreeBehavior(){
++    du.print("in eqTreeBehavior()");
+     killCopies();
+     Bool move = dontStepOnEggs();
+ 
+@@ -260,16 +263,12 @@ element Nucleus : QContent{
+           move = true;
+         }
+       }
+-    }else{
+-      lifespan = (Unsigned(10))(lifespan + 5u);
+     }
+     whetherToMove(move);
+ 
+     Atom com = dt.findSeqno((Seqno)2, id);
+     if(com as Gene){
+       comOut = com.value;
+-    }else{
+-      lifespan = (Unsigned(10))(lifespan + 5u);
+     }
+ 
+     Atom reproduce = dt.findSeqno((Seqno)3, id);
+@@ -279,14 +278,12 @@ element Nucleus : QContent{
+           initReproBehavior();
+         }
+       }
+-    }else{
+-      lifespan = (Unsigned(10))(lifespan + 5u);
+     }
+   }
+   Void behave(){
+-    if(!geneCheck()){
+-      die();
+-    }
++//    if(!geneCheck()){
++//      die();
++//    }
+     ++lifespan;
+     --refractoryPeriod;
+     //40 was too large. 2 was too small.
+diff --git a/C211-Nucleus/Primer.ulam b/C211-Nucleus/Primer.ulam
+index ef26576..41128b1 100644
+--- a/C211-Nucleus/Primer.ulam
++++ b/C211-Nucleus/Primer.ulam
+@@ -86,7 +86,7 @@ element Primer : QContent{
+     gene.id = id;
+ 
+     //representing addition, subtraction, multiplication, and division
+-//    gene.operator = Unsigned(2) r.create(3);
++    gene.op = Unsigned(2) r.create(3);
+ 
+     // I Don't like the way this reads, but the idea is
+     // that if valTypSwitch is true, it signifies a 
+diff --git a/C211-Nucleus/compile b/C211-Nucleus/compile
+index 3d8af14..c8e26ff 100755
+--- a/C211-Nucleus/compile
++++ b/C211-Nucleus/compile
+@@ -1,5 +1,5 @@
+ /usr/bin/ulam --sd /usr/bin/vendor_perl/lib --sd /usr/share/perl5/vendor_perl/auto/share/dist/SPLAT --sd ./ a.mfz \
+-Cell.ulam ClusterByID.ulam Commander.ulam Content.ulam DecisionTree.ulam DirectionUtils.ulam EggShell.ulam Gene.ulam \
++Cell.ulam ClusterByID.ulam Commander.ulam DecisionTree.ulam DirectionUtils.ulam EggShell.ulam Gene.ulam \
+ InnerMembrane.ulam Nucleus.ulam OuterMembrane.ulam OutOfBounds.ulam Primer.ulam QContent.ulam QMembrane.ulam Seed.ulam \
+-SiteVisitorByID.ulam Commander.splat Content.splat InnerMembrane.splat OuterMembrane.splat QContent.splat QMembrane.splat \
++SiteVisitorByID.ulam Commander.splat InnerMembrane.splat OuterMembrane.splat QContent.splat QMembrane.splat \
+ Seed.splat

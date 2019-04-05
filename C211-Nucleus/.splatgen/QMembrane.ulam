@@ -1,0 +1,924 @@
+//ALTERATION IS FUTILE: THIS FILE AUTOMATICALLY GENERATED FROM QMembrane.splat
+//CREATED "Thu Apr  4 19:13:19 2019 GMT" BY /usr/bin/vendor_perl/splattr FOR spencer
+//BEGIN QMembrane.ulam (in ./.splatgen)
+
+
+/** The parent class of inner and outer membrane
+  \symmetries all
+
+ */
+quark QMembrane : SPLATInstance {
+  // Data members
+  virtual Bool evaluateRuleSets() {
+    {
+      SPLATRuleSet_10QMembrane rs;
+      if (rs.evaluateRules()) return true;
+    }
+    {
+      SPLATRuleSet_11QMembrane rs;
+      if (rs.evaluateRules()) return true;
+    }
+    {
+      SPLATRuleSet_12QMembrane rs;
+      if (rs.evaluateRules()) return true;
+    }
+    {
+      SPLATRuleSet_13QMembrane rs;
+      if (rs.evaluateRules()) return true;
+    }
+    return false;   // We got nothing
+  }
+
+} // quark QMembrane
+
+transient SPLATKeyState_10QMembrane_Dot : SPLATKeyStateAny {
+} // transient SPLATKeyState_10QMembrane_Dot
+
+transient SPLATKeyState_10QMembrane_At : SPLATKeyStateSelf {
+  // given @ isa OuterMembrane 
+  Bool given(SPLATRuleSet & splATTROoB__rs, SN splATTROoB__cursn, Atom & splATTROoB__curatom) {
+    if (!(splATTROoB__curatom is OuterMembrane)) return false;
+    OuterMembrane & splATTROoB__self = (OuterMembrane &) splATTROoB__curatom;
+   return (true); 
+  }
+} // transient SPLATKeyState_10QMembrane_At
+
+transient SPLATKeyState_10QMembrane_Underline : SPLATKeyStateEmpty {
+} // transient SPLATKeyState_10QMembrane_Underline
+
+transient SPLATKeyState_10QMembrane_e : SPLATKeyState {
+  // check e  : $nvotes*3u>=$nsites*2u 
+  Bool check(SPLATRuleSet & splATTROoB__rs) {
+  return (
+  getNumberVotes()*3u>=getNumberSites()*2u 
+  );
+  }
+  // given e  : true      // Allow dead sites
+  Bool given(SPLATRuleSet & splATTROoB__rs, SN splATTROoB__cursn, Atom & splATTROoB__curatom) {
+    return (
+  true      // Allow dead sites
+  );
+  }
+  // vote e isa Empty 
+  Votes vote(SPLATRuleSet & splATTROoB__rs, SN splATTROoB__cursn, Atom & splATTROoB__curatom) {
+    if (!(splATTROoB__curatom is Empty)) return 0u;
+    Empty & splATTROoB__self = (Empty &) splATTROoB__curatom;
+  return 1u;
+  }
+} // transient SPLATKeyState_10QMembrane_e
+
+transient SPLATKeyState_10QMembrane_f : SPLATKeyState {
+  // check f  : random.oddsOf($nvotes,3)
+  Bool check(SPLATRuleSet & splATTROoB__rs) {
+  return (
+  random.oddsOf(getNumberVotes(),3)
+  );
+  }
+  // vote f isa QContent 
+  Votes vote(SPLATRuleSet & splATTROoB__rs, SN splATTROoB__cursn, Atom & splATTROoB__curatom) {
+    if (!(splATTROoB__curatom is QContent)) return 0u;
+    QContent & splATTROoB__self = (QContent &) splATTROoB__curatom;
+  return 1u;
+  }
+} // transient SPLATKeyState_10QMembrane_f
+
+transient SPLATKeyState_10QMembrane_i : SPLATKeyState {
+  // given i isa InnerMembrane 
+  Bool given(SPLATRuleSet & splATTROoB__rs, SN splATTROoB__cursn, Atom & splATTROoB__curatom) {
+    if (!(splATTROoB__curatom is InnerMembrane)) return false;
+    InnerMembrane & splATTROoB__self = (InnerMembrane &) splATTROoB__curatom;
+   return (true); 
+  }
+} // transient SPLATKeyState_10QMembrane_i
+
+transient SPLATKeyState_10QMembrane_n : SPLATKeyState {
+  // given n  : !($curatom is InnerMembrane)
+  Bool given(SPLATRuleSet & splATTROoB__rs, SN splATTROoB__cursn, Atom & splATTROoB__curatom) {
+    return (
+  !(splATTROoB__curatom is InnerMembrane)
+  );
+  }
+} // transient SPLATKeyState_10QMembrane_n
+
+transient SPLATKeyState_10QMembrane_o : SPLATKeyState {
+  // given o isa OuterMembrane 
+  Bool given(SPLATRuleSet & splATTROoB__rs, SN splATTROoB__cursn, Atom & splATTROoB__curatom) {
+    if (!(splATTROoB__curatom is OuterMembrane)) return false;
+    OuterMembrane & splATTROoB__self = (OuterMembrane &) splATTROoB__curatom;
+   return (true); 
+  }
+} // transient SPLATKeyState_10QMembrane_o
+
+transient SPLATKeyState_10QMembrane_q : SPLATKeyState {
+  // given q isa QMembrane 
+  Bool given(SPLATRuleSet & splATTROoB__rs, SN splATTROoB__cursn, Atom & splATTROoB__curatom) {
+    if (!(splATTROoB__curatom is QMembrane)) return false;
+    QMembrane & splATTROoB__self = (QMembrane &) splATTROoB__curatom;
+   return (true); 
+  }
+} // transient SPLATKeyState_10QMembrane_q
+
+transient SPLATKeyState_10QMembrane_r : SPLATKeyState {
+  // vote r  : $curatom is Empty 
+  //      || $curatom is OuterMembrane
+  Votes vote(SPLATRuleSet & splATTROoB__rs, SN splATTROoB__cursn, Atom & splATTROoB__curatom) {
+    return (
+  splATTROoB__curatom is Empty 
+       || splATTROoB__curatom is OuterMembrane
+  ) ? 1u : 0u;
+  }
+} // transient SPLATKeyState_10QMembrane_r
+
+transient SPLATRuleSet_10QMembrane : SPLATRuleSet {
+  SPLATKeyState_10QMembrane_Dot key_Dot;
+  SPLATKeyState_10QMembrane_At key_At;
+  SPLATKeyState_10QMembrane_Underline key_Underline;
+  SPLATKeyState_10QMembrane_e key_e;
+  SPLATKeyState_10QMembrane_f key_f;
+  SPLATKeyState_10QMembrane_i key_i;
+  SPLATKeyState_10QMembrane_n key_n;
+  SPLATKeyState_10QMembrane_o key_o;
+  SPLATKeyState_10QMembrane_q key_q;
+  SPLATKeyState_10QMembrane_r key_r;
+  virtual Void reset() {
+    super.reset();
+    key_Dot.define('.');
+    key_At.define('@');
+    key_Underline.define('_');
+    key_e.define('e');
+    key_f.define('f');
+    key_i.define('i');
+    key_n.define('n');
+    key_o.define('o');
+    key_q.define('q');
+    key_r.define('r');
+  }
+  virtual Void beginSiteEval() {
+    super.beginSiteEval();
+    key_Dot.beginSiteEval();
+    key_At.beginSiteEval();
+    key_Underline.beginSiteEval();
+    key_e.beginSiteEval();
+    key_f.beginSiteEval();
+    key_i.beginSiteEval();
+    key_n.beginSiteEval();
+    key_o.beginSiteEval();
+    key_q.beginSiteEval();
+    key_r.beginSiteEval();
+  }
+  virtual SPLATKeyState & getKeyState(ASCII key) {
+    which (key) {
+    case '.': { return key_Dot; }
+    case '@': { return key_At; }
+    case '_': { return key_Underline; }
+    case 'e': { return key_e; }
+    case 'f': { return key_f; }
+    case 'i': { return key_i; }
+    case 'n': { return key_n; }
+    case 'o': { return key_o; }
+    case 'q': { return key_q; }
+    case 'r': { return key_r; }
+    }
+    return super.getKeyState(key);
+  }
+
+  virtual Bool evaluateRules() {
+    SPLATRuleDriver pd;
+    DebugUtils du;
+     m_scratchVars[0] = (
+0
+);
+     m_scratchVars[1] = (
+0
+);
+     m_scratchVars[2] = (
+0
+);
+     m_scratchVars[3] = (
+0
+);
+     m_scratchVars[4] = (
+0
+);
+     m_scratchVars[5] = (
+0
+);
+     m_scratchVars[6] = (
+0
+);
+     m_scratchVars[7] = (
+0
+);
+     m_scratchVars[8] = (
+0
+);
+     m_scratchVars[9] = (
+0
+);
+    //           
+    //  i_ ->  .@
+    //  i@     ..
+    if (splatControl.cPRINT_RULES) {
+      du.print("Considering:");
+      du.print("          ");
+      du.print(" i_ ->  .@");
+      du.print(" i@     ..");
+    }
+    if (pd.evaluateRule(self, "\000@\001i\002_\005i\377\002@\376")) {
+      if (splatControl.cPRINT_RULES) du.print("Success");
+      return true;
+    };
+    //             
+    //  nnn     ...
+    //  n@n ->  ._.
+    //  nnn     ...
+    if (splatControl.cPRINT_RULES) {
+      du.print("Considering:");
+      du.print("            ");
+      du.print(" nnn     ...");
+      du.print(" n@n ->  ._.");
+      du.print(" nnn     ...");
+    }
+    if (pd.evaluateRule(self, "\000@\001n\002n\003n\004n\005n\006n\007n\010n\377\000_\376")) {
+      if (splatControl.cPRINT_RULES) du.print("Success");
+      return true;
+    };
+    //             
+    //  iii     ...
+    //  i@i ->  .i.
+    //  iii     ...
+    if (splatControl.cPRINT_RULES) {
+      du.print("Considering:");
+      du.print("            ");
+      du.print(" iii     ...");
+      du.print(" i@i ->  .i.");
+      du.print(" iii     ...");
+    }
+    if (pd.evaluateRule(self, "\000@\001i\002i\003i\004i\005i\006i\007i\010i\377\000i\376")) {
+      if (splatControl.cPRINT_RULES) du.print("Success");
+      return true;
+    };
+    //                     
+    //  ee_oqff     ..@....
+    //  eeo@iff ->  ...i...
+    //  eeoiiff     .......
+    if (splatControl.cPRINT_RULES) {
+      du.print("Considering:");
+      du.print("                    ");
+      du.print(" ee_oqff     ..@....");
+      du.print(" eeo@iff ->  ...i...");
+      du.print(" eeoiiff     .......");
+    }
+    if (pd.evaluateRule(self, "\000@\001o\002o\003i\004i\005_\006o\007q\010i\011e\014f\015e\016e\023f\024f\025e\030f\035e\036e\043f\044f\377\000i\005@\376")) {
+      if (splatControl.cPRINT_RULES) du.print("Success");
+      return true;
+    };
+    //               
+    //  eo       ..  
+    //  _oif     o...
+    //  _@if ->  @i..
+    //  _oif     o...
+    //  eo       ..  
+    if (splatControl.cPRINT_RULES) {
+      du.print("Considering:");
+      du.print("              ");
+      du.print(" eo       ..  ");
+      du.print(" _oif     o...");
+      du.print(" _@if ->  @i..");
+      du.print(" _oif     o...");
+      du.print(" eo       ..  ");
+    }
+    if (pd.evaluateRule(self, "\000@\001_\002o\003o\004i\005_\006_\007i\010i\012o\013o\014f\017e\020e\023f\024f\377\000i\001@\005o\006o\376")) {
+      if (splatControl.cPRINT_RULES) du.print("Success");
+      return true;
+    };
+    //               
+    //    ff       ..
+    //  qiif     ....
+    //  o@if ->  .i..
+    //  qiif     ....
+    //    ff       ..
+    if (splatControl.cPRINT_RULES) {
+      du.print("Considering:");
+      du.print("              ");
+      du.print("   ff       ..");
+      du.print(" qiif     ....");
+      du.print(" o@if ->  .i..");
+      du.print(" qiif     ....");
+      du.print("   ff       ..");
+    }
+    if (pd.evaluateRule(self, "\000@\001o\002i\003i\004i\005q\006q\007i\010i\014f\021f\022f\023f\024f\033f\034f\377\000i\376")) {
+      if (splatControl.cPRINT_RULES) du.print("Success");
+      return true;
+    };
+    //               
+    //  roqf     o...
+    //  o@if ->  .i..
+    //  qiif     ....
+    //  ffff     ....
+    if (splatControl.cPRINT_RULES) {
+      du.print("Considering:");
+      du.print("              ");
+      du.print(" roqf     o...");
+      du.print(" o@if ->  .i..");
+      du.print(" qiif     ....");
+      du.print(" ffff     ....");
+    }
+    if (pd.evaluateRule(self, "\000@\001o\002o\003i\004i\005r\006q\007q\010i\013f\014f\020f\022f\023f\024f\034f\377\000i\005o\376")) {
+      if (splatControl.cPRINT_RULES) du.print("Success");
+      return true;
+    };
+    //                         
+    //    fffff         .....  
+    //   iiiiiii       ....... 
+    //  oooo@oooo ->  ....i....
+    //   iiiiiii       ....... 
+    //    fffff         .....  
+    if (splatControl.cPRINT_RULES) {
+      du.print("Considering:");
+      du.print("                        ");
+      du.print("   fffff         .....  ");
+      du.print("  iiiiiii       ....... ");
+      du.print(" oooo@oooo ->  ....i....");
+      du.print("  iiiiiii       ....... ");
+      du.print("   fffff         .....  ");
+    }
+    if (pd.evaluateRule(self, "\000@\001o\002i\003i\004o\005i\006i\007i\010i\011o\012f\013f\014o\015i\016i\017f\020f\021f\022f\023i\024i\025o\030o\031f\032f\033f\034f\035i\036i\043i\044i\045o\050o\377\000i\376")) {
+      if (splatControl.cPRINT_RULES) du.print("Success");
+      return true;
+    };
+    return false;
+  }
+} // SPLATRuleSet_10QMembrane
+
+transient SPLATKeyState_11QMembrane_Dot : SPLATKeyStateAny {
+} // transient SPLATKeyState_11QMembrane_Dot
+
+transient SPLATKeyState_11QMembrane_At : SPLATKeyStateSelf {
+  // check @  : ($o.$nsites >= 7u) && ($i.$nsites <= 1u)
+  Bool check(SPLATRuleSet & splATTROoB__rs) {
+  return (
+  ((splATTROoB__rs.getKeyState('o')).getNumberSites() >= 7u) && ((splATTROoB__rs.getKeyState('i')).getNumberSites() <= 1u)
+  );
+  }
+  // given @ isa InnerMembrane 
+  Bool given(SPLATRuleSet & splATTROoB__rs, SN splATTROoB__cursn, Atom & splATTROoB__curatom) {
+    if (!(splATTROoB__curatom is InnerMembrane)) return false;
+    InnerMembrane & splATTROoB__self = (InnerMembrane &) splATTROoB__curatom;
+   return (true); 
+  }
+} // transient SPLATKeyState_11QMembrane_At
+
+transient SPLATKeyState_11QMembrane_i : SPLATKeyState {
+  // given i isa InnerMembrane 
+  Bool given(SPLATRuleSet & splATTROoB__rs, SN splATTROoB__cursn, Atom & splATTROoB__curatom) {
+    if (!(splATTROoB__curatom is InnerMembrane)) return false;
+    InnerMembrane & splATTROoB__self = (InnerMembrane &) splATTROoB__curatom;
+   return (true); 
+  }
+} // transient SPLATKeyState_11QMembrane_i
+
+transient SPLATKeyState_11QMembrane_o : SPLATKeyState {
+  // given o isa OuterMembrane 
+  Bool given(SPLATRuleSet & splATTROoB__rs, SN splATTROoB__cursn, Atom & splATTROoB__curatom) {
+    if (!(splATTROoB__curatom is OuterMembrane)) return false;
+    OuterMembrane & splATTROoB__self = (OuterMembrane &) splATTROoB__curatom;
+   return (true); 
+  }
+} // transient SPLATKeyState_11QMembrane_o
+
+transient SPLATKeyState_11QMembrane_x : SPLATKeyState {
+  // given x  = (i|o)
+  Bool given(SPLATRuleSet & splATTROoB__rs, SN splATTROoB__cursn, Atom & splATTROoB__curatom) {
+    return interpretGivenExpr(splATTROoB__rs,splATTROoB__cursn,splATTROoB__curatom,"\001\002\000|\000\000i\000\000\000o\000\000",0u);
+  }
+  // vote x  = (i|o)
+  Votes vote(SPLATRuleSet & splATTROoB__rs, SN splATTROoB__cursn, Atom & splATTROoB__curatom) {
+    return interpretVoteExpr(splATTROoB__rs,splATTROoB__cursn,splATTROoB__curatom,"\001\002\000|\000\000i\000\000\000o\000\000",0u);
+  }
+} // transient SPLATKeyState_11QMembrane_x
+
+transient SPLATRuleSet_11QMembrane : SPLATRuleSet {
+  SPLATKeyState_11QMembrane_Dot key_Dot;
+  SPLATKeyState_11QMembrane_At key_At;
+  SPLATKeyState_11QMembrane_i key_i;
+  SPLATKeyState_11QMembrane_o key_o;
+  SPLATKeyState_11QMembrane_x key_x;
+  virtual Void reset() {
+    super.reset();
+    key_Dot.define('.');
+    key_At.define('@');
+    key_i.define('i');
+    key_o.define('o');
+    key_x.define('x');
+  }
+  virtual Void beginSiteEval() {
+    super.beginSiteEval();
+    key_Dot.beginSiteEval();
+    key_At.beginSiteEval();
+    key_i.beginSiteEval();
+    key_o.beginSiteEval();
+    key_x.beginSiteEval();
+  }
+  virtual SPLATKeyState & getKeyState(ASCII key) {
+    which (key) {
+    case '.': { return key_Dot; }
+    case '@': { return key_At; }
+    case 'i': { return key_i; }
+    case 'o': { return key_o; }
+    case 'x': { return key_x; }
+    }
+    return super.getKeyState(key);
+  }
+
+  virtual Bool evaluateRules() {
+    SPLATRuleDriver pd;
+    DebugUtils du;
+     m_scratchVars[0] = (
+0
+);
+     m_scratchVars[1] = (
+0
+);
+     m_scratchVars[2] = (
+0
+);
+     m_scratchVars[3] = (
+0
+);
+     m_scratchVars[4] = (
+0
+);
+     m_scratchVars[5] = (
+0
+);
+     m_scratchVars[6] = (
+0
+);
+     m_scratchVars[7] = (
+0
+);
+     m_scratchVars[8] = (
+0
+);
+     m_scratchVars[9] = (
+0
+);
+    //             
+    //  xxx     ...
+    //  x@x ->  .o.
+    //  xxx     ...
+    if (splatControl.cPRINT_RULES) {
+      du.print("Considering:");
+      du.print("            ");
+      du.print(" xxx     ...");
+      du.print(" x@x ->  .o.");
+      du.print(" xxx     ...");
+    }
+    if (pd.evaluateRule(self, "\000@\001x\002x\003x\004x\005x\006x\007x\010x\377\000o\376")) {
+      if (splatControl.cPRINT_RULES) du.print("Success");
+      return true;
+    };
+    return false;
+  }
+} // SPLATRuleSet_11QMembrane
+
+transient SPLATKeyState_12QMembrane_Dot : SPLATKeyStateAny {
+} // transient SPLATKeyState_12QMembrane_Dot
+
+transient SPLATKeyState_12QMembrane_At : SPLATKeyStateSelf {
+  // given @ isa InnerMembrane 
+  Bool given(SPLATRuleSet & splATTROoB__rs, SN splATTROoB__cursn, Atom & splATTROoB__curatom) {
+    if (!(splATTROoB__curatom is InnerMembrane)) return false;
+    InnerMembrane & splATTROoB__self = (InnerMembrane &) splATTROoB__curatom;
+   return (true); 
+  }
+} // transient SPLATKeyState_12QMembrane_At
+
+transient SPLATKeyState_12QMembrane_Underline : SPLATKeyStateEmpty {
+} // transient SPLATKeyState_12QMembrane_Underline
+
+transient SPLATKeyState_12QMembrane_e : SPLATKeyState {
+  // check e  : $nvotes == 0u // Say no QContent
+  Bool check(SPLATRuleSet & splATTROoB__rs) {
+  return (
+  getNumberVotes() == 0u // Say no QContent
+  );
+  }
+  // vote e isa QContent 
+  Votes vote(SPLATRuleSet & splATTROoB__rs, SN splATTROoB__cursn, Atom & splATTROoB__curatom) {
+    if (!(splATTROoB__curatom is QContent)) return 0u;
+    QContent & splATTROoB__self = (QContent &) splATTROoB__curatom;
+  return 1u;
+  }
+} // transient SPLATKeyState_12QMembrane_e
+
+transient SPLATKeyState_12QMembrane_f : SPLATKeyState {
+  // check f  : random.oddsOf(3u*$nvotes+1u,10u)
+  Bool check(SPLATRuleSet & splATTROoB__rs) {
+  return (
+  random.oddsOf(3u*getNumberVotes()+1u,10u)
+  );
+  }
+  // given f  : true   // Allow dead sites
+  Bool given(SPLATRuleSet & splATTROoB__rs, SN splATTROoB__cursn, Atom & splATTROoB__curatom) {
+    return (
+  true   // Allow dead sites
+  );
+  }
+  // vote f  : !($curatom is Empty) 
+  Votes vote(SPLATRuleSet & splATTROoB__rs, SN splATTROoB__cursn, Atom & splATTROoB__curatom) {
+    return (
+  !(splATTROoB__curatom is Empty) 
+  ) ? 1u : 0u;
+  }
+} // transient SPLATKeyState_12QMembrane_f
+
+transient SPLATKeyState_12QMembrane_i : SPLATKeyState {
+  // given i isa InnerMembrane 
+  Bool given(SPLATRuleSet & splATTROoB__rs, SN splATTROoB__cursn, Atom & splATTROoB__curatom) {
+    if (!(splATTROoB__curatom is InnerMembrane)) return false;
+    InnerMembrane & splATTROoB__self = (InnerMembrane &) splATTROoB__curatom;
+   return (true); 
+  }
+} // transient SPLATKeyState_12QMembrane_i
+
+transient SPLATKeyState_12QMembrane_n : SPLATKeyState {
+  // given n  : !($curatom is OuterMembrane)
+  Bool given(SPLATRuleSet & splATTROoB__rs, SN splATTROoB__cursn, Atom & splATTROoB__curatom) {
+    return (
+  !(splATTROoB__curatom is OuterMembrane)
+  );
+  }
+} // transient SPLATKeyState_12QMembrane_n
+
+transient SPLATKeyState_12QMembrane_o : SPLATKeyState {
+  // given o isa OuterMembrane 
+  Bool given(SPLATRuleSet & splATTROoB__rs, SN splATTROoB__cursn, Atom & splATTROoB__curatom) {
+    if (!(splATTROoB__curatom is OuterMembrane)) return false;
+    OuterMembrane & splATTROoB__self = (OuterMembrane &) splATTROoB__curatom;
+   return (true); 
+  }
+} // transient SPLATKeyState_12QMembrane_o
+
+transient SPLATKeyState_12QMembrane_q : SPLATKeyState {
+  // given q isa QMembrane 
+  Bool given(SPLATRuleSet & splATTROoB__rs, SN splATTROoB__cursn, Atom & splATTROoB__curatom) {
+    if (!(splATTROoB__curatom is QMembrane)) return false;
+    QMembrane & splATTROoB__self = (QMembrane &) splATTROoB__curatom;
+   return (true); 
+  }
+} // transient SPLATKeyState_12QMembrane_q
+
+transient SPLATKeyState_12QMembrane_r : SPLATKeyState {
+  // vote r  : $curatom is Empty 
+  //      || $curatom is InnerMembrane
+  Votes vote(SPLATRuleSet & splATTROoB__rs, SN splATTROoB__cursn, Atom & splATTROoB__curatom) {
+    return (
+  splATTROoB__curatom is Empty 
+       || splATTROoB__curatom is InnerMembrane
+  ) ? 1u : 0u;
+  }
+} // transient SPLATKeyState_12QMembrane_r
+
+transient SPLATKeyState_12QMembrane_z : SPLATKeyState {
+  // given z  : !ew.isLive($cursn)
+  Bool given(SPLATRuleSet & splATTROoB__rs, SN splATTROoB__cursn, Atom & splATTROoB__curatom) {
+    return (
+  !ew.isLive(splATTROoB__cursn)
+  );
+  }
+} // transient SPLATKeyState_12QMembrane_z
+
+transient SPLATRuleSet_12QMembrane : SPLATRuleSet {
+  SPLATKeyState_12QMembrane_Dot key_Dot;
+  SPLATKeyState_12QMembrane_At key_At;
+  SPLATKeyState_12QMembrane_Underline key_Underline;
+  SPLATKeyState_12QMembrane_e key_e;
+  SPLATKeyState_12QMembrane_f key_f;
+  SPLATKeyState_12QMembrane_i key_i;
+  SPLATKeyState_12QMembrane_n key_n;
+  SPLATKeyState_12QMembrane_o key_o;
+  SPLATKeyState_12QMembrane_q key_q;
+  SPLATKeyState_12QMembrane_r key_r;
+  SPLATKeyState_12QMembrane_z key_z;
+  virtual Void reset() {
+    super.reset();
+    key_Dot.define('.');
+    key_At.define('@');
+    key_Underline.define('_');
+    key_e.define('e');
+    key_f.define('f');
+    key_i.define('i');
+    key_n.define('n');
+    key_o.define('o');
+    key_q.define('q');
+    key_r.define('r');
+    key_z.define('z');
+  }
+  virtual Void beginSiteEval() {
+    super.beginSiteEval();
+    key_Dot.beginSiteEval();
+    key_At.beginSiteEval();
+    key_Underline.beginSiteEval();
+    key_e.beginSiteEval();
+    key_f.beginSiteEval();
+    key_i.beginSiteEval();
+    key_n.beginSiteEval();
+    key_o.beginSiteEval();
+    key_q.beginSiteEval();
+    key_r.beginSiteEval();
+    key_z.beginSiteEval();
+  }
+  virtual SPLATKeyState & getKeyState(ASCII key) {
+    which (key) {
+    case '.': { return key_Dot; }
+    case '@': { return key_At; }
+    case '_': { return key_Underline; }
+    case 'e': { return key_e; }
+    case 'f': { return key_f; }
+    case 'i': { return key_i; }
+    case 'n': { return key_n; }
+    case 'o': { return key_o; }
+    case 'q': { return key_q; }
+    case 'r': { return key_r; }
+    case 'z': { return key_z; }
+    }
+    return super.getKeyState(key);
+  }
+
+  virtual Bool evaluateRules() {
+    SPLATRuleDriver pd;
+    DebugUtils du;
+     m_scratchVars[0] = (
+0
+);
+     m_scratchVars[1] = (
+0
+);
+     m_scratchVars[2] = (
+0
+);
+     m_scratchVars[3] = (
+0
+);
+     m_scratchVars[4] = (
+0
+);
+     m_scratchVars[5] = (
+0
+);
+     m_scratchVars[6] = (
+0
+);
+     m_scratchVars[7] = (
+0
+);
+     m_scratchVars[8] = (
+0
+);
+     m_scratchVars[9] = (
+0
+);
+    //           
+    //  o_ ->  .@
+    //  o@     ..
+    if (splatControl.cPRINT_RULES) {
+      du.print("Considering:");
+      du.print("          ");
+      du.print(" o_ ->  .@");
+      du.print(" o@     ..");
+    }
+    if (pd.evaluateRule(self, "\000@\001o\002_\005o\377\002@\376")) {
+      if (splatControl.cPRINT_RULES) du.print("Success");
+      return true;
+    };
+    //             
+    //  nnn     ...
+    //  n@n ->  ._.
+    //  nnn     ...
+    if (splatControl.cPRINT_RULES) {
+      du.print("Considering:");
+      du.print("            ");
+      du.print(" nnn     ...");
+      du.print(" n@n ->  ._.");
+      du.print(" nnn     ...");
+    }
+    if (pd.evaluateRule(self, "\000@\001n\002n\003n\004n\005n\006n\007n\010n\377\000_\376")) {
+      if (splatControl.cPRINT_RULES) du.print("Success");
+      return true;
+    };
+    //                 
+    //  _____     .....
+    //  __oo_ ->  .o...
+    //   o@o       ... 
+    if (splatControl.cPRINT_RULES) {
+      du.print("Considering:");
+      du.print("                ");
+      du.print(" _____     .....");
+      du.print(" __oo_ ->  .o...");
+      du.print("  o@o       ... ");
+    }
+    if (pd.evaluateRule(self, "\000@\001o\002o\004o\005_\007o\012_\015_\017_\021_\023_\031_\033_\377\005o\376")) {
+      if (splatControl.cPRINT_RULES) du.print("Success");
+      return true;
+    };
+    //             
+    //  ooo     ...
+    //  o@o ->  .o.
+    //  ooo     ...
+    if (splatControl.cPRINT_RULES) {
+      du.print("Considering:");
+      du.print("            ");
+      du.print(" ooo     ...");
+      du.print(" o@o ->  .o.");
+      du.print(" ooo     ...");
+    }
+    if (pd.evaluateRule(self, "\000@\001o\002o\003o\004o\005o\006o\007o\010o\377\000o\376")) {
+      if (splatControl.cPRINT_RULES) du.print("Success");
+      return true;
+    };
+    //         
+    //  o     .
+    //  @ ->  o
+    //  z     .
+    if (splatControl.cPRINT_RULES) {
+      du.print("Considering:");
+      du.print("        ");
+      du.print(" o     .");
+      du.print(" @ ->  o");
+      du.print(" z     .");
+    }
+    if (pd.evaluateRule(self, "\000@\002o\003z\377\000o\376")) {
+      if (splatControl.cPRINT_RULES) du.print("Success");
+      return true;
+    };
+    //                     
+    //  ee_iqff     ..@....
+    //  eei@off ->  ...o...
+    //  eeiooff     .......
+    if (splatControl.cPRINT_RULES) {
+      du.print("Considering:");
+      du.print("                    ");
+      du.print(" ee_iqff     ..@....");
+      du.print(" eei@off ->  ...o...");
+      du.print(" eeiooff     .......");
+    }
+    if (pd.evaluateRule(self, "\000@\001i\002i\003o\004o\005_\006i\007q\010o\011e\014f\015e\016e\023f\024f\025e\030f\035e\036e\043f\044f\377\000o\005@\376")) {
+      if (splatControl.cPRINT_RULES) du.print("Success");
+      return true;
+    };
+    //               
+    //  ei       ..  
+    //  _iof     i...
+    //  _@of ->  @o..
+    //  _iof     i...
+    //  ei       ..  
+    if (splatControl.cPRINT_RULES) {
+      du.print("Considering:");
+      du.print("              ");
+      du.print(" ei       ..  ");
+      du.print(" _iof     i...");
+      du.print(" _@of ->  @o..");
+      du.print(" _iof     i...");
+      du.print(" ei       ..  ");
+    }
+    if (pd.evaluateRule(self, "\000@\001_\002i\003i\004o\005_\006_\007o\010o\012i\013i\014f\017e\020e\023f\024f\377\000o\001@\005i\006i\376")) {
+      if (splatControl.cPRINT_RULES) du.print("Success");
+      return true;
+    };
+    //               
+    //    ff       ..
+    //  qoof     ....
+    //  i@of ->  .o..
+    //  qoof     ....
+    //    ff       ..
+    if (splatControl.cPRINT_RULES) {
+      du.print("Considering:");
+      du.print("              ");
+      du.print("   ff       ..");
+      du.print(" qoof     ....");
+      du.print(" i@of ->  .o..");
+      du.print(" qoof     ....");
+      du.print("   ff       ..");
+    }
+    if (pd.evaluateRule(self, "\000@\001i\002o\003o\004o\005q\006q\007o\010o\014f\021f\022f\023f\024f\033f\034f\377\000o\376")) {
+      if (splatControl.cPRINT_RULES) du.print("Success");
+      return true;
+    };
+    //               
+    //  riqf     i...
+    //  i@of ->  .o..
+    //  qoof     ....
+    //  ffff     ....
+    if (splatControl.cPRINT_RULES) {
+      du.print("Considering:");
+      du.print("              ");
+      du.print(" riqf     i...");
+      du.print(" i@of ->  .o..");
+      du.print(" qoof     ....");
+      du.print(" ffff     ....");
+    }
+    if (pd.evaluateRule(self, "\000@\001i\002i\003o\004o\005r\006q\007q\010o\013f\014f\020f\022f\023f\024f\034f\377\000o\005i\376")) {
+      if (splatControl.cPRINT_RULES) du.print("Success");
+      return true;
+    };
+    //                         
+    //    _____         .....  
+    //   ooooooo       ....... 
+    //  iiii@iiii ->  ....o....
+    //   ooooooo       ....... 
+    //    _____         .....  
+    if (splatControl.cPRINT_RULES) {
+      du.print("Considering:");
+      du.print("                        ");
+      du.print("   _____         .....  ");
+      du.print("  ooooooo       ....... ");
+      du.print(" iiii@iiii ->  ....o....");
+      du.print("  ooooooo       ....... ");
+      du.print("   _____         .....  ");
+    }
+    if (pd.evaluateRule(self, "\000@\001i\002o\003o\004i\005o\006o\007o\010o\011i\012_\013_\014i\015o\016o\017_\020_\021_\022_\023o\024o\025i\030i\031_\032_\033_\034_\035o\036o\043o\044o\045i\050i\377\000o\376")) {
+      if (splatControl.cPRINT_RULES) du.print("Success");
+      return true;
+    };
+    return false;
+  }
+} // SPLATRuleSet_12QMembrane
+
+transient SPLATKeyState_13QMembrane_Dot : SPLATKeyStateAny {
+} // transient SPLATKeyState_13QMembrane_Dot
+
+transient SPLATKeyState_13QMembrane_At : SPLATKeyStateSelf {
+} // transient SPLATKeyState_13QMembrane_At
+
+transient SPLATRuleSet_13QMembrane : SPLATRuleSet {
+  SPLATKeyState_13QMembrane_Dot key_Dot;
+  SPLATKeyState_13QMembrane_At key_At;
+  virtual Void reset() {
+    super.reset();
+    key_Dot.define('.');
+    key_At.define('@');
+  }
+  virtual Void beginSiteEval() {
+    super.beginSiteEval();
+    key_Dot.beginSiteEval();
+    key_At.beginSiteEval();
+  }
+  virtual SPLATKeyState & getKeyState(ASCII key) {
+    which (key) {
+    case '.': { return key_Dot; }
+    case '@': { return key_At; }
+    }
+    return super.getKeyState(key);
+  }
+
+  virtual Bool evaluateRules() {
+    SPLATRuleDriver pd;
+    DebugUtils du;
+     m_scratchVars[0] = (
+0
+);
+     m_scratchVars[1] = (
+0
+);
+     m_scratchVars[2] = (
+0
+);
+     m_scratchVars[3] = (
+0
+);
+     m_scratchVars[4] = (
+0
+);
+     m_scratchVars[5] = (
+0
+);
+     m_scratchVars[6] = (
+0
+);
+     m_scratchVars[7] = (
+0
+);
+     m_scratchVars[8] = (
+0
+);
+     m_scratchVars[9] = (
+0
+);
+    //         
+    //  @ ->  .
+    if (splatControl.cPRINT_RULES) {
+      du.print("Considering:");
+      du.print("        ");
+      du.print(" @ ->  .");
+    }
+    if (pd.evaluateRule(self, "\000@\377\376")) {
+      if (splatControl.cPRINT_RULES) du.print("Success");
+      return true;
+    };
+    return false;
+  }
+} // SPLATRuleSet_13QMembrane
+
+//END QMembrane.ulam

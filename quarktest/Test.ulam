@@ -1,0 +1,10 @@
+element Test(QTest q) : QTest{
+  EventWindow ew;
+  Bool element_data = true;
+  Void load(QTest q){
+    quark_data = q.quark_data;
+  }
+  Void behave(){
+    ew[0] = self;
+  }
+}

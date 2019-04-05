@@ -1,0 +1,131 @@
+element Init{
+  EventWindow ew;
+  typedef Unsigned(4) ButtonType;
+  typedef Int PositionDiff;
+  typedef EventWindow.SiteNum SiteNum;
+  ButtonType currentButton;
+  PositionDiff x;
+  PositionDiff y;
+
+  Void makeButton(){
+    C2D coord = coord.new(0, -4);
+    SiteNum dropsite = ew.getSiteNumberRaw(coord);
+    if (currentButton == 9){
+      Zero zero;
+      zero.center = true;
+      ew[dropsite] = zero;
+    }
+    if (currentButton == 0){
+      One one;
+      one.center = true;
+      ew[dropsite] = one;
+    }
+    if (currentButton == 1){
+      Two two;
+      two.center = true;
+      ew[dropsite] = two;
+    }
+    if (currentButton == 2){
+      Three three;
+      three.center = true;
+      ew[dropsite] = three;
+    }
+    if (currentButton == 5){
+      Four four;
+      four.center = true;
+      ew[dropsite] = four;
+    }
+    if (currentButton == 4){
+      Five five;
+      five.center = true;
+      ew[dropsite] = five;
+    }
+    if (currentButton == 3){
+      Six six;
+      six.center = true;
+      ew[dropsite] = six;
+    }
+    if (currentButton == 6){
+      Seven seven;
+      seven.center = true;
+      ew[dropsite] = seven;
+    }
+    if (currentButton == 7){
+      Eight eight;
+      eight.center = true;
+      ew[dropsite] = eight;
+    }
+    if (currentButton == 8){
+      Nine nine;
+      nine.center = true;
+      ew[dropsite] = nine;
+    }
+    if (currentButton == 10){
+      OPButton open;
+      open.center = true;
+      ew[dropsite] = open;
+    }
+    if (currentButton == 11){
+      CPButton close;
+      close.center = true;
+      ew[dropsite] = close;
+    }
+    if (currentButton == 12){
+      AddButton add;
+      add.center = true;
+      ew[dropsite] = add;
+    }
+    if (currentButton == 13){
+      SubtractButton subtract;
+      subtract.center = true;
+      ew[dropsite] = subtract;
+    }
+    if (currentButton == 14){
+      MultiplyButton multiply;
+      multiply.center = true;
+      ew[dropsite] = multiply;
+    }
+    if (currentButton == 15){
+      DivideButton divide;
+      divide.center = true;
+      ew[dropsite] = divide;
+    }
+  }
+  Void behave(){
+    if(x == 0 && y == 0){
+      makeButton();
+      ++currentButton;
+      if(currentButton == 2 ||
+         currentButton == 5 ||
+         currentButton == 8 ||
+         currentButton == 11 ||
+         currentButton == 14){
+        //change y position every third button.
+        x = 0;
+        y = 4;
+      }else{
+        y = 0;
+        if(currentButton > 2 && currentButton < 5 || 
+          currentButton > 8 && currentButton < 11 ||
+          currentButton > 14){
+          //x is negative on alternating groups of three.
+          x = -4;
+        }else{
+          x = 4;
+        }
+      }
+    }else{
+      C2D dest;
+      C2D origin;
+      dest.set(x, y);
+      x = 0;
+      y = 0;
+      origin.set(0, 0);
+      ew.swap(origin, dest);
+    }
+    if(currentButton == currentButton.maxof){
+      Empty e;
+      ew[0] = e;
+    }
+  }
+}

@@ -1,0 +1,14 @@
+/**
+  \symmetries all
+ */
+element ColorID{
+  EventWindow ew;
+
+  Unsigned fill;
+  Unsigned filler;
+  Unsigned(7); sfill;
+
+  void behave(){
+    ew.swap(0,1);
+  }
+}

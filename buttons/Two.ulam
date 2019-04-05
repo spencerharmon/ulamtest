@@ -1,0 +1,10 @@
+element Two : Button{
+  Void produce(){
+    Res r;
+    ew[1] = r;
+  }
+  Atom me(){
+    return self.atomof;
+  }
+  
+}

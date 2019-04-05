@@ -1,0 +1,13 @@
+element Init{
+  EventWindow ew;
+  Once o;
+  Void behave(){
+    if(o.new()){
+      QTest q;
+      q.quark_data = true;
+      Test t;
+      t.load(q);
+      ew[1] = t;
+    }
+  }
+}

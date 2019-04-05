@@ -281,6 +281,9 @@ element Nucleus{
       }
     }else{
       lifespan = (Unsigned(10))(lifespan + 5u);
+      //this negates the use of the reproduction gene
+      //it's only for demonstrating egg behavior.
+      initReproBehavior();
     }
   }
   Void behave(){

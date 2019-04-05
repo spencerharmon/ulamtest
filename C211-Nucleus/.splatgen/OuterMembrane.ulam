@@ -1,0 +1,23 @@
+//ALTERATION IS FUTILE: THIS FILE AUTOMATICALLY GENERATED FROM OuterMembrane.splat
+//CREATED "Thu Apr  4 19:13:19 2019 GMT" BY /usr/bin/vendor_perl/splattr FOR spencer
+//BEGIN OuterMembrane.ulam (in ./.splatgen)
+
+
+/** 
+  \symbol OM
+
+  \color #456789
+
+  \symmetries all
+
+ */
+element OuterMembrane : QMembrane {
+  // Data members
+  virtual Bool evaluateRuleSets() {
+    if (super.evaluateRuleSets()) return true; // Maybe super's got something
+    return false;   // We got nothing
+  }
+
+} // element OuterMembrane
+
+//END OuterMembrane.ulam

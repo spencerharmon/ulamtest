@@ -1,0 +1,35 @@
+upfront:
+	"putting things in c211" might imply that I'm programming in splat. That's not actually true. 
+fixed bit-width identifiers in the movable feast?:
+
+	nucleus' decision tree genes limit the number of genes that are possible in a tree. 
+
+	calculator is implemented as a sort of linked list, using random parent and child identifiers, this causes the problem 
+of possible collisions. Is this a sensible pattern?
+
+	Nucleus ids can use parents to increase bit width of unique identifiers and track lineage; what is the implication of 
+ID collisions here? 
+
+
+saturating int and genetic equations:
+
+	randomly generating operators and terminators with saturating integers leads to a bias toward the maximum and minimum 
+values. Is it worth working around this or could there be a benefit to saturating logic here?
+
+
+MFM/mfms fundamentals:
+
+	I often want a class structure that involves only minor differences in the data members of an element, but cannot store 
+enough data in a parent quark for this use case because of the 32-bit limit. What's the motivation to restrict the number of 
+storage bits in a quark? 
+
+	Followup: what considerations went into the data size of atoms, atom identifiers 
+
+	How are various IO peripherals intended to be made available to elements in the MFM? The mfms has had touch reporters 
+for a long time, which have a clear mapping to specific sites. How will the light sensor be made available to elements? At a 
+highger level, do you anticipate certain types of elements to interface with these peripherals, and to be essentially 
+gatekeepers of the resource? What about something like a stepper motor or a DAC/ADC?
+
+Nucleus:
+	https://www.nature.com/articles/srep34615.pdf
+	https://www.mitpressjournals.org/doi/pdf/10.1162/978-0-262-32621-6-ch108

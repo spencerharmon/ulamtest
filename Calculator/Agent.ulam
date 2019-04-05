@@ -1,3 +1,4 @@
+use DReg;
 quark Agent{
 	EventWindow ew;
 	AtomUtils au;
