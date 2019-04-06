@@ -26,7 +26,9 @@ quark TouchReporter {
       if (tmp > m_touchType) {
         m_touchType = tmp;
         m_touchCounter = m_touchCounter.maxof;
-        return true;
+        if (tmp == su.cTOUCH_TYPE_HEAVY){
+          return true;
+        }
       }
       return false;
     } else if (--m_touchCounter == m_touchCounter.minof)

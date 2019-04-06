@@ -8,7 +8,8 @@ element Init{
   PositionDiff y;
 
   Void makeButton(){
-    C2D coord = coord.new(0, -4);
+    C2D coord;
+    coord.set(0, -4);
     SiteNum dropsite = ew.getSiteNumberRaw(coord);
     if (currentButton == 9){
       Zero zero;
@@ -94,7 +95,6 @@ element Init{
   Void behave(){
     if(x == 0 && y == 0){
       makeButton();
-      ++currentButton;
       if(currentButton == 2 ||
          currentButton == 5 ||
          currentButton == 8 ||
@@ -114,6 +114,7 @@ element Init{
           x = 4;
         }
       }
+      ++currentButton;
     }else{
       C2D dest;
       C2D origin;

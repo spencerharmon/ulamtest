@@ -1,9 +1,32 @@
 quark Button : TouchReporter{
   AtomUtils au;
+  Random r;
+  typedef Agent.ID ID;  
   typedef EventWindow.SiteNum SiteNum;
   virtual Void produce();
   virtual Atom me();
   Bool center;
+  Bool newID;
+  ID id;
+  Void propagateID(){
+    Bool propagated = false;
+    if(newID){
+      for(SiteNum i = 1; i >= 40; ++i){
+        Atom a = ew[i];
+        if(a as Button){
+          if(a.id != id){
+            a.id = id;
+            a.newID = true;
+            ew[i] = a.atomof;
+            propagated = true;
+          }
+        }
+      }
+    }
+    if(!propagated){
+      newID = false;
+    }
+  }
   Void behave(){
     if(center){
       for(SiteNum i = 1; i <= 8; ++i){
@@ -14,8 +37,23 @@ quark Button : TouchReporter{
         }
       }
     }
-    if(touchReport()){
-      produce();
+    //debounce
+    Bool wait = false;
+    for(SiteNum i = 1; i <= 40; ++i){
+      Atom a = ew[i];
+      if (a as Button){
+        if (a.newID){
+          wait = true;
+        }
+      }
     }
+    if(!wait){
+      if(touchReport()){
+        id = (ID) r.create(id.maxof);
+        newID = true;
+        produce();
+      }
+    }
+    propagateID();
   }
 }
