@@ -10,14 +10,15 @@ quark Agent{
 	typedef Unsigned(15) ID;
 	typedef EventWindow.SiteNum SiteNum;
 	typedef AtomUtils.Type Type;
-	
+        parameter Unsigned resthreshold = 10u;
+        parameter Unsigned copythreshold = 1u;	
 	ID parent;
 	ID child;
 
 	Void clusterDiffuse(){
 		agentCluster();
 		Unsigned numCopies = numCopiesNearMe();
-		if(numCopies == 0u){
+		if(numCopies < copythreshold){
 			copySelf();
 		}else if(numCopies > 0u && lowrescount()){
 			die();
@@ -31,7 +32,7 @@ quark Agent{
 				++rescount;
 			}
 		}
-		if(rescount < 7u){
+		if(rescount < resthreshold){
 			return true;
 		}else return false;
 	}
@@ -165,7 +166,7 @@ quark Agent{
 			return e;
 		}else if(a as Multiply){
 			Expire e;
-			e.type = 2u;
+			e.type = 3u;
 			e.value = a.value;
 			e.parent = a.parent;
 			e.child = a.child;
