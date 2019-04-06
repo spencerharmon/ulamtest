@@ -1,7 +1,12 @@
 element CPButton : Button{
-  Void produce(){
-    Res r;
-    ew[1] = r;
+  ID produce(SiteNum slot){
+    ID child = (ID) r.create(id.maxof);
+    CloseParenth c;
+    c.parent = id;
+    c.child = child;
+    ew[slot] = c;
+
+    return child;
   }
   Atom me(){
     return self.atomof;

@@ -1,7 +1,12 @@
 element OPButton : Button{
-  Void produce(){
-    Res r;
-    ew[1] = r;
+  ID produce(SiteNum slot){
+    ID child = (ID) r.create(id.maxof);
+    OpenParenth o;
+    o.parent = id;
+    o.child = child;
+    ew[slot] = o;
+
+    return child;
   }
   Atom me(){
     return self.atomof;

@@ -1,7 +1,13 @@
 element MultiplyButton : Button{
-  Void produce(){
-    Res r;
-    ew[1] = r;
+  ID produce(SiteNum slot){
+    ID child = (ID) r.create(id.maxof);
+    Function f;
+    f.value = 3u;
+    f.parent = id;
+    f.child = child;
+    ew[slot] = f;
+
+    return child;
   }
   Atom me(){
     return self.atomof;

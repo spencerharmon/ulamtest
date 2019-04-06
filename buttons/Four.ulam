@@ -1,7 +1,13 @@
 element Four : Button{
-  Void produce(){
-    Res r;
-    ew[1] = r;
+  ID produce(SiteNum slot){
+    ID child = (ID) r.create(id.maxof);
+    Data d;
+    d.value = 4;
+    d.parent = id;
+    d.child = child;
+    ew[slot] = d;
+
+    return child;
   }
   Atom me(){
     return self.atomof;
