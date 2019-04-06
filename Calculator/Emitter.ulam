@@ -181,7 +181,7 @@ element Emitter{
 				nextid = openParenth(slot, nextid);
 			}else if(agentIndex == 7u){
 				//0 is for add
-				Int i = ;
+				Int i = 0;
 				nextid = function(slot, nextid, i);
 			}else if(agentIndex == 8u){
 				nextid = data(slot, nextid, 2);
