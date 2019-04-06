@@ -1,1 +1,1 @@
-mfzrun ./a.mfz run {{2H3}} -no-std
+mfzrun ./a.mfz run {{2H3}} -cp 10.mfs

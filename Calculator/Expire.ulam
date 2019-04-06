@@ -100,6 +100,19 @@ element Expire : Agent{
 		}
 		return b;
 	}
+	Bool expMultiply(){
+		Bool b = false;
+		for(SiteNum i = 1; i < 41; ++i){
+			Atom a = ew[i];
+			if(a as Multiply){
+				if(a.parent == parent && a.child == child && a.value == value){
+					ew[i] = self;
+					b = true;
+				}
+			}
+		}
+		return b;
+	}
 	Bool expOpenParenth(){
 		Bool b = false;
 		for(SiteNum i = 1; i < 41; ++i){
@@ -154,12 +167,14 @@ element Expire : Agent{
 	}
 	Bool exp(){
 		Bool b = false;
-		if(type == 1u){
+		if(type == 0u){
 			b = expAdd();
-		}else if(type ==2u){
+		}else if(type == 1u){
 			b = expSubtract();
-		}else if(type ==3u){
+		}else if(type == 2u){
 			b = expDivide();
+		}else if(type == 3u){
+			b = expMultiply();
 		}else if(type ==4u){
 			b = expOpenParenth();
 		}else if(type ==5u){

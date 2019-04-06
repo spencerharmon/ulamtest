@@ -128,16 +128,16 @@ element Emitter{
 			if(agentIndex == 1u){
 				nextid = openParenth(slot, nextid);
 			}else if(agentIndex == 2u){
-				//2 is for subtract
-				Int i = 2;
+				//1 is for subtract
+				Int i = 1;
 				nextid = function(slot, nextid, i);
 			}else if(agentIndex == 3u){
 				nextid = data(slot, nextid, 10);
 			}else if(agentIndex == 4u){
 				nextid = openParenth(slot, nextid);
 			}else if(agentIndex == 5u){
-				//3 is for divide
-				Int i = 3;
+				//2 is for divide
+				Int i = 2;
 				nextid = function(slot, nextid, i);
 			}else if(agentIndex == 6u){
 				nextid = data(slot, nextid, 600);
@@ -166,22 +166,22 @@ element Emitter{
 			if(agentIndex == 1u){
 				nextid = openParenth(slot, nextid);
 			}else if(agentIndex == 2u){
-				//3 is for divide
-				Int i = 3;
+				//2 is for divide
+				Int i = 2;
 				nextid = function(slot, nextid, i);
 			}else if(agentIndex == 3u){
 				nextid = data(slot, nextid, 600);
 			}else if(agentIndex == 4u){
 				nextid = openParenth(slot, nextid);
 			}else if(agentIndex == 5u){
-				//2 is for subtract
-				Int i = 2;
+				//1 is for subtract
+				Int i = 1;
 				nextid = function(slot, nextid, i);
 			}else if(agentIndex == 6u){
 				nextid = openParenth(slot, nextid);
 			}else if(agentIndex == 7u){
-				//1 is for add
-				Int i = 1;
+				//0 is for add
+				Int i = ;
 				nextid = function(slot, nextid, i);
 			}else if(agentIndex == 8u){
 				nextid = data(slot, nextid, 2);

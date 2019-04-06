@@ -74,25 +74,31 @@ element Function : Agent{
 		return collapsed;
 	}
 	Atom getOperator(Data c){
-		if(value == 1u){
+		if(value == 0u){
 			Add ad;
 			ad.parent = parent;
 			ad.child = child;
 			ad.value = c.value;
 			return ad;
-		}else if(value == 2u){
+		}else if(value == 1u){
 			Subtract sb;
 			sb.parent = parent;
 			sb.child = child;
 			sb.value = c.value;
 			return sb;
-		}else if(value == 3u){
+		}else if(value == 2u){
 			Divide dv;
 			dv.parent = parent;
 			dv.child = child;
 			dv.value = c.value;
 			return dv;
-		}
+		}else if (value == 3u){
+			Multiply m;
+			m.parent = parent;
+			m.child = child;
+ 			m.value = c.value;
+			return m;
+                }
 		//gcc non-void-function warning
 		Res r;
 		return r;

@@ -144,21 +144,28 @@ quark Agent{
 	Atom expire(Atom a){
 		if(a as Add){
 			Expire e;
-			e.type = 1u;
+			e.type = 0u;
 			e.value = a.value;
 			e.parent = a.parent;
 			e.child = a.child;
 			return e;
 		}else if(a as Subtract){
 			Expire e;
-			e.type = 2u;
+			e.type = 1u;
 			e.value = a.value;
 			e.parent = a.parent;
 			e.child = a.child;
 			return e;
 		}else if(a as Divide){
 			Expire e;
-			e.type = 3u;
+			e.type = 2u;
+			e.value = a.value;
+			e.parent = a.parent;
+			e.child = a.child;
+			return e;
+		}else if(a as Multiply){
+			Expire e;
+			e.type = 2u;
 			e.value = a.value;
 			e.parent = a.parent;
 			e.child = a.child;
@@ -260,6 +267,11 @@ quark Agent{
 			n.child = c;
 			return n;
 		}else if(n as Divide){
+			n.value = val;
+			n.parent = p;
+			n.child = c;
+			return n;
+		}else if(n as Multiply){
 			n.value = val;
 			n.parent = p;
 			n.child = c;
