@@ -1,4 +1,5 @@
 quark Button : TouchReporter{
+  DebugUtils du;
   AtomUtils au;
   DregResUtils dru;
   Random r;
@@ -9,15 +10,18 @@ quark Button : TouchReporter{
   Bool center;
   Bool newID;
   ID id;
+  Unsigned(4) timeout;
   Void propagateID(){
-    Bool propagated = false;
+    --timeout;
+    Bool propagated;
     if(newID){
-      for(SiteNum i = 1; i >= 40; ++i){
+      for(SiteNum i = 1; i <= 40; ++i){
         Atom a = ew[i];
         if(a as Button){
           if(a.id != id){
             a.id = id;
             a.newID = true;
+            a.timeout = timeout.maxof;
             ew[i] = a.atomof;
             propagated = true;
           }
@@ -31,30 +35,27 @@ quark Button : TouchReporter{
   Void behave(){
     if(center){
       for(SiteNum i = 1; i <= 8; ++i){
-        Atom n = au.new(au.getType(me()));
-        if(n as Button){
-          n.center = false;
-          ew[i] = n.atomof;
+        Atom a = ew[i];
+        if(a as Empty){
+          Atom n = au.new(au.getType(me()));
+          if(n as Button){
+            n.center = false;
+            ew[i] = n.atomof;
+          }
         }
       }
     }
-    //debounce
-    Bool wait = false;
-    for(SiteNum i = 1; i <= 40; ++i){
-      Atom a = ew[i];
-      if (a as Button){
-        if (a.newID){
-          wait = true;
-        }
-      }
-    }
-    if(!wait){
+    if(timeout == 0){
       if(touchReport()){
         for(SiteNum i = 1; i <=40; ++i){
           Atom a = ew[i];
           if(a as Res){
-            id = produce(i);
             newID = true;
+            ID tmp;
+            tmp = produce(i);
+            id = tmp;
+            timeout = timeout.maxof;
+            break;
           }
         }
       }

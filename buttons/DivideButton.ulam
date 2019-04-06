@@ -2,7 +2,7 @@ element DivideButton : Button{
   ID produce(SiteNum slot){
     ID child = (ID) r.create(id.maxof);
     Function f;
-    f.value = 2u;
+    f.value = 3u;
     f.parent = id;
     f.child = child;
     ew[slot] = f;
