@@ -1,0 +1,23 @@
+/*
+5/11/2019
+This gist is intended to demonstrate an unexpected error with otherwise apparently valid ulam code subclassing a quark written in splat.
+The error should look something like the following:
+
+/usr/share/perl5/vendor_perl/auto/share/dist/App-Splattr/SPLATInstance.ulam:59:15: ERROR: Named Constant 'cUNSET_SN' cannot be a class type: 90.
+/usr/share/perl5/vendor_perl/auto/share/dist/App-Splattr/SPLATInstance.ulam:59:15: ERROR: Invalid constant definition of type <90> and name <cUNSET_SN>.
+/usr/share/perl5/vendor_perl/auto/share/dist/App-Splattr/SPLATInstance.ulam:47:1: ERROR: Empty/Incomplete Class Definition 'SPLATKeyState'; Possible missing ending curly brace.
+
+To see it in action, uncomment "use WindowScanner;" then run "./compile" from the "C211-subclass-pattern" directory.
+The same error does not occur when explicitly importing other quarks from stdlib.
+
+*/
+
+//use WindowScanner;
+
+element TWest : SubQ{
+  EventWindow ew;
+  Bool evaluateRuleSets(){
+    ew.swap(0,1);
+    return true;
+  }
+}

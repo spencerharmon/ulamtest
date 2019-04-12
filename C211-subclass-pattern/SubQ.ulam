@@ -1,0 +1,3 @@
+quark SubQ : QContent {
+  virtual Bool evaluateRuleSets(){return true;}
+}
