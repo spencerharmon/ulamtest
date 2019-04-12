@@ -10,6 +10,14 @@ The error should look something like the following:
 To see it in action, uncomment "use WindowScanner;" then run "./compile" from the "C211-subclass-pattern" directory.
 The same error does not occur when explicitly importing other quarks from stdlib.
 
+ULAM compilation driver version ulam-4.0.2
+ Built for MFM 5.0.4
+ at 20190405041112 by spencer@home-one
+ from source commits v4.0.1-14-gf4d7c743 (ulam) and v5.0.4-14-g0bcd6bbd (mfm)
+
+~$ splattr -v
+1.005
+
 */
 
 //use WindowScanner;
