@@ -1,0 +1,20 @@
+/*
+Pattern to side affect data members in subclass with accessor functions in parent class returning reference type.
+*/
+quark QData{
+  typedef EventWindow.SiteNum SiteNum;
+  EventWindow ew;
+  Random r;
+  DebugUtils du;
+  Unsigned bar;
+  virtual Unsigned & virt();
+  Void behave(){
+    for(SiteNum i = 1; i <=40; ++i){
+      Atom a = ew[i];
+      if(a as QData){
+        a.virt()++;
+        ew[i] = a.atomof;
+      }
+    }
+  }
+}

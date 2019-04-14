@@ -1,0 +1,8 @@
+element EData : QData{
+  Unsigned data;
+  @Override Unsigned & virt(){
+    du.print("data");
+    du.print(data);
+    return data;
+  }
+}
