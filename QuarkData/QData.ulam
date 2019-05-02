@@ -8,6 +8,7 @@ quark QData{
   DebugUtils du;
   Unsigned bar;
   virtual Unsigned & virt();
+  virtual String name();
   Void behave(){
     for(SiteNum i = 1; i <=40; ++i){
       Atom a = ew[i];
@@ -16,5 +17,7 @@ quark QData{
         ew[i] = a.atomof;
       }
     }
+    du.print(self.name());
+    du.print(self.virt());
   }
 }

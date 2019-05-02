@@ -1,7 +1,10 @@
 element EBar : QData{
+
   @Override Unsigned & virt(){
-    du.print("Bar");
-    du.print(bar);
     return bar;
+  }
+
+  @Override String name(){
+    return "EBar";
   }
 }
