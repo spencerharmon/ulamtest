@@ -1,0 +1,12 @@
+element Caller{
+  EventWindow ew;
+  typedef EventWindow.SiteNum SiteNum;
+  Void behave(){
+    for(SiteNum i = (SiteNum)(ew.size()-1); i > 0; --i){
+      Atom a = ew[i];
+      if(a as QData){
+        a.do();
+      }
+    }
+  }
+}
